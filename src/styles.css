@@ -4134,6 +4134,15 @@ body,
   .project-sticky-bar .brand__demo { display: none; }
 }
 
+/* Keep the fixed desktop navigation clear of dashboard content at intermediate widths. */
+@media (min-width: 901px) and (max-width: 1500px) {
+  .overview__inner {
+    width: auto;
+    margin-right: 28px;
+    margin-left: 140px;
+  }
+}
+
 @media (max-width: 620px) {
   .welcome-surface h1 { top: 32%; width: calc(100% - 48px); text-align: center; white-space: normal; }
   .project-library__header { display: grid; gap: 24px; }
