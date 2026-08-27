@@ -2,6 +2,17 @@
 
 The public build is a static Vite application. It reads only the versioned files under `public/demo-data/v1.0.2/`; it does not deploy Express, project source directories, provider credentials, or writable storage.
 
+## Deployed infrastructure
+
+- Private GitHub repository: `https://github.com/100471551/boveda-public-demo`
+- Production branch: `main`
+- Release tag: `v1.0.2`
+- Vercel project: `boveda/boveda-public-demo`
+- Public production fallback: `https://boveda-public-demo.vercel.app`
+- GitHub Actions workflow: `Deployment checks / public-demo`
+
+The Vercel GitHub application is limited to this repository. On the Hobby plan, commits to this private repository must be authored by the GitHub account connected to the Vercel project; the release checkout is configured with that account's GitHub noreply identity.
+
 ## Normal release workflow
 
 1. Work locally on a branch and run `npm run test:deploy && npm run build:demo`.
@@ -13,9 +24,7 @@ When the three demo projects need to be deliberately refreshed, run `npm run dem
 
 ## One-time manual actions
 
-- Authorize access to the chosen GitHub account and create/connect the repository if this was not completed automatically.
-- Authorize Vercel, import the GitHub repository, select `main` as Production, and leave the detected Vite settings in place (`npm ci`, `npm run build:demo`, `dist`). Do not add analytical-provider environment variables.
 - Purchase or otherwise control `boveda.dev`, then add the exact DNS records Vercel displays for the project. Add `www.boveda.dev` only if desired and redirect it to the apex domain.
-- Confirm that the bundled Flink font files are licensed for public web distribution before the first public deployment. If not, replace them with an appropriately licensed font and re-run visual QA.
+- Confirm that the bundled Flink font files are licensed for public web distribution before directing public traffic to the site. If not, replace them with an appropriately licensed font and re-run visual QA.
 
 Recommended repository protection: require the `Deployment checks / public-demo` check and an up-to-date branch before merging to `main`; enable Vercel Deployment Protection for previews if previews may contain work-in-progress content.
