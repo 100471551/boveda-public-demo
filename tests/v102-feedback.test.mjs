@@ -9,6 +9,7 @@ import { reorderProjects, saveRecord } from "../engine/persistence.mjs";
 
 const main = readFileSync(new URL("../src/main.jsx", import.meta.url), "utf8");
 const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
+const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const menu = readFileSync(new URL("../public/ui/Menu.svg", import.meta.url), "utf8");
 const dragIcon = readFileSync(new URL("../public/ui/Drag_Icon.svg", import.meta.url), "utf8");
 const demoBannerClose = readFileSync(new URL("../public/ui/Demo_Banner_Close.svg", import.meta.url), "utf8");
@@ -16,6 +17,7 @@ const startExploring = readFileSync(new URL("../public/ui/Start_Exploring.png", 
 const repositoryLink = readFileSync(new URL("../public/ui/Link_Button.svg", import.meta.url), "utf8");
 const howItWorksIcon = readFileSync(new URL("../public/ui/How_It_Works.svg", import.meta.url), "utf8");
 const howItWorksArrow = readFileSync(new URL("../public/ui/How_It_Works_Arrow.svg", import.meta.url), "utf8");
+const favicon = readFileSync(new URL("../public/favicon.svg", import.meta.url), "utf8");
 const projectRepository = readFileSync(new URL("../src/project-repository.mjs", import.meta.url), "utf8");
 const server = readFileSync(new URL("../engine/server.mjs", import.meta.url), "utf8");
 const persistence = readFileSync(new URL("../engine/persistence.mjs", import.meta.url), "utf8");
@@ -89,17 +91,24 @@ test("v1.0.2 closes only the overlaid Projects menu with the Figma close control
 });
 
 test("v1.0.2 includes the final public-surface refinements", () => {
-  assert.match(main, /className="welcome-typewriter">Auditable by design/);
+  assert.match(main, /const WELCOME_HEADLINE = "Auditable by design\.";/);
+  assert.match(main, /const WELCOME_HEADLINE_LETTERS = \[\.\.\.WELCOME_HEADLINE\];/);
+  assert.match(main, /function WelcomeTypewriter\(\)/);
+  assert.match(main, /WELCOME_HEADLINE_LETTERS\.slice\(0, visibleCount\)\.map\(\(letter, index\)/);
+  assert.match(main, /window\.setTimeout\(revealNextLetter, 68\)/);
+  assert.match(main, /className={`welcome-typewriter__letter/);
+  assert.match(main, /className="welcome-typewriter__cursor"/);
   assert.match(main, /<p>Bóveda turns the evidence data, ML and AI projects already leave behind<br \/>into a clear, traceable record so the people responsible for them can<br \/>understand what happened, ask the right questions, and follow every<br \/>conclusion back to its source\./);
   assert.match(styles, /\.welcome-surface > p \{[\s\S]*?width:\s*588px;[\s\S]*?min-height:\s*210px;[\s\S]*?border:\s*1px solid var\(--v100b-line\);[\s\S]*?border-radius:\s*20px;[\s\S]*?background:\s*var\(--v100b-surface\);[\s\S]*?padding:\s*30px 33px;/);
-  assert.match(styles, /animation: welcome-type-in 1\.55s steps\(20, end\)/);
-  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.welcome-surface h1 > \.welcome-typewriter \{ clip-path: none; animation: none; \}/);
+  assert.match(styles, /@keyframes welcome-caret-blink/);
+  assert.doesNotMatch(styles, /clip-path: inset\(0 100% 0 0\)/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.welcome-typewriter__cursor \{ display: none; animation: none; \}/);
   assert.match(styles, /\.supervisor-finding \{ border-left: 0; \}/);
   assert.match(styles, /\.import-actions \.button--subtle \.ui-icon \{ width: 17\.52px; height: 17\.52px; order: -1; \}/);
 });
 
 test("v1.0.2 adds the Figma How it works navigation and video page", () => {
-  assert.equal(createHash("sha256").update(howItWorksIcon).digest("hex"), "cb6999958ea2f69326ab0b97cfd565767ab2ffec79c13d673acc544ad477e7d0");
+  assert.equal(createHash("sha256").update(howItWorksIcon).digest("hex"), "d24e6215672232050226f4fa2c327fa5fc5c21dd41cc80d74fbfc71604411b02");
   assert.equal(createHash("sha256").update(howItWorksArrow).digest("hex"), "d395e5422bbea84827869dd68b3648f56c7b49a72769533527ea5cdc53386509");
   assert.match(main, /aria-label="How it works"[\s\S]*?<Icon name="How_It_Works"/);
   assert.match(main, /className="welcome-how-link"[\s\S]*?>See how it works<Icon name="How_It_Works_Arrow"/);
@@ -110,6 +119,12 @@ test("v1.0.2 adds the Figma How it works navigation and video page", () => {
   assert.match(main, /<source src="\/media\/boveda-intro-v0\.1\.mp4" type="video\/mp4"/);
   assert.match(styles, /\.global-navigation \{[\s\S]*?grid-template-rows: repeat\(3, 1fr\);[\s\S]*?height: 192px;/);
   assert.match(styles, /\.how-it-works__video-frame video \{[\s\S]*?aspect-ratio: 16 \/ 9;/);
+});
+
+test("v1.0.2 uses the exact Figma favicon export", () => {
+  assert.equal(createHash("sha256").update(favicon).digest("hex"), "5fb63625f67e2c1ff314238b97428e09ac5602a51f3dbe6652a300b8569c6b27");
+  assert.match(favicon, /width="56" height="56" viewBox="0 0 56 56"/);
+  assert.match(indexHtml, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" \/>/);
 });
 
 test("v1.0.2 shows the Figma public-demo banner on Home only", () => {
@@ -132,6 +147,8 @@ test("v1.0.2 banner responds to downward scroll gestures and reduced-motion pref
   assert.match(welcomeSurface, /window\.addEventListener\("wheel", onWheel, \{ passive: true \}\)/);
   assert.match(welcomeSurface, /window\.addEventListener\("touchmove", onTouchMove, \{ passive: true \}\)/);
   assert.match(styles, /@keyframes demo-banner-slide-in[\s\S]*?from \{ transform: translateY\(-100%\); \}[\s\S]*?to \{ transform: translateY\(0\); \}/);
+  assert.match(styles, /\.demo-banner\.is-hidden \{[\s\S]*?opacity: 0;[\s\S]*?animation: demo-banner-fade-out \.38s ease both;/);
+  assert.match(styles, /@keyframes demo-banner-fade-out[\s\S]*?from \{ opacity: 1; transform: translateY\(0\); \}[\s\S]*?to \{ opacity: 0; transform: translateY\(-100%\); \}/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.demo-banner,[\s\S]*?\.demo-banner\.is-hidden \{ animation: none; transition: none; \}/);
 });
 

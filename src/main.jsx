@@ -42,6 +42,8 @@ const api = requestBovedaJson;
 
 const PROJECT_ORDER_STORAGE_KEY = "boveda.project-order.v1";
 const START_EXPLORING_STORAGE_KEY = "boveda.start-exploring.seen.v1";
+const WELCOME_HEADLINE = "Auditable by design.";
+const WELCOME_HEADLINE_LETTERS = [...WELCOME_HEADLINE];
 
 function readStoredProjectOrder() {
   try {
@@ -142,6 +144,36 @@ function GlobalNavigation({ active, onHome, onProjects, onHowItWorks, showStartE
   </nav>;
 }
 
+function WelcomeTypewriter() {
+  const [visibleCount, setVisibleCount] = useState(() => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? WELCOME_HEADLINE_LETTERS.length : 0);
+
+  useEffect(() => {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setVisibleCount(WELCOME_HEADLINE_LETTERS.length);
+      return undefined;
+    }
+    let timeoutId;
+    let nextCount = 0;
+    const revealNextLetter = () => {
+      nextCount += 1;
+      setVisibleCount(nextCount);
+      if (nextCount < WELCOME_HEADLINE_LETTERS.length) timeoutId = window.setTimeout(revealNextLetter, 68);
+    };
+    timeoutId = window.setTimeout(revealNextLetter, 180);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  return <span className="welcome-typewriter" data-text={WELCOME_HEADLINE} aria-hidden="true">
+    <span className="welcome-typewriter__content">
+      {WELCOME_HEADLINE_LETTERS.slice(0, visibleCount).map((letter, index) => <span
+        className={`welcome-typewriter__letter ${letter === "." ? "welcome-typewriter__dot" : ""}`}
+        key={`${letter}-${index}`}
+      >{letter}</span>)}
+      <span className="welcome-typewriter__cursor" />
+    </span>
+  </span>;
+}
+
 function WelcomeSurface({ onHowItWorks }) {
   const [demoBannerVisible, setDemoBannerVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -185,7 +217,7 @@ function WelcomeSurface({ onHowItWorks }) {
       </button>
     </aside>
     <div className="public-brand"><Logo showVersion={false} showDemo /></div>
-    <h1><span className="welcome-typewriter">Auditable by design<span className="welcome-typewriter__dot" aria-hidden="true">.</span></span></h1>
+    <h1 aria-label={WELCOME_HEADLINE}><WelcomeTypewriter /></h1>
     <p>Bóveda turns the evidence data, ML and AI projects already leave behind<br />into a clear, traceable record so the people responsible for them can<br />understand what happened, ask the right questions, and follow every<br />conclusion back to its source. <button type="button" className="welcome-how-link" onClick={onHowItWorks}>See how it works<Icon name="How_It_Works_Arrow" /></button></p>
     <span className="welcome-version">Alpha {applicationVersion}</span>
   </main>;
