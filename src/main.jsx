@@ -39,6 +39,7 @@ import { PUBLIC_DEMO, reportAssetUrl } from "./runtime-config.mjs";
 const api = requestBovedaJson;
 
 const PROJECT_ORDER_STORAGE_KEY = "boveda.project-order.v1";
+const START_EXPLORING_STORAGE_KEY = "boveda.start-exploring.seen.v1";
 
 function readStoredProjectOrder() {
   try {
@@ -59,6 +60,16 @@ function applyStoredProjectOrder(projects) {
 function storeProjectOrder(projectIds) {
   try { window.localStorage.setItem(PROJECT_ORDER_STORAGE_KEY, JSON.stringify(projectIds)); }
   catch { /* The server-backed order remains authoritative when browser storage is unavailable. */ }
+}
+
+function hasSeenStartExploring() {
+  try { return window.localStorage.getItem(START_EXPLORING_STORAGE_KEY) === "true"; }
+  catch { return false; }
+}
+
+function storeStartExploringSeen() {
+  try { window.localStorage.setItem(START_EXPLORING_STORAGE_KEY, "true"); }
+  catch { /* The hint can safely return if browser storage is unavailable. */ }
 }
 
 const MOTION_GROUPS = [
@@ -120,10 +131,11 @@ function Logo({ showVersion = true, showDemo = false }) {
   return <div className="brand"><img className="brand__logo" src="/Boveda_Logo_Black.svg" alt="Bóveda" />{showDemo ? <span className="brand__demo">Demo</span> : null}{showVersion ? <div className="brand__version">Alpha {applicationVersion}</div> : null}</div>;
 }
 
-function GlobalNavigation({ active, onHome, onProjects }) {
+function GlobalNavigation({ active, onHome, onProjects, showStartExploring = false }) {
   return <nav className="global-navigation" aria-label="Main navigation">
     <button type="button" className={active === "welcome" ? "is-active" : ""} onClick={onHome} aria-label="Home" aria-current={active === "welcome" ? "page" : undefined}><Icon name="Home" /></button>
-    <button type="button" className={active === "projects" ? "is-active" : ""} onClick={onProjects} aria-label="Projects" aria-current={active === "projects" ? "page" : undefined}><span className="global-navigation__grid" aria-hidden="true"><i /><i /><i /><i /></span></button>
+    <button type="button" className={active === "projects" ? "is-active" : ""} onClick={onProjects} aria-label="Projects" aria-current={active === "projects" ? "page" : undefined} aria-describedby={showStartExploring ? "start-exploring-hint" : undefined}><span className="global-navigation__grid" aria-hidden="true"><i /><i /><i /><i /></span></button>
+    {showStartExploring ? <span className="global-navigation__start-exploring" id="start-exploring-hint" role="note"><img src="/ui/Start_Exploring.png" alt="" aria-hidden="true" /><span className="visually-hidden">Start exploring</span></span> : null}
   </nav>;
 }
 
@@ -936,6 +948,7 @@ function App() {
   const [diagnostics, setDiagnostics] = useState(null);
   const [diagnosticsLoading, setDiagnosticsLoading] = useState(false);
   const [demoNotice, setDemoNotice] = useState("");
+  const [startExploringVisible, setStartExploringVisible] = useState(() => !hasSeenStartExploring());
   const demoNoticeTimer = useRef(null);
   const showDemoAction = useCallback((action) => {
     const messages = {
@@ -1057,7 +1070,7 @@ function App() {
     }
   }
   function showHome() { setProjectsOverlayOpen(false); setScreen("welcome"); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); window.scrollTo(0, 0); }
-  function showProjects() { if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); setScreen("projects"); } }
+  function showProjects() { if (startExploringVisible) { setStartExploringVisible(false); storeStartExploringSeen(); } if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); setScreen("projects"); } }
   function changeView(view) { setFindingsTarget(null); setActiveView(view); }
   function navigateToFindingGroup(target) { setFindingsTarget(target); setActiveView("signals"); }
   function openSignalEvidence(ids) { setSignalSelection(null); setTrail({ value: "Signal evidence trail", epistemic: "DERIVED", evidence_ids: Array.isArray(ids) ? ids : [ids] }); }
@@ -1070,7 +1083,7 @@ function App() {
       : projectsLoaded
         ? <ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} publicDemo={PUBLIC_DEMO} />
         : <main className="app-loading" aria-label="Loading projects" />;
-  return <><div className="v100b-app" inert={deleteCandidate ? true : undefined} aria-hidden={deleteCandidate ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} />{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
+  return <><div className="v100b-app" inert={deleteCandidate ? true : undefined} aria-hidden={deleteCandidate ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} showStartExploring={screen === "welcome" && startExploringVisible} />{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
 }
 
 createRoot(document.getElementById("root")).render(<React.StrictMode><App /></React.StrictMode>);

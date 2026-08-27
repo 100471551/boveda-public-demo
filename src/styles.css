@@ -3783,7 +3783,7 @@ body,
   grid-template-rows: repeat(2, 1fr);
   width: 61px;
   height: 136px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--v100b-line);
   border-radius: 20px;
   background: var(--v100b-surface);
@@ -3807,6 +3807,15 @@ body,
 .global-navigation .ui-icon { width: 13px; height: 12px; }
 .global-navigation__grid { display: grid; grid-template-columns: repeat(2, 5px); gap: 2px; }
 .global-navigation__grid i { width: 5px; height: 5px; border-radius: 1px; background: #222; }
+.global-navigation__start-exploring {
+  position: absolute;
+  top: 77px;
+  left: calc(100% + 8px);
+  width: 114px;
+  height: 27px;
+  pointer-events: none;
+}
+.global-navigation__start-exploring img { display: block; width: 114px; height: 27px; }
 
 .welcome-surface { position: relative; min-height: 100vh; overflow: hidden; color: #222; }
 .demo-banner {
@@ -4118,6 +4127,7 @@ body,
     transform: translateX(-50%);
     border-radius: 18px;
   }
+  .global-navigation__start-exploring { top: -34px; left: calc(50% + 10px); }
   .welcome-surface h1 { top: 37%; font-size: clamp(40px, 9vw, 62px); }
   .welcome-surface > p { left: 28px; right: 28px; bottom: 105px; font-size: 14px; line-height: 26px; }
   .welcome-surface > p br { display: none; }
