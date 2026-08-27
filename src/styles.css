@@ -4179,6 +4179,11 @@ body,
   z-index: 3;
   overflow: visible;
 }
+.evaluation-behaviour.analytical-frame--empty > .evaluation-heading {
+  position: relative;
+  z-index: 3;
+  overflow: visible;
+}
 
 .lineage-graph { border: 1px solid #ebebeb; background: #fff; }
 .lineage-node,

@@ -29,6 +29,7 @@ test("v1.0.2 stores and uses the supplied 46px Figma dashboard menu asset", () =
   assert.match(v102, /\.project-menu-button \.ui-icon \{ width: 46px; height: 46px; \}/);
   assert.match(v102, /\.record-menu-button \{ z-index: 4; \}/);
   assert.match(v102, /\.evaluation-behaviour:not\(\.analytical-frame--empty\) > \.evaluation-heading\s*\{[\s\S]*?position:\s*relative;[\s\S]*?z-index:\s*3;[\s\S]*?overflow:\s*visible;/);
+  assert.match(v102, /\.evaluation-behaviour\.analytical-frame--empty > \.evaluation-heading\s*\{[\s\S]*?position:\s*relative;[\s\S]*?z-index:\s*3;[\s\S]*?overflow:\s*visible;/);
 });
 
 test("v1.0.2 makes the lineage graph and its staged node cards visible", () => {
