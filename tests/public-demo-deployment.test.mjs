@@ -22,6 +22,11 @@ test("public runtime fails closed and maps only read endpoints to static assets"
 test("every public project has the complete immutable dashboard bundle", async () => {
   const projects = JSON.parse(await fs.readFile(path.join(DATA_ROOT, "projects.json"), "utf8"));
   assert.ok(projects.length >= 1);
+  assert.deepEqual(
+    projects.map((project) => project.source_project_path.match(/^\/R(\d+)_/)?.[1]),
+    ["1", "2", "3"],
+    "the public demo should present its project snapshots in R1, R2, R3 order",
+  );
   for (const project of projects) {
     const directory = path.join(DATA_ROOT, "projects", project.project_id);
     for (const file of ["record.json", "signals.json", "history.json", "analytical.json", "diagnostics.json", "report.html", "report.pdf"]) {

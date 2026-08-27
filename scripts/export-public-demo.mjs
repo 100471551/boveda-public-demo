@@ -39,6 +39,11 @@ function sanitize(value, sourceRoot) {
     .map(([key, item]) => [key, sanitize(item, sourceRoot)]));
 }
 
+function publicDemoProjectSequence(project) {
+  const match = String(project?.source_project_path || "").match(/^\/R(\d+)_/i);
+  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
+
 async function writeJson(file, value) {
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, `${JSON.stringify(value, null, 2)}\n`, "utf8");
@@ -85,6 +90,7 @@ async function main() {
     console.log(`Exporting ${summary.project_id}…`);
     publicSummaries.push(await exportProject(summary));
   }
+  publicSummaries.sort((left, right) => publicDemoProjectSequence(left) - publicDemoProjectSequence(right));
   await writeJson(path.join(DESTINATION, "projects.json"), publicSummaries);
   await writeJson(path.join(DESTINATION, "manifest.json"), {
     schema_version: "boveda-public-demo-1",
