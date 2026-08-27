@@ -133,15 +133,16 @@ function Logo({ showVersion = true, showDemo = false }) {
   return <div className="brand"><img className="brand__logo" src="/Boveda_Logo_Black.svg" alt="Bóveda" />{showDemo ? <span className="brand__demo">Demo</span> : null}{showVersion ? <div className="brand__version">Alpha {applicationVersion}</div> : null}</div>;
 }
 
-function GlobalNavigation({ active, onHome, onProjects, showStartExploring = false }) {
+function GlobalNavigation({ active, onHome, onProjects, onHowItWorks, showStartExploring = false }) {
   return <nav className="global-navigation" aria-label="Main navigation">
     <button type="button" className={active === "welcome" ? "is-active" : ""} onClick={onHome} aria-label="Home" aria-current={active === "welcome" ? "page" : undefined}><Icon name="Home" /></button>
     <button type="button" className={active === "projects" ? "is-active" : ""} onClick={onProjects} aria-label="Projects" aria-current={active === "projects" ? "page" : undefined} aria-describedby={showStartExploring ? "start-exploring-hint" : undefined}><span className="global-navigation__grid" aria-hidden="true"><i /><i /><i /><i /></span></button>
+    <button type="button" className={`global-navigation__how ${active === "how-it-works" ? "is-active" : ""}`} onClick={onHowItWorks} aria-label="How it works" aria-current={active === "how-it-works" ? "page" : undefined}><Icon name="How_It_Works" /></button>
     {showStartExploring ? <span className="global-navigation__start-exploring" id="start-exploring-hint" role="note"><img src="/ui/Start_Exploring.png" alt="" aria-hidden="true" /><span className="visually-hidden">Start exploring</span></span> : null}
   </nav>;
 }
 
-function WelcomeSurface() {
+function WelcomeSurface({ onHowItWorks }) {
   const [demoBannerVisible, setDemoBannerVisible] = useState(true);
   const lastScrollY = useRef(0);
   const touchY = useRef(null);
@@ -185,7 +186,27 @@ function WelcomeSurface() {
     </aside>
     <div className="public-brand"><Logo showVersion={false} showDemo /></div>
     <h1><span className="welcome-typewriter">Auditable by design<span className="welcome-typewriter__dot" aria-hidden="true">.</span></span></h1>
-    <p>Bóveda turns the evidence data, ML and AI projects already leave behind<br />into a clear, traceable record so the people responsible for them can<br />understand what happened, ask the right questions, and follow every<br />conclusion back to its source.</p>
+    <p>Bóveda turns the evidence data, ML and AI projects already leave behind<br />into a clear, traceable record so the people responsible for them can<br />understand what happened, ask the right questions, and follow every<br />conclusion back to its source. <button type="button" className="welcome-how-link" onClick={onHowItWorks}>See how it works<Icon name="How_It_Works_Arrow" /></button></p>
+    <span className="welcome-version">Alpha {applicationVersion}</span>
+  </main>;
+}
+
+function HowItWorksSurface({ onProjects }) {
+  return <main className="how-it-works-surface">
+    <div className="public-brand"><Logo showVersion={false} showDemo /></div>
+    <div className="how-it-works__inner">
+      <header className="how-it-works__header">
+        <h1>How it works?</h1>
+        <p>From scattered project evidence to a clear, traceable record you can inspect and supervise.</p>
+      </header>
+      <div className="how-it-works__video-frame">
+        <video controls playsInline preload="metadata" aria-label="Introduction to how Bóveda works">
+          <source src="/media/boveda-intro-v0.1.mp4" type="video/mp4" />
+          Your browser does not support embedded video. <a href="/media/boveda-intro-v0.1.mp4">Open the Bóveda introduction video</a>.
+        </video>
+      </div>
+    </div>
+    <button type="button" className="project-menu-button how-it-works__projects-shortcut" onClick={onProjects} aria-label="Open Projects"><Icon name="Menu" /></button>
     <span className="welcome-version">Alpha {applicationVersion}</span>
   </main>;
 }
@@ -1120,13 +1141,16 @@ function App() {
   }
   function showHome() { setProjectsOverlayOpen(false); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); navigateRoute({ screen: "welcome" }); window.scrollTo(0, 0); }
   function showProjects() { if (startExploringVisible) { setStartExploringVisible(false); storeStartExploringSeen(); } if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); navigateRoute({ screen: "projects" }); } }
+  function showHowItWorks() { setProjectsOverlayOpen(false); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); navigateRoute({ screen: "how-it-works" }); window.scrollTo(0, 0); }
   function changeView(view) { setFindingsTarget(null); navigateRoute({ screen: "project", projectId: record.project_id, activeView: view }); }
   function navigateToFindingGroup(target) { setFindingsTarget(target); navigateRoute({ screen: "project", projectId: record.project_id, activeView: "signals" }); }
   function openSignalEvidence(ids) { setSignalSelection(null); setTrail({ value: "Signal evidence trail", epistemic: "DERIVED", evidence_ids: Array.isArray(ids) ? ids : [ids] }); }
   function openHistoryEvidence(id) { setTrail({ value: "History evidence trail", epistemic: "OBSERVED", evidence_ids: [id] }); }
   const currentNavigation = projectsOverlayOpen || screen === "projects" ? "projects" : screen;
   const content = screen === "welcome"
-    ? <WelcomeSurface />
+    ? <WelcomeSurface onHowItWorks={showHowItWorks} />
+    : screen === "how-it-works"
+      ? <HowItWorksSurface onProjects={showProjects} />
     : screen === "project"
       ? record?.project_id === routeProjectId
         ? <div className="app-shell" inert={projectsOverlayOpen ? true : undefined} aria-hidden={projectsOverlayOpen || undefined}><Overview record={record} signalsLayer={signalsLayer} historyLayer={historyLayer} analyticalLayer={analyticalLayer} activeView={activeView} onView={changeView} findingsTarget={findingsTarget} onFindingsTargetHandled={() => setFindingsTarget(null)} onFindingNavigate={navigateToFindingGroup} onOpenProjects={showProjects} onSignalInspect={setSignalSelection} onSignalEvidence={openSignalEvidence} onHistoryEvidence={openHistoryEvidence} onReanalyse={reanalyse} reanalysing={reanalysing} onTrail={setTrail} onDiagnostics={openDiagnostics} /></div>
@@ -1134,7 +1158,7 @@ function App() {
       : projectsLoaded
         ? <ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} publicDemo={PUBLIC_DEMO} />
         : <main className="app-loading" aria-label="Loading projects" />;
-  return <><div className="v100b-app" inert={deleteCandidate ? true : undefined} aria-hidden={deleteCandidate ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} showStartExploring={screen === "welcome" && startExploringVisible} />{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
+  return <><div className="v100b-app" inert={deleteCandidate ? true : undefined} aria-hidden={deleteCandidate ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} onHowItWorks={showHowItWorks} showStartExploring={screen === "welcome" && startExploringVisible} />{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
 }
 
 createRoot(document.getElementById("root")).render(<React.StrictMode><App /></React.StrictMode>);

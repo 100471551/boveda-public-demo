@@ -14,6 +14,8 @@ const dragIcon = readFileSync(new URL("../public/ui/Drag_Icon.svg", import.meta.
 const demoBannerClose = readFileSync(new URL("../public/ui/Demo_Banner_Close.svg", import.meta.url), "utf8");
 const startExploring = readFileSync(new URL("../public/ui/Start_Exploring.png", import.meta.url));
 const repositoryLink = readFileSync(new URL("../public/ui/Link_Button.svg", import.meta.url), "utf8");
+const howItWorksIcon = readFileSync(new URL("../public/ui/How_It_Works.svg", import.meta.url), "utf8");
+const howItWorksArrow = readFileSync(new URL("../public/ui/How_It_Works_Arrow.svg", import.meta.url), "utf8");
 const projectRepository = readFileSync(new URL("../src/project-repository.mjs", import.meta.url), "utf8");
 const server = readFileSync(new URL("../engine/server.mjs", import.meta.url), "utf8");
 const persistence = readFileSync(new URL("../engine/persistence.mjs", import.meta.url), "utf8");
@@ -88,12 +90,26 @@ test("v1.0.2 closes only the overlaid Projects menu with the Figma close control
 
 test("v1.0.2 includes the final public-surface refinements", () => {
   assert.match(main, /className="welcome-typewriter">Auditable by design/);
-  assert.match(main, /<p>Bóveda turns the evidence data, ML and AI projects already leave behind<br \/>into a clear, traceable record so the people responsible for them can<br \/>understand what happened, ask the right questions, and follow every<br \/>conclusion back to its source\.<\/p>/);
-  assert.match(styles, /\.welcome-surface > p \{[\s\S]*?border:\s*1px solid var\(--v100b-line\);[\s\S]*?border-radius:\s*20px;[\s\S]*?background:\s*var\(--v100b-surface\);[\s\S]*?padding:\s*18px 22px 19px;/);
+  assert.match(main, /<p>Bóveda turns the evidence data, ML and AI projects already leave behind<br \/>into a clear, traceable record so the people responsible for them can<br \/>understand what happened, ask the right questions, and follow every<br \/>conclusion back to its source\./);
+  assert.match(styles, /\.welcome-surface > p \{[\s\S]*?width:\s*588px;[\s\S]*?min-height:\s*210px;[\s\S]*?border:\s*1px solid var\(--v100b-line\);[\s\S]*?border-radius:\s*20px;[\s\S]*?background:\s*var\(--v100b-surface\);[\s\S]*?padding:\s*30px 33px;/);
   assert.match(styles, /animation: welcome-type-in 1\.55s steps\(20, end\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.welcome-surface h1 > \.welcome-typewriter \{ clip-path: none; animation: none; \}/);
   assert.match(styles, /\.supervisor-finding \{ border-left: 0; \}/);
   assert.match(styles, /\.import-actions \.button--subtle \.ui-icon \{ width: 17\.52px; height: 17\.52px; order: -1; \}/);
+});
+
+test("v1.0.2 adds the Figma How it works navigation and video page", () => {
+  assert.equal(createHash("sha256").update(howItWorksIcon).digest("hex"), "cb6999958ea2f69326ab0b97cfd565767ab2ffec79c13d673acc544ad477e7d0");
+  assert.equal(createHash("sha256").update(howItWorksArrow).digest("hex"), "d395e5422bbea84827869dd68b3648f56c7b49a72769533527ea5cdc53386509");
+  assert.match(main, /aria-label="How it works"[\s\S]*?<Icon name="How_It_Works"/);
+  assert.match(main, /className="welcome-how-link"[\s\S]*?>See how it works<Icon name="How_It_Works_Arrow"/);
+  assert.match(main, /function HowItWorksSurface\(\{ onProjects \}\)/);
+  assert.match(main, /<h1>How it works\?<\/h1>/);
+  assert.match(main, /From scattered project evidence to a clear, traceable record you can inspect and supervise\./);
+  assert.match(main, /<video controls playsInline preload="metadata" aria-label="Introduction to how Bóveda works">/);
+  assert.match(main, /<source src="\/media\/boveda-intro-v0\.1\.mp4" type="video\/mp4"/);
+  assert.match(styles, /\.global-navigation \{[\s\S]*?grid-template-rows: repeat\(3, 1fr\);[\s\S]*?height: 192px;/);
+  assert.match(styles, /\.how-it-works__video-frame video \{[\s\S]*?aspect-ratio: 16 \/ 9;/);
 });
 
 test("v1.0.2 shows the Figma public-demo banner on Home only", () => {
@@ -102,7 +118,7 @@ test("v1.0.2 shows the Figma public-demo banner on Home only", () => {
   assert.match(welcomeSurface, /<strong>This public demo uses pre-analysed projects only\.<\/strong> New project analysis is disabled, and some project information may be incomplete\./);
   assert.match(welcomeSurface, /aria-label="Close public demo notice"/);
   assert.match(welcomeSurface, /src="\/ui\/Demo_Banner_Close\.svg"/);
-  assert.equal((main.match(/<WelcomeSurface \/>/g) || []).length, 1);
+  assert.equal((main.match(/<WelcomeSurface onHowItWorks=/g) || []).length, 1);
   assert.match(styles, /\.demo-banner \{[\s\S]*?min-height: 30px;[\s\S]*?background: var\(--ui-red\);[\s\S]*?font-size: 13px;/);
   assert.match(styles, /\.demo-banner__close img \{ display: block; width: 19\.5352px; height: 19\.5352px; \}/);
 });

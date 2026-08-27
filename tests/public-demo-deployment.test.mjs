@@ -43,6 +43,15 @@ test("public source and generated assets pass privacy validation", async () => {
   assert.equal(sourceResult.ok, true);
 });
 
+test("the public How it works video is a bounded static MP4 without local path leakage", async () => {
+  const video = await fs.readFile(path.join(ROOT, "public", "media", "boveda-intro-v0.1.mp4"));
+  assert.ok(video.length > 1_000_000, "the introduction video should not be an empty placeholder");
+  assert.ok(video.length < 10_000_000, "the static introduction video should stay practical for public delivery");
+  assert.equal(video.subarray(4, 8).toString("ascii"), "ftyp");
+  const raw = video.toString("latin1");
+  assert.doesNotMatch(raw, /\/Users\/|\/home\/|[A-Za-z]:\\\\Users\\\\/);
+});
+
 test("deployment configuration contains no serverless or analytical backend", async () => {
   const vercel = JSON.parse(await fs.readFile(path.join(ROOT, "vercel.json"), "utf8"));
   assert.equal(vercel.framework, "vite");

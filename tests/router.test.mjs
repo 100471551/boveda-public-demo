@@ -9,6 +9,7 @@ const PUBLIC_PROJECT_IDS = ["PRJ-2C27CC9912", "PRJ-1686EC052E", "PRJ-181CCD8192"
 
 test("routes map stable project URLs to the correct app view", () => {
   assert.deepEqual(parseRoute("/"), { screen: "welcome", projectId: null, activeView: "overview" });
+  assert.deepEqual(parseRoute("/how-it-works"), { screen: "how-it-works", projectId: null, activeView: "overview" });
   assert.deepEqual(parseRoute("/projects"), { screen: "projects", projectId: null, activeView: "overview" });
   assert.deepEqual(parseRoute(`/projects/${PUBLIC_PROJECT_IDS[0]}`), { screen: "project", projectId: PUBLIC_PROJECT_IDS[0], activeView: "overview" });
   assert.deepEqual(parseRoute(`/projects/${PUBLIC_PROJECT_IDS[1]}/findings`), { screen: "project", projectId: PUBLIC_PROJECT_IDS[1], activeView: "signals" });
@@ -17,6 +18,7 @@ test("routes map stable project URLs to the correct app view", () => {
 
 test("route serialization is shareable and preserves project IDs", () => {
   assert.equal(routeFor({ screen: "welcome" }), "/");
+  assert.equal(routeFor({ screen: "how-it-works" }), "/how-it-works");
   assert.equal(routeFor({ screen: "projects" }), "/projects");
   assert.equal(routeFor({ screen: "project", projectId: PUBLIC_PROJECT_IDS[0], activeView: "overview" }), `/projects/${PUBLIC_PROJECT_IDS[0]}`);
   assert.equal(routeFor({ screen: "project", projectId: PUBLIC_PROJECT_IDS[0], activeView: "signals" }), `/projects/${PUBLIC_PROJECT_IDS[0]}/findings`);
