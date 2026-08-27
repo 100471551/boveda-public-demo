@@ -3885,7 +3885,12 @@ body,
   position: absolute;
   left: 73px;
   bottom: 82px;
+  box-sizing: border-box;
   margin: 0;
+  border: 1px solid var(--v100b-line);
+  border-radius: 20px;
+  background: var(--v100b-surface);
+  padding: 18px 22px 19px;
   font-size: 16px;
   font-weight: 400;
   line-height: 35px;
