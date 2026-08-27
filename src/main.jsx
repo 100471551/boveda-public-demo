@@ -36,6 +36,7 @@ import { overviewAvailabilityMessage, primaryResultAvailability } from "./sparse
 import { buildOverviewModelContexts, modelContextByKey, modelMetricKey, modelResult } from "./overview-model-context.mjs";
 import { requestBovedaJson } from "./demo-api.mjs";
 import { PUBLIC_DEMO, reportAssetUrl } from "./runtime-config.mjs";
+import { navigateRoute, parseRoute, ROUTE_CHANGE_EVENT } from "./router.mjs";
 
 const api = requestBovedaJson;
 
@@ -934,7 +935,8 @@ function DemoActionNotice({ message, onClose }) {
 }
 
 function App() {
-  const [screen, setScreen] = useState("welcome");
+  const [route, setRoute] = useState(() => parseRoute(window.location.pathname));
+  const { screen, projectId: routeProjectId, activeView: routeView } = route;
   const [projectsOverlayOpen, setProjectsOverlayOpen] = useState(false);
   const [projects, setProjects] = useState([]);
   const [projectOrderBusy, setProjectOrderBusy] = useState(false);
@@ -942,12 +944,12 @@ function App() {
   const [deleteBusy, setDeleteBusy] = useState(false);
   const cancelRemove = useCallback(() => { if (!deleteBusy) setDeleteCandidate(null); }, [deleteBusy]);
   const [projectsLoaded, setProjectsLoaded] = useState(false);
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const [selectedProjectId, setSelectedProjectId] = useState(routeProjectId);
   const [record, setRecord] = useState(null);
   const [signalsLayer, setSignalsLayer] = useState(null);
   const [historyLayer, setHistoryLayer] = useState(null);
   const [analyticalLayer, setAnalyticalLayer] = useState(null);
-  const [activeView, setActiveView] = useState("overview");
+  const activeView = routeView;
   const [findingsTarget, setFindingsTarget] = useState(null);
   const [signalSelection, setSignalSelection] = useState(null);
   const [showImport, setShowImport] = useState(false);
@@ -971,6 +973,25 @@ function App() {
     demoNoticeTimer.current = window.setTimeout(() => setDemoNotice(""), 7000);
   }, []);
   useEffect(() => () => window.clearTimeout(demoNoticeTimer.current), []);
+  useEffect(() => {
+    const syncRoute = () => {
+      setRoute(parseRoute(window.location.pathname));
+      setProjectsOverlayOpen(false);
+      setShowImport(false);
+      setDeleteCandidate(null);
+      setTrail(null);
+      setSignalSelection(null);
+      setDiagnosticsOpen(false);
+      setFindingsTarget(null);
+    };
+    window.addEventListener("popstate", syncRoute);
+    window.addEventListener(ROUTE_CHANGE_EVENT, syncRoute);
+    return () => {
+      window.removeEventListener("popstate", syncRoute);
+      window.removeEventListener(ROUTE_CHANGE_EVENT, syncRoute);
+    };
+  }, []);
+  useEffect(() => { if (route.notFound) navigateRoute({ screen: "projects" }, { replace: true }); }, [route.notFound]);
   useSiteMotion([record?.project_id, activeView, projectsLoaded, signalsLayer, historyLayer, analyticalLayer]);
   useEffect(() => {
     if (!projectsOverlayOpen && !deleteCandidate) return undefined;
@@ -1024,7 +1045,25 @@ function App() {
     withFindingCounts(items).then(applyFindingCounts).catch(() => {});
     return items;
   }
-  useEffect(() => { api("/api/projects").then((items) => applyStoredProjectOrder(items)).then((items) => { setProjects(items); setSelectedProjectId(items[0]?.project_id || null); setProjectsLoaded(true); withFindingCounts(items).then(applyFindingCounts).catch(() => {}); }).catch((err) => { setError(err.message); setProjectsLoaded(true); }); }, []);
+  useEffect(() => { api("/api/projects").then((items) => applyStoredProjectOrder(items)).then((items) => { setProjects(items); setSelectedProjectId(routeProjectId || items[0]?.project_id || null); setProjectsLoaded(true); withFindingCounts(items).then(applyFindingCounts).catch(() => {}); }).catch((err) => { setError(err.message); setProjectsLoaded(true); }); }, []);
+  useEffect(() => {
+    if (!projectsLoaded || screen !== "project" || !routeProjectId) return undefined;
+    const knownProject = projects.find((item) => item.project_id === routeProjectId);
+    if (!knownProject) { navigateRoute({ screen: "projects" }, { replace: true }); return undefined; }
+    if (record?.project_id === routeProjectId) return undefined;
+    let cancelled = false;
+    setError(""); setSelectedProjectId(routeProjectId); setRecord(null); setSignalSelection(null); setFindingsTarget(null);
+    Promise.all([
+      api(`/api/projects/${routeProjectId}`),
+      api(`/api/projects/${routeProjectId}/signals`).catch(() => null),
+      api(`/api/projects/${routeProjectId}/history`).catch(() => null),
+      api(`/api/projects/${routeProjectId}/analytical`).catch(() => null),
+    ]).then(([nextRecord, nextSignals, nextHistory, nextAnalytical]) => {
+      if (cancelled) return;
+      setRecord(nextRecord); setSignalsLayer(nextSignals); setHistoryLayer(nextHistory); setAnalyticalLayer(nextAnalytical); window.scrollTo(0, 0);
+    }).catch((err) => { if (!cancelled) setError(err.message); });
+    return () => { cancelled = true; };
+  }, [projectsLoaded, screen, routeProjectId, projects, record?.project_id]);
   async function reorderProjectCards(projectIds) {
     if (projectOrderBusy) return;
     const previousProjects = projects;
@@ -1047,8 +1086,8 @@ function App() {
       setProjectOrderBusy(false);
     }
   }
-  async function select(id) { setError(""); setDiagnosticsOpen(false); setSignalSelection(null); setFindingsTarget(null); setActiveView("overview"); setSelectedProjectId(id); try { const next = await api(`/api/projects/${id}`); setRecord(next); setScreen("project"); setProjectsOverlayOpen(false); window.scrollTo(0, 0); await loadLayers(id); } catch (err) { setError(err.message); } }
-  async function imported(next) { setRecord(next); setSelectedProjectId(next.project_id); setShowImport(false); setSignalSelection(null); setFindingsTarget(null); setActiveView("overview"); setScreen("project"); setProjectsOverlayOpen(false); await refreshProjects(); await loadLayers(next.project_id); }
+  async function select(id) { setError(""); setDiagnosticsOpen(false); setSignalSelection(null); setFindingsTarget(null); setSelectedProjectId(id); setProjectsOverlayOpen(false); navigateRoute({ screen: "project", projectId: id, activeView: "overview" }); }
+  async function imported(next) { setRecord(next); setShowImport(false); setSelectedProjectId(next.project_id); setSignalSelection(null); setFindingsTarget(null); setProjectsOverlayOpen(false); await refreshProjects(); await loadLayers(next.project_id); navigateRoute({ screen: "project", projectId: next.project_id, activeView: "overview" }); }
   async function reanalyse() { if (PUBLIC_DEMO) { showDemoAction("reanalyse"); return; } setReanalysing(true); setError(""); try { await imported(await api(`/api/projects/${record.project_id}/reanalyse`, { method: "POST", body: "{}" })); } catch (err) { setError(err.message); } finally { setReanalysing(false); } }
   async function openDiagnostics() { setDiagnosticsOpen(true); setDiagnosticsLoading(true); setDiagnostics(null); try { setDiagnostics(await api(`/api/projects/${record.project_id}/diagnostics`)); } catch (err) { setDiagnosticsOpen(false); setError(err.message); } finally { setDiagnosticsLoading(false); } }
   function remove(project) { if (PUBLIC_DEMO) { showDemoAction("delete"); return; } setDeleteCandidate(project); }
@@ -1070,7 +1109,7 @@ function App() {
         setHistoryLayer(null);
         setAnalyticalLayer(null);
         setProjectsOverlayOpen(false);
-        setScreen("projects");
+        navigateRoute({ screen: "projects" });
       }
       setDeleteCandidate(null);
     } catch (err) {
@@ -1079,17 +1118,19 @@ function App() {
       setDeleteBusy(false);
     }
   }
-  function showHome() { setProjectsOverlayOpen(false); setScreen("welcome"); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); window.scrollTo(0, 0); }
-  function showProjects() { if (startExploringVisible) { setStartExploringVisible(false); storeStartExploringSeen(); } if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); setScreen("projects"); } }
-  function changeView(view) { setFindingsTarget(null); setActiveView(view); }
-  function navigateToFindingGroup(target) { setFindingsTarget(target); setActiveView("signals"); }
+  function showHome() { setProjectsOverlayOpen(false); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); navigateRoute({ screen: "welcome" }); window.scrollTo(0, 0); }
+  function showProjects() { if (startExploringVisible) { setStartExploringVisible(false); storeStartExploringSeen(); } if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); navigateRoute({ screen: "projects" }); } }
+  function changeView(view) { setFindingsTarget(null); navigateRoute({ screen: "project", projectId: record.project_id, activeView: view }); }
+  function navigateToFindingGroup(target) { setFindingsTarget(target); navigateRoute({ screen: "project", projectId: record.project_id, activeView: "signals" }); }
   function openSignalEvidence(ids) { setSignalSelection(null); setTrail({ value: "Signal evidence trail", epistemic: "DERIVED", evidence_ids: Array.isArray(ids) ? ids : [ids] }); }
   function openHistoryEvidence(id) { setTrail({ value: "History evidence trail", epistemic: "OBSERVED", evidence_ids: [id] }); }
   const currentNavigation = projectsOverlayOpen || screen === "projects" ? "projects" : screen;
   const content = screen === "welcome"
     ? <WelcomeSurface />
-    : screen === "project" && record
-      ? <div className="app-shell" inert={projectsOverlayOpen ? true : undefined} aria-hidden={projectsOverlayOpen || undefined}><Overview record={record} signalsLayer={signalsLayer} historyLayer={historyLayer} analyticalLayer={analyticalLayer} activeView={activeView} onView={changeView} findingsTarget={findingsTarget} onFindingsTargetHandled={() => setFindingsTarget(null)} onFindingNavigate={navigateToFindingGroup} onOpenProjects={showProjects} onSignalInspect={setSignalSelection} onSignalEvidence={openSignalEvidence} onHistoryEvidence={openHistoryEvidence} onReanalyse={reanalyse} reanalysing={reanalysing} onTrail={setTrail} onDiagnostics={openDiagnostics} /></div>
+    : screen === "project"
+      ? record?.project_id === routeProjectId
+        ? <div className="app-shell" inert={projectsOverlayOpen ? true : undefined} aria-hidden={projectsOverlayOpen || undefined}><Overview record={record} signalsLayer={signalsLayer} historyLayer={historyLayer} analyticalLayer={analyticalLayer} activeView={activeView} onView={changeView} findingsTarget={findingsTarget} onFindingsTargetHandled={() => setFindingsTarget(null)} onFindingNavigate={navigateToFindingGroup} onOpenProjects={showProjects} onSignalInspect={setSignalSelection} onSignalEvidence={openSignalEvidence} onHistoryEvidence={openHistoryEvidence} onReanalyse={reanalyse} reanalysing={reanalysing} onTrail={setTrail} onDiagnostics={openDiagnostics} /></div>
+        : <main className="app-loading" aria-label="Loading project" />
       : projectsLoaded
         ? <ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} publicDemo={PUBLIC_DEMO} />
         : <main className="app-loading" aria-label="Loading projects" />;

@@ -14,7 +14,7 @@
     "build": "vite build",
     "build:demo": "vite build",
     "test": "node --test tests/*.test.mjs",
-    "test:deploy": "node --test tests/public-demo-deployment.test.mjs tests/v102-feedback.test.mjs",
+    "test:deploy": "node --test tests/public-demo-deployment.test.mjs tests/router.test.mjs tests/v102-feedback.test.mjs",
     "demo:export": "node scripts/export-public-demo.mjs",
     "demo:validate": "node scripts/public-demo-privacy.mjs public/demo-data/v1.0.2",
     "report:stored": "node scripts/generate-stored-report.mjs",

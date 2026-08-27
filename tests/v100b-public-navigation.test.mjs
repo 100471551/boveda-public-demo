@@ -8,7 +8,7 @@ const metadata = JSON.parse(readFileSync(new URL("../package.json", import.meta.
 
 test("v1.0.2 retains the v1.0.0b Welcome and simple Home/Projects flow", () => {
   assert.equal(metadata.version, "1.0.2");
-  assert.match(main, /useState\("welcome"\)/);
+  assert.match(main, /useState\(\(\) => parseRoute\(window\.location\.pathname\)\)/);
   assert.match(main, /Auditable by design/);
   assert.match(main, /function GlobalNavigation/);
   assert.match(main, /aria-label="Home"/);
