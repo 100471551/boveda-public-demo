@@ -13,6 +13,7 @@ import {
   formatSupervisorSummary,
 } from "./format-display.mjs";
 import { canonicalSupervisorProjectTitle, canonicalSupervisorProjectTitleForRecord, rootFolderName, splitDashboardTitle } from "./project-display.mjs";
+import { projectRepository } from "./project-repository.mjs";
 import { PROJECT_ICON_LABELS, selectProjectIcon } from "./project-icon.mjs";
 import { populationStageDots } from "./population-funnel.mjs";
 import {
@@ -616,6 +617,12 @@ function ReportDownloadMenu({ projectId }) {
   </div>;
 }
 
+function ProjectRepositoryLink({ record }) {
+  const repository = projectRepository(record?.source_project?.path);
+  if (!repository) return null;
+  return <a className="project-repository-link" href={repository.href} target="_blank" rel="noreferrer" aria-label={repository.label} title={repository.label}><img src="/ui/Link_Button.svg" alt="" aria-hidden="true" /></a>;
+}
+
 function ConfidenceBadge({ confidence }) {
   if (!confidence) return null;
   const tone = confidenceTone(confidence.score);
@@ -790,7 +797,10 @@ function Overview({ record, signalsLayer, historyLayer, analyticalLayer, activeV
           <div className="record-title-row"><h1 aria-label={projectTitle} title={projectTitle}>{projectTitleLines.map((line, index) => <span className="record-title-line" key={`${line}-${index}`}>{line}</span>)}</h1></div>
           <div className="record-title-actions">
             <button type="button" className={`record-title-action record-title-action--primary ${reanalysing ? "is-reanalysing" : ""}`} onClick={onReanalyse} disabled={reanalysing} data-demo-disabled={PUBLIC_DEMO || undefined} title={PUBLIC_DEMO ? "Reanalysis is disabled in the public demo" : undefined}><Icon name="Reanalyse_Top" />{reanalysing ? <><span>Reanalysing</span><span className="reanalysis-dots" aria-hidden="true"><i /><i /><i /></span></> : "Reanalyse"}</button>
-            <ReportDownloadMenu projectId={record.project_id} />
+            <div className="record-title-secondary-actions">
+              <ReportDownloadMenu projectId={record.project_id} />
+              <ProjectRepositoryLink record={record} />
+            </div>
           </div>
         </div>
         <strong className="project-intro-label">What is the project about</strong>

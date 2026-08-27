@@ -13,6 +13,8 @@ const menu = readFileSync(new URL("../public/ui/Menu.svg", import.meta.url), "ut
 const dragIcon = readFileSync(new URL("../public/ui/Drag_Icon.svg", import.meta.url), "utf8");
 const demoBannerClose = readFileSync(new URL("../public/ui/Demo_Banner_Close.svg", import.meta.url), "utf8");
 const startExploring = readFileSync(new URL("../public/ui/Start_Exploring.png", import.meta.url));
+const repositoryLink = readFileSync(new URL("../public/ui/Link_Button.svg", import.meta.url), "utf8");
+const projectRepository = readFileSync(new URL("../src/project-repository.mjs", import.meta.url), "utf8");
 const server = readFileSync(new URL("../engine/server.mjs", import.meta.url), "utf8");
 const persistence = readFileSync(new URL("../engine/persistence.mjs", import.meta.url), "utf8");
 const devLauncher = readFileSync(new URL("../scripts/dev.mjs", import.meta.url), "utf8");
@@ -135,6 +137,23 @@ test("v1.0.2 introduces first-visit guidance beside Projects using the exact Fig
   assert.match(main, /setStartExploringVisible\(false\); storeStartExploringSeen\(\);/);
   assert.match(styles, /\.global-navigation__start-exploring \{[\s\S]*?top: 77px;[\s\S]*?left: calc\(100% \+ 8px\);[\s\S]*?width: 114px;[\s\S]*?height: 27px;/);
   assert.match(styles, /@media \(max-width: 900px\)[\s\S]*?\.global-navigation__start-exploring \{ top: -34px; left: calc\(50% \+ 10px\); \}/);
+});
+
+test("v1.0.2 links each known demo project to its original GitHub repository", () => {
+  assert.match(projectRepository, /R1_public-health_housing-chelsea/);
+  assert.match(projectRepository, /https:\/\/github\.com\/nsdiaz\/chelsea-code-violations-and-public-health/);
+  assert.match(projectRepository, /R2_public-safety_road-crash-risk/);
+  assert.match(projectRepository, /https:\/\/github\.com\/insight-lane\/crash-model/);
+  assert.match(projectRepository, /R3_public-services_nyc-311-resolution/);
+  assert.match(projectRepository, /https:\/\/github\.com\/ayush159\/NYC-311/);
+  assert.match(projectRepository, /\|\| null/);
+  assert.match(main, /record-title-secondary-actions[\s\S]*<ReportDownloadMenu projectId=\{record\.project_id\} \/>[\s\S]*<ProjectRepositoryLink record=\{record\} \/>/);
+  assert.match(main, /target="_blank" rel="noreferrer"/);
+  assert.match(main, /aria-label=\{repository\.label\}/);
+  assert.match(main, /src="\/ui\/Link_Button\.svg"/);
+  assert.match(styles, /\.record-title-secondary-actions[^}]*display: inline-flex[^}]*gap: 8px/);
+  assert.match(styles, /\.project-repository-link[^}]*flex: 0 0 34px[^}]*width: 34px[^}]*height: 34px/);
+  assert.match(repositoryLink, /<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="34" height="34"/);
 });
 
 test("v1.0.2 unifies solid red accents without changing gradients or confidence indicators", () => {
