@@ -26,8 +26,8 @@ The Vercel GitHub application is limited to this repository. On the Hobby plan, 
 
 When the three demo projects need to be deliberately refreshed, run `npm run demo:export` in the trusted local workspace, inspect the diff under `public/demo-data/v1.0.2/`, run `npm run demo:validate`, and commit only the sanitized output. Never add `storage/`, `.env`, source-project directories, or provider credentials.
 
-## One-time manual actions
+## Owner decisions
 
-- Confirm that the bundled Flink font files are covered by a Webfont License for `boveda.dev` before promoting the custom domain publicly. The [Identity Letters EULA](https://www.moritz-kleinsorge.de/files/EULA-Identity-Letters-v2-1-20250109) distinguishes self-hosted web use from desktop/static-document use. If no matching license exists, purchase the appropriate license or replace Flink with an appropriately licensed font and re-run visual QA.
+- Keep the bundled Flink font files and current typography unchanged. No font substitution is part of this deployment.
 
 Recommended repository protection: require the `Deployment checks / public-demo` check and an up-to-date branch before merging to `main`; enable Vercel Deployment Protection for previews if previews may contain work-in-progress content.
