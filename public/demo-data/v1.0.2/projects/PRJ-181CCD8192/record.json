@@ -1,0 +1,922 @@
+{
+  "schema_version": "boveda-supervisory-record-0.9.0",
+  "product_version": "0.20.13",
+  "project_id": "PRJ-181CCD8192",
+  "audit_id": "AUD-8663C7D0D4",
+  "analysed_at": "2026-08-26T11:58:09.574Z",
+  "source_project": {
+    "path": "/R3_public-services_nyc-311-resolution",
+    "content_snapshot_before": "cf86e7ee50945c683b03214f595ee6c9aaaf2eafa43a2888242a849dae68706f",
+    "content_snapshot_after": "cf86e7ee50945c683b03214f595ee6c9aaaf2eafa43a2888242a849dae68706f",
+    "modified": false
+  },
+  "inventory": {
+    "eligible_files": 3,
+    "collected_items": 5,
+    "bounded_characters": 36459,
+    "git": {
+      "head": "ff013227b878e1960a48344534e560381938070b",
+      "branch": "master"
+    }
+  },
+  "provider": {
+    "generation_mode": "llm",
+    "provider": "OpenAI",
+    "model": "gpt-5.6-sol",
+    "response_id": "resp_065b0506e11efc61016a8ed4c6caa087d28ccc2a6f17eb0766",
+    "usage": {
+      "input_tokens": 13134,
+      "input_tokens_details": {
+        "cache_write_tokens": 13131,
+        "cached_tokens": 0
+      },
+      "output_tokens": 538,
+      "output_tokens_details": {
+        "reasoning_tokens": 353
+      },
+      "total_tokens": 13672
+    },
+    "attempts": 2,
+    "rejected_candidates": [
+      {
+        "operation": "full_reconstruction",
+        "attempt": 1,
+        "response_id": "resp_09bbbcf12ed0f289016a8ed48d5e9c87d28db38cd7cc425463",
+        "errors": [
+          "record.samples.source_data: numeric value 16 is not grounded in cited evidence",
+          "record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence",
+          "record.data.period: numeric value 311 is not grounded in cited evidence"
+        ],
+        "usage": {
+          "input_tokens": 16572,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 16569,
+          "output_tokens": 3945,
+          "reasoning_output_tokens": 2381,
+          "total_tokens": 20517
+        },
+        "duration_ms": 56406,
+        "failure_stage": "grounding"
+      }
+    ],
+    "fallback_reason": null,
+    "localized_repair": {
+      "status": "accepted",
+      "base_attempt": 1,
+      "repair_attempts": 1,
+      "fields": [
+        "record.samples.source_data",
+        "record.results_evaluation.establishes",
+        "record.data.period"
+      ],
+      "evidence_scope": [
+        "E-B9CC546808",
+        "E-2B1FA53FA7"
+      ],
+      "unrelated_fields_preserved": true
+    }
+  },
+  "validation": {
+    "status": "VALID",
+    "errors": [],
+    "warnings": []
+  },
+  "reconstruction": {
+    "identity": {
+      "name": {
+        "state": "established",
+        "value": "NYC-311",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808",
+          "E-SYSTEM-PATH"
+        ]
+      },
+      "description": {
+        "state": "established",
+        "value": "Analyzes NYC 311 service requests, models complaint-resolution ranges and daily call volumes, and compares storm-period response times to inform city understanding and resource planning.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      }
+    },
+    "purpose_scope": {
+      "summary": {
+        "state": "established",
+        "value": "The project examines NYC 311 demand, complaint patterns, resolution times and storm-related differences, using descriptive analysis, classification and time-series forecasting. Its outputs are intended to support city resource allocation and resident expectations, although the evaluated resolution model is restricted to Brooklyn heat and hot-water complaints.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "purpose": {
+        "state": "established",
+        "value": "Improve understanding of city service demand and support more efficient resource allocation.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808"
+        ]
+      },
+      "task": {
+        "state": "established",
+        "value": "Describe request patterns, classify resolution-time ranges, forecast daily volumes, and compare storm-related response times.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808"
+        ]
+      },
+      "target_outcome": {
+        "state": "established",
+        "value": "Outputs a three-class complaint-resolution range and forecast daily service-request volume.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B9CC546808"
+        ]
+      },
+      "unit": {
+        "state": "established",
+        "value": "Individual 311 service request",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808"
+        ]
+      },
+      "population_scope": {
+        "state": "established",
+        "value": "NYC 311 service requests; resolution modelling narrows to Brooklyn heat and hot-water complaints.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "intended_use": {
+        "state": "established",
+        "value": "Support city resource allocation and help residents estimate when complaints may be resolved.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B9CC546808"
+        ]
+      }
+    },
+    "samples": {
+      "source_data": {
+        "state": "established",
+        "display": "More than 16M rows",
+        "count": null,
+        "unit": "rows",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B9CC546808"
+        ]
+      },
+      "model_sample": {
+        "state": "not_established",
+        "display": "–",
+        "count": null,
+        "unit": "service requests",
+        "epistemic": "UNRESOLVED",
+        "evidence_ids": []
+      },
+      "evaluation_sample": {
+        "state": "not_established",
+        "display": "–",
+        "count": null,
+        "unit": "service requests",
+        "epistemic": "UNRESOLVED",
+        "evidence_ids": []
+      }
+    },
+    "results_evaluation": {
+      "primary_result": {
+        "state": "established",
+        "display_value": "0.62486417070038525",
+        "metric": "Test accuracy",
+        "method": "Random Forest Classifier with 100 trees",
+        "task_target": "Three resolution-time classes for Brooklyn heat complaints",
+        "evaluation_context": "Held-out X_test/Y_test from filtered 2015 model data",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "material_results": [
+        {
+          "state": "established",
+          "display_value": "0.953887894029",
+          "metric": "r2_score",
+          "method": "Prophet additive time-series model",
+          "task_target": "Log daily NYC 311 request volume",
+          "evaluation_context": "Goodness of fit on 391 retained days with over 25 calls",
+          "epistemic": "OBSERVED",
+          "evidence_ids": [
+            "E-B9CC546808",
+            "E-2B1FA53FA7"
+          ]
+        }
+      ],
+      "evaluation_design": {
+        "state": "established",
+        "value": "The random forest was evaluated on a held-out train/test split; the split proportion and absolute training and test counts are not reported.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-2B1FA53FA7"
+        ]
+      },
+      "other_material_result": {
+        "state": "established",
+        "value": "Prophet additionally achieved r2_score 0.953887894029 as a goodness-of-fit measure for retained daily call volumes.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "known_limitation": {
+        "state": "established",
+        "value": "The three classes are imbalanced, with too few examples in the longest-resolution class, limiting interpretation of overall accuracy.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "establishes": {
+        "state": "established",
+        "value": "On the recorded test dataset, the random forest achieved accuracy of 0.62486417070038525 for classifying complaint resolution-time ranges.",
+        "epistemic": "DERIVED",
+        "evidence_ids": [
+          "E-2B1FA53FA7"
+        ]
+      },
+      "does_not_establish": {
+        "state": "established",
+        "value": "It does not establish similar accuracy for other complaint types, boroughs, periods, or requests taking more than 28 days.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      }
+    },
+    "data": {
+      "summary": {
+        "state": "established",
+        "value": "Public NYC 311 records were prepared with created and closed dates, location, complaint descriptors and derived resolution days; a filtered Brooklyn heat subset fed classification.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "data_sources": {
+        "state": "established",
+        "value": "NYC Open Data 311 Service Requests dataset.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-B9CC546808"
+        ]
+      },
+      "unit_of_observation": {
+        "state": "established",
+        "value": "One individual 311 service request",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ]
+      },
+      "period": {
+        "state": "established",
+        "value": "The prepared service-request analysis and resolution model used data from 2015.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-2B1FA53FA7"
+        ]
+      },
+      "population_filters": {
+        "state": "established",
+        "value": "Resolution modelling selected Brooklyn heat and hot-water complaints and removed requests with resolution times exceeding 28 days.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-2B1FA53FA7"
+        ]
+      },
+      "population_limitation": {
+        "state": "established",
+        "value": "The resolution model is limited to Brooklyn heat and hot-water complaints resolved within 28 days, restricting application beyond that selected group.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-2B1FA53FA7"
+        ]
+      }
+    },
+    "confidence": {
+      "level": "Medium",
+      "explanation": "The exact test accuracy is stored in the notebook and rounded in the report, but test size and split proportion are unavailable.",
+      "evidence_ids": [
+        "E-B9CC546808",
+        "E-2B1FA53FA7"
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "E-SYSTEM-PATH",
+      "path": ".",
+      "kind": "project_identity",
+      "epistemic": "OBSERVED",
+      "excerpt": "Imported directory name: R3_public-services_nyc-311-resolution",
+      "sha256": "181ccd8192ab14d309eb872baa0d565f9a7d5389c7ccde96163a2270e5bf2023"
+    },
+    {
+      "id": "E-B335630551",
+      "path": "README.md",
+      "kind": "documentation",
+      "epistemic": "OBSERVED",
+      "excerpt": "# Analysis of NYC-311 Service Request Data\nBackground:\n\n311 Service Requests encompass all non-emergency requests from the city, including but not limited to noise complaints, air quality issues and reports of unsanitary conditions etc. The 311 calls in New York City (NYC) are publicly available.\n\n311 service request dataset is available at https://data.cityofnewyork.us/Social-Services/311- Service-Requests- from-2010-to-Present/erm2-nwe9\n\nProblem Statements and Motivation:\n\nAnalysis of 311 calls can be of great use for a wide variety of purposes, ranging from a rich understanding of the status of a city to the effectiveness of the government services in addressing such calls.\n\nIn our analysis, we want to answer following questions\n\n1. What are different type of Service Requests(SRs)? Which is most/least frequent?\n\n2. From which borough most SRs come from?\n\n3. Which SRs peaks at what time of year or time of day?\n\n4. How air quality issues relate to different boroughs?\n\n5. The agencies which are more efficient in solving SRs.\n\n6. From which type of location we get most number of complaints?\n\nNext thing we want to find out or predict is:\n\n1. Predict time required in terms of range of days to resolve a specific complaint in a specific borough.\n\n2. A time series analysis to forecast the volume of calls to be expected on given future date.\n\n3. Merge the 311 dataset with the Storms dataset. Compare the average response time for complaints during a storm and otherwise.\n\n4. To do a time series analysis of the storm data to find out the weekly or daily seasonality.\n\n\nThe storm events dataset is available at\nhttps://www.ncdc.noaa.gov/stormevents/choosedates.jsp?statefips=36%2CNEW+YORK\nThis dataset contains features such as Location, County, Date, Type, Magnitude and few features telling about the damage caused by the event.\n\n\nOutcomes of Analysis:\n\n![Complaints Distribution Across Boroughs](https://github.com/ayush159/NYC-311/blob/master/graphs/distribution.png)\n\n![Most Common Complaints](https://github.com/ayush159/NYC-311/blob/master/graphs/most_common.png)\n\n![Air_Quality issue distribution across NYC](https://github.com/ayush159/NYC-311/blob/master/graphs/air_quality.png)\n\n![Response Time Comparison](https://github.com/ayush159/NYC-311/blob/master/graphs/complaints.png)",
+      "sha256": "dc05a17032fed3df7a878905a8f973f7fa7f7c795d23dca308dde24434a3ad6b"
+    },
+    {
+      "id": "E-B9CC546808",
+      "path": "Project_Report_GIT.pdf",
+      "kind": "report",
+      "epistemic": "OBSERVED",
+      "excerpt": "Exploring 311 Service Request Data\n\nProblem Statement and Background:\n\nBackground:\n\n311 Service Requests encompass all non-emergency requests from the city, including but not\nlimited to noise complaints, air quality issues and reports of unsanitary conditions etc. The\n311 calls in New York City (NYC) are publicly available.\n\n311 service request dataset is available  at https://data.cityofnewyork.us/Social-Services/311-\nService-Requests-from-2010-to-Present/erm2-nwe9\nThis dataset comprises of all calls made to 311 from the year 2010-Present. The data contains\nmore than 16M rows spread across 53 features. Size of the data is approximately 8 Gb.\n\n53 features of the dataset include features related to\nTime such as Created Date, Closed Date, Due Date, and Resolution Action Updated Date \nLocation specific such as Incident Zip, Incident Address, X Coordinate (State Plane), and Y\nCoordinate (State Plane) \nType such as Complaint Type, Agency and Descriptor \nThen there are other features which are there to support specific types of requests.\n\nProblem Statements and Motivation:\n\nAnalysis of 311 calls can be of great use for a wide variety of purposes, ranging from a rich\nunderstanding  of  the  status  of  a  city  to  the effectiveness  of  the  government  services  in\naddressing such calls.\n\nIn this analysis, we want to answer following questions\n1.  What are different type of Service Requests(SRs)? Which is most/least frequent?\n2.  From which borough most SRs come from? \n3.  Which SRs peaks at what time of year or time of day? \n4.  How air quality issues relate to different boroughs? \n\n\n5.  The agencies which are more efficient in solving SRs. \n6.  From which type of location we get most number of complaints?\n\nThese answers will give us a better understanding of the city’s issue.\nNext thing we want to find out or predict is: \n1. Predict time required in terms of range of days to resolve a specific complaint in a specific\nborough.\n2. A time series analysis to forecast the volume of calls to be expected on given future date.\n3. Merge the 311 dataset with the Storms dataset. Compare the average response time for\ncomplaints during a storm and otherwise.\n4. To do a time series analysis of the storm data to find out the weekly or daily seasonality.\nBy using these answers, a city can be better prepared for a particular storm type. Policy\nmakers can use this information to efficiently allocate resources. And the residents of the city\ncan have a real-time sense of when their problem will be solved.\nThe storm events dataset is available at\nhttps://www.ncdc.noaa.gov/stormevents/choosedates.jsp?statefips=36%2CNEW+YORK\nThis dataset contains features such as Location, County, Date, Type, Magnitude and few\nfeatures telling about the damage caused by the event.\nMethods:\nFor predicting time to resolve:\nThis is a supervised learning, classification problem. The model we build for this problem\ncontains following:\nPredictor Variables:\n1. Day of Week\n2. Day of Month\n3. Month\n4. Incident Zip\n5. Descriptor\n\n\nThe first 3 features are stripped from the Created Date column of the 311 dataset.\nDescriptor column contains text data so converted each unique text value into a feature for\nmodel.\nTarget Variable:\nResolution Time: - First calculated the resolution time in terms of days by subtracting created\ndate from closed date. Then divided the days into buckets such as bucket 1 for less than 2\ndays, bucket 2 for 2 to 6 days and bucket 3 for more than a week.\nHence our target variable represents 3 classes and we aim to classify input data into one of\nthese classes.\nSo, for  this  problem  we  used  classification  models:  Logistic  Regression,  Decision  Tree\nClassifier, Random Forest Classifier.\nEvaluation Metric: For evaluation of the above models we used confusion matrix.\nFor Time Series Analysis to forecast volume of calls:\nFor doing the time series analysis, we used Created date column and the count of complaints\non each date. We used two models: traditional ARMA model and Prophet model.\nProphet is a library to build forecasting models for time series data, but instead of using the\ntraditional way of building the model such as using ARIMA, etc., it is fitting additive regression\nmodels or known as ‘curve fitting’.\nEvaluation Metric: For evaluation of ARMA model, we calculated MAE and MFE values and\nalso the Durbin Watson Statistic. For evaluation of Prophet model, we did the goodness of\nfit test and calculated r2_score.\n\nFor merging Storms dataset:\nWe performed an inner join on Created date column between storms dataset and 311\ndataset. Performed some visual exploration and calculated weekly and daily seasonality\nusing the Prophet model.\n\n\nResults:\nDescriptive Answers:\n\nWe can see that most number of air quality issues comes from Lower Manhattan.\n\n\nWe can see here that NYPD, DHS and 3-1-1 are the most efficient agencies among the\nrest. While DPR take on an average more than 2 months to solve a complaint.\n\n\nNoise Issues are most common in the summers.\n\nFor most of the complaints, it’s the expected result i.e. during storm, they take more time\nto resolve, but in case of unsanitary conditions, it’s the reverse. Also heat issues takes\nalmost same time in both the cases.\nModels:\nPredictive model for resolution time yielded an accuracy of around 62% with both Decision\nTree Classifier and random forest.  Confusion matrix highlights the problem with the model.\nThe data is imbalanced. We do not have enough data points for class 3.\n\n\nTime Series analysis to forecast volume of calls for future:\n\nThis plot is drawing the original data (black dots), the model (blue line) and the error of the\nforecast (shaded blue area).\nWe fitted ARMA(1,0) model with an MAE of 0.66 and Durbin Watson Statistic of 0.0037.\nWe were able to fit Prophet model with an r2_score of 0.95.\n\n\nAssumptions/Limitations:\n1. Dataset was very large and it was difficult to process, so filtered on many levels to\nreduce the data size.\n2. Assumed that all the complaints were in closed state.\n3. Assumed that impact of storm lasted only till the duration of storm.",
+      "sha256": "f273b495d8be79470d852dcf35d80371b3c7b8eafb1ddf0bb552b9326ad0d880"
+    },
+    {
+      "id": "E-2B1FA53FA7",
+      "path": "NYC311.ipynb",
+      "kind": "notebook",
+      "epistemic": "OBSERVED",
+      "excerpt": "[CODE FOR OUTPUT]\ndf_perfect = prepareData(df)\ndf_perfect.shape\n\n[PERSISTED OUTPUT]\n(2099575, 57)\n\n[CODE FOR OUTPUT]\ndf_Brooklyn.shape\n\n[PERSISTED OUTPUT]\n(654694, 57)\n\n[CODE FOR OUTPUT]\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score\n\nX_train, X_test, y_train, y_test = splitter(df_model,df_model['categories'])\nX1 = X_train.drop(['Resolution_Time','categories'],1)\nY1 = y_train\nX2 = X_test.drop(['Resolution_Time','categories'],1)\nY2 = y_test\nlog=LogisticRegression(C=1e30)\nlog.fit(X1,Y1)\naccuracy_score(Y2,log.predict(X2))\n\n[PERSISTED OUTPUT]\n0.57808949916032792\n\n[CODE FOR OUTPUT]\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.tree import export_graphviz\nimport scipy as sp\nclf = DecisionTreeClassifier(criterion='entropy')\nclf = clf.fit(X1,Y1)\ny1_model = clf.score(X1,Y1)\ny2_model = clf.score(X2,Y2)\nprint(\"Accuracy on training dataset = \",y1_model*100,\"%\",\"\\nAccuracy on test dataset = \",y2_model*100,\"%\")\n\n\n[PERSISTED OUTPUT]\nAccuracy on training dataset =  75.5667986198 %\nAccuracy on test dataset =  62.1456090092 %\n\n\n[CODE FOR OUTPUT]\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score\n\nrf = RandomForestClassifier(n_estimators=100)\nrf.fit(X1, Y1)\n\npredicted = rf.predict(X2)\naccuracy = accuracy_score(Y2, predicted)\naccuracy\n\n[PERSISTED OUTPUT]\n0.62486417070038525\n\n[CODE FOR OUTPUT]\nimport itertools\nclass_names = ['< 2 days','2 <= days <= 6','more than a week',]\nplt.figure()\nplot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,\n                      title='Normalized confusion matrix')\nplt.show()\n\n[PERSISTED OUTPUT]\nNormalized confusion matrix\n[[ 0.55115806  0.41639094  0.03245101]\n [ 0.22262401  0.73546592  0.04191006]\n [ 0.22333125  0.53462258  0.24204616]]\n\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x121a28ef0>\n\n[CODE FOR OUTPUT]\nimport itertools\nclass_names = ['< 2 days','2 <= days <= 6','more than a week',]\nplt.figure()\nplot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,\n                      title='Normalized confusion matrix')\nplt.show()\n\n[PERSISTED OUTPUT]\nNormalized confusion matrix\n[[ 0.60244337  0.37223212  0.02532451]\n [ 0.2676866   0.69568846  0.03662494]\n [ 0.26699938  0.51777916  0.21522146]]\n\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x131064e80>\n\n[CODE FOR OUTPUT]\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score\n\nX_train, X_test, y_train, y_test = splitter(data_clean,data_clean.categories)\nX1 = X_train.drop('categories',1)\nY1 = y_train\nX2 = X_test.drop('categories',1)\nY2 = y_test\nlog=LogisticRegression(C=1e30)\nlog.fit(X1,Y1)\naccuracy_score(Y2,log.predict(X2))\n\n[PERSISTED OUTPUT]\n0.57408870888076657\n\n[CODE FOR OUTPUT]\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.tree import export_graphviz\nimport scipy as sp\nclf = DecisionTreeClassifier(criterion='entropy')\nclf = clf.fit(X1,Y1)\ny1_model = clf.score(X1,Y1)\ny2_model = clf.score(X2,Y2)\nprint(\"Accuracy on training dataset = \",y1_model*100,\"%\",\"\\nAccuracy on test dataset = \",y2_model*100,\"%\")\n\n[PERSISTED OUTPUT]\nAccuracy on training dataset =  75.8673977011 %\nAccuracy on test dataset =  61.1478810629 %\n\n\n[CODE FOR OUTPUT]\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score\n\nrf = RandomForestClassifier(n_estimators=100)\nrf.fit(X1, Y1)\n\npredicted = rf.predict(X2)\naccuracy = accuracy_score(Y2, predicted)\naccuracy\n\n[PERSISTED OUTPUT]\n0.61859132668181371\n\n[CODE FOR OUTPUT]\nMFE = volume.y.sub(forecast).mean()\nMAE = np.mean((np.abs(MFE/forecast)))\nprint(\"MFE = \",MFE,\"\\nMAE = \",MAE)\n\n[PERSISTED OUTPUT]\nMFE =  -117.46489790455281\nMAE =  0.6667867415358774\n\n\n[CODE FOR OUTPUT]\nvolume = pd.DataFrame({'ds':time.index, 'y':time.values})\nvolume['y_orig'] = volume['y'] # to save a copy of the original data.. \n# log-transform y\nvolume['y'] = np.log(volume['y'])\nvolume.shape\n\n[PERSISTED OUTPUT]\n(391, 3)\n\n[CODE FOR OUTPUT]\njoined_df = volume.merge(forecast, left_on='ds', right_on='ds')\nfrom sklearn.metrics import mean_squared_error, r2_score\nplt.scatter(joined_df.y, joined_df.yhat, alpha = 0.7)\nr2_score(joined_df.y, joined_df.yhat)\nprint(r2_score(joined_df.y, joined_df.yhat))\nplt.xlabel('Observed N of service requests')\nplt.ylabel('Predicted N of service requests')\nplt.text(3.5,8,\"r2_score=\"+str(r2_score(joined_df.y, joined_df.yhat)))\nplt.plot([joined_df.y.min(),joined_df.y.max()],[joined_df.y.min(),joined_df.y.max()], color='orange')\n\n[PERSISTED OUTPUT]\n0.953887894029\n\n\n[PERSISTED OUTPUT]\n[<matplotlib.lines.Line2D at 0x163f544e0>]\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x1598183c8>\n\n[CODE FOR OUTPUT]\nstorm = (result['Complaint Type'].value_counts()).head(15)\nnoStorm = df_perfect[df_perfect['Complaint Type'].isin(storm.index)]\n\nvar = result.groupby('Complaint Type').Resolution_Time.mean()\nfrequent = result['Complaint Type'].value_counts().head(15)\nvar = var.ix[frequent.index]\n\nvar1 = noStorm.groupby('Complaint Type').Resolution_Time.mean()\nfrequent1 = noStorm['Complaint Type'].value_counts().head(15)\nvar1 = var1.ix[frequent.index]\n\n# Setting the positions and width for the bars\npos = list(range(len(var)))\nwidth = 0.25\n\n# Plotting the bars\nfig, ax = plt.subplots(figsize=(12,6))\n\n# in position pos,\nplt.bar(pos,\n        var,\n        # of width\n        width,\n        # with alpha 0.5\n        alpha=0.5,\n        # with color\n        color='#f03b20',\n        label=var.index[0])\n\n\n# in position pos + some width buffer,\nplt.bar([p + width for p in pos],\n        var1,\n        # of width\n        width,\n        # with alpha 0.5\n        alpha=0.5,\n        # with color\n        color='#2c7fb8',\n        label=var.index[1])\n\n\n# Set the x,y axis label\nax.set_ylabel('Avg Response Time')\nax.set_xlabel('Common Complaints')\n\n\n# Set the chart's title\nax.set_title('Comparison of Response Time during storm and otherwise')\n\n# Set the position of the x ticks\nax.set_xticks([p + width for p in pos])\n\n# Set the labels for the x ticks\nax.set_xticklabels(var1.index)\n#ax.grid(axis=1)\n\n# Setting the x-axis and y-axis limits\nplt.xlim(min(pos)-width, max(pos)+width*4)\n\nplt.xticks(rotation='vertical')\n# Adding the legend and showing the plot\nplt.legend(['with Storm', 'without Storm'], loc='upper left')\nplt.grid()\n#plt.show()\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x15224bbe0>\n\n[CODE FOR OUTPUT]\nfrom sklearn.metrics import mean_squared_error, r2_score\nplt.scatter(joined_df.y, joined_df.yhat, alpha = 0.7)\nprint(r2_score(joined_df.y, joined_df.yhat))\nplt.xlabel('N of calls')\nplt.ylabel('Prediction')\nplt.text(3.5,9.5,\"r2_score=\"+str(r2_score(joined_df.y, joined_df.yhat)))\nplt.plot([joined_df.y.min(),joined_df.y.max()],[joined_df.y.min(),joined_df.y.max()], color='orange')\n\n[PERSISTED OUTPUT]\n0.903472509313\n\n\n[PERSISTED OUTPUT]\n[<matplotlib.lines.Line2D at 0x115a5f780>]\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x155967160>\n\n[CODE FOR OUTPUT]\n(df_perfect['Complaint Type'].value_counts()).head(25).plot(kind='bar',\n                    figsize=(10,6), title = 'Most common Complaints')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x102d919b0>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x175ef5908>\n\n[CODE FOR OUTPUT]\n(df_perfect['Complaint Type'].value_counts()).tail(25).plot(kind='bar',\n                    figsize=(10,6), title = 'Least frequent Complaints')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x12bc6a438>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x12eae3f28>\n\n[CODE FOR OUTPUT]\ncolors = ['#639ace','#ca6b39','#7f67ca','#5ba85f','#c360aa','#a7993f','#cc566a']\ndf_perfect['Borough'].value_counts().plot(kind='pie',autopct='%1.1f%%',\n                        explode = (0.15, 0, 0, 0, 0), startangle=45, shadow=False, colors = colors,\n                        figsize = (8,6))\n#plt.legend(title='BOROUGH', loc='upper right', bbox_to_anchor=(1.5,1))\nplt.axis('equal')\nplt.title('# complaints distribution across Boroughs (2015)\\n')\nplt.tight_layout()\nplt.show()\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x15696aba8>\n\n[CODE FOR OUTPUT]\ndf_perfect_Air = df_perfect[df_perfect['Complaint Type'] == 'Air Quality']\ndf_perfect_Air.plot(kind='hexbin', x='Longitude', y='Latitude', gridsize=40,\n    colormap = 'jet',mincnt=1,title = 'Air Quality issues across NYC\\n', figsize=(10,6)).axis('equal')\n\n[PERSISTED OUTPUT]\n(-74.252209273941219,\n -73.700771566384404,\n 40.503329093002719,\n 40.906862062031507)\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x118b7da20>\n\n[CODE FOR OUTPUT]\n(df_Brooklyn['Complaint Type'].value_counts()).head(25).plot(kind='bar',\n                                                    figsize=(10,6),title = 'Most Frequent Complaints in Brooklyn')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x171a2b630>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x144316278>\n\n[CODE FOR OUTPUT]\nimport matplotlib.ticker as ticker\n\nvar = df_Brooklyn.groupby('Complaint Type').Resolution_Time.mean()\nfrequent = df_Brooklyn['Complaint Type'].value_counts().head(25)\nvar = var.ix[frequent.index]\nfig = plt.figure()\nax1 = fig.add_subplot(1,1,1)\nax1.set_xlabel('Complaint_Type')\nax1.set_ylabel('Average Response Time')\nax1.set_title(\"Avg Response Time of Complaints\")\ntick_spacing = 2\nax1.yaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))\nvar.head(15).plot(kind='bar')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x160363da0>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x160363e80>\n\n[CODE FOR OUTPUT]\nimport matplotlib.ticker as ticker\n\nvar = df_Brooklyn.groupby('Agency').Resolution_Time.mean()\nfrequent = df_Brooklyn['Agency'].value_counts().head(25)\nvar1 = var.ix[frequent.index]\nfig = plt.figure()\nax1 = fig.add_subplot(1,1,1)\nax1.set_xlabel('Agencies')\nax1.set_ylabel('Average Response Time')\nax1.set_title(\"Avg Response Time of Agencies\")\ntick_spacing = 5\nax1.yaxis.set_major_locator(ticker.MultipleLocator(tick_spacing))\nvar1.head(25).plot(kind='bar')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x16035ea90>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x16035e780>\n\n[CODE FOR OUTPUT]\n(df_Brooklyn['Location Type'].value_counts()).head(25).plot(kind='bar',\n                                                    figsize=(10,6),title = 'Location Type vs # Complaints')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x16887a898>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x1367b8f60>\n\n[CODE FOR OUTPUT]\ndf_Brooklyn[['Longitude', 'Latitude']].plot(kind='scatter',\n    x='Longitude', y='Latitude', figsize=(10,8),title = 'Complaints concentration across Brooklyn').axis('equal')\n\n[PERSISTED OUTPUT]\n(-74.056070710674547,\n -73.840023278532783,\n 40.555768040404651,\n 40.753034410640936)\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x155b175c0>\n\n[CODE FOR OUTPUT]\ndf_Brooklyn.plot(kind='hexbin', x='Longitude', y='Latitude', gridsize=40,\n    colormap = 'jet',mincnt=1,title = 'Complaints concentration across Brooklyn\\n', figsize=(10,6)).axis('equal')\n\n[PERSISTED OUTPUT]\n(-74.042680660431444,\n -73.853413328775886,\n 40.569527363302065,\n 40.739275087743508)\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x152e8fcf8>\n\n[CODE FOR OUTPUT]\ndf_perfect[df_perfect['Complaint Type'] == 'HEAT/HOT WATER']['Descriptor'].value_counts()\n\n[PERSISTED OUTPUT]\nENTIRE BUILDING    146366\nAPARTMENT ONLY      78213\nName: Descriptor, dtype: int64\n\n[CODE FOR OUTPUT]\ndf_Brook_Heat[df_Brook_Heat['Complaint Type'] == 'HEAT/HOT WATER'].plot(\n    kind='hexbin', x='Longitude', y='Latitude', gridsize=40,title = 'Heat issues concentration across Brooklyn\\n',\n    colormap='jet', mincnt=1, figsize=(10,6)).axis('equal')\n\n[PERSISTED OUTPUT]\n(-74.040670973162179,\n -73.855786803255711,\n 40.572605163983042,\n 40.737091381226094)\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x16d15ab38>\n\n[CODE FOR OUTPUT]\ndf_Brook_Heat['Month'].value_counts().plot(kind = 'bar',figsize=(10,6), title = 'Volume of Heat issues by Month\\n')\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x166bb2438>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x1670cc400>\n\n[CODE FOR OUTPUT]\ndf_Brook_Noise = df_Brooklyn[df_Brooklyn['Complaint Type'] == 'Noise - Residential']\ndf_Brook_Noise['Month'].value_counts().plot(kind = 'bar',figsize=(10,6), title = 'Volume of Noise issues by Month\\n')\n\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x15b9e60b8>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x169999320>\n\n[CODE FOR OUTPUT]\ngetDfSummary(df_Brook_Heat)\n\n[PERSISTED OUTPUT]\n                                number_distinct  number_nan\nCreated Date                              24836           0\nClosed Date                                7866           0\nAgency                                        1           0\nAgency Name                                   2           0\nComplaint Type                                1           0\nDescriptor                                    2           0\nLocation Type                                 1           0\nIncident Zip                                 76           2\nIncident Address                          13104           0\nStreet Name                                1178           0\nCross Street 1                              899       37169\nCross Street 2                              886       37168\nIntersection Street 1                         0       67497\nIntersection Street 2                         0       67497\nAddress Type                                  1           0\nCity                                          1           2\nLandmark                                      0       67497\nFacility Type                                 0       67497\nStatus                                        1           0\nDue Date                                      0       67497\nResolution Description                       14           0\nResolution Action Updated Date             7672           0\nCommunity Board                              20           0\nBorough                                       1           0\nX Coordinate (State Plane)                10522           2\nY Coordinate (State Plane)                10759           2\nPark Facility Name                            1           0\nPark Borough                                  1           0\nSchool Name                                   1           0\nSchool Number                                 1           0\nSchool Region                                 1           0\nSchool Code                                   1           0\nSchool Phone Number                           1           0\nSchool Address                                1           0\nSchool City                                   1           0\nSchool State                                  1           0\nSchool Zip                                    1           0\nSchool Not Found                              0       67497\nSchool or Citywide Complaint                  0       67497\nVehicle Type                                  0       67497\nTaxi Company Borough                          0       67497\nTaxi Pick Up Location                         0       67497\nBridge Highway Name                           0       67497\nBridge Highway Direction                      0       67497\nRoad Ramp                                     0       67497\nBridge Highway Segment                        0       67497\nGarage Lot Name                               0       67497\nFerry Direction                               0       67497\nFerry Terminal Name                           0       67497\nLatitude                                  12603           2\nLongitude                                 12603           2\nLocation                                  12603           2\nResolution_Time                              36           0\nDay of Week                                   7           0\nDay of Month                                 31           0\nMonth                                        12           0\nYear                                          1           0\n\n[CODE FOR OUTPUT]\ndf_model = buildFeatures(df_Brook_Heat)\ndf_model = df_model[['Incident Zip','Day of Week','Day of Month','Month','descriptor_APARTMENT ONLY',\n                     'descriptor_ENTIRE BUILDING','Resolution_Time']]\ndf_model.describe()\n\n[PERSISTED OUTPUT]\n       Incident Zip   Day of Week  Day of Month         Month  \\\ncount  67495.000000  67495.000000  67495.000000  67495.000000\nmean      18.525061      2.943240     15.703785      5.233588\nstd       10.624182      2.034795      8.516172      4.267747\nmin        0.000000      0.000000      1.000000      1.000000\n25%       10.000000      1.000000      8.000000      2.000000\n50%       19.000000      3.000000     16.000000      3.000000\n75%       25.000000      5.000000     23.000000     10.000000\nmax       48.000000      6.000000     31.000000     12.000000\n\n       descriptor_APARTMENT ONLY  descriptor_ENTIRE BUILDING  Resolution_Time\ncount               67495.000000                67495.000000     67495.000000\nmean                    0.394889                    0.605111         3.396444\nstd                     0.488830                    0.488830         2.269707\nmin                     0.000000                    0.000000         0.000000\n25%                     0.000000                    0.000000         2.000000\n50%                     0.000000                    1.000000         3.000000\n75%                     1.000000                    1.000000         5.000000\nmax                     1.000000                    1.000000        43.000000\n\n[CODE FOR OUTPUT]\ndf_model.describe()\n\n[PERSISTED OUTPUT]\n       Incident Zip   Day of Week  Day of Month         Month  \\\ncount  67495.000000  67495.000000  67495.000000  67495.000000\nmean      18.525061      2.943240     15.703785      5.233588\nstd       10.624182      2.034795      8.516172      4.267747\nmin        0.000000      0.000000      1.000000      1.000000\n25%       10.000000      1.000000      8.000000      2.000000\n50%       19.000000      3.000000     16.000000      3.000000\n75%       25.000000      5.000000     23.000000     10.000000\nmax       48.000000      6.000000     31.000000     12.000000\n\n       descriptor_APARTMENT ONLY  descriptor_ENTIRE BUILDING  Resolution_Time\ncount               67495.000000                67495.000000     67495.000000\nmean                    0.394889                    0.605111         3.396444\nstd                     0.488830                    0.488830         2.269707\nmin                     0.000000                    0.000000         0.000000\n25%                     0.000000                    0.000000         2.000000\n50%                     0.000000                    1.000000         3.000000\n75%                     1.000000                    1.000000         5.000000\nmax                     1.000000                    1.000000        43.000000\n\n[CODE FOR OUTPUT]\n# Since the data is highly imbalanced we are removing few outliers.\ndf_model.drop(df_model[df_model.Resolution_Time > 28].index, inplace=True)\ndf_model.Resolution_Time.value_counts()\n\n[PERSISTED OUTPUT]\n3     12951\n2     12231\n4     10461\n1      9932\n5      7929\n6      4881\n0      3688\n7      2538\n8      1320\n9       683\n10      388\n11      195\n12       88\n13       42\n14       42\n15       25\n16       14\n18       13\n20       13\n17       12\n19       11\n22        6\n21        4\n23        4\n28        4\n25        3\n26        3\n27        2\n24        2\nName: Resolution_Time, dtype: int64\n\n[CODE FOR OUTPUT]\nbins = [0,2,6,28]\ngroup_names = [0,1,2]\ndf_model['categories'] = pd.cut(df_model['Resolution_Time'], bins,include_lowest=True,labels=group_names)\ndf_model.describe()\n\n[PERSISTED OUTPUT]\n       Incident Zip   Day of Week  Day of Month         Month  \\\ncount  67485.000000  67485.000000  67485.000000  67485.000000\nmean      18.525287      2.943128     15.703297      5.233444\nstd       10.624588      2.034779      8.516091      4.267989\nmin        0.000000      0.000000      1.000000      1.000000\n25%       10.000000      1.000000      8.000000      2.000000\n50%       19.000000      3.000000     16.000000      3.000000\n75%       25.000000      5.000000     23.000000     10.000000\nmax       48.000000      6.000000     31.000000     12.000000\n\n       descriptor_APARTMENT ONLY  descriptor_ENTIRE BUILDING  Resolution_Time\ncount               67485.000000                67485.000000     67485.000000\nmean                    0.394873                    0.605127         3.391731\nstd                     0.488827                    0.488827         2.236168\nmin                     0.000000                    0.000000         0.000000\n25%                     0.000000                    0.000000         2.000000\n50%                     0.000000                    1.000000         3.000000\n75%                     1.000000                    1.000000         5.000000\nmax                     1.000000                    1.000000        28.000000\n\n[CODE FOR OUTPUT]\ngetDfSummary(df_model)\n\n[PERSISTED OUTPUT]\n                            number_distinct  number_nan\nIncident Zip                             38           0\nDay of Week                               7           0\nDay of Month                             31           0\nMonth                                    12           0\ndescriptor_APARTMENT ONLY                 2           0\ndescriptor_ENTIRE BUILDING                2           0\nResolution_Time                          29           0\ncategories                                3           0\n\n[CODE FOR OUTPUT]\nprint(log.predict(X2))\n\n[PERSISTED OUTPUT]\n[0 1 1 ..., 1 1 1]\n\n\n[CODE FOR OUTPUT]\ndata_clean.describe()\n\n[PERSISTED OUTPUT]\n       Incident Zip   Day of Week  Day of Month         Month  \\\ncount  6.748500e+04  6.748500e+04  6.748500e+04  6.748500e+04\nmean  -3.631878e-16 -6.989527e-16 -3.564407e-15 -3.699186e-14\nstd    1.000007e+00  1.000007e+00  1.000007e+00  1.000007e+00\nmin   -1.743637e+00 -1.446422e+00 -1.726544e+00 -9.919135e-01\n25%   -8.024170e-01 -9.549649e-01 -9.045646e-01 -7.576094e-01\n50%    4.468092e-02  2.795012e-02  3.484054e-02 -5.233052e-01\n75%    6.094129e-01  1.010865e+00  8.568200e-01  1.116824e+00\nmax    2.774219e+00  1.502323e+00  1.796225e+00  1.585432e+00\n\n       descriptor_APARTMENT ONLY  descriptor_ENTIRE BUILDING\ncount               67485.000000                67485.000000\nmean                    0.394873                    0.605127\nstd                     0.488827                    0.488827\nmin                     0.000000                    0.000000\n25%                     0.000000                    0.000000\n50%                     0.000000                    1.000000\n75%                     1.000000                    1.000000\nmax                     1.000000                    1.000000\n\n[CODE FOR OUTPUT]\ntime = df_perfect['Created Date'].value_counts()\nprint(time.size)\n#Considering days where atleast 25 calls were made in a day\ntime = time[time > 25]\nprint(time.size)\n\n[PERSISTED OUTPUT]\n1403536\n391\n\n\n[CODE FOR OUTPUT]\nplot_acf(volume.y,lags=30)\nplt.show()\n\nplot_pacf(volume.y,lags=30)\nplt.show()\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x1399dcc88>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x1265be9b0>\n\n[CODE FOR OUTPUT]\nvolume.plot()\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x1155b4e48>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x15a208be0>\n\n[CODE FOR OUTPUT]\nmodel = tsa.ARMA(volume.y, (1, 0)).fit()\nmodel.resid.plot()\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x155966da0>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x16b39bfd0>\n\n[CODE FOR OUTPUT]\nforecast = model.predict('2015-09-04','2015-12-06',dynamic = True)\nplot = volume.ix['2015':].plot()\nplot = forecast.plot(ax=plot, style='r--', label='Prediction')\nplot.legend()\n\n[PERSISTED OUTPUT]\n<matplotlib.legend.Legend at 0x14ba40668>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x168c757b8>\n\n[CODE FOR OUTPUT]\nforecast\n\n[PERSISTED OUTPUT]\nds\n2015-09-04 00:00:00    110.903791\n2015-08-27 00:00:00    111.807338\n2015-07-20 00:00:00    112.710641\n2015-06-11 00:00:00    113.613700\n2015-09-28 00:00:00    114.516515\n2015-08-04 00:00:00    115.419087\n2015-07-21 00:00:00    116.321414\n2015-09-21 00:00:00    117.223498\n2015-07-17 00:00:00    118.125338\n2015-09-15 00:00:00    119.026935\n2015-09-14 00:00:00    119.928288\n2015-06-16 00:00:00    120.829398\n2015-06-22 00:00:00    121.730265\n2015-09-09 00:00:00    122.630888\n2015-10-07 00:00:00    123.531268\n2015-09-29 00:00:00    124.431404\n2015-09-23 00:00:00    125.331298\n2015-10-08 00:00:00    126.230949\n2015-07-09 00:00:00    127.130356\n2015-07-06 00:00:00    128.029521\n2015-07-07 00:00:00    128.928443\n2015-08-14 00:00:00    129.827122\n2015-10-15 00:00:00    130.725558\n2015-07-10 00:00:00    131.623752\n2015-09-11 00:00:00    132.521703\n2015-11-03 00:00:00    133.419412\n2015-10-27 00:00:00    134.316878\n2015-09-17 00:00:00    135.214102\n2015-07-01 00:00:00    136.111084\n2015-08-12 00:00:00    137.007823\n                          ...\n2015-06-21 00:00:00    236.795086\n2015-12-31 00:00:00    237.664634\n2015-07-05 00:00:00    238.533947\n2015-08-16 00:00:00    239.403025\n2015-11-22 00:00:00    240.271868\n2015-12-12 00:00:00    241.140477\n2015-08-30 00:00:00    242.008851\n2015-03-06 07:00:00    242.876990\n2015-10-17 00:00:00    243.744896\n2015-11-14 00:00:00    244.612566\n2015-12-21 00:00:00    245.480003\n2015-12-20 00:00:00    246.347205\n2015-11-15 00:00:00    247.214173\n2015-12-19 00:00:00    248.080907\n2015-11-07 00:00:00    248.947406\n2015-08-15 00:00:00    249.813672\n2015-11-27 00:00:00    250.679704\n2015-12-26 00:00:00    251.545502\n2015-11-21 00:00:00    252.411066\n2015-12-27 00:00:00    253.276396\n2015-10-04 00:00:00    254.141493\n2015-06-28 00:00:00    255.006356\n2015-09-26 00:00:00    255.870985\n2015-07-26 00:00:00    256.735381\n2015-02-19 18:31:00    257.599544\n2015-12-24 00:00:00    258.463473\n2015-07-04 00:00:00    259.327168\n2015-06-14 00:00:00    260.190631\n2015-12-15 22:44:00    261.053860\n2015-12-06 00:00:00    261.916856\nLength: 172, dtype: float64\n\n[CODE FOR OUTPUT]\ndw = sm.stats.durbin_watson(volume.y)\nprint(dw)\n\n[PERSISTED OUTPUT]\n0.00347188108193\n\n\n[CODE FOR OUTPUT]\ntime = df_perfect['Created Date'].value_counts()\nprint(time.size)\n#Considering days where atleast 25 calls were made in a day\ntime = time[time > 25]\nprint(time.size)\n\n[PERSISTED OUTPUT]\n1403536\n391\n\n\n[CODE FOR OUTPUT]\n%matplotlib inline\n\nplt.rcParams['figure.figsize']=(14,10)\nvolume.set_index('ds').y.plot()\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x168c664a8>\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x10b5d4eb8>\n\n[CODE FOR OUTPUT]\nfrom fbprophet import Prophet\nm = Prophet(yearly_seasonality=True)\nm.fit(volume)\nfuture = m.make_future_dataframe(periods=60)\nfuture.tail()\nforecast = m.predict(future)\nforecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()\n\n[PERSISTED OUTPUT]\n            ds      yhat  yhat_lower  yhat_upper\n446 2016-02-25  4.216273    3.750287    4.690173\n447 2016-02-26  4.071014    3.576535    4.534200\n448 2016-02-27  3.645049    3.214166    4.060201\n449 2016-02-28  3.574651    3.123150    4.036060\n450 2016-02-29  4.133557    3.650807    4.598922\n\n[CODE FOR OUTPUT]\nx = m.plot_components(forecast)\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x14ba2ed30>\n\n[CODE FOR OUTPUT]\nx = m.plot(forecast)\n\n[PERSISTED OUTPUT]\n<matplotlib.figure.Figure at 0x147e99358>\n\n[CODE FOR OUTPUT]\ndf_storm.head()\n\n[PERSISTED OUTPUT]\n                           CZ_NAME_STR BEGIN_LOCATION BEGIN_DATE  BEGIN_TIME  \\\nEVENT_ID\n211892         KINGS (BROOKLYN) (ZONE)                2010-01-03         800\n211893                    BRONX (ZONE)                2010-01-25         600\n214130     NEW YORK (MANHATTAN) (ZONE)                2010-01-25         600\n217497    RICHMOND (STATEN IS.) (ZONE)                2010-02-09        2100\n217496         KINGS (BROOKLYN) (ZONE)                2010-02-09        2200\n\n           EVENT_TYPE MAGNITUDE TOR_F_SCALE  DEATHS_DI",
+      "sha256": "17cff19f29616f5a7dfed6cbdfc093d7e978567e880fef687b4c8063b8424a87"
+    },
+    {
+      "id": "E-SYSTEM-GIT",
+      "path": ".git",
+      "kind": "git_identity",
+      "epistemic": "OBSERVED",
+      "excerpt": "Checked-out branch: master\nHEAD: ff013227b878e1960a48344534e560381938070b",
+      "sha256": "ff013227b878e1960a48344534e560381938070b"
+    }
+  ],
+  "diagnostics": {
+    "schema_version": "boveda-audit-diagnostics-0.9.3",
+    "availability": "complete",
+    "historical": false,
+    "audit_id": "AUD-8663C7D0D4",
+    "audit_started_at": "2026-08-26T11:57:00.848Z",
+    "audit_completed_at": "2026-08-26T11:58:09.574Z",
+    "total_duration_ms": 68726,
+    "stages": [
+      {
+        "stage": "source_resolution",
+        "status": "succeeded",
+        "duration_ms": 0
+      },
+      {
+        "stage": "evidence_collection",
+        "status": "succeeded",
+        "duration_ms": 119,
+        "evidence_items": 5,
+        "evidence_characters": 36532,
+        "evidence_pack_sha256": "45d21b8fa620a51b4fad1ba73477eff80ae7cd39fefaa93e15e3d03e4e8caca5",
+        "eligible_files": 3,
+        "collected_items": 5
+      },
+      {
+        "stage": "llm_reconstruction",
+        "status": "accepted",
+        "duration_ms": 68605,
+        "attempts": 2,
+        "provider_calls": 2,
+        "validation_status": "VALID"
+      },
+      {
+        "stage": "source_integrity",
+        "status": "succeeded",
+        "duration_ms": 2,
+        "content_unchanged": true
+      },
+      {
+        "stage": "final_record",
+        "status": "succeeded",
+        "duration_ms": 0
+      }
+    ],
+    "evidence_pack": {
+      "item_count": 5,
+      "character_count": 36532,
+      "sha256": "45d21b8fa620a51b4fad1ba73477eff80ae7cd39fefaa93e15e3d03e4e8caca5"
+    },
+    "llm": {
+      "schema_version": "boveda-llm-diagnostics-0.9.3",
+      "started_at": "2026-08-26T11:57:00.967Z",
+      "completed_at": "2026-08-26T11:58:09.572Z",
+      "duration_ms": 68605,
+      "provider": "OpenAI",
+      "model": "gpt-5.6-sol",
+      "result": "accepted",
+      "activity": "attempted",
+      "attempt_count": 2,
+      "provider_call_count": 2,
+      "paid_model_activity": true,
+      "total_usage": {
+        "attempts_with_usage": 2,
+        "input_tokens": 29706,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 29700,
+        "output_tokens": 4483,
+        "reasoning_output_tokens": 2734,
+        "total_tokens": 34189
+      },
+      "request_profile": {
+        "reasoning_effort": "medium",
+        "structured_output_schema": "boveda_overview_v090",
+        "localized_repair_schema": "boveda_local_repair_v096",
+        "maximum_attempts": 3,
+        "evidence_pack": {
+          "item_count": 5,
+          "character_count": 36532,
+          "sha256": "45d21b8fa620a51b4fad1ba73477eff80ae7cd39fefaa93e15e3d03e4e8caca5"
+        }
+      },
+      "fallback": {
+        "used": false,
+        "reason": null,
+        "followed_model_activity": true,
+        "followed_paid_model_activity": false
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "operation": "full_reconstruction",
+          "target_fields": [],
+          "base_attempt": null,
+          "started_at": "2026-08-26T11:57:00.967Z",
+          "completed_at": "2026-08-26T11:57:57.373Z",
+          "duration_ms": 56406,
+          "correction_applied": false,
+          "provider_call_started": true,
+          "provider_duration_ms": 56032,
+          "provider_request_id": "req_b495f9556ed94acc9429f8fc24e55663",
+          "response_id": "resp_09bbbcf12ed0f289016a8ed48d5e9c87d28db38cd7cc425463",
+          "response_status": "completed",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 16572,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 16569,
+            "output_tokens": 3945,
+            "reasoning_output_tokens": 2381,
+            "total_tokens": 20517
+          },
+          "outcome": "rejected",
+          "failure": {
+            "stage": "grounding",
+            "message": "record.samples.source_data: numeric value 16 is not grounded in cited evidence · record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence · record.data.period: numeric value 311 is not grounded in cited evidence"
+          },
+          "validation": {
+            "status": "INVALID",
+            "error_count": 3,
+            "warning_count": 0,
+            "errors": [
+              "record.samples.source_data: numeric value 16 is not grounded in cited evidence",
+              "record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence",
+              "record.data.period: numeric value 311 is not grounded in cited evidence"
+            ],
+            "warnings": [],
+            "rejected_candidate": {
+              "identity": {
+                "name": {
+                  "state": "established",
+                  "value": "NYC-311",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808",
+                    "E-SYSTEM-PATH"
+                  ]
+                },
+                "description": {
+                  "state": "established",
+                  "value": "Analyzes NYC 311 service requests, models complaint-resolution ranges and daily call volumes, and compares storm-period response times to inform city understanding and resource planning.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                }
+              },
+              "purpose_scope": {
+                "summary": {
+                  "state": "established",
+                  "value": "The project examines NYC 311 demand, complaint patterns, resolution times and storm-related differences, using descriptive analysis, classification and time-series forecasting. Its outputs are intended to support city resource allocation and resident expectations, although the evaluated resolution model is restricted to Brooklyn heat and hot-water complaints.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "purpose": {
+                  "state": "established",
+                  "value": "Improve understanding of city service demand and support more efficient resource allocation.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808"
+                  ]
+                },
+                "task": {
+                  "state": "established",
+                  "value": "Describe request patterns, classify resolution-time ranges, forecast daily volumes, and compare storm-related response times.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808"
+                  ]
+                },
+                "target_outcome": {
+                  "state": "established",
+                  "value": "Outputs a three-class complaint-resolution range and forecast daily service-request volume.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808"
+                  ]
+                },
+                "unit": {
+                  "state": "established",
+                  "value": "Individual 311 service request",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808"
+                  ]
+                },
+                "population_scope": {
+                  "state": "established",
+                  "value": "NYC 311 service requests; resolution modelling narrows to Brooklyn heat and hot-water complaints.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "intended_use": {
+                  "state": "established",
+                  "value": "Support city resource allocation and help residents estimate when complaints may be resolved.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808"
+                  ]
+                }
+              },
+              "samples": {
+                "source_data": {
+                  "state": "established",
+                  "display": "More than 16 million",
+                  "count": 16000000,
+                  "unit": "rows",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808"
+                  ]
+                },
+                "model_sample": {
+                  "state": "not_established",
+                  "display": "–",
+                  "count": null,
+                  "unit": "service requests",
+                  "epistemic": "UNRESOLVED",
+                  "evidence_ids": []
+                },
+                "evaluation_sample": {
+                  "state": "not_established",
+                  "display": "–",
+                  "count": null,
+                  "unit": "service requests",
+                  "epistemic": "UNRESOLVED",
+                  "evidence_ids": []
+                }
+              },
+              "results_evaluation": {
+                "primary_result": {
+                  "state": "established",
+                  "display_value": "0.62486417070038525",
+                  "metric": "Test accuracy",
+                  "method": "Random Forest Classifier with 100 trees",
+                  "task_target": "Three resolution-time classes for Brooklyn heat complaints",
+                  "evaluation_context": "Held-out X_test/Y_test from filtered 2015 model data",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "material_results": [
+                  {
+                    "state": "established",
+                    "display_value": "0.953887894029",
+                    "metric": "r2_score",
+                    "method": "Prophet additive time-series model",
+                    "task_target": "Log daily NYC 311 request volume",
+                    "evaluation_context": "Goodness of fit on 391 retained days with over 25 calls",
+                    "epistemic": "OBSERVED",
+                    "evidence_ids": [
+                      "E-B9CC546808",
+                      "E-2B1FA53FA7"
+                    ]
+                  }
+                ],
+                "evaluation_design": {
+                  "state": "established",
+                  "value": "The random forest was evaluated on a held-out train/test split; the split proportion and absolute training and test counts are not reported.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "other_material_result": {
+                  "state": "established",
+                  "value": "Prophet additionally achieved r2_score 0.953887894029 as a goodness-of-fit measure for retained daily call volumes.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "known_limitation": {
+                  "state": "established",
+                  "value": "The three classes are imbalanced, with too few examples in the longest-resolution class, limiting interpretation of overall accuracy.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "establishes": {
+                  "state": "established",
+                  "value": "On its recorded held-out split, the random forest correctly classified 62.486% of filtered Brooklyn heat complaints into resolution-time ranges.",
+                  "epistemic": "DERIVED",
+                  "evidence_ids": [
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "does_not_establish": {
+                  "state": "established",
+                  "value": "It does not establish similar accuracy for other complaint types, boroughs, periods, or requests taking more than 28 days.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                }
+              },
+              "data": {
+                "summary": {
+                  "state": "established",
+                  "value": "Public NYC 311 records were prepared with created and closed dates, location, complaint descriptors and derived resolution days; a filtered Brooklyn heat subset fed classification.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "data_sources": {
+                  "state": "established",
+                  "value": "NYC Open Data 311 Service Requests dataset.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-B9CC546808"
+                  ]
+                },
+                "unit_of_observation": {
+                  "state": "established",
+                  "value": "One individual 311 service request",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "period": {
+                  "state": "established",
+                  "value": "2015 for the prepared 311 analysis and resolution model.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "population_filters": {
+                  "state": "established",
+                  "value": "Resolution modelling selected Brooklyn heat and hot-water complaints and removed requests with resolution times exceeding 28 days.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-2B1FA53FA7"
+                  ]
+                },
+                "population_limitation": {
+                  "state": "established",
+                  "value": "The resolution model is limited to Brooklyn heat and hot-water complaints resolved within 28 days, restricting application beyond that selected group.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-2B1FA53FA7"
+                  ]
+                }
+              },
+              "confidence": {
+                "level": "Medium",
+                "explanation": "The exact test accuracy is stored in the notebook and rounded in the report, but test size and split proportion are unavailable.",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              }
+            },
+            "field_evidence_ids": {
+              "record.identity.name": [
+                "E-B335630551",
+                "E-B9CC546808",
+                "E-SYSTEM-PATH"
+              ],
+              "record.identity.description": [
+                "E-B335630551",
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.purpose_scope.summary": [
+                "E-B335630551",
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.purpose_scope.purpose": [
+                "E-B335630551",
+                "E-B9CC546808"
+              ],
+              "record.purpose_scope.task": [
+                "E-B335630551",
+                "E-B9CC546808"
+              ],
+              "record.purpose_scope.target_outcome": [
+                "E-B9CC546808"
+              ],
+              "record.purpose_scope.unit": [
+                "E-B335630551",
+                "E-B9CC546808"
+              ],
+              "record.purpose_scope.population_scope": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.purpose_scope.intended_use": [
+                "E-B9CC546808"
+              ],
+              "record.samples.source_data": [
+                "E-B9CC546808"
+              ],
+              "record.samples.model_sample": [],
+              "record.samples.evaluation_sample": [],
+              "record.results_evaluation.primary_result": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.results_evaluation.material_results[0]": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.results_evaluation.evaluation_design": [
+                "E-2B1FA53FA7"
+              ],
+              "record.results_evaluation.other_material_result": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.results_evaluation.known_limitation": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.results_evaluation.establishes": [
+                "E-2B1FA53FA7"
+              ],
+              "record.results_evaluation.does_not_establish": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.data.summary": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.data.data_sources": [
+                "E-B335630551",
+                "E-B9CC546808"
+              ],
+              "record.data.unit_of_observation": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ],
+              "record.data.period": [
+                "E-2B1FA53FA7"
+              ],
+              "record.data.population_filters": [
+                "E-2B1FA53FA7"
+              ],
+              "record.data.population_limitation": [
+                "E-2B1FA53FA7"
+              ]
+            }
+          },
+          "retry_scheduled": true,
+          "retry": {
+            "scheduled": true,
+            "reason": "localized_validation_repair",
+            "correction_errors": [
+              "record.samples.source_data: numeric value 16 is not grounded in cited evidence",
+              "record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence",
+              "record.data.period: numeric value 311 is not grounded in cited evidence"
+            ],
+            "target_fields": [
+              "record.samples.source_data",
+              "record.results_evaluation.establishes",
+              "record.data.period"
+            ]
+          }
+        },
+        {
+          "attempt": 2,
+          "operation": "localized_repair",
+          "target_fields": [
+            "record.samples.source_data",
+            "record.results_evaluation.establishes",
+            "record.data.period"
+          ],
+          "base_attempt": 1,
+          "started_at": "2026-08-26T11:57:57.373Z",
+          "completed_at": "2026-08-26T11:58:09.572Z",
+          "duration_ms": 12199,
+          "correction_applied": true,
+          "provider_call_started": true,
+          "provider_duration_ms": 12011,
+          "provider_request_id": "req_32bbc7b1a7d04422bcde892560698077",
+          "response_id": "resp_065b0506e11efc61016a8ed4c6caa087d28ccc2a6f17eb0766",
+          "response_status": "completed",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 13134,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 13131,
+            "output_tokens": 538,
+            "reasoning_output_tokens": 353,
+            "total_tokens": 13672
+          },
+          "outcome": "accepted",
+          "failure": null,
+          "validation": {
+            "status": "VALID",
+            "error_count": 0,
+            "warning_count": 0,
+            "errors": [],
+            "warnings": []
+          },
+          "retry_scheduled": false,
+          "retry": null
+        }
+      ],
+      "localized_repair": {
+        "status": "accepted",
+        "base_attempt": 1,
+        "repair_attempts": 1,
+        "fields": [
+          "record.samples.source_data",
+          "record.results_evaluation.establishes",
+          "record.data.period"
+        ],
+        "evidence_scope": [
+          "E-B9CC546808",
+          "E-2B1FA53FA7"
+        ],
+        "unrelated_fields_preserved": true
+      }
+    },
+    "final": {
+      "generation_mode": "llm",
+      "validation_status": "VALID",
+      "source_unchanged": true
+    }
+  }
+}

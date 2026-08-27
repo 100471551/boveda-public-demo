@@ -1,0 +1,1320 @@
+{
+  "schema_version": "boveda-history-0.11.1",
+  "project_id": "PRJ-2C27CC9912",
+  "audit_id": "AUD-A57071CBE3",
+  "generated_from": {
+    "schema_version": "boveda-supervisory-record-0.9.0",
+    "audit_id": "AUD-A57071CBE3"
+  },
+  "event_count": 5,
+  "host_event_count": 4,
+  "boveda_event_count": 1,
+  "recovered_host_event_count": 24,
+  "supporting_event_count": 22,
+  "events": [
+    {
+      "event_id": "HIS-3B9E0B5A3C",
+      "event_key": "host-data-period",
+      "source": "host_project",
+      "event_type": "data_period",
+      "date": {
+        "label": "2014–2019",
+        "start": "2014-01-01",
+        "end": "2019-12-31",
+        "precision": "year_range",
+        "sort_at": "2019-12-31T23:59:59.999Z"
+      },
+      "title": "Project data period reconstructed",
+      "description": "Inspections from 2014–2019; training used proactive inspections from 2014–2018.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": true,
+      "evidence_ids": [
+        "E-B335630551"
+      ],
+      "related": [
+        {
+          "type": "documentation",
+          "id": "E-B335630551",
+          "label": "README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "This establishes the period represented by the project evidence; it does not establish when the dataset was created or changed."
+    },
+    {
+      "event_id": "HIS-C975B313BA",
+      "event_key": "git-commit:de1f2e2e1b53e18805ba549ba61214660d70d131",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-16T14:00:38.000Z",
+        "end": "2020-06-16T14:00:38.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-16T14:00:38.000Z"
+      },
+      "title": "added data cleaning notebook",
+      "description": "Commit de1f2e2e1b changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": true,
+      "materiality": {
+        "level": "material",
+        "reasons": [
+          "Data, population, sample, or snapshot change",
+          "Model, pipeline, or data-preparation artifact added in an explicitly named project area"
+        ]
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-BB6B6668B7"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "de1f2e2e1b53e18805ba549ba61214660d70d131",
+          "label": "de1f2e2e1b"
+        },
+        {
+          "type": "changed_file",
+          "id": "data-cleaning/data-cleaning.ipynb",
+          "label": "A · data-cleaning/data-cleaning.ipynb"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-1D9FFEA147",
+      "event_key": "git-commit:063788fb91cdf160293b5ddff07022ff8eafe4c1",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "13 Jul 2020",
+        "start": "2020-07-13T13:56:17.000Z",
+        "end": "2020-07-13T13:56:17.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-07-13T13:56:17.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit 063788fb91 changed 3 files.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": true,
+      "materiality": {
+        "level": "material",
+        "reasons": [
+          "Model, pipeline, or data-preparation artifact added in an explicitly named project area"
+        ]
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-25C95144A8"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "063788fb91cdf160293b5ddff07022ff8eafe4c1",
+          "label": "063788fb91"
+        },
+        {
+          "type": "changed_file",
+          "id": "models/Predicting any code violation.ipynb",
+          "label": "A · models/Predicting any code violation.ipynb"
+        },
+        {
+          "type": "changed_file",
+          "id": "models/Predicting high risk violations.ipynb",
+          "label": "A · models/Predicting high risk violations.ipynb"
+        },
+        {
+          "type": "changed_file",
+          "id": "models/Predicting overcrowding.ipynb",
+          "label": "A · models/Predicting overcrowding.ipynb"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-AA6BE6805C",
+      "event_key": "host-primary-evaluation",
+      "source": "host_project",
+      "event_type": "evaluation",
+      "date": {
+        "label": "Date unresolved",
+        "start": null,
+        "end": null,
+        "precision": "unresolved",
+        "sort_at": null
+      },
+      "title": "Primary evaluation recorded",
+      "description": "Persisted project evidence records Average precision score from binary predictions 0.4608713336647534 for Elevated public-health-risk code violations using Default random forest classifier.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": true,
+      "evidence_ids": [
+        "E-C113A90389"
+      ],
+      "related": [
+        {
+          "type": "notebook",
+          "id": "E-C113A90389",
+          "label": "models/Predicting high risk violations.ipynb"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "The evaluation is supported, but the current Project Record does not establish when it was performed."
+    },
+    {
+      "event_id": "HIS-3293AC52CF",
+      "event_key": "boveda-audit",
+      "source": "boveda",
+      "event_type": "boveda_audit",
+      "date": {
+        "label": "26 Aug 2026, 11:52 UTC",
+        "start": "2026-08-26T11:52:41.973Z",
+        "end": "2026-08-26T11:52:41.973Z",
+        "precision": "timestamp",
+        "sort_at": "2026-08-26T11:52:41.973Z"
+      },
+      "title": "Bóveda audit completed",
+      "description": "Bóveda completed audit AUD-A57071CBE3 and stored the current canonical Project Record. 2 reconstruction attempts were recorded; 1 did not pass validation and 1 triggered a retry.",
+      "epistemic": "OBSERVED",
+      "status": "completed_after_retry",
+      "material": true,
+      "evidence_ids": [],
+      "related": [
+        {
+          "type": "boveda_audit",
+          "id": "AUD-A57071CBE3",
+          "label": "Audit diagnostics"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "This is a Bóveda reconstruction event, not an event in the host project's own development history."
+    }
+  ],
+  "supporting_events": [
+    {
+      "event_id": "HIS-F95176E942",
+      "event_key": "git-commit:c7892c2804148dbe4a9c403b9e4504c8af55d248",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "12 Jun 2020",
+        "start": "2020-06-12T13:14:35.000Z",
+        "end": "2020-06-12T13:14:35.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-12T13:14:35.000Z"
+      },
+      "title": "Initial commit",
+      "description": "Commit c7892c2804 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-4184FF8535"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "c7892c2804148dbe4a9c403b9e4504c8af55d248",
+          "label": "c7892c2804"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "A · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-88D80BBD11",
+      "event_key": "git-commit:649139821674525453adf1479d35b9c4d43092f3",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "12 Jun 2020",
+        "start": "2020-06-12T13:30:25.000Z",
+        "end": "2020-06-12T13:30:25.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-12T13:30:25.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 6491398216 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-D319AA23EF"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "649139821674525453adf1479d35b9c4d43092f3",
+          "label": "6491398216"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-6D961677F0",
+      "event_key": "git-commit:e384777026e6f357c2c4f7ef7ca31fbbc60c8fb7",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "12 Jun 2020",
+        "start": "2020-06-12T13:32:15.000Z",
+        "end": "2020-06-12T13:32:15.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-12T13:32:15.000Z"
+      },
+      "title": "Update README.,d",
+      "description": "Commit e384777026 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-FD96EA8D62"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "e384777026e6f357c2c4f7ef7ca31fbbc60c8fb7",
+          "label": "e384777026"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-91A86F456B",
+      "event_key": "git-commit:24f4cf1fda156dfc224790990997d0460b4e8d5d",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "12 Jun 2020",
+        "start": "2020-06-12T13:32:49.000Z",
+        "end": "2020-06-12T13:32:49.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-12T13:32:49.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 24f4cf1fda changed 0 files.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-7ECB9F5E2D"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "24f4cf1fda156dfc224790990997d0460b4e8d5d",
+          "label": "24f4cf1fda"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-63AB914F00",
+      "event_key": "git-commit:2e85a29324769684b3c52a8a3b56979754d9fd4a",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "12 Jun 2020",
+        "start": "2020-06-12T13:34:23.000Z",
+        "end": "2020-06-12T13:34:23.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-12T13:34:23.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 2e85a29324 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-2D7A44BBA0"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "2e85a29324769684b3c52a8a3b56979754d9fd4a",
+          "label": "2e85a29324"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-93A3CA706E",
+      "event_key": "git-commit:0566ad23c09bb08f32ee1e11ee71e3e893a1a4d8",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T22:46:15.000Z",
+        "end": "2020-06-15T22:46:15.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T22:46:15.000Z"
+      },
+      "title": "Create .gitkeep",
+      "description": "Commit 0566ad23c0 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-8B26704091"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "0566ad23c09bb08f32ee1e11ee71e3e893a1a4d8",
+          "label": "0566ad23c0"
+        },
+        {
+          "type": "changed_file",
+          "id": "models/.gitkeep",
+          "label": "A · models/.gitkeep"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-68BC39378A",
+      "event_key": "git-commit:52e9742ca1badaf819ba6c9274ff583f645373c6",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T22:46:33.000Z",
+        "end": "2020-06-15T22:46:33.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T22:46:33.000Z"
+      },
+      "title": "Create .gitkeep",
+      "description": "Commit 52e9742ca1 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-9440E3F4C1"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "52e9742ca1badaf819ba6c9274ff583f645373c6",
+          "label": "52e9742ca1"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/.gitkeep",
+          "label": "A · output/.gitkeep"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-7D029DC2D3",
+      "event_key": "git-commit:06c6fda512d1ba16ec9e099d23202b3711a72e77",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T22:47:12.000Z",
+        "end": "2020-06-15T22:47:12.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T22:47:12.000Z"
+      },
+      "title": "Create .gitkeep",
+      "description": "Commit 06c6fda512 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-B95CDC53AB"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "06c6fda512d1ba16ec9e099d23202b3711a72e77",
+          "label": "06c6fda512"
+        },
+        {
+          "type": "changed_file",
+          "id": "data-cleaning/.gitkeep",
+          "label": "A · data-cleaning/.gitkeep"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-DF939A3D1F",
+      "event_key": "git-commit:83407abeb5232babb723efb1ad79169bfccdb59a",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T22:54:02.000Z",
+        "end": "2020-06-15T22:54:02.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T22:54:02.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 83407abeb5 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-4E1112AD5A"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "83407abeb5232babb723efb1ad79169bfccdb59a",
+          "label": "83407abeb5"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-E75E09B496",
+      "event_key": "git-commit:a438dc22c00d57ad61a93b841a54d15b1221fd21",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T23:00:05.000Z",
+        "end": "2020-06-15T23:00:05.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T23:00:05.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit a438dc22c0 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-61DC6C30A3"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "a438dc22c00d57ad61a93b841a54d15b1221fd21",
+          "label": "a438dc22c0"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-5E7B65D99F",
+      "event_key": "git-commit:5370960f19a5c6aed7f01808dc7f6a44bac97b45",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T23:10:53.000Z",
+        "end": "2020-06-15T23:10:53.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T23:10:53.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 5370960f19 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-31166B17B0"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "5370960f19a5c6aed7f01808dc7f6a44bac97b45",
+          "label": "5370960f19"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-B0826630A3",
+      "event_key": "git-commit:bb4b67aa0b9b13157d7d73e91e0471d7dff16c0c",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T23:15:06.000Z",
+        "end": "2020-06-15T23:15:06.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T23:15:06.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit bb4b67aa0b changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-127D484F09"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "bb4b67aa0b9b13157d7d73e91e0471d7dff16c0c",
+          "label": "bb4b67aa0b"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-F4F37921FA",
+      "event_key": "git-commit:c6999a088762c5add678bc1a8480bfde3c6b8243",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T23:23:42.000Z",
+        "end": "2020-06-15T23:23:42.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T23:23:42.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit c6999a0887 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-78BE0C8E72"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "c6999a088762c5add678bc1a8480bfde3c6b8243",
+          "label": "c6999a0887"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-386482713F",
+      "event_key": "git-commit:84c4d282dd397c69402ee2b9d71c21cb6d12457d",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-15T23:24:22.000Z",
+        "end": "2020-06-15T23:24:22.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-15T23:24:22.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 84c4d282dd changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-0489A5C311"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "84c4d282dd397c69402ee2b9d71c21cb6d12457d",
+          "label": "84c4d282dd"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-82C80F34E8",
+      "event_key": "git-commit:880c70c19a5c4231765c004d74833cd3ff63115b",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-16T14:01:14.000Z",
+        "end": "2020-06-16T14:01:14.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-16T14:01:14.000Z"
+      },
+      "title": "Delete .gitkeep",
+      "description": "Commit 880c70c19a changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-4F44B3E289"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "880c70c19a5c4231765c004d74833cd3ff63115b",
+          "label": "880c70c19a"
+        },
+        {
+          "type": "changed_file",
+          "id": "data-cleaning/.gitkeep",
+          "label": "D · data-cleaning/.gitkeep"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-90625427E5",
+      "event_key": "git-commit:bfc276c1a483454733d88c45a91f8d5c8659abd9",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "16 Jun 2020",
+        "start": "2020-06-16T14:10:52.000Z",
+        "end": "2020-06-16T14:10:52.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-16T14:10:52.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit bfc276c1a4 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-09649C1A3E"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "bfc276c1a483454733d88c45a91f8d5c8659abd9",
+          "label": "bfc276c1a4"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-06677A3ACE",
+      "event_key": "git-commit:cd682917d7af1718d12ab89a27ea06e19f44cc5c",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "17 Jun 2020",
+        "start": "2020-06-17T13:09:24.000Z",
+        "end": "2020-06-17T13:09:24.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-17T13:09:24.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit cd682917d7 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-9BF9AF2D0F"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "cd682917d7af1718d12ab89a27ea06e19f44cc5c",
+          "label": "cd682917d7"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-ECACB9B8E5",
+      "event_key": "git-commit:2a289f3ae51d241e1ece279420e731c8727d3c3f",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "17 Jun 2020",
+        "start": "2020-06-17T17:57:49.000Z",
+        "end": "2020-06-17T17:57:49.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-06-17T17:57:49.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 2a289f3ae5 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-7880D1EB6B"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "2a289f3ae51d241e1ece279420e731c8727d3c3f",
+          "label": "2a289f3ae5"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-FBB197F207",
+      "event_key": "git-commit:95554c253255fbe6d4539a2a6a954e73eba971c5",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "13 Jul 2020",
+        "start": "2020-07-13T14:08:48.000Z",
+        "end": "2020-07-13T14:08:48.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-07-13T14:08:48.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit 95554c2532 changed 8 files.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-7E01B7B3C7"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "95554c253255fbe6d4539a2a6a954e73eba971c5",
+          "label": "95554c2532"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/Any violation - Feature importances.png",
+          "label": "A · output/Any violation - Feature importances.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/Any violation - Precision Recall AUC.png",
+          "label": "A · output/Any violation - Precision Recall AUC.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/Any violation - ROC AUC.png",
+          "label": "A · output/Any violation - ROC AUC.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/High risk - AUC ROC.png",
+          "label": "A · output/High risk - AUC ROC.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/High risk - Feature importances.png",
+          "label": "A · output/High risk - Feature importances.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/High risk - Precision Recall AUC.png",
+          "label": "A · output/High risk - Precision Recall AUC.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/Overcrowding - AUC ROC.png",
+          "label": "A · output/Overcrowding - AUC ROC.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/Overcrowding - Precision Recall AUC.png",
+          "label": "A · output/Overcrowding - Precision Recall AUC.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-0D5A8868DD",
+      "event_key": "git-commit:2b3a7a7f91e7fbe72eb371960fe7433b2e85a50c",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "13 Jul 2020",
+        "start": "2020-07-13T14:09:16.000Z",
+        "end": "2020-07-13T14:09:16.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-07-13T14:09:16.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit 2b3a7a7f91 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-ABDC0DE5F8"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "2b3a7a7f91e7fbe72eb371960fe7433b2e85a50c",
+          "label": "2b3a7a7f91"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/Overcrowding - Feature importances.png",
+          "label": "A · output/Overcrowding - Feature importances.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-FF14F6B3DB",
+      "event_key": "git-commit:d78ab12dcba843a70395188c6086cdb4e3991807",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "13 Jul 2020",
+        "start": "2020-07-13T14:09:46.000Z",
+        "end": "2020-07-13T14:09:46.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-07-13T14:09:46.000Z"
+      },
+      "title": "Delete .gitkeep",
+      "description": "Commit d78ab12dcb changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-816BD568C6"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "d78ab12dcba843a70395188c6086cdb4e3991807",
+          "label": "d78ab12dcb"
+        },
+        {
+          "type": "changed_file",
+          "id": "models/.gitkeep",
+          "label": "D · models/.gitkeep"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-68DDFE94E9",
+      "event_key": "git-commit:4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "13 Jul 2020",
+        "start": "2020-07-13T14:11:10.000Z",
+        "end": "2020-07-13T14:11:10.000Z",
+        "precision": "timestamp",
+        "sort_at": "2020-07-13T14:11:10.000Z"
+      },
+      "title": "Delete .gitkeep",
+      "description": "Commit 4bdc65d9b6 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-9DCA5EC31D"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd",
+          "label": "4bdc65d9b6"
+        },
+        {
+          "type": "changed_file",
+          "id": "output/.gitkeep",
+          "label": "D · output/.gitkeep"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    }
+  ],
+  "presentation": {
+    "availability": "limited",
+    "summary": "Bóveda found 24 recorded project changes, but only 2 could be connected to a material data, model, evaluation, or release event. The remaining activity is retained as supporting context."
+  },
+  "evidence": [
+    {
+      "id": "E-HIS-9DCA5EC31D",
+      "kind": "git_commit",
+      "path": "git:4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd\nAuthored: 2020-07-13T10:11:10-04:00\nSubject: Delete .gitkeep\nBody: Not recorded\nChanged files (1):\nD\toutput/.gitkeep",
+      "sha256": "2310f8676de875cd47f1bf7b5a1af075c03741eb4c4ac63fa2b77dcdf5f4b760"
+    },
+    {
+      "id": "E-HIS-816BD568C6",
+      "kind": "git_commit",
+      "path": "git:d78ab12dcba843a70395188c6086cdb4e3991807",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: d78ab12dcba843a70395188c6086cdb4e3991807\nAuthored: 2020-07-13T10:09:46-04:00\nSubject: Delete .gitkeep\nBody: Not recorded\nChanged files (1):\nD\tmodels/.gitkeep",
+      "sha256": "d9a8a727ef5ee8eaff4e68b9101ee82877467abcf25b0ad67a0bfbf18941b52c"
+    },
+    {
+      "id": "E-HIS-ABDC0DE5F8",
+      "kind": "git_commit",
+      "path": "git:2b3a7a7f91e7fbe72eb371960fe7433b2e85a50c",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 2b3a7a7f91e7fbe72eb371960fe7433b2e85a50c\nAuthored: 2020-07-13T10:09:16-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (1):\nA\toutput/Overcrowding - Feature importances.png",
+      "sha256": "019d33647cdb5926a0b2ac48e1c016a01410a6b1f1ec48fcf0192834108a8346"
+    },
+    {
+      "id": "E-HIS-7E01B7B3C7",
+      "kind": "git_commit",
+      "path": "git:95554c253255fbe6d4539a2a6a954e73eba971c5",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 95554c253255fbe6d4539a2a6a954e73eba971c5\nAuthored: 2020-07-13T10:08:48-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (8):\nA\toutput/Any violation - Feature importances.png\nA\toutput/Any violation - Precision Recall AUC.png\nA\toutput/Any violation - ROC AUC.png\nA\toutput/High risk - AUC ROC.png\nA\toutput/High risk - Feature importances.png\nA\toutput/High risk - Precision Recall AUC.png\nA\toutput/Overcrowding - AUC ROC.png\nA\toutput/Overcrowding - Precision Recall AUC.png",
+      "sha256": "11e66840cdf53ffa520c11fc6af9703c769ec888de0ad822da1ef8d4ff9ddad1"
+    },
+    {
+      "id": "E-HIS-25C95144A8",
+      "kind": "git_commit",
+      "path": "git:063788fb91cdf160293b5ddff07022ff8eafe4c1",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 063788fb91cdf160293b5ddff07022ff8eafe4c1\nAuthored: 2020-07-13T09:56:17-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (3):\nA\tmodels/Predicting any code violation.ipynb\nA\tmodels/Predicting high risk violations.ipynb\nA\tmodels/Predicting overcrowding.ipynb",
+      "sha256": "cf2c06cd69c34345e1769859973d1297d4fcae884e7933bb03d82538479f05f1"
+    },
+    {
+      "id": "E-HIS-7880D1EB6B",
+      "kind": "git_commit",
+      "path": "git:2a289f3ae51d241e1ece279420e731c8727d3c3f",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 2a289f3ae51d241e1ece279420e731c8727d3c3f\nAuthored: 2020-06-17T13:57:49-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "984eba03bdff94572977d528604f26ea34aefeab3c83f0a70def5269d17e3972"
+    },
+    {
+      "id": "E-HIS-9BF9AF2D0F",
+      "kind": "git_commit",
+      "path": "git:cd682917d7af1718d12ab89a27ea06e19f44cc5c",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: cd682917d7af1718d12ab89a27ea06e19f44cc5c\nAuthored: 2020-06-17T09:09:24-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "3cd96d08243ca0f2d7c813593a54271e1ecef7944e4b19108c63c4d52526e50c"
+    },
+    {
+      "id": "E-HIS-09649C1A3E",
+      "kind": "git_commit",
+      "path": "git:bfc276c1a483454733d88c45a91f8d5c8659abd9",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: bfc276c1a483454733d88c45a91f8d5c8659abd9\nAuthored: 2020-06-16T10:10:52-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "9e64ba22f6475833b3c4d087b1c83112c657dfdf55020329424ec13cbe21efac"
+    },
+    {
+      "id": "E-HIS-4F44B3E289",
+      "kind": "git_commit",
+      "path": "git:880c70c19a5c4231765c004d74833cd3ff63115b",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 880c70c19a5c4231765c004d74833cd3ff63115b\nAuthored: 2020-06-16T10:01:14-04:00\nSubject: Delete .gitkeep\nBody: Not recorded\nChanged files (1):\nD\tdata-cleaning/.gitkeep",
+      "sha256": "fff10842a850c361bebe35754b504ffdaaf7b8d99eeb6d391424028284dd8e0d"
+    },
+    {
+      "id": "E-HIS-BB6B6668B7",
+      "kind": "git_commit",
+      "path": "git:de1f2e2e1b53e18805ba549ba61214660d70d131",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: de1f2e2e1b53e18805ba549ba61214660d70d131\nAuthored: 2020-06-16T10:00:38-04:00\nSubject: added data cleaning notebook\nBody: Not recorded\nChanged files (1):\nA\tdata-cleaning/data-cleaning.ipynb",
+      "sha256": "45915aed2ede827af1bad2b6ef457faf086550a736da4f011a313a25ca2e1772"
+    },
+    {
+      "id": "E-HIS-0489A5C311",
+      "kind": "git_commit",
+      "path": "git:84c4d282dd397c69402ee2b9d71c21cb6d12457d",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 84c4d282dd397c69402ee2b9d71c21cb6d12457d\nAuthored: 2020-06-15T19:24:22-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "80d5e6b7b5dc50bae1cdc49b22b94de53a0b1df11c671722392402a1d1affd94"
+    },
+    {
+      "id": "E-HIS-78BE0C8E72",
+      "kind": "git_commit",
+      "path": "git:c6999a088762c5add678bc1a8480bfde3c6b8243",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: c6999a088762c5add678bc1a8480bfde3c6b8243\nAuthored: 2020-06-15T19:23:42-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "093e2ac63311b648957b9fe590ecf19e01017fa96079d1d5056f9bc59d8d36f6"
+    },
+    {
+      "id": "E-HIS-127D484F09",
+      "kind": "git_commit",
+      "path": "git:bb4b67aa0b9b13157d7d73e91e0471d7dff16c0c",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: bb4b67aa0b9b13157d7d73e91e0471d7dff16c0c\nAuthored: 2020-06-15T19:15:06-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "4573815d0ea79787643c8bbc23ba5c5134fa116884533c560ef1ce90482d86b7"
+    },
+    {
+      "id": "E-HIS-31166B17B0",
+      "kind": "git_commit",
+      "path": "git:5370960f19a5c6aed7f01808dc7f6a44bac97b45",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 5370960f19a5c6aed7f01808dc7f6a44bac97b45\nAuthored: 2020-06-15T19:10:53-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "5db0d291106c55e4d071682cf5a77f785ed0e2293904c0558c926882994c7153"
+    },
+    {
+      "id": "E-HIS-61DC6C30A3",
+      "kind": "git_commit",
+      "path": "git:a438dc22c00d57ad61a93b841a54d15b1221fd21",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: a438dc22c00d57ad61a93b841a54d15b1221fd21\nAuthored: 2020-06-15T19:00:05-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "50004306a48ccf4ef285a24221f88b0094697fc40a9ebae033aab93edb17d0ca"
+    },
+    {
+      "id": "E-HIS-4E1112AD5A",
+      "kind": "git_commit",
+      "path": "git:83407abeb5232babb723efb1ad79169bfccdb59a",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 83407abeb5232babb723efb1ad79169bfccdb59a\nAuthored: 2020-06-15T18:54:02-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "9dfa2c2aebc0eb8c2cb01b4d475961b3bbd622ebb0e24a84fed4cafb68f8fc4a"
+    },
+    {
+      "id": "E-HIS-B95CDC53AB",
+      "kind": "git_commit",
+      "path": "git:06c6fda512d1ba16ec9e099d23202b3711a72e77",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 06c6fda512d1ba16ec9e099d23202b3711a72e77\nAuthored: 2020-06-15T18:47:12-04:00\nSubject: Create .gitkeep\nBody: Not recorded\nChanged files (1):\nA\tdata-cleaning/.gitkeep",
+      "sha256": "cf488fab1f4021c3c96a005c6ec24791ef344ed37f2e1cb626de358da66c87da"
+    },
+    {
+      "id": "E-HIS-9440E3F4C1",
+      "kind": "git_commit",
+      "path": "git:52e9742ca1badaf819ba6c9274ff583f645373c6",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 52e9742ca1badaf819ba6c9274ff583f645373c6\nAuthored: 2020-06-15T18:46:33-04:00\nSubject: Create .gitkeep\nBody: Not recorded\nChanged files (1):\nA\toutput/.gitkeep",
+      "sha256": "e57ce49b0fd60396a4f8194dadd105d62b08f3704c182c4292859fb69e3540e5"
+    },
+    {
+      "id": "E-HIS-8B26704091",
+      "kind": "git_commit",
+      "path": "git:0566ad23c09bb08f32ee1e11ee71e3e893a1a4d8",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 0566ad23c09bb08f32ee1e11ee71e3e893a1a4d8\nAuthored: 2020-06-15T18:46:15-04:00\nSubject: Create .gitkeep\nBody: Not recorded\nChanged files (1):\nA\tmodels/.gitkeep",
+      "sha256": "f176ae35b0c342eb7a6e9ce9fdb5333e7d686144d8a0934864e9cff35373938d"
+    },
+    {
+      "id": "E-HIS-2D7A44BBA0",
+      "kind": "git_commit",
+      "path": "git:2e85a29324769684b3c52a8a3b56979754d9fd4a",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 2e85a29324769684b3c52a8a3b56979754d9fd4a\nAuthored: 2020-06-12T09:34:23-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "13e3a3ee57c2077293fed6efa93b4d19c7fbe76077fc53ae1566e335c588ea89"
+    },
+    {
+      "id": "E-HIS-7ECB9F5E2D",
+      "kind": "git_commit",
+      "path": "git:24f4cf1fda156dfc224790990997d0460b4e8d5d",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 24f4cf1fda156dfc224790990997d0460b4e8d5d\nAuthored: 2020-06-12T09:32:49-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (0):",
+      "sha256": "a92ad0eeef8d2e7caa8033d09aea0f5f5a602583f0f673d6709cf025e3384316"
+    },
+    {
+      "id": "E-HIS-FD96EA8D62",
+      "kind": "git_commit",
+      "path": "git:e384777026e6f357c2c4f7ef7ca31fbbc60c8fb7",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: e384777026e6f357c2c4f7ef7ca31fbbc60c8fb7\nAuthored: 2020-06-12T09:32:15-04:00\nSubject: Update README.,d\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "d0a43bb6894582d273e15402275da6411bfae6df646cc696532c134ede8f0437"
+    },
+    {
+      "id": "E-HIS-D319AA23EF",
+      "kind": "git_commit",
+      "path": "git:649139821674525453adf1479d35b9c4d43092f3",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 649139821674525453adf1479d35b9c4d43092f3\nAuthored: 2020-06-12T09:30:25-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "d7e30d223537fc3999b8b499669230d3ea7a1dc60d8a05ffc58c237469a05163"
+    },
+    {
+      "id": "E-HIS-4184FF8535",
+      "kind": "git_commit",
+      "path": "git:c7892c2804148dbe4a9c403b9e4504c8af55d248",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: c7892c2804148dbe4a9c403b9e4504c8af55d248\nAuthored: 2020-06-12T09:14:35-04:00\nSubject: Initial commit\nBody: Not recorded\nChanged files (1):\nA\tREADME.md",
+      "sha256": "7d3990d806b8983c10f500d226d391fd14f044770c5c762ad55e5d77821858ae"
+    }
+  ],
+  "collection_summary": {
+    "git_available": true,
+    "git_total_commits": 24,
+    "git_recovered_commits": 24,
+    "git_tags": 0,
+    "git_truncated": false,
+    "git_tags_truncated": false,
+    "mlflow_available": false,
+    "mlflow_runs": 0
+  },
+  "limitations": []
+}

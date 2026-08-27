@@ -1,0 +1,132 @@
+{
+  "schema_version": "boveda-audit-diagnostics-0.9.3",
+  "availability": "complete",
+  "historical": false,
+  "audit_id": "AUD-8F3965C55C",
+  "audit_started_at": "2026-08-26T11:54:08.236Z",
+  "audit_completed_at": "2026-08-26T11:55:12.131Z",
+  "total_duration_ms": 63895,
+  "stages": [
+    {
+      "stage": "source_resolution",
+      "status": "succeeded",
+      "duration_ms": 0
+    },
+    {
+      "stage": "evidence_collection",
+      "status": "succeeded",
+      "duration_ms": 99,
+      "evidence_items": 34,
+      "evidence_characters": 320073,
+      "evidence_pack_sha256": "2a8524be280eed5baf0afe09776240fc87d3ce5ade7f7cc201877e76820a1395",
+      "eligible_files": 171,
+      "collected_items": 34
+    },
+    {
+      "stage": "llm_reconstruction",
+      "status": "accepted",
+      "duration_ms": 63770,
+      "attempts": 1,
+      "provider_calls": 1,
+      "validation_status": "VALID"
+    },
+    {
+      "stage": "source_integrity",
+      "status": "succeeded",
+      "duration_ms": 26,
+      "content_unchanged": true
+    },
+    {
+      "stage": "final_record",
+      "status": "succeeded",
+      "duration_ms": 0
+    }
+  ],
+  "evidence_pack": {
+    "item_count": 34,
+    "character_count": 320073,
+    "sha256": "2a8524be280eed5baf0afe09776240fc87d3ce5ade7f7cc201877e76820a1395"
+  },
+  "llm": {
+    "schema_version": "boveda-llm-diagnostics-0.9.3",
+    "started_at": "2026-08-26T11:54:08.335Z",
+    "completed_at": "2026-08-26T11:55:12.105Z",
+    "duration_ms": 63770,
+    "provider": "OpenAI",
+    "model": "gpt-5.6-sol",
+    "result": "accepted",
+    "activity": "attempted",
+    "attempt_count": 1,
+    "provider_call_count": 1,
+    "paid_model_activity": true,
+    "total_usage": {
+      "attempts_with_usage": 1,
+      "input_tokens": 119441,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 119438,
+      "output_tokens": 3804,
+      "reasoning_output_tokens": 2164,
+      "total_tokens": 123245
+    },
+    "request_profile": {
+      "reasoning_effort": "medium",
+      "structured_output_schema": "boveda_overview_v090",
+      "localized_repair_schema": "boveda_local_repair_v096",
+      "maximum_attempts": 3,
+      "evidence_pack": {
+        "item_count": 34,
+        "character_count": 320073,
+        "sha256": "2a8524be280eed5baf0afe09776240fc87d3ce5ade7f7cc201877e76820a1395"
+      }
+    },
+    "fallback": {
+      "used": false,
+      "reason": null,
+      "followed_model_activity": true,
+      "followed_paid_model_activity": false
+    },
+    "attempts": [
+      {
+        "attempt": 1,
+        "operation": "full_reconstruction",
+        "target_fields": [],
+        "base_attempt": null,
+        "started_at": "2026-08-26T11:54:08.335Z",
+        "completed_at": "2026-08-26T11:55:12.105Z",
+        "duration_ms": 63770,
+        "correction_applied": false,
+        "provider_call_started": true,
+        "provider_duration_ms": 63387,
+        "provider_request_id": "req_5c12cc77ef81488ab9aa00b7c30b9ed8",
+        "response_id": "resp_068ec305aa5b3763016a8ed3e0c4b087d2ad289dcc1f734470",
+        "response_status": "completed",
+        "http_status": 200,
+        "usage": {
+          "input_tokens": 119441,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 119438,
+          "output_tokens": 3804,
+          "reasoning_output_tokens": 2164,
+          "total_tokens": 123245
+        },
+        "outcome": "accepted",
+        "failure": null,
+        "validation": {
+          "status": "VALID",
+          "error_count": 0,
+          "warning_count": 0,
+          "errors": [],
+          "warnings": []
+        },
+        "retry_scheduled": false,
+        "retry": null
+      }
+    ]
+  },
+  "final": {
+    "generation_mode": "llm",
+    "validation_status": "VALID",
+    "source_unchanged": true
+  },
+  "related_legacy_audits": []
+}

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+storage/projects/*/
+storage/registry.json
+storage/.v*-audits-imported.json
+validation/results/
+validation/v017-baseline/
+validation/v017-runs/
+validation/v017-smoke/
+validation/v017-final/
+tmp/pdfs/
+.env
+.env.*.local
+.vercel/
+.DS_Store
+*.log

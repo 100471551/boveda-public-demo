@@ -1,0 +1,547 @@
+{
+  "schema_version": "boveda-audit-diagnostics-0.9.3",
+  "availability": "complete",
+  "historical": false,
+  "audit_id": "AUD-8663C7D0D4",
+  "audit_started_at": "2026-08-26T11:57:00.848Z",
+  "audit_completed_at": "2026-08-26T11:58:09.574Z",
+  "total_duration_ms": 68726,
+  "stages": [
+    {
+      "stage": "source_resolution",
+      "status": "succeeded",
+      "duration_ms": 0
+    },
+    {
+      "stage": "evidence_collection",
+      "status": "succeeded",
+      "duration_ms": 119,
+      "evidence_items": 5,
+      "evidence_characters": 36532,
+      "evidence_pack_sha256": "45d21b8fa620a51b4fad1ba73477eff80ae7cd39fefaa93e15e3d03e4e8caca5",
+      "eligible_files": 3,
+      "collected_items": 5
+    },
+    {
+      "stage": "llm_reconstruction",
+      "status": "accepted",
+      "duration_ms": 68605,
+      "attempts": 2,
+      "provider_calls": 2,
+      "validation_status": "VALID"
+    },
+    {
+      "stage": "source_integrity",
+      "status": "succeeded",
+      "duration_ms": 2,
+      "content_unchanged": true
+    },
+    {
+      "stage": "final_record",
+      "status": "succeeded",
+      "duration_ms": 0
+    }
+  ],
+  "evidence_pack": {
+    "item_count": 5,
+    "character_count": 36532,
+    "sha256": "45d21b8fa620a51b4fad1ba73477eff80ae7cd39fefaa93e15e3d03e4e8caca5"
+  },
+  "llm": {
+    "schema_version": "boveda-llm-diagnostics-0.9.3",
+    "started_at": "2026-08-26T11:57:00.967Z",
+    "completed_at": "2026-08-26T11:58:09.572Z",
+    "duration_ms": 68605,
+    "provider": "OpenAI",
+    "model": "gpt-5.6-sol",
+    "result": "accepted",
+    "activity": "attempted",
+    "attempt_count": 2,
+    "provider_call_count": 2,
+    "paid_model_activity": true,
+    "total_usage": {
+      "attempts_with_usage": 2,
+      "input_tokens": 29706,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 29700,
+      "output_tokens": 4483,
+      "reasoning_output_tokens": 2734,
+      "total_tokens": 34189
+    },
+    "request_profile": {
+      "reasoning_effort": "medium",
+      "structured_output_schema": "boveda_overview_v090",
+      "localized_repair_schema": "boveda_local_repair_v096",
+      "maximum_attempts": 3,
+      "evidence_pack": {
+        "item_count": 5,
+        "character_count": 36532,
+        "sha256": "45d21b8fa620a51b4fad1ba73477eff80ae7cd39fefaa93e15e3d03e4e8caca5"
+      }
+    },
+    "fallback": {
+      "used": false,
+      "reason": null,
+      "followed_model_activity": true,
+      "followed_paid_model_activity": false
+    },
+    "attempts": [
+      {
+        "attempt": 1,
+        "operation": "full_reconstruction",
+        "target_fields": [],
+        "base_attempt": null,
+        "started_at": "2026-08-26T11:57:00.967Z",
+        "completed_at": "2026-08-26T11:57:57.373Z",
+        "duration_ms": 56406,
+        "correction_applied": false,
+        "provider_call_started": true,
+        "provider_duration_ms": 56032,
+        "provider_request_id": "req_b495f9556ed94acc9429f8fc24e55663",
+        "response_id": "resp_09bbbcf12ed0f289016a8ed48d5e9c87d28db38cd7cc425463",
+        "response_status": "completed",
+        "http_status": 200,
+        "usage": {
+          "input_tokens": 16572,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 16569,
+          "output_tokens": 3945,
+          "reasoning_output_tokens": 2381,
+          "total_tokens": 20517
+        },
+        "outcome": "rejected",
+        "failure": {
+          "stage": "grounding",
+          "message": "record.samples.source_data: numeric value 16 is not grounded in cited evidence · record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence · record.data.period: numeric value 311 is not grounded in cited evidence"
+        },
+        "validation": {
+          "status": "INVALID",
+          "error_count": 3,
+          "warning_count": 0,
+          "errors": [
+            "record.samples.source_data: numeric value 16 is not grounded in cited evidence",
+            "record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence",
+            "record.data.period: numeric value 311 is not grounded in cited evidence"
+          ],
+          "warnings": [],
+          "rejected_candidate": {
+            "identity": {
+              "name": {
+                "state": "established",
+                "value": "NYC-311",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808",
+                  "E-SYSTEM-PATH"
+                ]
+              },
+              "description": {
+                "state": "established",
+                "value": "Analyzes NYC 311 service requests, models complaint-resolution ranges and daily call volumes, and compares storm-period response times to inform city understanding and resource planning.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              }
+            },
+            "purpose_scope": {
+              "summary": {
+                "state": "established",
+                "value": "The project examines NYC 311 demand, complaint patterns, resolution times and storm-related differences, using descriptive analysis, classification and time-series forecasting. Its outputs are intended to support city resource allocation and resident expectations, although the evaluated resolution model is restricted to Brooklyn heat and hot-water complaints.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "purpose": {
+                "state": "established",
+                "value": "Improve understanding of city service demand and support more efficient resource allocation.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808"
+                ]
+              },
+              "task": {
+                "state": "established",
+                "value": "Describe request patterns, classify resolution-time ranges, forecast daily volumes, and compare storm-related response times.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808"
+                ]
+              },
+              "target_outcome": {
+                "state": "established",
+                "value": "Outputs a three-class complaint-resolution range and forecast daily service-request volume.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B9CC546808"
+                ]
+              },
+              "unit": {
+                "state": "established",
+                "value": "Individual 311 service request",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808"
+                ]
+              },
+              "population_scope": {
+                "state": "established",
+                "value": "NYC 311 service requests; resolution modelling narrows to Brooklyn heat and hot-water complaints.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "intended_use": {
+                "state": "established",
+                "value": "Support city resource allocation and help residents estimate when complaints may be resolved.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B9CC546808"
+                ]
+              }
+            },
+            "samples": {
+              "source_data": {
+                "state": "established",
+                "display": "More than 16 million",
+                "count": 16000000,
+                "unit": "rows",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B9CC546808"
+                ]
+              },
+              "model_sample": {
+                "state": "not_established",
+                "display": "–",
+                "count": null,
+                "unit": "service requests",
+                "epistemic": "UNRESOLVED",
+                "evidence_ids": []
+              },
+              "evaluation_sample": {
+                "state": "not_established",
+                "display": "–",
+                "count": null,
+                "unit": "service requests",
+                "epistemic": "UNRESOLVED",
+                "evidence_ids": []
+              }
+            },
+            "results_evaluation": {
+              "primary_result": {
+                "state": "established",
+                "display_value": "0.62486417070038525",
+                "metric": "Test accuracy",
+                "method": "Random Forest Classifier with 100 trees",
+                "task_target": "Three resolution-time classes for Brooklyn heat complaints",
+                "evaluation_context": "Held-out X_test/Y_test from filtered 2015 model data",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "material_results": [
+                {
+                  "state": "established",
+                  "display_value": "0.953887894029",
+                  "metric": "r2_score",
+                  "method": "Prophet additive time-series model",
+                  "task_target": "Log daily NYC 311 request volume",
+                  "evaluation_context": "Goodness of fit on 391 retained days with over 25 calls",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B9CC546808",
+                    "E-2B1FA53FA7"
+                  ]
+                }
+              ],
+              "evaluation_design": {
+                "state": "established",
+                "value": "The random forest was evaluated on a held-out train/test split; the split proportion and absolute training and test counts are not reported.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "other_material_result": {
+                "state": "established",
+                "value": "Prophet additionally achieved r2_score 0.953887894029 as a goodness-of-fit measure for retained daily call volumes.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "known_limitation": {
+                "state": "established",
+                "value": "The three classes are imbalanced, with too few examples in the longest-resolution class, limiting interpretation of overall accuracy.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "establishes": {
+                "state": "established",
+                "value": "On its recorded held-out split, the random forest correctly classified 62.486% of filtered Brooklyn heat complaints into resolution-time ranges.",
+                "epistemic": "DERIVED",
+                "evidence_ids": [
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "does_not_establish": {
+                "state": "established",
+                "value": "It does not establish similar accuracy for other complaint types, boroughs, periods, or requests taking more than 28 days.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              }
+            },
+            "data": {
+              "summary": {
+                "state": "established",
+                "value": "Public NYC 311 records were prepared with created and closed dates, location, complaint descriptors and derived resolution days; a filtered Brooklyn heat subset fed classification.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "data_sources": {
+                "state": "established",
+                "value": "NYC Open Data 311 Service Requests dataset.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-B9CC546808"
+                ]
+              },
+              "unit_of_observation": {
+                "state": "established",
+                "value": "One individual 311 service request",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B9CC546808",
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "period": {
+                "state": "established",
+                "value": "2015 for the prepared 311 analysis and resolution model.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "population_filters": {
+                "state": "established",
+                "value": "Resolution modelling selected Brooklyn heat and hot-water complaints and removed requests with resolution times exceeding 28 days.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-2B1FA53FA7"
+                ]
+              },
+              "population_limitation": {
+                "state": "established",
+                "value": "The resolution model is limited to Brooklyn heat and hot-water complaints resolved within 28 days, restricting application beyond that selected group.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-2B1FA53FA7"
+                ]
+              }
+            },
+            "confidence": {
+              "level": "Medium",
+              "explanation": "The exact test accuracy is stored in the notebook and rounded in the report, but test size and split proportion are unavailable.",
+              "evidence_ids": [
+                "E-B9CC546808",
+                "E-2B1FA53FA7"
+              ]
+            }
+          },
+          "field_evidence_ids": {
+            "record.identity.name": [
+              "E-B335630551",
+              "E-B9CC546808",
+              "E-SYSTEM-PATH"
+            ],
+            "record.identity.description": [
+              "E-B335630551",
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.purpose_scope.summary": [
+              "E-B335630551",
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.purpose_scope.purpose": [
+              "E-B335630551",
+              "E-B9CC546808"
+            ],
+            "record.purpose_scope.task": [
+              "E-B335630551",
+              "E-B9CC546808"
+            ],
+            "record.purpose_scope.target_outcome": [
+              "E-B9CC546808"
+            ],
+            "record.purpose_scope.unit": [
+              "E-B335630551",
+              "E-B9CC546808"
+            ],
+            "record.purpose_scope.population_scope": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.purpose_scope.intended_use": [
+              "E-B9CC546808"
+            ],
+            "record.samples.source_data": [
+              "E-B9CC546808"
+            ],
+            "record.samples.model_sample": [],
+            "record.samples.evaluation_sample": [],
+            "record.results_evaluation.primary_result": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.results_evaluation.material_results[0]": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.results_evaluation.evaluation_design": [
+              "E-2B1FA53FA7"
+            ],
+            "record.results_evaluation.other_material_result": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.results_evaluation.known_limitation": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.results_evaluation.establishes": [
+              "E-2B1FA53FA7"
+            ],
+            "record.results_evaluation.does_not_establish": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.data.summary": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.data.data_sources": [
+              "E-B335630551",
+              "E-B9CC546808"
+            ],
+            "record.data.unit_of_observation": [
+              "E-B9CC546808",
+              "E-2B1FA53FA7"
+            ],
+            "record.data.period": [
+              "E-2B1FA53FA7"
+            ],
+            "record.data.population_filters": [
+              "E-2B1FA53FA7"
+            ],
+            "record.data.population_limitation": [
+              "E-2B1FA53FA7"
+            ]
+          }
+        },
+        "retry_scheduled": true,
+        "retry": {
+          "scheduled": true,
+          "reason": "localized_validation_repair",
+          "correction_errors": [
+            "record.samples.source_data: numeric value 16 is not grounded in cited evidence",
+            "record.results_evaluation.establishes: numeric value 62.486% is not grounded in cited evidence",
+            "record.data.period: numeric value 311 is not grounded in cited evidence"
+          ],
+          "target_fields": [
+            "record.samples.source_data",
+            "record.results_evaluation.establishes",
+            "record.data.period"
+          ]
+        }
+      },
+      {
+        "attempt": 2,
+        "operation": "localized_repair",
+        "target_fields": [
+          "record.samples.source_data",
+          "record.results_evaluation.establishes",
+          "record.data.period"
+        ],
+        "base_attempt": 1,
+        "started_at": "2026-08-26T11:57:57.373Z",
+        "completed_at": "2026-08-26T11:58:09.572Z",
+        "duration_ms": 12199,
+        "correction_applied": true,
+        "provider_call_started": true,
+        "provider_duration_ms": 12011,
+        "provider_request_id": "req_32bbc7b1a7d04422bcde892560698077",
+        "response_id": "resp_065b0506e11efc61016a8ed4c6caa087d28ccc2a6f17eb0766",
+        "response_status": "completed",
+        "http_status": 200,
+        "usage": {
+          "input_tokens": 13134,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 13131,
+          "output_tokens": 538,
+          "reasoning_output_tokens": 353,
+          "total_tokens": 13672
+        },
+        "outcome": "accepted",
+        "failure": null,
+        "validation": {
+          "status": "VALID",
+          "error_count": 0,
+          "warning_count": 0,
+          "errors": [],
+          "warnings": []
+        },
+        "retry_scheduled": false,
+        "retry": null
+      }
+    ],
+    "localized_repair": {
+      "status": "accepted",
+      "base_attempt": 1,
+      "repair_attempts": 1,
+      "fields": [
+        "record.samples.source_data",
+        "record.results_evaluation.establishes",
+        "record.data.period"
+      ],
+      "evidence_scope": [
+        "E-B9CC546808",
+        "E-2B1FA53FA7"
+      ],
+      "unrelated_fields_preserved": true
+    }
+  },
+  "final": {
+    "generation_mode": "llm",
+    "validation_status": "VALID",
+    "source_unchanged": true
+  },
+  "related_legacy_audits": []
+}

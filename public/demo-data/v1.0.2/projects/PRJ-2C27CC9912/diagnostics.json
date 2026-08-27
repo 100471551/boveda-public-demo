@@ -1,0 +1,563 @@
+{
+  "schema_version": "boveda-audit-diagnostics-0.9.3",
+  "availability": "complete",
+  "historical": false,
+  "audit_id": "AUD-A57071CBE3",
+  "audit_started_at": "2026-08-26T11:51:38.944Z",
+  "audit_completed_at": "2026-08-26T11:52:41.973Z",
+  "total_duration_ms": 63029,
+  "stages": [
+    {
+      "stage": "source_resolution",
+      "status": "succeeded",
+      "duration_ms": 0
+    },
+    {
+      "stage": "evidence_collection",
+      "status": "succeeded",
+      "duration_ms": 61,
+      "evidence_items": 7,
+      "evidence_characters": 116001,
+      "evidence_pack_sha256": "6791ab734d8b26e73c6394ad896d8b77e34282deece920e95072d91fa97f3944",
+      "eligible_files": 5,
+      "collected_items": 7
+    },
+    {
+      "stage": "llm_reconstruction",
+      "status": "accepted",
+      "duration_ms": 62964,
+      "attempts": 2,
+      "provider_calls": 2,
+      "validation_status": "VALID"
+    },
+    {
+      "stage": "source_integrity",
+      "status": "succeeded",
+      "duration_ms": 2,
+      "content_unchanged": true
+    },
+    {
+      "stage": "final_record",
+      "status": "succeeded",
+      "duration_ms": 0
+    }
+  ],
+  "evidence_pack": {
+    "item_count": 7,
+    "character_count": 116001,
+    "sha256": "6791ab734d8b26e73c6394ad896d8b77e34282deece920e95072d91fa97f3944"
+  },
+  "llm": {
+    "schema_version": "boveda-llm-diagnostics-0.9.3",
+    "started_at": "2026-08-26T11:51:39.005Z",
+    "completed_at": "2026-08-26T11:52:41.969Z",
+    "duration_ms": 62964,
+    "provider": "OpenAI",
+    "model": "gpt-5.6-sol",
+    "result": "accepted",
+    "activity": "attempted",
+    "attempt_count": 2,
+    "provider_call_count": 2,
+    "paid_model_activity": true,
+    "total_usage": {
+      "attempts_with_usage": 2,
+      "input_tokens": 41057,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 41051,
+      "output_tokens": 3963,
+      "reasoning_output_tokens": 2291,
+      "total_tokens": 45020
+    },
+    "request_profile": {
+      "reasoning_effort": "medium",
+      "structured_output_schema": "boveda_overview_v090",
+      "localized_repair_schema": "boveda_local_repair_v096",
+      "maximum_attempts": 3,
+      "evidence_pack": {
+        "item_count": 7,
+        "character_count": 116001,
+        "sha256": "6791ab734d8b26e73c6394ad896d8b77e34282deece920e95072d91fa97f3944"
+      }
+    },
+    "fallback": {
+      "used": false,
+      "reason": null,
+      "followed_model_activity": true,
+      "followed_paid_model_activity": false
+    },
+    "attempts": [
+      {
+        "attempt": 1,
+        "operation": "full_reconstruction",
+        "target_fields": [],
+        "base_attempt": null,
+        "started_at": "2026-08-26T11:51:39.005Z",
+        "completed_at": "2026-08-26T11:52:31.651Z",
+        "duration_ms": 52646,
+        "correction_applied": false,
+        "provider_call_started": true,
+        "provider_duration_ms": 52255,
+        "provider_request_id": "req_93eda6523b164ff88f3e7eac45f8188a",
+        "response_id": "resp_0fd658baefcde3d4016a8ed34c42b087d2a7bb82ae31f6048e",
+        "response_status": "completed",
+        "http_status": 200,
+        "usage": {
+          "input_tokens": 32008,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 32005,
+          "output_tokens": 3316,
+          "reasoning_output_tokens": 1775,
+          "total_tokens": 35324
+        },
+        "outcome": "rejected",
+        "failure": {
+          "stage": "grounding",
+          "message": "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence · record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence · record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+        },
+        "validation": {
+          "status": "INVALID",
+          "error_count": 3,
+          "warning_count": 0,
+          "errors": [
+            "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence",
+            "record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence",
+            "record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+          ],
+          "warnings": [],
+          "rejected_candidate": {
+            "identity": {
+              "name": {
+                "state": "established",
+                "value": "Chelsea Housing and Public Health",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-SYSTEM-PATH",
+                  "E-B335630551"
+                ]
+              },
+              "description": {
+                "state": "established",
+                "value": "The project predicts housing-code and public-health hazards for Chelsea properties using linked municipal data, supporting the city’s prioritization of proactive inspections.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              }
+            },
+            "purpose_scope": {
+              "summary": {
+                "state": "established",
+                "value": "Chelsea sought to identify housing-related health hazards earlier than reactive enforcement allowed. The project uses linked property and municipal records to predict three categories of code violations and help city government prioritize inspections, although modelling and evaluation cover only previously inspected properties.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-1352155D41",
+                  "E-C113A90389",
+                  "E-5CD21A80C3"
+                ]
+              },
+              "purpose": {
+                "state": "established",
+                "value": "Help Chelsea identify housing-related public-health risks earlier and prioritize limited inspection capacity.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551"
+                ]
+              },
+              "task": {
+                "state": "established",
+                "value": "Classify properties by their likelihood of having specified housing-code violations.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551"
+                ]
+              },
+              "target_outcome": {
+                "state": "established",
+                "value": "Binary predictions for any violation, elevated-risk violations, and violations associated with overcrowding.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "unit": {
+                "state": "established",
+                "value": "Residential property",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "population_scope": {
+                "state": "established",
+                "value": "Chelsea’s 5,989 residential properties, with model development restricted to 1,611 inspected properties.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "intended_use": {
+                "state": "established",
+                "value": "Support Chelsea city government in prioritizing properties for proactive housing inspections.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551"
+                ]
+              }
+            },
+            "samples": {
+              "source_data": {
+                "state": "established",
+                "display": "5,989 residential properties",
+                "count": 5989,
+                "unit": "properties",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "model_sample": {
+                "state": "established",
+                "display": "1,263 training properties",
+                "count": 1263,
+                "unit": "properties",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              },
+              "evaluation_sample": {
+                "state": "established",
+                "display": "348 held-out properties",
+                "count": 348,
+                "unit": "properties",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              }
+            },
+            "results_evaluation": {
+              "primary_result": {
+                "state": "established",
+                "display_value": "0.4608713336647534",
+                "metric": "Average precision score from binary predictions",
+                "method": "Default random forest classifier",
+                "task_target": "Elevated public-health-risk code violations",
+                "evaluation_context": "348 held-out inspected properties outside the target area",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              },
+              "material_results": [
+                {
+                  "state": "established",
+                  "display_value": "59",
+                  "metric": "True positives",
+                  "method": "Default random forest classifier",
+                  "task_target": "Elevated public-health-risk code violations",
+                  "evaluation_context": "Confusion matrix on 348 held-out properties outside the target area",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                },
+                {
+                  "state": "established",
+                  "display_value": "50",
+                  "metric": "False positives",
+                  "method": "Default random forest classifier",
+                  "task_target": "Elevated public-health-risk code violations",
+                  "evaluation_context": "Confusion matrix on 348 held-out properties outside the target area",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                }
+              ],
+              "evaluation_design": {
+                "state": "established",
+                "value": "A random forest trained on 1,263 target-area properties was tested on 348 held-out inspected properties outside that area.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-C113A90389"
+                ]
+              },
+              "other_material_result": {
+                "state": "established",
+                "value": "Its held-out predictions included 59 true positives and 50 false positives.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              },
+              "known_limitation": {
+                "state": "established",
+                "value": "Average precision was calculated from binary class predictions, limiting its interpretation as ranking performance across decision thresholds.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              },
+              "establishes": {
+                "state": "established",
+                "value": "The default random forest achieved the reported average precision on 348 inspected properties held out by geography.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              },
+              "does_not_establish": {
+                "state": "established",
+                "value": "The evaluation does not establish performance on uninspected Chelsea properties or whether model-guided inspections improve public-health outcomes.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-C113A90389"
+                ]
+              }
+            },
+            "data": {
+              "summary": {
+                "state": "established",
+                "value": "Property-level municipal records were joined in BuildingBlocks, filtered to residential properties, transformed into model features, and linked with inspection-derived violation outcomes.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "data_sources": {
+                "state": "established",
+                "value": "BuildingBlocks-linked inspections, police and fire calls, assessor, census, and property records.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "unit_of_observation": {
+                "state": "established",
+                "value": "One Chelsea property or parcel record",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2"
+                ]
+              },
+              "period": {
+                "state": "established",
+                "value": "Inspections from 2014–2019; training used proactive inspections from 2014–2018.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551"
+                ]
+              },
+              "population_filters": {
+                "state": "established",
+                "value": "Source records were limited to residential properties; modelling used inspected properties, split by target-area status.",
+                "epistemic": "OBSERVED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-06B8ACEBB2",
+                  "E-C113A90389"
+                ]
+              },
+              "population_limitation": {
+                "state": "established",
+                "value": "Evaluation includes only inspected properties outside the target area, so it may not represent Chelsea’s uninspected properties.",
+                "epistemic": "INTERPRETED_INFERRED",
+                "evidence_ids": [
+                  "E-B335630551",
+                  "E-C113A90389"
+                ]
+              }
+            },
+            "confidence": {
+              "level": "High",
+              "explanation": "Notebook output directly links the random forest, held-out labels, binary predictions, confusion matrix, and reported average precision score.",
+              "evidence_ids": [
+                "E-C113A90389"
+              ]
+            }
+          },
+          "field_evidence_ids": {
+            "record.identity.name": [
+              "E-SYSTEM-PATH",
+              "E-B335630551"
+            ],
+            "record.identity.description": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.purpose_scope.summary": [
+              "E-B335630551",
+              "E-1352155D41",
+              "E-C113A90389",
+              "E-5CD21A80C3"
+            ],
+            "record.purpose_scope.purpose": [
+              "E-B335630551"
+            ],
+            "record.purpose_scope.task": [
+              "E-B335630551"
+            ],
+            "record.purpose_scope.target_outcome": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.purpose_scope.unit": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.purpose_scope.population_scope": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.purpose_scope.intended_use": [
+              "E-B335630551"
+            ],
+            "record.samples.source_data": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.samples.model_sample": [
+              "E-C113A90389"
+            ],
+            "record.samples.evaluation_sample": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.primary_result": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.material_results[0]": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.material_results[1]": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.evaluation_design": [
+              "E-B335630551",
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.other_material_result": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.known_limitation": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.establishes": [
+              "E-C113A90389"
+            ],
+            "record.results_evaluation.does_not_establish": [
+              "E-B335630551",
+              "E-C113A90389"
+            ],
+            "record.data.summary": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.data.data_sources": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.data.unit_of_observation": [
+              "E-B335630551",
+              "E-06B8ACEBB2"
+            ],
+            "record.data.period": [
+              "E-B335630551"
+            ],
+            "record.data.population_filters": [
+              "E-B335630551",
+              "E-06B8ACEBB2",
+              "E-C113A90389"
+            ],
+            "record.data.population_limitation": [
+              "E-B335630551",
+              "E-C113A90389"
+            ]
+          }
+        },
+        "retry_scheduled": true,
+        "retry": {
+          "scheduled": true,
+          "reason": "localized_validation_repair",
+          "correction_errors": [
+            "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence",
+            "record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence",
+            "record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+          ],
+          "target_fields": [
+            "record.results_evaluation.other_material_result",
+            "record.results_evaluation.establishes"
+          ]
+        }
+      },
+      {
+        "attempt": 2,
+        "operation": "localized_repair",
+        "target_fields": [
+          "record.results_evaluation.other_material_result",
+          "record.results_evaluation.establishes"
+        ],
+        "base_attempt": 1,
+        "started_at": "2026-08-26T11:52:31.651Z",
+        "completed_at": "2026-08-26T11:52:41.968Z",
+        "duration_ms": 10317,
+        "correction_applied": true,
+        "provider_call_started": true,
+        "provider_duration_ms": 10169,
+        "provider_request_id": "req_51b9387f010a4664b72f5ab08df0702c",
+        "response_id": "resp_017659d92c9194d8016a8ed37fe20887d2bdf175a7406db702",
+        "response_status": "completed",
+        "http_status": 200,
+        "usage": {
+          "input_tokens": 9049,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 9046,
+          "output_tokens": 647,
+          "reasoning_output_tokens": 516,
+          "total_tokens": 9696
+        },
+        "outcome": "accepted",
+        "failure": null,
+        "validation": {
+          "status": "VALID",
+          "error_count": 0,
+          "warning_count": 0,
+          "errors": [],
+          "warnings": []
+        },
+        "retry_scheduled": false,
+        "retry": null
+      }
+    ],
+    "localized_repair": {
+      "status": "accepted",
+      "base_attempt": 1,
+      "repair_attempts": 1,
+      "fields": [
+        "record.results_evaluation.other_material_result",
+        "record.results_evaluation.establishes"
+      ],
+      "evidence_scope": [
+        "E-C113A90389"
+      ],
+      "unrelated_fields_preserved": true
+    }
+  },
+  "final": {
+    "generation_mode": "llm",
+    "validation_status": "VALID",
+    "source_unchanged": true
+  },
+  "related_legacy_audits": []
+}

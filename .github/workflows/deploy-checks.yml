@@ -1,0 +1,26 @@
+name: Deployment checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  public-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run demo:validate
+      - run: npm run test:deploy
+      - run: npm run build:demo
+      - name: Validate built artefacts
+        run: node scripts/public-demo-privacy.mjs dist

@@ -1,0 +1,864 @@
+{
+  "schema_version": "boveda-history-0.11.1",
+  "project_id": "PRJ-181CCD8192",
+  "audit_id": "AUD-8663C7D0D4",
+  "generated_from": {
+    "schema_version": "boveda-supervisory-record-0.9.0",
+    "audit_id": "AUD-8663C7D0D4"
+  },
+  "event_count": 3,
+  "host_event_count": 2,
+  "boveda_event_count": 1,
+  "recovered_host_event_count": 15,
+  "supporting_event_count": 15,
+  "events": [
+    {
+      "event_id": "HIS-CF97B49434",
+      "event_key": "host-data-period",
+      "source": "host_project",
+      "event_type": "data_period",
+      "date": {
+        "label": "2015",
+        "start": "2015-01-01",
+        "end": "2015-12-31",
+        "precision": "year",
+        "sort_at": "2015-12-31T23:59:59.999Z"
+      },
+      "title": "Project data period reconstructed",
+      "description": "The prepared service-request analysis and resolution model used data from 2015.",
+      "epistemic": "INTERPRETED_INFERRED",
+      "status": "reconstructed",
+      "material": true,
+      "evidence_ids": [
+        "E-2B1FA53FA7"
+      ],
+      "related": [
+        {
+          "type": "notebook",
+          "id": "E-2B1FA53FA7",
+          "label": "NYC311.ipynb"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "This establishes the period represented by the project evidence; it does not establish when the dataset was created or changed."
+    },
+    {
+      "event_id": "HIS-C59E5835BE",
+      "event_key": "host-primary-evaluation",
+      "source": "host_project",
+      "event_type": "evaluation",
+      "date": {
+        "label": "2015",
+        "start": "2015-01-01",
+        "end": "2015-12-31",
+        "precision": "year",
+        "sort_at": "2015-12-31T23:59:59.999Z"
+      },
+      "title": "Primary evaluation recorded",
+      "description": "Persisted project evidence records Test accuracy 0.62486417070038525 for Three resolution-time classes for Brooklyn heat complaints using Random Forest Classifier with 100 trees.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": true,
+      "evidence_ids": [
+        "E-B9CC546808",
+        "E-2B1FA53FA7"
+      ],
+      "related": [
+        {
+          "type": "report",
+          "id": "E-B9CC546808",
+          "label": "Project_Report_GIT.pdf"
+        },
+        {
+          "type": "notebook",
+          "id": "E-2B1FA53FA7",
+          "label": "NYC311.ipynb"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": null
+    },
+    {
+      "event_id": "HIS-1306770C80",
+      "event_key": "boveda-audit",
+      "source": "boveda",
+      "event_type": "boveda_audit",
+      "date": {
+        "label": "26 Aug 2026, 11:58 UTC",
+        "start": "2026-08-26T11:58:09.574Z",
+        "end": "2026-08-26T11:58:09.574Z",
+        "precision": "timestamp",
+        "sort_at": "2026-08-26T11:58:09.574Z"
+      },
+      "title": "Bóveda audit completed",
+      "description": "Bóveda completed audit AUD-8663C7D0D4 and stored the current canonical Project Record. 2 reconstruction attempts were recorded; 1 did not pass validation and 1 triggered a retry.",
+      "epistemic": "OBSERVED",
+      "status": "completed_after_retry",
+      "material": true,
+      "evidence_ids": [],
+      "related": [
+        {
+          "type": "boveda_audit",
+          "id": "AUD-8663C7D0D4",
+          "label": "Audit diagnostics"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "This is a Bóveda reconstruction event, not an event in the host project's own development history."
+    }
+  ],
+  "supporting_events": [
+    {
+      "event_id": "HIS-502C9DFE34",
+      "event_key": "git-commit:cc8216093a02cf52a2bf59433169be5a8682f6b3",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Feb 2018",
+        "start": "2018-02-03T23:29:09.000Z",
+        "end": "2018-02-03T23:29:09.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-02-03T23:29:09.000Z"
+      },
+      "title": "Initial commit",
+      "description": "Commit cc8216093a changed 2 files.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-83D2D76B3A"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "cc8216093a02cf52a2bf59433169be5a8682f6b3",
+          "label": "cc8216093a"
+        },
+        {
+          "type": "changed_file",
+          "id": "LICENSE",
+          "label": "A · LICENSE"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "A · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-96347DB089",
+      "event_key": "git-commit:01b36e72546340fba4fa61d3aec38a98f4242014",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Feb 2018",
+        "start": "2018-02-03T23:32:30.000Z",
+        "end": "2018-02-03T23:32:30.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-02-03T23:32:30.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit 01b36e7254 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-65C990E480"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "01b36e72546340fba4fa61d3aec38a98f4242014",
+          "label": "01b36e7254"
+        },
+        {
+          "type": "changed_file",
+          "id": "NYC311.ipynb",
+          "label": "A · NYC311.ipynb"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-89E5309FB3",
+      "event_key": "git-commit:5b996a8e99fe0fe607f0c9fb47e346eb952d854a",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Feb 2018",
+        "start": "2018-02-03T23:41:01.000Z",
+        "end": "2018-02-03T23:41:01.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-02-03T23:41:01.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit 5b996a8e99 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-CCDEDCB0A5"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "5b996a8e99fe0fe607f0c9fb47e346eb952d854a",
+          "label": "5b996a8e99"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-43C85BA189",
+      "event_key": "git-commit:265a33e32416768fa11244eedbc4f5574a48838f",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "27 Apr 2018",
+        "start": "2018-04-27T03:09:32.000Z",
+        "end": "2018-04-27T03:09:32.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-04-27T03:09:32.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Code report and results",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": true,
+      "evidence_ids": [
+        "E-HIS-2CB8897D4D"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "265a33e32416768fa11244eedbc4f5574a48838f",
+          "label": "265a33e324"
+        },
+        {
+          "type": "changed_file",
+          "id": "Project_Report_GIT.pdf",
+          "label": "A · Project_Report_GIT.pdf"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": null
+    },
+    {
+      "event_id": "HIS-D052087FA8",
+      "event_key": "git-commit:549e3e18e9aff2794a6baf70c453c13d5a8c8557",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:00:07.000Z",
+        "end": "2018-10-04T05:00:07.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:00:07.000Z"
+      },
+      "title": "Create sdfd",
+      "description": "Commit 549e3e18e9 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-49E93C9A3B"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "549e3e18e9aff2794a6baf70c453c13d5a8c8557",
+          "label": "549e3e18e9"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/sdfd",
+          "label": "A · graphs/sdfd"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-9D7BC06B9E",
+      "event_key": "git-commit:b0180379d9ae47254d80d0bc831878b2123507b0",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:00:32.000Z",
+        "end": "2018-10-04T05:00:32.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:00:32.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit b0180379d9 changed 2 files.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-3BF0465F40"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "b0180379d9ae47254d80d0bc831878b2123507b0",
+          "label": "b0180379d9"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/air_quality.png",
+          "label": "A · graphs/air_quality.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/complaints.png",
+          "label": "A · graphs/complaints.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-FE76C96769",
+      "event_key": "git-commit:63dbce21b7f733c486500fbff3668ee32cd93bfb",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:00:51.000Z",
+        "end": "2018-10-04T05:00:51.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:00:51.000Z"
+      },
+      "title": "Delete sdfd",
+      "description": "Commit 63dbce21b7 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-323538A637"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "63dbce21b7f733c486500fbff3668ee32cd93bfb",
+          "label": "63dbce21b7"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/sdfd",
+          "label": "D · graphs/sdfd"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-C1CD71AAE6",
+      "event_key": "git-commit:08203e48a8867b22fe2d70cf452cf26ff35a8acf",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:03:05.000Z",
+        "end": "2018-10-04T05:03:05.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:03:05.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit 08203e48a8 changed 2 files.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-BF16E04026"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "08203e48a8867b22fe2d70cf452cf26ff35a8acf",
+          "label": "08203e48a8"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/distribution.png",
+          "label": "A · graphs/distribution.png"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/most_common.png",
+          "label": "A · graphs/most_common.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-CD55F40C2F",
+      "event_key": "git-commit:c4ec1bfd0a8483830c8226372eaad6f8907369d7",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:13:03.000Z",
+        "end": "2018-10-04T05:13:03.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:13:03.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit c4ec1bfd0a changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-841FBCC380"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "c4ec1bfd0a8483830c8226372eaad6f8907369d7",
+          "label": "c4ec1bfd0a"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-6EF8CA7403",
+      "event_key": "git-commit:830d9e4db0600644f29f8d90a449508c6f9fffb9",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:13:14.000Z",
+        "end": "2018-10-04T05:13:14.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:13:14.000Z"
+      },
+      "title": "Delete complaints.png",
+      "description": "Commit 830d9e4db0 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-937C6453FC"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "830d9e4db0600644f29f8d90a449508c6f9fffb9",
+          "label": "830d9e4db0"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/complaints.png",
+          "label": "D · graphs/complaints.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-0919C341AC",
+      "event_key": "git-commit:d689207c5cff7fd58c9ba39f2af90acc0a6a3561",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:13:28.000Z",
+        "end": "2018-10-04T05:13:28.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:13:28.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit d689207c5c changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-3E735F4614"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "d689207c5cff7fd58c9ba39f2af90acc0a6a3561",
+          "label": "d689207c5c"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/complaints.png",
+          "label": "A · graphs/complaints.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-9BFFC9EEC6",
+      "event_key": "git-commit:46f6254c77a6a30934ea746a73a8bcb870b524a6",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:14:25.000Z",
+        "end": "2018-10-04T05:14:25.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:14:25.000Z"
+      },
+      "title": "Delete complaints.png",
+      "description": "Commit 46f6254c77 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-F3AEF08CBB"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "46f6254c77a6a30934ea746a73a8bcb870b524a6",
+          "label": "46f6254c77"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/complaints.png",
+          "label": "D · graphs/complaints.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-3E7FF81EAA",
+      "event_key": "git-commit:bc88f05a866022ee4386bb37058d89a159a11bdb",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:16:16.000Z",
+        "end": "2018-10-04T05:16:16.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:16:16.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit bc88f05a86 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-17C6808101"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "bc88f05a866022ee4386bb37058d89a159a11bdb",
+          "label": "bc88f05a86"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-B8F8985FA2",
+      "event_key": "git-commit:9e0067bf32ad20318db09ab8efb9bbe2f4037551",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:16:56.000Z",
+        "end": "2018-10-04T05:16:56.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:16:56.000Z"
+      },
+      "title": "Add files via upload",
+      "description": "Commit 9e0067bf32 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-B93F8E8098"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "9e0067bf32ad20318db09ab8efb9bbe2f4037551",
+          "label": "9e0067bf32"
+        },
+        {
+          "type": "changed_file",
+          "id": "graphs/complaints.png",
+          "label": "A · graphs/complaints.png"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    },
+    {
+      "event_id": "HIS-B0CC965F0E",
+      "event_key": "git-commit:ff013227b878e1960a48344534e560381938070b",
+      "source": "host_project",
+      "event_type": "git_commit",
+      "date": {
+        "label": "4 Oct 2018",
+        "start": "2018-10-04T05:18:30.000Z",
+        "end": "2018-10-04T05:18:30.000Z",
+        "precision": "timestamp",
+        "sort_at": "2018-10-04T05:18:30.000Z"
+      },
+      "title": "Update README.md",
+      "description": "Commit ff013227b8 changed 1 file.",
+      "epistemic": "OBSERVED",
+      "status": "reconstructed",
+      "material": false,
+      "materiality": {
+        "level": "supporting",
+        "reasons": []
+      },
+      "rationale_recorded": false,
+      "evidence_ids": [
+        "E-HIS-CD68EADA6D"
+      ],
+      "related": [
+        {
+          "type": "git_commit",
+          "id": "ff013227b878e1960a48344534e560381938070b",
+          "label": "ff013227b8"
+        },
+        {
+          "type": "changed_file",
+          "id": "README.md",
+          "label": "M · README.md"
+        }
+      ],
+      "finding_ids": [],
+      "limitation": "No additional rationale was recorded in the commit body."
+    }
+  ],
+  "presentation": {
+    "availability": "limited",
+    "summary": "Bóveda found 15 recorded project changes, but none could be connected to a material data, model, evaluation, or release event. The remaining activity is retained as supporting context."
+  },
+  "evidence": [
+    {
+      "id": "E-HIS-CD68EADA6D",
+      "kind": "git_commit",
+      "path": "git:ff013227b878e1960a48344534e560381938070b",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: ff013227b878e1960a48344534e560381938070b\nAuthored: 2018-10-04T01:18:30-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "602ace40f0af61f1d2e7cb4c9715f4ef22b75c914f6ef9d86e17dfb80170342b"
+    },
+    {
+      "id": "E-HIS-B93F8E8098",
+      "kind": "git_commit",
+      "path": "git:9e0067bf32ad20318db09ab8efb9bbe2f4037551",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 9e0067bf32ad20318db09ab8efb9bbe2f4037551\nAuthored: 2018-10-04T01:16:56-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (1):\nA\tgraphs/complaints.png",
+      "sha256": "87cefa7eaa41c0a383d481a075b594241a4fa394d63bb53db4befaaf1d94a000"
+    },
+    {
+      "id": "E-HIS-17C6808101",
+      "kind": "git_commit",
+      "path": "git:bc88f05a866022ee4386bb37058d89a159a11bdb",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: bc88f05a866022ee4386bb37058d89a159a11bdb\nAuthored: 2018-10-04T01:16:16-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "f9829b68a202b404a4a67c377cbbbd7701432201e2f7b24106431b100718b59f"
+    },
+    {
+      "id": "E-HIS-F3AEF08CBB",
+      "kind": "git_commit",
+      "path": "git:46f6254c77a6a30934ea746a73a8bcb870b524a6",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 46f6254c77a6a30934ea746a73a8bcb870b524a6\nAuthored: 2018-10-04T01:14:25-04:00\nSubject: Delete complaints.png\nBody: Not recorded\nChanged files (1):\nD\tgraphs/complaints.png",
+      "sha256": "56e7f2adec7cf361a0b03b9885b30fafe019764a7d6a963d7ffddbaa43530204"
+    },
+    {
+      "id": "E-HIS-3E735F4614",
+      "kind": "git_commit",
+      "path": "git:d689207c5cff7fd58c9ba39f2af90acc0a6a3561",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: d689207c5cff7fd58c9ba39f2af90acc0a6a3561\nAuthored: 2018-10-04T01:13:28-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (1):\nA\tgraphs/complaints.png",
+      "sha256": "b6bb13aece9c50b387e97cc7810ebf9c18239de9202bf12f8f4373e12d3cedb1"
+    },
+    {
+      "id": "E-HIS-937C6453FC",
+      "kind": "git_commit",
+      "path": "git:830d9e4db0600644f29f8d90a449508c6f9fffb9",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 830d9e4db0600644f29f8d90a449508c6f9fffb9\nAuthored: 2018-10-04T01:13:14-04:00\nSubject: Delete complaints.png\nBody: Not recorded\nChanged files (1):\nD\tgraphs/complaints.png",
+      "sha256": "b13546e260a17e4a906aaaa0726e10a7602022a3a96eb91d7ec5639da0bcba37"
+    },
+    {
+      "id": "E-HIS-841FBCC380",
+      "kind": "git_commit",
+      "path": "git:c4ec1bfd0a8483830c8226372eaad6f8907369d7",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: c4ec1bfd0a8483830c8226372eaad6f8907369d7\nAuthored: 2018-10-04T01:13:03-04:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "2a1c11544ea5bc9c6aef32f7dca8a76cac4000b0243b3930a811dc4749e0e2dc"
+    },
+    {
+      "id": "E-HIS-BF16E04026",
+      "kind": "git_commit",
+      "path": "git:08203e48a8867b22fe2d70cf452cf26ff35a8acf",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 08203e48a8867b22fe2d70cf452cf26ff35a8acf\nAuthored: 2018-10-04T01:03:05-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (2):\nA\tgraphs/distribution.png\nA\tgraphs/most_common.png",
+      "sha256": "15726147d8798d33b25017e1b5a5f25a15140a94c5e42be479ebac5570df602d"
+    },
+    {
+      "id": "E-HIS-323538A637",
+      "kind": "git_commit",
+      "path": "git:63dbce21b7f733c486500fbff3668ee32cd93bfb",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 63dbce21b7f733c486500fbff3668ee32cd93bfb\nAuthored: 2018-10-04T01:00:51-04:00\nSubject: Delete sdfd\nBody: Not recorded\nChanged files (1):\nD\tgraphs/sdfd",
+      "sha256": "b386520168a49a76822f9efbabb203b34576b7bbe54dd0f3650cbee011302f03"
+    },
+    {
+      "id": "E-HIS-3BF0465F40",
+      "kind": "git_commit",
+      "path": "git:b0180379d9ae47254d80d0bc831878b2123507b0",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: b0180379d9ae47254d80d0bc831878b2123507b0\nAuthored: 2018-10-04T01:00:32-04:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (2):\nA\tgraphs/air_quality.png\nA\tgraphs/complaints.png",
+      "sha256": "4161330993a9e74512fc96431be75b77ff63140283b0169740ad26360463cf35"
+    },
+    {
+      "id": "E-HIS-49E93C9A3B",
+      "kind": "git_commit",
+      "path": "git:549e3e18e9aff2794a6baf70c453c13d5a8c8557",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 549e3e18e9aff2794a6baf70c453c13d5a8c8557\nAuthored: 2018-10-04T01:00:07-04:00\nSubject: Create sdfd\nBody: Not recorded\nChanged files (1):\nA\tgraphs/sdfd",
+      "sha256": "3bf90b780788ec40ca86970bf6a24726649cbea158be8db7b4cfde73ccda2878"
+    },
+    {
+      "id": "E-HIS-2CB8897D4D",
+      "kind": "git_commit",
+      "path": "git:265a33e32416768fa11244eedbc4f5574a48838f",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 265a33e32416768fa11244eedbc4f5574a48838f\nAuthored: 2018-04-26T23:09:32-04:00\nSubject: Add files via upload\nBody: Code report and results\nChanged files (1):\nA\tProject_Report_GIT.pdf",
+      "sha256": "7f8677ec2463ab21d855d91962e37bb02844bcb4c75e73df24f000372486ade4"
+    },
+    {
+      "id": "E-HIS-CCDEDCB0A5",
+      "kind": "git_commit",
+      "path": "git:5b996a8e99fe0fe607f0c9fb47e346eb952d854a",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 5b996a8e99fe0fe607f0c9fb47e346eb952d854a\nAuthored: 2018-02-03T18:41:01-05:00\nSubject: Update README.md\nBody: Not recorded\nChanged files (1):\nM\tREADME.md",
+      "sha256": "29bc2d5e97a67bf6e77fab3f2d16ce82d932ded184c588b45a3f49eb61436f72"
+    },
+    {
+      "id": "E-HIS-65C990E480",
+      "kind": "git_commit",
+      "path": "git:01b36e72546340fba4fa61d3aec38a98f4242014",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: 01b36e72546340fba4fa61d3aec38a98f4242014\nAuthored: 2018-02-03T18:32:30-05:00\nSubject: Add files via upload\nBody: Not recorded\nChanged files (1):\nA\tNYC311.ipynb",
+      "sha256": "20fcd712e54f1c09e3c7aacbf35c6d44dffe0548e92f4b77df7f45144a88dfd9"
+    },
+    {
+      "id": "E-HIS-83D2D76B3A",
+      "kind": "git_commit",
+      "path": "git:cc8216093a02cf52a2bf59433169be5a8682f6b3",
+      "epistemic": "OBSERVED",
+      "excerpt": "Commit: cc8216093a02cf52a2bf59433169be5a8682f6b3\nAuthored: 2018-02-03T18:29:09-05:00\nSubject: Initial commit\nBody: Not recorded\nChanged files (2):\nA\tLICENSE\nA\tREADME.md",
+      "sha256": "61948554d287105cb15763c2bcfd389d4c2e657f7f89430ab5a7e66dcacb0a74"
+    }
+  ],
+  "collection_summary": {
+    "git_available": true,
+    "git_total_commits": 15,
+    "git_recovered_commits": 15,
+    "git_tags": 0,
+    "git_truncated": false,
+    "git_tags_truncated": false,
+    "mlflow_available": false,
+    "mlflow_runs": 0
+  },
+  "limitations": []
+}

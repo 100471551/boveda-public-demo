@@ -1,0 +1,966 @@
+{
+  "schema_version": "boveda-supervisory-record-0.9.0",
+  "product_version": "0.20.13",
+  "project_id": "PRJ-2C27CC9912",
+  "audit_id": "AUD-A57071CBE3",
+  "analysed_at": "2026-08-26T11:52:41.973Z",
+  "source_project": {
+    "path": "/R1_public-health_housing-chelsea",
+    "content_snapshot_before": "9c135a68ff6b3daa07e36fe78babad5681cfbe8bb8dd6413313a27a9b979e01b",
+    "content_snapshot_after": "9c135a68ff6b3daa07e36fe78babad5681cfbe8bb8dd6413313a27a9b979e01b",
+    "modified": false
+  },
+  "inventory": {
+    "eligible_files": 5,
+    "collected_items": 7,
+    "bounded_characters": 115928,
+    "git": {
+      "head": "4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd",
+      "branch": "master"
+    }
+  },
+  "provider": {
+    "generation_mode": "llm",
+    "provider": "OpenAI",
+    "model": "gpt-5.6-sol",
+    "response_id": "resp_017659d92c9194d8016a8ed37fe20887d2bdf175a7406db702",
+    "usage": {
+      "input_tokens": 9049,
+      "input_tokens_details": {
+        "cache_write_tokens": 9046,
+        "cached_tokens": 0
+      },
+      "output_tokens": 647,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 9696
+    },
+    "attempts": 2,
+    "rejected_candidates": [
+      {
+        "operation": "full_reconstruction",
+        "attempt": 1,
+        "response_id": "resp_0fd658baefcde3d4016a8ed34c42b087d2a7bb82ae31f6048e",
+        "errors": [
+          "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence",
+          "record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence",
+          "record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+        ],
+        "usage": {
+          "input_tokens": 32008,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 32005,
+          "output_tokens": 3316,
+          "reasoning_output_tokens": 1775,
+          "total_tokens": 35324
+        },
+        "duration_ms": 52646,
+        "failure_stage": "grounding"
+      }
+    ],
+    "fallback_reason": null,
+    "localized_repair": {
+      "status": "accepted",
+      "base_attempt": 1,
+      "repair_attempts": 1,
+      "fields": [
+        "record.results_evaluation.other_material_result",
+        "record.results_evaluation.establishes"
+      ],
+      "evidence_scope": [
+        "E-C113A90389"
+      ],
+      "unrelated_fields_preserved": true
+    }
+  },
+  "validation": {
+    "status": "VALID",
+    "errors": [],
+    "warnings": []
+  },
+  "reconstruction": {
+    "identity": {
+      "name": {
+        "state": "established",
+        "value": "Chelsea Housing and Public Health",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-SYSTEM-PATH",
+          "E-B335630551"
+        ]
+      },
+      "description": {
+        "state": "established",
+        "value": "The project predicts housing-code and public-health hazards for Chelsea properties using linked municipal data, supporting the city’s prioritization of proactive inspections.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      }
+    },
+    "purpose_scope": {
+      "summary": {
+        "state": "established",
+        "value": "Chelsea sought to identify housing-related health hazards earlier than reactive enforcement allowed. The project uses linked property and municipal records to predict three categories of code violations and help city government prioritize inspections, although modelling and evaluation cover only previously inspected properties.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-1352155D41",
+          "E-C113A90389",
+          "E-5CD21A80C3"
+        ]
+      },
+      "purpose": {
+        "state": "established",
+        "value": "Help Chelsea identify housing-related public-health risks earlier and prioritize limited inspection capacity.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551"
+        ]
+      },
+      "task": {
+        "state": "established",
+        "value": "Classify properties by their likelihood of having specified housing-code violations.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551"
+        ]
+      },
+      "target_outcome": {
+        "state": "established",
+        "value": "Binary predictions for any violation, elevated-risk violations, and violations associated with overcrowding.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "unit": {
+        "state": "established",
+        "value": "Residential property",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "population_scope": {
+        "state": "established",
+        "value": "Chelsea’s 5,989 residential properties, with model development restricted to 1,611 inspected properties.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "intended_use": {
+        "state": "established",
+        "value": "Support Chelsea city government in prioritizing properties for proactive housing inspections.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551"
+        ]
+      }
+    },
+    "samples": {
+      "source_data": {
+        "state": "established",
+        "display": "5,989 residential properties",
+        "count": 5989,
+        "unit": "properties",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "model_sample": {
+        "state": "established",
+        "display": "1,263 training properties",
+        "count": 1263,
+        "unit": "properties",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-C113A90389"
+        ]
+      },
+      "evaluation_sample": {
+        "state": "established",
+        "display": "348 held-out properties",
+        "count": 348,
+        "unit": "properties",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-C113A90389"
+        ]
+      }
+    },
+    "results_evaluation": {
+      "primary_result": {
+        "state": "established",
+        "display_value": "0.4608713336647534",
+        "metric": "Average precision score from binary predictions",
+        "method": "Default random forest classifier",
+        "task_target": "Elevated public-health-risk code violations",
+        "evaluation_context": "348 held-out inspected properties outside the target area",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-C113A90389"
+        ]
+      },
+      "material_results": [
+        {
+          "state": "established",
+          "display_value": "59",
+          "metric": "True positives",
+          "method": "Default random forest classifier",
+          "task_target": "Elevated public-health-risk code violations",
+          "evaluation_context": "Confusion matrix on 348 held-out properties outside the target area",
+          "epistemic": "OBSERVED",
+          "evidence_ids": [
+            "E-C113A90389"
+          ]
+        },
+        {
+          "state": "established",
+          "display_value": "50",
+          "metric": "False positives",
+          "method": "Default random forest classifier",
+          "task_target": "Elevated public-health-risk code violations",
+          "evaluation_context": "Confusion matrix on 348 held-out properties outside the target area",
+          "epistemic": "OBSERVED",
+          "evidence_ids": [
+            "E-C113A90389"
+          ]
+        }
+      ],
+      "evaluation_design": {
+        "state": "established",
+        "value": "A random forest trained on 1,263 target-area properties was tested on 348 held-out inspected properties outside that area.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-C113A90389"
+        ]
+      },
+      "other_material_result": {
+        "state": "established",
+        "value": "For the same held-out predictions, the confusion matrix complements average precision by showing correct and incorrect classifications across both outcome classes.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-C113A90389"
+        ]
+      },
+      "known_limitation": {
+        "state": "established",
+        "value": "Average precision was calculated from binary class predictions, limiting its interpretation as ranking performance across decision thresholds.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-C113A90389"
+        ]
+      },
+      "establishes": {
+        "state": "established",
+        "value": "The default random forest achieved the reported average precision on the designated held-out test parcel sample.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-C113A90389"
+        ]
+      },
+      "does_not_establish": {
+        "state": "established",
+        "value": "The evaluation does not establish performance on uninspected Chelsea properties or whether model-guided inspections improve public-health outcomes.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-C113A90389"
+        ]
+      }
+    },
+    "data": {
+      "summary": {
+        "state": "established",
+        "value": "Property-level municipal records were joined in BuildingBlocks, filtered to residential properties, transformed into model features, and linked with inspection-derived violation outcomes.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "data_sources": {
+        "state": "established",
+        "value": "BuildingBlocks-linked inspections, police and fire calls, assessor, census, and property records.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "unit_of_observation": {
+        "state": "established",
+        "value": "One Chelsea property or parcel record",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2"
+        ]
+      },
+      "period": {
+        "state": "established",
+        "value": "Inspections from 2014–2019; training used proactive inspections from 2014–2018.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551"
+        ]
+      },
+      "population_filters": {
+        "state": "established",
+        "value": "Source records were limited to residential properties; modelling used inspected properties, split by target-area status.",
+        "epistemic": "OBSERVED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-06B8ACEBB2",
+          "E-C113A90389"
+        ]
+      },
+      "population_limitation": {
+        "state": "established",
+        "value": "Evaluation includes only inspected properties outside the target area, so it may not represent Chelsea’s uninspected properties.",
+        "epistemic": "INTERPRETED_INFERRED",
+        "evidence_ids": [
+          "E-B335630551",
+          "E-C113A90389"
+        ]
+      }
+    },
+    "confidence": {
+      "level": "High",
+      "explanation": "Notebook output directly links the random forest, held-out labels, binary predictions, confusion matrix, and reported average precision score.",
+      "evidence_ids": [
+        "E-C113A90389"
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "E-SYSTEM-PATH",
+      "path": ".",
+      "kind": "project_identity",
+      "epistemic": "OBSERVED",
+      "excerpt": "Imported directory name: R1_public-health_housing-chelsea",
+      "sha256": "2c27cc9912cb0f4d4359ad902239def475eb56681db3b9de4b7b1988cce0470a"
+    },
+    {
+      "id": "E-B335630551",
+      "path": "README.md",
+      "kind": "documentation",
+      "epistemic": "OBSERVED",
+      "excerpt": "#  Leveraging data to expand city capacity to identify and resolve housing-related public health problems\n\nThis project uses machine learning to predict which properties in the city of Chelsea, MA, will be exposed to public health hazards. The model works by training on a subsection of the city that was subject to a proactive code inspections program and then making predictions for the rest of the city.\n\nInitial evaluation of the models suggests that the city government may use these results to be more effective at finding public health risks than by inspecting properties at random or by reactively responding to citizen requests.\n\n## Motivation\n\n City housing code enforcement has enormous transformative potential for public health. Achieving cities’ health and social missions, such as reducing overcrowding or asthma attacks, has remained difficult with traditional code enforcement approaches.\n\n Cities increasingly have access to digital datasets that can be used to identify and characterize housing-related health risks and prioritize these properties for inspection. However, code enforcement has limited effectiveness in addressing health and housing problems. This is because cities are not aware of problems soon enough and inspections are often reactive or rely only on inspectors’ tacit knowledge.\n\n ## Scope\n\nIn 2014, Chelsea implemented a proactive program to inspect all rental properties in a target area of the city. In mid-2018, the city expanded the proactive program beyond the target area. . The sanitary code violations resulting from these inspections, as well as data on police and fire calls, the assessor’s database, the census, and other sources were aggregated and linked by property.\n\n## Data\n\nThe data used for this project has been collected by different departments in Chelsea and uploaded to the [BuildingBlocks](https://www.tolemi.com/buildingblocks/)  platform, a map-based application which collects and joins property-based data. In 2019, the City of Chelsea had property-level records for 5,989 residential properties, 1,611 of which has been inspected between 2014 and 2019.\n\n## Analysis\n\nWe built three models for each of our target variables:\n*\tProperties with any code violation\n*\tProperties with code violations that present an elevated public health risk (a composite of 4 code violations selected to consultation with city housing inspectors)\n*\tProperties with code violations associated with overcrowding (illegal locks found inside building units)\n\nFor each of these, we ran different machine learning algorithms (XGBoost, Random Forest, LASSO) on a training dataset of properties inspected proactively between 2014 and 2018 in a target area of the city. We optimized the hyperparameters for each using crossvalidation and the [\"area under the precision-recall curve\"](https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html) metric. Then, we tested each algorithm using data from inspections outside of the target area that was held at the beginning.\n\n\n## Python\n\nThis project is written in Python. To work in Python, we recommend downloading the\n[Anaconda environment](https://docs.anaconda.com/anaconda/install/).\n\nWithin Python, we use the `pandas` library for dataframe manipulation and analysis and the `sklearn` library for running supervised learning models. Additionally, we leverage the following libraries: `matplotlib.pyplot`, `seaborn`, `numpy`, `missingno`, `xgboost`, `warnings`.\n\n\n## Notes\n\nAdditional materials:\n* [Data-Smart City Solutions article](https://datasmart.ash.harvard.edu/news/article/how-cities-can-use-housing-data-predict-covid-19-hotspots-lessons-chelsea-ma) covering this project\n\nThis work was conducted as part of the Harvard Kennedy School’s Ash Center for Democratic Governance and Innovation’s [Innovation Field Lab](https://ash.harvard.edu/innovation-field-lab).",
+      "sha256": "e2bc08acdf96afef0bfb023c8fe2071095ea1193ff95ce8fce258d7d17d04501"
+    },
+    {
+      "id": "E-06B8ACEBB2",
+      "path": "data-cleaning/data-cleaning.ipynb",
+      "kind": "notebook",
+      "epistemic": "OBSERVED",
+      "excerpt": "[CODE FOR OUTPUT]\nprint(chelsea.shape)\nprint(chelsea.columns)\n\n[PERSISTED OUTPUT]\n(7036, 68)\nIndex(['Parcel ID', 'Address',\n       'Building Permits - Count - Between 01-01-2016 and 05-31-2019',\n       'See Click Fix - Count - Between 08-01-2016 and 09-30-2019',\n       'Certificate of Habitability Violations - Bathroom Lighting and Electrical Outlets - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Collection of Garbage and Rubbish - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Egress Obstructions - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Extermination of Insects, Rodents and Skunks - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Habitable Rooms Other than Kitchen -- Natural Light and Electrical Outlets - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Heating Facilities Required - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Hot Water - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Installation of Screens - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Kitchen Facilities - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Kitchen Lighting and Electrical Outlets - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Light Fixtures Other than in Habitable Rooms or Kitchens - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Light in Passageways, Hallways, and Stairways - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Locks - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Maintenance of Areas Free from Garbage and Rubbish - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Means of Egress - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Minimum Square Footage - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Natural and Mechanical Ventilation - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Non-absorbent Surfaces - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Occupant's Installation and Maintenance Responsibilities - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Occupant's Responsibility Respecting Structural Elements - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Owner's Installation and Maintenance Responsibilities - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Owner's Responsibility to Maintain Structural Elements - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Plumbing Connections - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Posting of Name of Owner - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Protective Railings and Walls - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Safe Condition - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Screens for Doors - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Screens for Windows - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Shared Facilities - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Smoke Detectors and Carbon Monoxide Alarms - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Storage of Garbage and Rubbish - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Temporary Wiring - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Use of Lead Paint Prohibited - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Ventilation Shut-off - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Venting - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Washbasins, Toilets, Tubs and Showers - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Weathertight Elements - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Egress Obstruction - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Other Violation - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability Violations - Use of Lead Paint Prohibited** - Between 08-01-2015 and 08-31-2019',\n       'Certificate of Habitability by Status - Between 08-01-2015 and 08-31-2019',\n       'Fire Incidents - Count - Between 08-01-2016 and 06-30-2019',\n       'Foreclosure Sales - Count - Between 09-01-2004 and 11-30-2017',\n       'Vacant Foreclosed Properties - Between 01-01-2012 and 07-31-2019',\n       'Property Sales - Count - Between 09-01-2004 and 06-30-2019',\n       'Property Sales - Price - Between 09-01-2004 and 06-30-2019',\n       '40U Violations - Count - Between 12-01-2011 and 06-30-2019',\n       '40U Violations - Fine - Between 12-01-2011 and 06-30-2019',\n       'Police Incidents - Count - Between 12-01-2010 and 06-30-2019',\n       'Rat Baiting - Count - Between 07-01-2017 and 07-31-2019',\n       'Tax Title - Between 03-01-2019 and 03-31-2019', 'Total Assessed Value',\n       'Bedrooms', 'Building Size', 'Census Block Group', 'Current Use',\n       'Fuel Type', 'Full Bathrooms', 'Heat Type', 'Land Size',\n       'Opportunity Zones', 'Owner Occupied', 'Year Built'],\n      dtype='object')\n\n\n[CODE FOR OUTPUT]\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(5989, 68)\n\n[CODE FOR OUTPUT]\nprint(chelsea['Current Use'].isna().sum()/chelsea.shape[0]*100)\nprint(chelsea['Fuel Type'].isna().sum()/chelsea.shape[0]*100)\nprint(chelsea['Heat Type'].isna().sum()/chelsea.shape[0]*100)\nprint(chelsea['Census Block Group'].isna().sum()/chelsea.shape[0]*100)\n\n[PERSISTED OUTPUT]\n0.0\n10.369009851394223\n10.369009851394223\n0.01669727834362999\n\n\n[CODE FOR OUTPUT]\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(5989, 69)\n\n[CODE FOR OUTPUT]\n# Checking how many COH parcels are outside target area\nchelsea['test parcels'] = np.where(((chelsea.any_coh == 1) & (chelsea['Target Area'] == 0)), 1, 0)\nprint(chelsea['test parcels'].sum())\n\n[PERSISTED OUTPUT]\n348\n\n\n[CODE FOR OUTPUT]\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(5989, 71)\n\n[CODE FOR OUTPUT]\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(5989, 72)\n\n[CODE FOR OUTPUT]\n# Analyze target area in COH and non-target area in COH\nchelsea['analyze'] = chelsea['any_coh'] + chelsea['test parcels']\nanalyze = chelsea[chelsea['analyze'] != 0]\n\nchelsea_pairplot = analyze[['log_assessed_value','any_violation' , 'Police Incidents After 2015', 'log_building_size', 'analyze', 'Full Bathrooms']]\n\ncols = list(chelsea_pairplot.columns)\ncols = [cols[-1]] + cols[:-1]\nchelsea_pairplot = chelsea_pairplot[cols]\n\nb= sns.pairplot(chelsea_pairplot, hue = 'analyze', vars=chelsea_pairplot.columns[:-1], diag_kind='kde', palette = 'husl')\n\n[PERSISTED OUTPUT]\n<Figure size 952x900 with 30 Axes>\n\n[CODE FOR OUTPUT]\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(5989, 118)\n\n[CODE FOR OUTPUT]\n# Drop the final things that need to be dropped\nexport = chelsea.drop(columns=['Parcel ID', 'Address', 'Current Use', 'Fuel Type', 'Heat Type', 'Opportunity Zones', 'Census Block Group'])\nexport = export[export.any_coh == 1]\nexport.drop(columns = ['any_coh', 'Target Area'], inplace = True)\nexport.head()\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n2                       0.0                    0.0                     1.0\n3                       0.0                    0.0                     0.0\n4                       0.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n2                        0.0                           0.0\n3                        0.0                           0.0\n4                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n2                     0.0                     0.0                     8.0\n3                     1.0                     0.0                     1.0\n4                     1.0                300000.0                     5.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n2                  750.0                       2.0                  1.0\n3                    0.0                       0.0                  0.0\n4                  100.0                       1.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n2          0              370600.0       6.0         4180.0             3.0\n3          0              699400.0       0.0        12366.0             0.0\n4          0              439300.0       4.0         5197.0             4.0\n\n   Land Size  Owner Occupied  Year Built  test parcels  \\\n0   0.115141               1      1893.0             0\n1   0.090972               0      1920.0             0\n2   0.035825               0      1900.0             0\n3   0.084192               0      1910.0             0\n4   0.071424               1      1890.0             0\n\n   Police Incidents After 2015  log_land_size  log_building_size  \\\n0                          0.0            0.0           3.526985\n1                          0.0            0.0           4.126618\n2                          1.0            0.0           3.621176\n3                          0.0            0.0           4.092229\n4                          1.0            0.0           3.715753\n\n   log_assessed_value  log_bedrooms  log_bathrooms  high_risk_violation  \\\n0            5.607991      0.602060       0.301030                  2.0\n1            5.928703      0.000000       0.000000                  4.0\n2            5.568905      0.778151       0.477121                  3.0\n3            5.844726      0.000000       0.000000                  3.0\n4            5.642761      0.602060       0.602060                  5.0\n\n   any_high_risk  violation_total  any_violation  overcrowding_risk  \\\n0            1.0              4.0            1.0                1.0\n1            1.0             15.0            1.0                1.0\n2            1.0             10.0            1.0                1.0\n3            1.0             11.0            1.0                2.0\n4            1.0              9.0            1.0                1.0\n\n   any_overcrowding_risk   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0                    1.0                    0                   0\n1                    1.0                    0                   0\n2                    1.0                    0                   0\n3                    1.0                    0                   0\n4                    1.0                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n2                    0                0                0                  0\n3                    0                0                0                  0\n4                    0                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n2                  0                     0                    0\n3                  0                     0                    0\n4                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n2                    0                    0                    0\n3                    0                    0                    0\n4                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n2                    0                                0\n3                    0                                0\n4                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n2                                    0\n3                                    0\n4                                    1\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n2                             0                         0\n3                             0                         0\n4                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n2                                 0\n3                                 0\n4                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  1\n4                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n2                              0\n3                              0\n4                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n2                            0                          0\n3                            0                          0\n4                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n2                         1                       0\n3                         0                       0\n4                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n2                               0      0                           0\n3                               0      0                           0\n4                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n2                           0                           1\n3                           0                           1\n4                           0                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           1                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n2                           0                  1                  0\n3                           0                  1                  0\n4                           0                  0                  1\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n2                   0               0          1          0\n3                   0               0          1          0\n4                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n2                     0                    0                     1\n3                     0                    0                     0\n4                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n2                     0                0           0            0\n3                     0                1           0            0\n4                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n2                       0                               1\n3                       0                               1\n4                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n2                               0      1.0\n3                               0      1.0\n4                               0      1.0\n\n[CODE FOR OUTPUT]\n# Calculating baselines\nprint(export.any_violation.sum()/export.shape[0])\nprint(export.any_high_risk.sum()/export.shape[0])\nprint(export.any_overcrowding_risk.sum()/export.shape[0])\n\n\n[PERSISTED OUTPUT]\n0.5344506517690876\n0.45561762880198636\n0.2917442582247052\n\n\n[CODE FOR OUTPUT]\nmsno.matrix(chelsea)\n\n[PERSISTED OUTPUT]\n<matplotlib.axes._subplots.AxesSubplot at 0x13076843048>\n\n[PERSISTED OUTPUT]\n<Figure size 1800x720 with 2 Axes>\n\n[CODE FOR OUTPUT]\npd.DataFrame(chelsea.isna().any())\n\n[PERSISTED OUTPUT]\n                                                        0\nParcel ID                                           False\nAddress                                             False\nBuilding Permits - Count                             True\nSee Click Fix - Count                                True\nCertificate of Habitability Violations - Bathro...   True\nCertificate of Habitability Violations - Collec...   True\nCertificate of Habitability Violations - Egress...   True\nCertificate of Habitability Violations               True\nCertificate of Habitability Violations - Exterm...   True\nCertificate of Habitability Violations - Habita...   True\nCertificate of Habitability Violations - Heatin...   True\nCertificate of Habitability Violations - Hot Water   True\nCertificate of Habitability Violations - Instal...   True\nCertificate of Habitability Violations - Kitche...   True\nCertificate of Habitability Violations - Kitche...   True\nCertificate of Habitability Violations - Light ...   True\nCertificate of Habitability Violations - Light ...   True\nCertificate of Habitability Violations - Locks       True\nCertificate of Habitability Violations - Mainte...   True\nCertificate of Habitability Violations - Means ...   True\nCertificate of Habitability Violations - Minimu...   True\nCertificate of Habitability Violations - Natura...   True\nCertificate of Habitability Violations - Non-ab...   True\nCertificate of Habitability Violations - Occupa...   True\nCertificate of Habitability Violations - Occupa...   True\nCertificate of Habitability Violations - Owner'...   True\nCertificate of Habitability Violations - Owner'...   True\nCertificate of Habitability Violations - Plumbi...   True\nCertificate of Habitability Violations - Postin...   True\nCertificate of Habitability Violations - Protec...   True\n...                                                   ...\nCertificate of Habitability Violations - Ventil...   True\nCertificate of Habitability Violations - Venting     True\nCertificate of Habitability Violations - Washba...   True\nCertificate of Habitability Violations - Weathe...   True\nCertificate of Habitability Violations - Egress...   True\nCertificate of Habitability Violations - Other ...   True\nCertificate of Habitability Violations - Use of...   True\nCertificate of Habitability by Status                True\nFire Incidents - Count                               True\nForeclosure Sales - Count                            True\nVacant Foreclosed Properties                         True\nProperty Sales - Count                               True\nProperty Sales - Price                               True\n40U Violations - Count                               True\n40U Violations - Fine                                True\nPolice Incidents - Count                             True\nRat Baiting - Count                                  True\nTax Title                                            True\nTotal Assessed Val",
+      "sha256": "1b0aa63b7f6391f675ebd87e695bff4767024a1e3e1d9465e514bf4ba3541eaa"
+    },
+    {
+      "id": "E-1352155D41",
+      "path": "models/Predicting any code violation.ipynb",
+      "kind": "notebook",
+      "epistemic": "OBSERVED",
+      "excerpt": "[CODE FOR OUTPUT]\nchelsea = chelsea_df.copy()\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(1611, 109)\n\n[CODE FOR OUTPUT]\nchelsea.head(2)\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n\n   Land Size  Owner Occupied  Year Built  test parcels  \\\n0   0.115141               1      1893.0             0\n1   0.090972               0      1920.0             0\n\n   Police Incidents After 2015  log_land_size  log_building_size  \\\n0                          0.0            0.0           3.526985\n1                          0.0            0.0           4.126618\n\n   log_assessed_value  log_bedrooms  log_bathrooms  high_risk_violation  \\\n0            5.607991       0.60206        0.30103                  2.0\n1            5.928703       0.00000        0.00000                  4.0\n\n   any_high_risk  violation_total  any_violation  overcrowding_risk  \\\n0            1.0              4.0            1.0                1.0\n1            1.0             15.0            1.0                1.0\n\n   any_overcrowding_risk   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0                    1.0                    0                   0\n1                    1.0                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n\n[CODE FOR OUTPUT]\n# Number of test and train parcels\nprint('The number of train parcels is ' + str(chelsea[chelsea['test parcels'] == 0].shape[0]))\nprint('The number of test parcels is ' + str(chelsea[chelsea['test parcels'] == 1].shape[0]))\n\n\n[PERSISTED OUTPUT]\nThe number of train parcels is 1263\nThe number of test parcels is 348\n\n\n[CODE FOR OUTPUT]\nX_train.head()\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n2                       0.0                    0.0                     1.0\n3                       0.0                    0.0                     0.0\n4                       0.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n2                        0.0                           0.0\n3                        0.0                           0.0\n4                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n2                     0.0                     0.0                     8.0\n3                     1.0                     0.0                     1.0\n4                     1.0                300000.0                     5.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n2                  750.0                       2.0                  1.0\n3                    0.0                       0.0                  0.0\n4                  100.0                       1.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n2          0              370600.0       6.0         4180.0             3.0\n3          0              699400.0       0.0        12366.0             0.0\n4          0              439300.0       4.0         5197.0             4.0\n\n   Land Size  Owner Occupied  Year Built  Police Incidents After 2015  \\\n0   0.115141               1      1893.0                          0.0\n1   0.090972               0      1920.0                          0.0\n2   0.035825               0      1900.0                          1.0\n3   0.084192               0      1910.0                          0.0\n4   0.071424               1      1890.0                          1.0\n\n   log_land_size  log_building_size  log_assessed_value  log_bedrooms  \\\n0            0.0           3.526985            5.607991      0.602060\n1            0.0           4.126618            5.928703      0.000000\n2            0.0           3.621176            5.568905      0.778151\n3            0.0           4.092229            5.844726      0.000000\n4            0.0           3.715753            5.642761      0.602060\n\n   log_bathrooms   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0       0.301030                    0                   0\n1       0.000000                    0                   0\n2       0.477121                    0                   0\n3       0.000000                    0                   0\n4       0.602060                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n2                    0                0                0                  0\n3                    0                0                0                  0\n4                    0                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n2                  0                     0                    0\n3                  0                     0                    0\n4                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n2                    0                    0                    0\n3                    0                    0                    0\n4                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n2                    0                                0\n3                    0                                0\n4                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n2                                    0\n3                                    0\n4                                    1\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n2                             0                         0\n3                             0                         0\n4                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n2                                 0\n3                                 0\n4                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  1\n4                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n2                              0\n3                              0\n4                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n2                            0                          0\n3                            0                          0\n4                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n2                         1                       0\n3                         0                       0\n4                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n2                               0      0                           0\n3                               0      0                           0\n4                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n2                           0                           1\n3                           0                           1\n4                           0                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           1                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n2                           0                  1                  0\n3                           0                  1                  0\n4                           0                  0                  1\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n2                   0               0          1          0\n3                   0               0          1          0\n4                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n2                     0                    0                     1\n3                     0                    0                     0\n4                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n2                     0                0           0            0\n3                     0                1           0            0\n4                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n2                       0                               1\n3                       0                               1\n4                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n2                               0      1.0\n3                               0      1.0\n4                               0      1.0\n\n[CODE FOR OUTPUT]\nprint (X_train.shape, y_train.shape)\nprint (X_test.shape, y_test.shape)\n\n[PERSISTED OUTPUT]\n(1263, 102) (1263, 1)\n(348, 102) (348, 1)\n\n\n[CODE FOR OUTPUT]\nX_train.head()\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n2                       0.0                    0.0                     1.0\n3                       0.0                    0.0                     0.0\n4                       0.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n2                        0.0                           0.0\n3                        0.0                           0.0\n4                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n2                     0.0                     0.0                     8.0\n3                     1.0                     0.0                     1.0\n4                     1.0                300000.0                     5.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n2                  750.0                       2.0                  1.0\n3                    0.0                       0.0                  0.0\n4                  100.0                       1.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n2          0              370600.0       6.0         4180.0             3.0\n3          0              699400.0       0.0        12366.0             0.0\n4          0              439300.0       4.0         5197.0             4.0\n\n   Land Size  Owner Occupied  Year Built  Police Incidents After 2015  \\\n0   0.115141               1      1893.0                          0.0\n1   0.090972               0      1920.0                          0.0\n2   0.035825               0      1900.0                          1.0\n3   0.084192               0      1910.0                          0.0\n4   0.071424               1      1890.0                          1.0\n\n   log_land_size  log_building_size  log_assessed_value  log_bedrooms  \\\n0            0.0           3.526985            5.607991      0.602060\n1            0.0           4.126618            5.928703      0.000000\n2            0.0           3.621176            5.568905      0.778151\n3            0.0           4.092229            5.844726      0.000000\n4            0.0           3.715753            5.642761      0.602060\n\n   log_bathrooms   APT 4-UN",
+      "sha256": "6ae461e50c98fe265a11e86842b76436e7b77278b6522d8997ff2bb73f4b6b49"
+    },
+    {
+      "id": "E-C113A90389",
+      "path": "models/Predicting high risk violations.ipynb",
+      "kind": "notebook",
+      "epistemic": "OBSERVED",
+      "excerpt": "[CODE FOR OUTPUT]\nchelsea = chelsea_df.copy()\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(1611, 109)\n\n[CODE FOR OUTPUT]\nchelsea.head(2)\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n\n   Land Size  Owner Occupied  Year Built  test parcels  \\\n0   0.115141               1      1893.0             0\n1   0.090972               0      1920.0             0\n\n   Police Incidents After 2015  log_land_size  log_building_size  \\\n0                          0.0            0.0           3.526985\n1                          0.0            0.0           4.126618\n\n   log_assessed_value  log_bedrooms  log_bathrooms  high_risk_violation  \\\n0            5.607991       0.60206        0.30103                  2.0\n1            5.928703       0.00000        0.00000                  4.0\n\n   any_high_risk  violation_total  any_violation  overcrowding_risk  \\\n0            1.0              4.0            1.0                1.0\n1            1.0             15.0            1.0                1.0\n\n   any_overcrowding_risk   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0                    1.0                    0                   0\n1                    1.0                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n\n[CODE FOR OUTPUT]\n# Number of test and train parcels\nprint('The number of train parcels is ' + str(chelsea[chelsea['test parcels'] == 0].shape[0]))\nprint('The number of test parcels is ' + str(chelsea[chelsea['test parcels'] == 1].shape[0]))\n\n\n[PERSISTED OUTPUT]\nThe number of train parcels is 1263\nThe number of test parcels is 348\n\n\n[CODE FOR OUTPUT]\nX_train.head()\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n2                       0.0                    0.0                     1.0\n3                       0.0                    0.0                     0.0\n4                       0.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n2                        0.0                           0.0\n3                        0.0                           0.0\n4                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n2                     0.0                     0.0                     8.0\n3                     1.0                     0.0                     1.0\n4                     1.0                300000.0                     5.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n2                  750.0                       2.0                  1.0\n3                    0.0                       0.0                  0.0\n4                  100.0                       1.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n2          0              370600.0       6.0         4180.0             3.0\n3          0              699400.0       0.0        12366.0             0.0\n4          0              439300.0       4.0         5197.0             4.0\n\n   Land Size  Owner Occupied  Year Built  Police Incidents After 2015  \\\n0   0.115141               1      1893.0                          0.0\n1   0.090972               0      1920.0                          0.0\n2   0.035825               0      1900.0                          1.0\n3   0.084192               0      1910.0                          0.0\n4   0.071424               1      1890.0                          1.0\n\n   log_land_size  log_building_size  log_assessed_value  log_bedrooms  \\\n0            0.0           3.526985            5.607991      0.602060\n1            0.0           4.126618            5.928703      0.000000\n2            0.0           3.621176            5.568905      0.778151\n3            0.0           4.092229            5.844726      0.000000\n4            0.0           3.715753            5.642761      0.602060\n\n   log_bathrooms   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0       0.301030                    0                   0\n1       0.000000                    0                   0\n2       0.477121                    0                   0\n3       0.000000                    0                   0\n4       0.602060                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n2                    0                0                0                  0\n3                    0                0                0                  0\n4                    0                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n2                  0                     0                    0\n3                  0                     0                    0\n4                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n2                    0                    0                    0\n3                    0                    0                    0\n4                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n2                    0                                0\n3                    0                                0\n4                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n2                                    0\n3                                    0\n4                                    1\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n2                             0                         0\n3                             0                         0\n4                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n2                                 0\n3                                 0\n4                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  1\n4                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n2                              0\n3                              0\n4                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n2                            0                          0\n3                            0                          0\n4                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n2                         1                       0\n3                         0                       0\n4                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n2                               0      0                           0\n3                               0      0                           0\n4                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n2                           0                           1\n3                           0                           1\n4                           0                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           1                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n2                           0                  1                  0\n3                           0                  1                  0\n4                           0                  0                  1\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n2                   0               0          1          0\n3                   0               0          1          0\n4                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n2                     0                    0                     1\n3                     0                    0                     0\n4                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n2                     0                0           0            0\n3                     0                1           0            0\n4                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n2                       0                               1\n3                       0                               1\n4                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n2                               0      1.0\n3                               0      1.0\n4                               0      1.0\n\n[CODE FOR OUTPUT]\nprint(y_train.sum())\ny_train.head()\n\n\n[PERSISTED OUTPUT]\nany_high_risk    594.0\ndtype: float64\n\n\n[PERSISTED OUTPUT]\n   any_high_risk\n0            1.0\n1            1.0\n2            1.0\n3            1.0\n4            1.0\n\n[CODE FOR OUTPUT]\ny_test.any_high_risk.sum()\n\n[PERSISTED OUTPUT]\n140.0\n\n[CODE FOR OUTPUT]\nprint (X_train.shape, y_train.shape)\nprint (X_test.shape, y_test.shape)\n\n[PERSISTED OUTPUT]\n(1263, 102) (1263, 1)\n(348, 102) (348, 1)\n\n\n[CODE FOR OUTPUT]\nX_train_lasso\n\n[PERSISTED OUTPUT]\narray([[-0.59221287, -0.35029821, -0.258502  , ..., -0.5066719 ,\n         0.        ,  0.        ],\n       [ 1.39441356, -0.35029821, -0.258502  , ...,  1.97366381,\n         0.        ,  0.        ],\n       [-0.59221287, -0.35029821, -0.20225945, ...,  1.97366381,\n         0.        ,  0.        ],\n       ...,\n       [-0.59221287, -0.35029821,  0.81010653, ..., -0.5066719 ,\n         0.        ,  0.        ],\n       [-0.59221287, -0.35029821, -0.20225945, ..., -0.5066719 ,\n         0.        ,  0.        ],\n       [ 0.40110035, -0.35029821, -0.14601689, ..., -0.5066719 ,\n         0.        ,  0.        ]])\n\n[CODE FOR OUTPUT]\nrandom_forest = RandomForestClassifier(random_state=1)\nrandom_forest.fit(X_train, y_train)\ny_pred = random_forest.predict(X_test)\nprint(average_precision_score(y_test, y_pred))\nprint('number predicted : ' + str(y_pred.sum()))\n\n[PERSISTED OUTPUT]\n0.4608713336647534\nnumber predicted : 109.0\n\n\n[CODE FOR OUTPUT]\nprint(metrics.confusion_matrix(y_test, y_pred))\n\n\n[PERSISTED OUTPUT]\n[[158  50]\n [ 81  59]]\n\n\n[CODE FOR OUTPUT]\n# Random forest parameter tuning\nforest = RandomForestClassifier(random_state = 1)\n\nn_estimators = [100, 300, 500]\nmax_depth = [1, 2, 5, 8, 15, 25]\nmin_samples_split = [2, 5, 10, 100]\nmin_samples_leaf = [1, 2, 5, 10]\nmax_features = [\"log2\", \"sqrt\"]\ncriterion = [\"gini\", \"entropy\"]\n\nhyperF = dict(n_estimators = n_estimators, max_depth = max_depth,\n              min_samples_split = min_samples_split,\n             min_samples_leaf = min_samples_leaf, max_features = max_features, criterion=criterion)\n\ngridF = GridSearchCV(forest, hyperF, cv = 5, verbose = 1,\n                      n_jobs = -1, scoring='average_precision')\nbestF = gridF.fit(X_train, y_train)\n\n\n[PERSISTED OUTPUT]\nFitting 5 folds for each of 1152 candidates, totalling 5760 fits\n\n\n[PERSISTED OUTPUT]\n[Parallel(n_jobs=-1)]: Done  42 tasks      | elapsed:   20.0s\n[Parallel(n_jobs=-1)]: Done 192 tasks      | elapsed:   57.0s\n[Parallel(n_jobs=-1)]: Done 442 tasks      | elapsed:  2.0min\n[Parallel(n_jobs=-1)]: Done 792 tasks      | elapsed:  4.3min\n[Parallel(n_jobs=-1)]: Done 1242 tasks      | elapsed:  6.4min\n[Parallel(n_jobs=-1)]: Done 1792 tasks      | elapsed:  9.2min\n[Parallel(n_jobs=-1)]: Done 2442 tasks      | elapsed: 13.7min\n[Parallel(n_jobs=-1)]: Done 3192 tasks      | elapsed: 18.6min\n[Parallel(n_jobs=-1)]: Done 4042 tasks      | elapsed: 23.0min\n[Parallel(n_jobs=-1)]: Done 4992 tasks      | elapsed: 30.3min\n[Parallel(n_jobs=-1)]: Done 5760 out of 5760 | elapsed: 36.3min finished\n\n\n[CODE FOR OUTPUT]\nprint(gridF.best_params_)\nprint(gridF.best_score_)\n\n[PERSISTED OUTPUT]\n{'criterion': 'gini', 'max_depth': 15, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n",
+      "sha256": "decc662deca63d0897795abcec0f4c885f7b49a487812d03f8c5f92d03e9d5fa"
+    },
+    {
+      "id": "E-5CD21A80C3",
+      "path": "models/Predicting overcrowding.ipynb",
+      "kind": "notebook",
+      "epistemic": "OBSERVED",
+      "excerpt": "[CODE FOR OUTPUT]\nchelsea = chelsea_df.copy()\nchelsea.shape\n\n[PERSISTED OUTPUT]\n(1611, 109)\n\n[CODE FOR OUTPUT]\nchelsea.head(2)\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n\n   Land Size  Owner Occupied  Year Built  test parcels  \\\n0   0.115141               1      1893.0             0\n1   0.090972               0      1920.0             0\n\n   Police Incidents After 2015  log_land_size  log_building_size  \\\n0                          0.0            0.0           3.526985\n1                          0.0            0.0           4.126618\n\n   log_assessed_value  log_bedrooms  log_bathrooms  high_risk_violation  \\\n0            5.607991       0.60206        0.30103                  2.0\n1            5.928703       0.00000        0.00000                  4.0\n\n   any_high_risk  violation_total  any_violation  overcrowding_risk  \\\n0            1.0              4.0            1.0                1.0\n1            1.0             15.0            1.0                1.0\n\n   any_overcrowding_risk   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0                    1.0                    0                   0\n1                    1.0                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n\n[CODE FOR OUTPUT]\nchelsea_all.shape\n\n[PERSISTED OUTPUT]\n(5989, 113)\n\n[CODE FOR OUTPUT]\nchelsea_all.head(2)\n\n[PERSISTED OUTPUT]\n  Parcel ID          Address  Building Permits - Count  See Click Fix - Count  \\\n0     59-10     850 BROADWAY                       0.0                    0.0\n1      29-2  116 HAWTHORN ST                       2.0                    0.0\n\n   Fire Incidents - Count  Foreclosure Sales - Count  \\\n0                     0.0                        0.0\n1                     0.0                        0.0\n\n   Vacant Foreclosed Properties  Property Sales - Count  \\\n0                           0.0                     1.0\n1                           0.0                     0.0\n\n   Property Sales - Price  40U Violations - Count  40U Violations - Fine  \\\n0                260000.0                     4.0                  100.0\n1                     0.0                     9.0                  250.0\n\n   Police Incidents - Count  Rat Baiting - Count  Tax Title  \\\n0                       0.0                  0.0          0\n1                       0.0                  0.0          0\n\n   Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  Land Size  \\\n0              405500.0       4.0         3365.0             2.0   0.115141\n1              848600.0       0.0        13385.0             0.0   0.090972\n\n   Owner Occupied  Year Built  Target Area  any_coh  test parcels  \\\n0               1      1893.0          1.0      1.0             0\n1               0      1920.0          1.0      1.0             0\n\n   Police Incidents After 2015  log_land_size  log_building_size  \\\n0                          0.0            0.0           3.526985\n1                          0.0            0.0           4.126618\n\n   log_assessed_value  log_bedrooms  log_bathrooms  high_risk_violation  \\\n0            5.607991       0.60206        0.30103                  2.0\n1            5.928703       0.00000        0.00000                  4.0\n\n   any_high_risk  violation_total  any_violation  overcrowding_risk  \\\n0            1.0              4.0            1.0                1.0\n1            1.0             15.0            1.0                1.0\n\n   any_overcrowding_risk   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0                    1.0                    0                   0\n1                    1.0                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160400 Block Group 2  Tract 160501 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 2  Tract 160501 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160501 Block Group 4  Tract 160501 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 1  Tract 160502 Block Group 2  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160502 Block Group 3  Tract 160601 Block Group 1  \\\n0                           1                           0\n1                           0                           0\n\n   Tract 160601 Block Group 2  Tract 160602 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 2  Tract 160602 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 160602 Block Group 4  Tract 160602 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 170100 Block Group 3  Tract 342101 Block Group 4  \\\n0                           0                           0\n1                           0                           0\n\n   Tract 342600 Block Group 1  owner_occupied__0  owner_occupied__1  \\\n0                           0                  0                  1\n1                           0                  1                  0\n\n   fuel__Coal or Wood  fuel__Electric  fuel__Gas  fuel__Oil  \\\n0                   0               0          0          1\n1                   0               0          1          0\n\n   heat__Electr Basebrd  heat__Floor Furnace  heat__Forced Air-Duc  \\\n0                     0                    0                     1\n1                     0                    0                     0\n\n   heat__Hot Air-no Duc  heat__Hot Water  heat__None  heat__Steam  \\\n0                     0                0           0            0\n1                     0                1           0            0\n\n   opportunity_zone__None  opportunity_zone__Tract 160200  \\\n0                       1                               0\n1                       0                               1\n\n   opportunity_zone__Tract 160400  analyze\n0                               0      1.0\n1                               0      1.0\n\n[CODE FOR OUTPUT]\n# Number of test and train parcels\nprint('The number of train parcels is ' + str(chelsea[chelsea['test parcels'] == 0].shape[0]))\nprint('The number of test parcels is ' + str(chelsea[chelsea['test parcels'] == 1].shape[0]))\n\n\n[PERSISTED OUTPUT]\nThe number of train parcels is 1263\nThe number of test parcels is 348\n\n\n[CODE FOR OUTPUT]\nX_train.head()\n\n[PERSISTED OUTPUT]\n   Building Permits - Count  See Click Fix - Count  Fire Incidents - Count  \\\n0                       0.0                    0.0                     0.0\n1                       2.0                    0.0                     0.0\n2                       0.0                    0.0                     1.0\n3                       0.0                    0.0                     0.0\n4                       0.0                    0.0                     0.0\n\n   Foreclosure Sales - Count  Vacant Foreclosed Properties  \\\n0                        0.0                           0.0\n1                        0.0                           0.0\n2                        0.0                           0.0\n3                        0.0                           0.0\n4                        0.0                           0.0\n\n   Property Sales - Count  Property Sales - Price  40U Violations - Count  \\\n0                     1.0                260000.0                     4.0\n1                     0.0                     0.0                     9.0\n2                     0.0                     0.0                     8.0\n3                     1.0                     0.0                     1.0\n4                     1.0                300000.0                     5.0\n\n   40U Violations - Fine  Police Incidents - Count  Rat Baiting - Count  \\\n0                  100.0                       0.0                  0.0\n1                  250.0                       0.0                  0.0\n2                  750.0                       2.0                  1.0\n3                    0.0                       0.0                  0.0\n4                  100.0                       1.0                  0.0\n\n   Tax Title  Total Assessed Value  Bedrooms  Building Size  Full Bathrooms  \\\n0          0              405500.0       4.0         3365.0             2.0\n1          0              848600.0       0.0        13385.0             0.0\n2          0              370600.0       6.0         4180.0             3.0\n3          0              699400.0       0.0        12366.0             0.0\n4          0              439300.0       4.0         5197.0             4.0\n\n   Land Size  Owner Occupied  Year Built  Police Incidents After 2015  \\\n0   0.115141               1      1893.0                          0.0\n1   0.090972               0      1920.0                          0.0\n2   0.035825               0      1900.0                          1.0\n3   0.084192               0      1910.0                          0.0\n4   0.071424               1      1890.0                          1.0\n\n   log_land_size  log_building_size  log_assessed_value  log_bedrooms  \\\n0            0.0           3.526985            5.607991      0.602060\n1            0.0           4.126618            5.928703      0.000000\n2            0.0           3.621176            5.568905      0.778151\n3            0.0           4.092229            5.844726      0.000000\n4            0.0           3.715753            5.642761      0.602060\n\n   log_bathrooms   APT 4-UNIT  MDL-94   APT 4-UNT  MDL-94  \\\n0       0.301030                    0                   0\n1       0.000000                    0                   0\n2       0.477121                    0                   0\n3       0.000000                    0                   0\n4       0.602060                    0                   0\n\n    APT OVER 8  MDL-94   CHAR HOUSING C   CHAR HOUSING R   Condo NL  MDL-00  \\\n0                    0                0                0                  0\n1                    1                0                0                  0\n2                    0                0                0                  0\n3                    0                0                0                  0\n4                    0                0                0                  0\n\n    Condo NL  MDL-05   HOUSING AUTHORITY C   OFFICE BLD  MDL-96  \\\n0                  0                     0                    0\n1                  0                     0                    0\n2                  0                     0                    0\n3                  0                     0                    0\n4                  0                     0                    0\n\n    STORE/SHOP  MDL-96   Single Fam  MDL-94   TWO FAMILY  MDL-94  \\\n0                    0                    0                    0\n1                    0                    0                    0\n2                    0                    0                    0\n3                    0                    0                    0\n4                    0                    0                    0\n\n    TWO FAMILY  MDL-96  Accessory Land with Improvement  \\\n0                    0                                0\n1                    0                                0\n2                    0                                0\n3                    0                                0\n4                    0                                0\n\n   Apartments with Four to Eight Units  \\\n0                                    0\n1                                    0\n2                                    0\n3                                    0\n4                                    1\n\n   Dept. of Education (DOE) - UMass., State Colleges, Community Colleges  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Developable Residential Land  General Office Buildings  \\\n0                             0                         0\n1                             0                         0\n2                             0                         0\n3                             0                         0\n4                             0                         0\n\n   Housing, Other (Charitable Org.)  \\\n0                                 0\n1                                 0\n2                                 0\n3                                 0\n4                                 0\n\n   Mixed Use (Primarily Commercial, some Industrial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  1\n4                                                  0\n\n   Mixed Use (Primarily Commercial, some Residential)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Mixed Use (Primarily Residential, some Commercial)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Multiple Houses on one parcel  \\\n0                              0\n1                              0\n2                              0\n3                              0\n4                              0\n\n   Other Congregate Housing (includes non-transient shared living arrangements)  \\\n0                                                  0\n1                                                  0\n2                                                  0\n3                                                  0\n4                                                  0\n\n   Rooming and Boarding Houses  Single Family Residential  \\\n0                            0                          0\n1                            0                          0\n2                            0                          0\n3                            0                          0\n4                            0                          0\n\n   Three-Family Residential  Two-Family Residential  \\\n0                         0                       1\n1                         0                       0\n2                         1                       0\n3                         0                       0\n4                         0                       0\n\n   Undevelopable Residential Land  n use  Tract 160101 Block Group 1  \\\n0                               0      0                           0\n1                               0      0                           0\n2                               0      0                           0\n3                               0      0                           0\n4                               0      0                           0\n\n   Tract 160101 Block Group 2  Tract 160101 Block Group 3  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160101 Block Group 4  Tract 160101 Block Group 5  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           0                           0\n\n   Tract 160200 Block Group 1  Tract 160200 Block Group 2  \\\n0                           0                           0\n1                           1                           0\n2                           0                           1\n3                           0                           1\n4                           0                           0\n\n   Tract 160200 Block Group 3  Tract 160300 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3                           0                           0\n4                           1                           0\n\n   Tract 160300 Block Group 2  Tract 160400 Block Group 1  \\\n0                           0                           0\n1                           0                           0\n2                           0                           0\n3",
+      "sha256": "b2cf813fbe47fdc414dc12658b26758af44840e6c54ac7dafd8d97ccb4f65be5"
+    },
+    {
+      "id": "E-SYSTEM-GIT",
+      "path": ".git",
+      "kind": "git_identity",
+      "epistemic": "OBSERVED",
+      "excerpt": "Checked-out branch: master\nHEAD: 4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd",
+      "sha256": "4bdc65d9b6c2d152a3e1fc2ba7d2191063ac52fd"
+    }
+  ],
+  "diagnostics": {
+    "schema_version": "boveda-audit-diagnostics-0.9.3",
+    "availability": "complete",
+    "historical": false,
+    "audit_id": "AUD-A57071CBE3",
+    "audit_started_at": "2026-08-26T11:51:38.944Z",
+    "audit_completed_at": "2026-08-26T11:52:41.973Z",
+    "total_duration_ms": 63029,
+    "stages": [
+      {
+        "stage": "source_resolution",
+        "status": "succeeded",
+        "duration_ms": 0
+      },
+      {
+        "stage": "evidence_collection",
+        "status": "succeeded",
+        "duration_ms": 61,
+        "evidence_items": 7,
+        "evidence_characters": 116001,
+        "evidence_pack_sha256": "6791ab734d8b26e73c6394ad896d8b77e34282deece920e95072d91fa97f3944",
+        "eligible_files": 5,
+        "collected_items": 7
+      },
+      {
+        "stage": "llm_reconstruction",
+        "status": "accepted",
+        "duration_ms": 62964,
+        "attempts": 2,
+        "provider_calls": 2,
+        "validation_status": "VALID"
+      },
+      {
+        "stage": "source_integrity",
+        "status": "succeeded",
+        "duration_ms": 2,
+        "content_unchanged": true
+      },
+      {
+        "stage": "final_record",
+        "status": "succeeded",
+        "duration_ms": 0
+      }
+    ],
+    "evidence_pack": {
+      "item_count": 7,
+      "character_count": 116001,
+      "sha256": "6791ab734d8b26e73c6394ad896d8b77e34282deece920e95072d91fa97f3944"
+    },
+    "llm": {
+      "schema_version": "boveda-llm-diagnostics-0.9.3",
+      "started_at": "2026-08-26T11:51:39.005Z",
+      "completed_at": "2026-08-26T11:52:41.969Z",
+      "duration_ms": 62964,
+      "provider": "OpenAI",
+      "model": "gpt-5.6-sol",
+      "result": "accepted",
+      "activity": "attempted",
+      "attempt_count": 2,
+      "provider_call_count": 2,
+      "paid_model_activity": true,
+      "total_usage": {
+        "attempts_with_usage": 2,
+        "input_tokens": 41057,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 41051,
+        "output_tokens": 3963,
+        "reasoning_output_tokens": 2291,
+        "total_tokens": 45020
+      },
+      "request_profile": {
+        "reasoning_effort": "medium",
+        "structured_output_schema": "boveda_overview_v090",
+        "localized_repair_schema": "boveda_local_repair_v096",
+        "maximum_attempts": 3,
+        "evidence_pack": {
+          "item_count": 7,
+          "character_count": 116001,
+          "sha256": "6791ab734d8b26e73c6394ad896d8b77e34282deece920e95072d91fa97f3944"
+        }
+      },
+      "fallback": {
+        "used": false,
+        "reason": null,
+        "followed_model_activity": true,
+        "followed_paid_model_activity": false
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "operation": "full_reconstruction",
+          "target_fields": [],
+          "base_attempt": null,
+          "started_at": "2026-08-26T11:51:39.005Z",
+          "completed_at": "2026-08-26T11:52:31.651Z",
+          "duration_ms": 52646,
+          "correction_applied": false,
+          "provider_call_started": true,
+          "provider_duration_ms": 52255,
+          "provider_request_id": "req_93eda6523b164ff88f3e7eac45f8188a",
+          "response_id": "resp_0fd658baefcde3d4016a8ed34c42b087d2a7bb82ae31f6048e",
+          "response_status": "completed",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 32008,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 32005,
+            "output_tokens": 3316,
+            "reasoning_output_tokens": 1775,
+            "total_tokens": 35324
+          },
+          "outcome": "rejected",
+          "failure": {
+            "stage": "grounding",
+            "message": "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence · record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence · record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+          },
+          "validation": {
+            "status": "INVALID",
+            "error_count": 3,
+            "warning_count": 0,
+            "errors": [
+              "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence",
+              "record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence",
+              "record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+            ],
+            "warnings": [],
+            "rejected_candidate": {
+              "identity": {
+                "name": {
+                  "state": "established",
+                  "value": "Chelsea Housing and Public Health",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-SYSTEM-PATH",
+                    "E-B335630551"
+                  ]
+                },
+                "description": {
+                  "state": "established",
+                  "value": "The project predicts housing-code and public-health hazards for Chelsea properties using linked municipal data, supporting the city’s prioritization of proactive inspections.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                }
+              },
+              "purpose_scope": {
+                "summary": {
+                  "state": "established",
+                  "value": "Chelsea sought to identify housing-related health hazards earlier than reactive enforcement allowed. The project uses linked property and municipal records to predict three categories of code violations and help city government prioritize inspections, although modelling and evaluation cover only previously inspected properties.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-1352155D41",
+                    "E-C113A90389",
+                    "E-5CD21A80C3"
+                  ]
+                },
+                "purpose": {
+                  "state": "established",
+                  "value": "Help Chelsea identify housing-related public-health risks earlier and prioritize limited inspection capacity.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551"
+                  ]
+                },
+                "task": {
+                  "state": "established",
+                  "value": "Classify properties by their likelihood of having specified housing-code violations.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551"
+                  ]
+                },
+                "target_outcome": {
+                  "state": "established",
+                  "value": "Binary predictions for any violation, elevated-risk violations, and violations associated with overcrowding.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "unit": {
+                  "state": "established",
+                  "value": "Residential property",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "population_scope": {
+                  "state": "established",
+                  "value": "Chelsea’s 5,989 residential properties, with model development restricted to 1,611 inspected properties.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "intended_use": {
+                  "state": "established",
+                  "value": "Support Chelsea city government in prioritizing properties for proactive housing inspections.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551"
+                  ]
+                }
+              },
+              "samples": {
+                "source_data": {
+                  "state": "established",
+                  "display": "5,989 residential properties",
+                  "count": 5989,
+                  "unit": "properties",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "model_sample": {
+                  "state": "established",
+                  "display": "1,263 training properties",
+                  "count": 1263,
+                  "unit": "properties",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                },
+                "evaluation_sample": {
+                  "state": "established",
+                  "display": "348 held-out properties",
+                  "count": 348,
+                  "unit": "properties",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                }
+              },
+              "results_evaluation": {
+                "primary_result": {
+                  "state": "established",
+                  "display_value": "0.4608713336647534",
+                  "metric": "Average precision score from binary predictions",
+                  "method": "Default random forest classifier",
+                  "task_target": "Elevated public-health-risk code violations",
+                  "evaluation_context": "348 held-out inspected properties outside the target area",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                },
+                "material_results": [
+                  {
+                    "state": "established",
+                    "display_value": "59",
+                    "metric": "True positives",
+                    "method": "Default random forest classifier",
+                    "task_target": "Elevated public-health-risk code violations",
+                    "evaluation_context": "Confusion matrix on 348 held-out properties outside the target area",
+                    "epistemic": "OBSERVED",
+                    "evidence_ids": [
+                      "E-C113A90389"
+                    ]
+                  },
+                  {
+                    "state": "established",
+                    "display_value": "50",
+                    "metric": "False positives",
+                    "method": "Default random forest classifier",
+                    "task_target": "Elevated public-health-risk code violations",
+                    "evaluation_context": "Confusion matrix on 348 held-out properties outside the target area",
+                    "epistemic": "OBSERVED",
+                    "evidence_ids": [
+                      "E-C113A90389"
+                    ]
+                  }
+                ],
+                "evaluation_design": {
+                  "state": "established",
+                  "value": "A random forest trained on 1,263 target-area properties was tested on 348 held-out inspected properties outside that area.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-C113A90389"
+                  ]
+                },
+                "other_material_result": {
+                  "state": "established",
+                  "value": "Its held-out predictions included 59 true positives and 50 false positives.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                },
+                "known_limitation": {
+                  "state": "established",
+                  "value": "Average precision was calculated from binary class predictions, limiting its interpretation as ranking performance across decision thresholds.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                },
+                "establishes": {
+                  "state": "established",
+                  "value": "The default random forest achieved the reported average precision on 348 inspected properties held out by geography.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-C113A90389"
+                  ]
+                },
+                "does_not_establish": {
+                  "state": "established",
+                  "value": "The evaluation does not establish performance on uninspected Chelsea properties or whether model-guided inspections improve public-health outcomes.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-C113A90389"
+                  ]
+                }
+              },
+              "data": {
+                "summary": {
+                  "state": "established",
+                  "value": "Property-level municipal records were joined in BuildingBlocks, filtered to residential properties, transformed into model features, and linked with inspection-derived violation outcomes.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "data_sources": {
+                  "state": "established",
+                  "value": "BuildingBlocks-linked inspections, police and fire calls, assessor, census, and property records.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "unit_of_observation": {
+                  "state": "established",
+                  "value": "One Chelsea property or parcel record",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2"
+                  ]
+                },
+                "period": {
+                  "state": "established",
+                  "value": "Inspections from 2014–2019; training used proactive inspections from 2014–2018.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551"
+                  ]
+                },
+                "population_filters": {
+                  "state": "established",
+                  "value": "Source records were limited to residential properties; modelling used inspected properties, split by target-area status.",
+                  "epistemic": "OBSERVED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-06B8ACEBB2",
+                    "E-C113A90389"
+                  ]
+                },
+                "population_limitation": {
+                  "state": "established",
+                  "value": "Evaluation includes only inspected properties outside the target area, so it may not represent Chelsea’s uninspected properties.",
+                  "epistemic": "INTERPRETED_INFERRED",
+                  "evidence_ids": [
+                    "E-B335630551",
+                    "E-C113A90389"
+                  ]
+                }
+              },
+              "confidence": {
+                "level": "High",
+                "explanation": "Notebook output directly links the random forest, held-out labels, binary predictions, confusion matrix, and reported average precision score.",
+                "evidence_ids": [
+                  "E-C113A90389"
+                ]
+              }
+            },
+            "field_evidence_ids": {
+              "record.identity.name": [
+                "E-SYSTEM-PATH",
+                "E-B335630551"
+              ],
+              "record.identity.description": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.purpose_scope.summary": [
+                "E-B335630551",
+                "E-1352155D41",
+                "E-C113A90389",
+                "E-5CD21A80C3"
+              ],
+              "record.purpose_scope.purpose": [
+                "E-B335630551"
+              ],
+              "record.purpose_scope.task": [
+                "E-B335630551"
+              ],
+              "record.purpose_scope.target_outcome": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.purpose_scope.unit": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.purpose_scope.population_scope": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.purpose_scope.intended_use": [
+                "E-B335630551"
+              ],
+              "record.samples.source_data": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.samples.model_sample": [
+                "E-C113A90389"
+              ],
+              "record.samples.evaluation_sample": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.primary_result": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.material_results[0]": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.material_results[1]": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.evaluation_design": [
+                "E-B335630551",
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.other_material_result": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.known_limitation": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.establishes": [
+                "E-C113A90389"
+              ],
+              "record.results_evaluation.does_not_establish": [
+                "E-B335630551",
+                "E-C113A90389"
+              ],
+              "record.data.summary": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.data.data_sources": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.data.unit_of_observation": [
+                "E-B335630551",
+                "E-06B8ACEBB2"
+              ],
+              "record.data.period": [
+                "E-B335630551"
+              ],
+              "record.data.population_filters": [
+                "E-B335630551",
+                "E-06B8ACEBB2",
+                "E-C113A90389"
+              ],
+              "record.data.population_limitation": [
+                "E-B335630551",
+                "E-C113A90389"
+              ]
+            }
+          },
+          "retry_scheduled": true,
+          "retry": {
+            "scheduled": true,
+            "reason": "localized_validation_repair",
+            "correction_errors": [
+              "record.results_evaluation.other_material_result: numeric value 59 is not grounded in cited evidence",
+              "record.results_evaluation.other_material_result: numeric value 50 is not grounded in cited evidence",
+              "record.results_evaluation.establishes: numeric value 348 is not grounded in cited evidence"
+            ],
+            "target_fields": [
+              "record.results_evaluation.other_material_result",
+              "record.results_evaluation.establishes"
+            ]
+          }
+        },
+        {
+          "attempt": 2,
+          "operation": "localized_repair",
+          "target_fields": [
+            "record.results_evaluation.other_material_result",
+            "record.results_evaluation.establishes"
+          ],
+          "base_attempt": 1,
+          "started_at": "2026-08-26T11:52:31.651Z",
+          "completed_at": "2026-08-26T11:52:41.968Z",
+          "duration_ms": 10317,
+          "correction_applied": true,
+          "provider_call_started": true,
+          "provider_duration_ms": 10169,
+          "provider_request_id": "req_51b9387f010a4664b72f5ab08df0702c",
+          "response_id": "resp_017659d92c9194d8016a8ed37fe20887d2bdf175a7406db702",
+          "response_status": "completed",
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 9049,
+            "cached_input_tokens": 0,
+            "cache_write_input_tokens": 9046,
+            "output_tokens": 647,
+            "reasoning_output_tokens": 516,
+            "total_tokens": 9696
+          },
+          "outcome": "accepted",
+          "failure": null,
+          "validation": {
+            "status": "VALID",
+            "error_count": 0,
+            "warning_count": 0,
+            "errors": [],
+            "warnings": []
+          },
+          "retry_scheduled": false,
+          "retry": null
+        }
+      ],
+      "localized_repair": {
+        "status": "accepted",
+        "base_attempt": 1,
+        "repair_attempts": 1,
+        "fields": [
+          "record.results_evaluation.other_material_result",
+          "record.results_evaluation.establishes"
+        ],
+        "evidence_scope": [
+          "E-C113A90389"
+        ],
+        "unrelated_fields_preserved": true
+      }
+    },
+    "final": {
+      "generation_mode": "llm",
+      "validation_status": "VALID",
+      "source_unchanged": true
+    }
+  }
+}

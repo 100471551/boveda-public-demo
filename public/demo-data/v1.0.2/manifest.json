@@ -1,0 +1,10 @@
+{
+  "schema_version": "boveda-public-demo-1",
+  "application_version": "1.0.2",
+  "generated_from": "pre-analysed local snapshots",
+  "project_ids": [
+    "PRJ-181CCD8192",
+    "PRJ-1686EC052E",
+    "PRJ-2C27CC9912"
+  ]
+}

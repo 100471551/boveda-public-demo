@@ -1,0 +1,68 @@
+[
+  {
+    "project_id": "PRJ-181CCD8192",
+    "audit_id": "AUD-8663C7D0D4",
+    "name": "NYC-311",
+    "analysed_at": "2026-08-26T11:58:09.574Z",
+    "generation_mode": "llm",
+    "supervisor_project_title": "NYC-311",
+    "source_project_path": "/R3_public-services_nyc-311-resolution",
+    "identity_name": {
+      "state": "established",
+      "value": "NYC-311",
+      "epistemic": "OBSERVED",
+      "evidence_ids": [
+        "E-B335630551",
+        "E-B9CC546808",
+        "E-SYSTEM-PATH"
+      ]
+    },
+    "project_purpose": "Improve understanding of city service demand and support more efficient resource allocation.",
+    "primary_task_target": "Three resolution-time classes for Brooklyn heat complaints",
+    "analytical_task": "Describe request patterns, classify resolution-time ranges, forecast daily volumes, and compare storm-related response times.",
+    "finding_count": 5
+  },
+  {
+    "project_id": "PRJ-1686EC052E",
+    "audit_id": "AUD-8F3965C55C",
+    "name": "Crash Modeling",
+    "analysed_at": "2026-08-26T11:55:12.131Z",
+    "generation_mode": "llm",
+    "supervisor_project_title": "Crash Modeling",
+    "source_project_path": "/R2_public-safety_road-crash-risk",
+    "identity_name": {
+      "state": "established",
+      "value": "Crash Modeling",
+      "epistemic": "OBSERVED",
+      "evidence_ids": [
+        "E-B335630551"
+      ]
+    },
+    "project_purpose": "Support safer roads by identifying high-risk locations and factors associated with elevated crash risk.",
+    "primary_task_target": "Any crash on a segment in week 19 of 2017",
+    "analytical_task": "Estimate and map crash risk for each road segment using historical and segment-level features.",
+    "finding_count": 6
+  },
+  {
+    "project_id": "PRJ-2C27CC9912",
+    "audit_id": "AUD-A57071CBE3",
+    "name": "Chelsea Housing and Public Health",
+    "analysed_at": "2026-08-26T11:52:41.973Z",
+    "generation_mode": "llm",
+    "supervisor_project_title": "Chelsea Housing and Public Health",
+    "source_project_path": "/R1_public-health_housing-chelsea",
+    "identity_name": {
+      "state": "established",
+      "value": "Chelsea Housing and Public Health",
+      "epistemic": "INTERPRETED_INFERRED",
+      "evidence_ids": [
+        "E-SYSTEM-PATH",
+        "E-B335630551"
+      ]
+    },
+    "project_purpose": "Help Chelsea identify housing-related public-health risks earlier and prioritize limited inspection capacity.",
+    "primary_task_target": "Elevated public-health-risk code violations",
+    "analytical_task": "Classify properties by their likelihood of having specified housing-code violations.",
+    "finding_count": 9
+  }
+]
