@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import pdfParse from "pdf-parse/lib/pdf-parse.js";
 
 const SECRET_PATTERNS = [
   { label: "OpenAI-style credential", pattern: /\bsk-[A-Za-z0-9_-]{20,}\b/g },
@@ -14,6 +15,16 @@ const SECRET_PATTERNS = [
 ];
 
 const TEXT_EXTENSIONS = new Set([".css", ".html", ".js", ".jsx", ".json", ".map", ".md", ".mjs", ".svg", ".txt"]);
+
+async function extractScannableText(file) {
+  const extension = path.extname(file).toLowerCase();
+  if (TEXT_EXTENSIONS.has(extension)) return fs.readFile(file, "utf8");
+  if (extension === ".pdf") {
+    const parsed = await pdfParse(await fs.readFile(file));
+    return parsed.text;
+  }
+  return null;
+}
 
 async function filesWithin(root) {
   const entries = await fs.readdir(root, { withFileTypes: true });
@@ -29,8 +40,8 @@ async function filesWithin(root) {
 export async function validatePublicArtifacts(root) {
   const failures = [];
   for (const file of await filesWithin(root)) {
-    if (!TEXT_EXTENSIONS.has(path.extname(file).toLowerCase())) continue;
-    const text = await fs.readFile(file, "utf8");
+    const text = await extractScannableText(file);
+    if (text === null) continue;
     for (const { label, pattern } of SECRET_PATTERNS) {
       pattern.lastIndex = 0;
       const match = pattern.exec(text);
