@@ -185,7 +185,7 @@ function WelcomeSurface() {
     </aside>
     <div className="public-brand"><Logo showVersion={false} showDemo /></div>
     <h1><span className="welcome-typewriter">Auditable by design<span className="welcome-typewriter__dot" aria-hidden="true">.</span></span></h1>
-    <p>Bóveda turns the evidence data, ML and AI projects already leave behind into a clear, traceable record so the people responsible for them can understand what happened, ask the right questions, and follow every conclusion back to its source.</p>
+    <p>Bóveda turns the evidence data, ML and AI projects already leave behind<br />into a clear, traceable record so the people responsible for them can<br />understand what happened, ask the right questions, and follow every<br />conclusion back to its source.</p>
     <span className="welcome-version">Alpha {applicationVersion}</span>
   </main>;
 }

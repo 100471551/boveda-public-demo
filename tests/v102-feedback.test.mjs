@@ -88,7 +88,7 @@ test("v1.0.2 closes only the overlaid Projects menu with the Figma close control
 
 test("v1.0.2 includes the final public-surface refinements", () => {
   assert.match(main, /className="welcome-typewriter">Auditable by design/);
-  assert.match(main, /<p>Bóveda turns the evidence data, ML and AI projects already leave behind into a clear, traceable record so the people responsible for them can understand what happened, ask the right questions, and follow every conclusion back to its source\.<\/p>/);
+  assert.match(main, /<p>Bóveda turns the evidence data, ML and AI projects already leave behind<br \/>into a clear, traceable record so the people responsible for them can<br \/>understand what happened, ask the right questions, and follow every<br \/>conclusion back to its source\.<\/p>/);
   assert.match(styles, /animation: welcome-type-in 1\.55s steps\(20, end\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.welcome-surface h1 > \.welcome-typewriter \{ clip-path: none; animation: none; \}/);
   assert.match(styles, /\.supervisor-finding \{ border-left: 0; \}/);
