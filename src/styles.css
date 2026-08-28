@@ -4359,6 +4359,11 @@ body,
 .welcome-typewriter__letter {
   display: inline;
 }
+.welcome-typewriter__letter--space {
+  display: inline-block;
+  flex: 0 0 .28em;
+  width: .28em;
+}
 .welcome-typewriter__dot {
   color: var(--ui-red);
 }
@@ -4383,6 +4388,7 @@ body,
   }
   .welcome-surface h1 > .welcome-typewriter { display: block; width: 100%; }
   .welcome-typewriter__content { display: block; width: 100%; white-space: normal; text-align: center; }
+  .welcome-typewriter__letter--space { display: inline; width: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

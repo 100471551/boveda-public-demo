@@ -166,7 +166,7 @@ function WelcomeTypewriter() {
   return <span className="welcome-typewriter" data-text={WELCOME_HEADLINE} aria-hidden="true">
     <span className="welcome-typewriter__content">
       {WELCOME_HEADLINE_LETTERS.slice(0, visibleCount).map((letter, index) => <span
-        className={`welcome-typewriter__letter ${letter === "." ? "welcome-typewriter__dot" : ""}`}
+        className={`welcome-typewriter__letter${letter === " " ? " welcome-typewriter__letter--space" : ""}${letter === "." ? " welcome-typewriter__dot" : ""}`}
         key={`${letter}-${index}`}
       >{letter}</span>)}
       <span className="welcome-typewriter__cursor" />

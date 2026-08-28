@@ -18,6 +18,7 @@ const repositoryLink = readFileSync(new URL("../public/ui/Link_Button.svg", impo
 const howItWorksIcon = readFileSync(new URL("../public/ui/How_It_Works.svg", import.meta.url), "utf8");
 const howItWorksArrow = readFileSync(new URL("../public/ui/How_It_Works_Arrow.svg", import.meta.url), "utf8");
 const favicon = readFileSync(new URL("../public/favicon.svg", import.meta.url), "utf8");
+const faviconDark = readFileSync(new URL("../public/favicon-dark.svg", import.meta.url), "utf8");
 const projectRepository = readFileSync(new URL("../src/project-repository.mjs", import.meta.url), "utf8");
 const server = readFileSync(new URL("../engine/server.mjs", import.meta.url), "utf8");
 const persistence = readFileSync(new URL("../engine/persistence.mjs", import.meta.url), "utf8");
@@ -97,10 +98,13 @@ test("v1.0.2 includes the final public-surface refinements", () => {
   assert.match(main, /WELCOME_HEADLINE_LETTERS\.slice\(0, visibleCount\)\.map\(\(letter, index\)/);
   assert.match(main, /window\.setTimeout\(revealNextLetter, 68\)/);
   assert.match(main, /className={`welcome-typewriter__letter/);
+  assert.match(main, /letter === " " \? " welcome-typewriter__letter--space"/);
   assert.match(main, /className="welcome-typewriter__cursor"/);
   assert.match(main, /<p>Bóveda turns the evidence data, ML and AI projects already leave behind<br \/>into a clear, traceable record so the people responsible for them can<br \/>understand what happened, ask the right questions, and follow every<br \/>conclusion back to its source\./);
   assert.match(styles, /\.welcome-surface > p \{[\s\S]*?width:\s*588px;[\s\S]*?min-height:\s*210px;[\s\S]*?border:\s*1px solid var\(--v100b-line\);[\s\S]*?border-radius:\s*20px;[\s\S]*?background:\s*var\(--v100b-surface\);[\s\S]*?padding:\s*30px 33px;/);
   assert.match(styles, /@keyframes welcome-caret-blink/);
+  assert.match(styles, /\.welcome-typewriter__letter--space \{[\s\S]*?flex: 0 0 \.28em;[\s\S]*?width: \.28em;/);
+  assert.match(styles, /@media \(max-width: 900px\)[\s\S]*?\.welcome-typewriter__letter--space \{ display: inline; width: auto; \}/);
   assert.doesNotMatch(styles, /clip-path: inset\(0 100% 0 0\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.welcome-typewriter__cursor \{ display: none; animation: none; \}/);
   assert.match(styles, /\.supervisor-finding \{ border-left: 0; \}/);
@@ -121,10 +125,14 @@ test("v1.0.2 adds the Figma How it works navigation and video page", () => {
   assert.match(styles, /\.how-it-works__video-frame video \{[\s\S]*?aspect-ratio: 16 \/ 9;/);
 });
 
-test("v1.0.2 uses the exact Figma favicon export", () => {
+test("v1.0.2 uses theme-aware variants of the exact Figma favicon export", () => {
   assert.equal(createHash("sha256").update(favicon).digest("hex"), "5fb63625f67e2c1ff314238b97428e09ac5602a51f3dbe6652a300b8569c6b27");
   assert.match(favicon, /width="56" height="56" viewBox="0 0 56 56"/);
-  assert.match(indexHtml, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" \/>/);
+  assert.match(faviconDark, /width="56" height="56" viewBox="0 0 56 56"/);
+  assert.match(faviconDark, /fill="white"/);
+  assert.doesNotMatch(faviconDark, /fill="black"/);
+  assert.match(indexHtml, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" media="\(prefers-color-scheme: light\)" \/>/);
+  assert.match(indexHtml, /<link rel="icon" href="\/favicon-dark\.svg" type="image\/svg\+xml" media="\(prefers-color-scheme: dark\)" \/>/);
 });
 
 test("v1.0.2 shows the Figma public-demo banner on Home only", () => {
