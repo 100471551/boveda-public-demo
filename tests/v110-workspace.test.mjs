@@ -64,8 +64,8 @@ test("v1.1.0 gates workspace routes with an honest local demo session", () => {
   assert.match(main, /login-panel__brand/);
   assert.match(main, /function logout\(\)/);
   assert.match(styles, /\.login-backdrop\s*\{[\s\S]*?backdrop-filter:\s*blur/);
-  assert.match(styles, /\.login-panel\s*\{[\s\S]*?background:\s*rgba\(255, 255, 255, \.82\)/);
-  assert.match(styles, /\.login-panel\s*\{[\s\S]*?backdrop-filter:\s*blur\(42px\)/);
+  assert.match(styles, /\.login-panel\s*\{[\s\S]*?background:\s*rgba\(255, 255, 255, \.68\)/);
+  assert.match(styles, /\.login-panel\s*\{[\s\S]*?-webkit-backdrop-filter:\s*blur\(42px\)[\s\S]*?backdrop-filter:\s*blur\(42px\)/);
   assert.match(styles, /\.account-menu__popover\s*\{[\s\S]*?backdrop-filter:\s*blur/);
 });
 

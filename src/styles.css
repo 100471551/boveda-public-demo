@@ -4565,8 +4565,8 @@ body,
 .welcome-sign-in:hover { background: #3a3a3a; }
 .welcome-sign-in:focus-visible { outline: 2px solid #222; outline-offset: 3px; }
 
-.login-backdrop { position: fixed; z-index: 160; inset: 0; display: grid; place-items: center; background: rgba(34, 34, 34, .42); padding: 24px; backdrop-filter: blur(20px) saturate(.85); -webkit-backdrop-filter: blur(20px) saturate(.85); }
-.login-panel { position: relative; width: min(500px, 100%); border: 1px solid rgba(255, 255, 255, .7); border-radius: 24px; background: rgba(255, 255, 255, .82); padding: 42px 48px 46px; color: #222; box-shadow: 0 26px 90px rgba(34, 34, 34, .2); backdrop-filter: blur(42px) saturate(.82); -webkit-backdrop-filter: blur(42px) saturate(.82); }
+.login-backdrop { position: fixed; z-index: 160; inset: 0; display: grid; place-items: center; background: rgba(34, 34, 34, .42); padding: 24px; -webkit-backdrop-filter: blur(20px) saturate(.85); backdrop-filter: blur(20px) saturate(.85); }
+.login-panel { position: relative; width: min(500px, 100%); border: 1px solid rgba(255, 255, 255, .74); border-radius: 24px; background: rgba(255, 255, 255, .68); padding: 42px 48px 46px; color: #222; box-shadow: 0 26px 90px rgba(34, 34, 34, .2); -webkit-backdrop-filter: blur(42px) saturate(.82); backdrop-filter: blur(42px) saturate(.82); }
 .login-panel__close { position: absolute; top: 18px; right: 18px; display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: transparent; padding: 0; cursor: pointer; }
 .login-panel__close .ui-icon { width: 40px; height: 40px; }
 .login-panel__brand { display: flex; align-items: center; gap: 12px; margin: 0 52px 32px 0; }
@@ -4588,7 +4588,7 @@ body,
 
 .account-menu { position: fixed; z-index: 86; top: 49px; right: 54px; }
 .account-menu__trigger { width: 46px; height: 46px; }
-.account-menu__popover { position: absolute; top: 56px; right: 0; display: grid; width: 272px; border: 1px solid rgba(34, 34, 34, .08); border-radius: 18px; background: rgba(255, 255, 255, .9); padding: 20px; color: #222; box-shadow: 0 18px 52px rgba(34, 34, 34, .13); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+.account-menu__popover { position: absolute; top: 56px; right: 0; display: grid; width: 272px; border: 1px solid rgba(34, 34, 34, .08); border-radius: 18px; background: rgba(255, 255, 255, .9); padding: 20px; color: #222; box-shadow: 0 18px 52px rgba(34, 34, 34, .13); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
 .account-menu__popover > span { color: rgba(34, 34, 34, .48); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .account-menu__popover > strong { margin-top: 8px; font-size: 17px; line-height: 22px; }
 .account-menu__popover > small { overflow: hidden; margin-top: 2px; color: rgba(34, 34, 34, .55); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
