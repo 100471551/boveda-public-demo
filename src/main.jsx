@@ -38,6 +38,7 @@ import { requestBovedaJson } from "./demo-api.mjs";
 import { PUBLIC_DEMO, reportAssetUrl } from "./runtime-config.mjs";
 import { navigateRoute, parseRoute, ROUTE_CHANGE_EVENT } from "./router.mjs";
 import { clearDemoSession, createDemoSession, readDemoSession, storeDemoSession } from "./demo-session.mjs";
+import { DEMO_LOGIN } from "./demo-login-config.mjs";
 import { WorkspaceDashboard } from "./workspace-dashboard.jsx";
 
 const api = requestBovedaJson;
@@ -978,7 +979,8 @@ function DemoActionNotice({ message, onClose }) {
 }
 
 function LoginModal({ onClose, onSignIn }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(DEMO_LOGIN.username);
+  const [password, setPassword] = useState("");
   const [validation, setValidation] = useState("");
   const inputRef = useRef(null);
   useEffect(() => {
@@ -994,20 +996,30 @@ function LoginModal({ onClose, onSignIn }) {
   }, [onClose]);
   const submit = (event) => {
     event.preventDefault();
-    const session = createDemoSession(email);
-    if (!session) { setValidation("Enter a valid email address."); return; }
+    const session = createDemoSession(username, password);
+    if (!session) { setValidation("Use the shared demo credentials shown above."); return; }
     onSignIn(session);
   };
   return <div className="login-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="login-panel" role="dialog" aria-modal="true" aria-labelledby="login-title">
       <button type="button" className="login-panel__close" onClick={onClose} aria-label="Close sign in"><Icon name="Import_Close" /></button>
+      <div className="login-panel__brand" aria-label="Bóveda public demo">
+        <img src="/Boveda_Logo_Black.svg" alt="Bóveda" />
+        <span>Demo</span>
+      </div>
       <span className="login-panel__eyebrow">Demo workspace</span>
       <h2 id="login-title">Sign in to Bóveda</h2>
-      <p>Enter your email to start a local demo session. No password or account is created.</p>
-      <form onSubmit={submit} noValidate>
-        <label htmlFor="demo-login-email">Email</label>
-        <input ref={inputRef} id="demo-login-email" type="email" value={email} onChange={(event) => { setEmail(event.target.value); setValidation(""); }} placeholder="name@organisation.com" autoComplete="email" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : "demo-login-note"} />
-        {validation ? <span className="login-panel__error" id="demo-login-error" role="alert">{validation}</span> : <span className="login-panel__note" id="demo-login-note">Your email stays in this browser.</span>}
+      <p>Use the shared public demo account below. This is a realistic demo gate, not secure production authentication.</p>
+      <dl className="login-panel__credentials" aria-label="Shared demo credentials">
+        <div><dt>Username</dt><dd>{DEMO_LOGIN.username}</dd></div>
+        <div><dt>Password</dt><dd>{DEMO_LOGIN.password}</dd></div>
+      </dl>
+      <form onSubmit={submit} noValidate autoComplete="off">
+        <label htmlFor="demo-login-username">Demo username</label>
+        <input ref={inputRef} id="demo-login-username" type="text" inputMode="email" value={username} onChange={(event) => { setUsername(event.target.value); setValidation(""); }} autoComplete="off" spellCheck="false" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : "demo-login-note"} />
+        <label htmlFor="demo-login-password">Demo password</label>
+        <input id="demo-login-password" type="password" value={password} onChange={(event) => { setPassword(event.target.value); setValidation(""); }} autoComplete="off" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : "demo-login-note"} />
+        {validation ? <span className="login-panel__error" id="demo-login-error" role="alert">{validation}</span> : <span className="login-panel__note" id="demo-login-note">Credentials are checked only in this browser and are not sent or stored.</span>}
         <button type="submit" className="login-panel__submit">Continue to workspace <Icon name="Arrow_Forward" /></button>
       </form>
     </section>
@@ -1027,7 +1039,7 @@ function AccountMenu({ session, onLogout }) {
   return <div className={`account-menu ${open ? "is-open" : ""}`} ref={rootRef}>
     <button type="button" className="project-menu-button account-menu__trigger" onClick={() => setOpen((value) => !value)} aria-label="Open account menu" aria-haspopup="menu" aria-expanded={open}><Icon name="Menu" /></button>
     {open ? <div className="account-menu__popover" role="menu">
-      <span>Demo session</span><strong>{session.displayName}</strong><small>{session.email}</small>
+      <span>Shared public demo</span><strong>{session.displayName}</strong><small>{DEMO_LOGIN.username}</small>
       <button type="button" role="menuitem" onClick={onLogout}>Log out <Icon name="Arrow_Forward" /></button>
     </div> : null}
   </div>;

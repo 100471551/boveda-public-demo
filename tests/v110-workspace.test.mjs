@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 import { clearDemoSession, createDemoSession, readDemoSession, storeDemoSession } from "../src/demo-session.mjs";
+import { DEMO_LOGIN } from "../src/demo-login-config.mjs";
 import { buildWorkspaceSummary } from "../src/workspace-summary.mjs";
 
 const main = readFileSync(new URL("../src/main.jsx", import.meta.url), "utf8");
@@ -14,12 +15,14 @@ function memoryStorage() {
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: (key) => values.delete(key) };
 }
 
-test("v1.1.0 creates and persists a bounded local demo session", () => {
-  const session = createDemoSession(" Supervisor.Name@example.com ", () => "2026-08-30T08:00:00.000Z");
-  assert.deepEqual(session, { email: "supervisor.name@example.com", displayName: "Supervisor Name", signedInAt: "2026-08-30T08:00:00.000Z" });
-  assert.equal(createDemoSession("not-an-email"), null);
+test("v1.1.0 creates a shared demo session without storing visitor identity", () => {
+  const session = createDemoSession(` ${DEMO_LOGIN.username.toUpperCase()} `, DEMO_LOGIN.password, () => "2026-08-30T08:00:00.000Z");
+  assert.deepEqual(session, { kind: "shared-public-demo", displayName: "Demo supervisor", signedInAt: "2026-08-30T08:00:00.000Z" });
+  assert.equal(createDemoSession("visitor@example.com", DEMO_LOGIN.password), null);
+  assert.equal(createDemoSession(DEMO_LOGIN.username, "wrong-password"), null);
   const storage = memoryStorage();
-  assert.equal(storeDemoSession(session, storage), true);
+  assert.equal(storeDemoSession({ ...session, email: "visitor@example.com" }, storage), true);
+  assert.doesNotMatch(storage.getItem("boveda.demo-session.v1.1.0"), /visitor@example\.com/);
   assert.deepEqual(readDemoSession(storage), session);
   assert.equal(clearDemoSession(storage), true);
   assert.equal(readDemoSession(storage), null);
@@ -50,12 +53,19 @@ test("v1.1.0 derives supervisory KPIs and activity from project layers", () => {
 test("v1.1.0 gates workspace routes with an honest local demo session", () => {
   assert.equal(metadata.version, "1.1.0");
   assert.match(main, /function LoginModal/);
-  assert.match(main, /No password or account is created/);
+  assert.match(main, /shared public demo account/);
+  assert.match(main, /not secure production authentication/);
+  assert.match(main, /Shared demo credentials/);
+  assert.match(main, /Credentials are checked only in this browser and are not sent or stored/);
+  assert.doesNotMatch(main, /name@organisation\.com/);
   assert.match(main, /function AccountMenu/);
-  assert.match(main, /Demo session/);
+  assert.match(main, /Shared public demo/);
+  assert.match(main, /login-panel__brand/);
   assert.match(main, /function logout\(\)/);
   assert.match(styles, /\.login-backdrop\s*\{[\s\S]*?backdrop-filter:\s*blur/);
-  assert.match(styles, /\.login-panel\s*\{[\s\S]*?background:\s*#fff/);
+  assert.match(styles, /\.login-panel\s*\{[\s\S]*?background:\s*rgba\(255, 255, 255, \.9\)/);
+  assert.match(styles, /\.login-panel\s*\{[\s\S]*?backdrop-filter:\s*blur/);
+  assert.match(styles, /\.account-menu__popover\s*\{[\s\S]*?backdrop-filter:\s*blur/);
 });
 
 test("v1.1.0 provides the evidence-backed supervisory workspace without changing project dashboards", () => {

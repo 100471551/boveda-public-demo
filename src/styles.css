@@ -4564,16 +4564,25 @@ body,
 .welcome-sign-in:hover { background: #3a3a3a; }
 .welcome-sign-in:focus-visible { outline: 2px solid #222; outline-offset: 3px; }
 
-.login-backdrop { position: fixed; z-index: 160; inset: 0; display: grid; place-items: center; background: rgba(20, 20, 20, .48); padding: 24px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-.login-panel { position: relative; width: min(470px, 100%); border: 1px solid var(--v100b-line); border-radius: 24px; background: #fff; padding: 48px; color: #222; box-shadow: 0 24px 80px rgba(0, 0, 0, .18); }
+.login-backdrop { position: fixed; z-index: 160; inset: 0; display: grid; place-items: center; background: rgba(34, 34, 34, .42); padding: 24px; backdrop-filter: blur(20px) saturate(.85); -webkit-backdrop-filter: blur(20px) saturate(.85); }
+.login-panel { position: relative; width: min(500px, 100%); border: 1px solid rgba(34, 34, 34, .08); border-radius: 24px; background: rgba(255, 255, 255, .9); padding: 42px 48px 46px; color: #222; box-shadow: 0 26px 90px rgba(34, 34, 34, .2); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); }
 .login-panel__close { position: absolute; top: 18px; right: 18px; display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: transparent; padding: 0; cursor: pointer; }
 .login-panel__close .ui-icon { width: 40px; height: 40px; }
+.login-panel__brand { display: flex; align-items: center; gap: 12px; margin: 0 52px 32px 0; }
+.login-panel__brand img { display: block; width: 128px; height: auto; }
+.login-panel__brand span { display: grid; place-items: center; min-width: 46px; height: 19px; border-radius: 999px; background: var(--ui-red); padding: 0 10px; color: #fff; font-size: 9px; line-height: 1; }
 .login-panel__eyebrow, .workspace-dashboard__eyebrow, .workspace-panel__eyebrow { display: block; color: rgba(34, 34, 34, .48); font-size: 11px; font-weight: 700; letter-spacing: .08em; line-height: 16px; text-transform: uppercase; }
 .login-panel h2 { margin: 12px 0; font-size: 38px; line-height: 1.08; letter-spacing: -.025em; }
 .login-panel > p { margin: 0; color: rgba(34, 34, 34, .68); font-size: 14px; line-height: 22px; }
-.login-panel form { display: grid; gap: 10px; margin-top: 32px; }
+.login-panel__credentials { display: grid; gap: 0; margin: 22px 0 0; border: 1px solid rgba(34, 34, 34, .08); border-radius: 14px; background: rgba(255, 255, 255, .62); padding: 4px 15px; }
+.login-panel__credentials > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); align-items: baseline; gap: 12px; padding: 11px 0; }
+.login-panel__credentials > div + div { border-top: 1px solid rgba(34, 34, 34, .07); }
+.login-panel__credentials dt { color: rgba(34, 34, 34, .5); font-size: 11px; font-weight: 700; }
+.login-panel__credentials dd { margin: 0; color: #222; font-size: 13px; font-weight: 700; }
+.login-panel form { display: grid; gap: 10px; margin-top: 22px; }
 .login-panel label { font-size: 12px; font-weight: 700; }
-.login-panel input { width: 100%; height: 52px; border: 1px solid #cfcfcf; border-radius: 12px; background: #fff; padding: 0 16px; color: #222; font: inherit; font-size: 14px; }
+.login-panel label:not(:first-child) { margin-top: 4px; }
+.login-panel input { width: 100%; height: 52px; border: 1px solid rgba(34, 34, 34, .13); border-radius: 12px; background: rgba(255, 255, 255, .72); padding: 0 16px; color: #222; font: inherit; font-size: 14px; transition: border-color .16s ease, background .16s ease, box-shadow .16s ease; }
 .login-panel input:focus { border-color: #222; outline: 1px solid #222; }
 .login-panel input[aria-invalid="true"] { border-color: var(--ui-red); }
 .login-panel__note, .login-panel__error { min-height: 18px; font-size: 11px; line-height: 18px; }
@@ -4584,7 +4593,7 @@ body,
 
 .account-menu { position: fixed; z-index: 86; top: 49px; right: 54px; }
 .account-menu__trigger { width: 46px; height: 46px; }
-.account-menu__popover { position: absolute; top: 56px; right: 0; display: grid; width: 272px; border: 1px solid var(--v100b-line); border-radius: 16px; background: #fff; padding: 20px; color: #222; box-shadow: 0 16px 45px rgba(0, 0, 0, .1); }
+.account-menu__popover { position: absolute; top: 56px; right: 0; display: grid; width: 272px; border: 1px solid rgba(34, 34, 34, .08); border-radius: 18px; background: rgba(255, 255, 255, .9); padding: 20px; color: #222; box-shadow: 0 18px 52px rgba(34, 34, 34, .13); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
 .account-menu__popover > span { color: rgba(34, 34, 34, .48); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .account-menu__popover > strong { margin-top: 8px; font-size: 17px; line-height: 22px; }
 .account-menu__popover > small { overflow: hidden; margin-top: 2px; color: rgba(34, 34, 34, .55); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }

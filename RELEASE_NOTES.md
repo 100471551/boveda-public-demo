@@ -4,7 +4,8 @@ First coherent supervision-workspace release, based independently on the current
 
 - Public Welcome and How it works remain available without signing in.
 - One compact Bóveda-styled sign-in modal gates the workspace, Projects and project URLs.
-- Browser-local demo sessions are explicitly passwordless and create no account or network identity.
+- The public gate uses one intentionally shared, configurable demo credential pair shown in the modal; it is explicitly not secure production authentication.
+- Browser-local sessions store only a generic shared-demo marker and timestamp—never visitor email addresses or personal identifiers.
 - New general workspace dashboard uses the real demo snapshots for Active Projects, Signals to review, Evidence Gaps, projects requiring attention, reviewable Signals and recorded project activity.
 - Signal rows open the exact canonical Finding, project Signal and Gap pills focus the corresponding Findings group, and activity rows open the relevant project History.
 - A secondary Usage element totals the tokens recorded by the three stored audit diagnostics; no usage values are estimated.
