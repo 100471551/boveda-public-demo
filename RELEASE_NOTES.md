@@ -5,7 +5,12 @@ First coherent supervision-workspace release, based independently on the current
 - Public Welcome and How it works remain available without signing in.
 - One compact Bóveda-styled sign-in modal gates the workspace, Projects and project URLs.
 - Browser-local demo sessions are explicitly passwordless and create no account or network identity.
-- New general workspace dashboard uses the real demo snapshots for Active Projects, Open Signals, Evidence Gaps, projects requiring attention, active Signals and recorded Bóveda activity.
+- New general workspace dashboard uses the real demo snapshots for Active Projects, Signals to review, Evidence Gaps, projects requiring attention, reviewable Signals and recorded project activity.
+- Signal rows open the exact canonical Finding, project Signal and Gap pills focus the corresponding Findings group, and activity rows open the relevant project History.
+- A secondary Usage element totals the tokens recorded by the three stored audit diagnostics; no usage values are estimated.
+- Signing in always enters the general workspace, regardless of which protected route prompted the sign-in.
+- Review inbox items use a bounded `new` / `in_review` / `reviewed` status shape. Current immutable snapshots default to `new`; no unsupported resolution workflow is implied.
+- The former Start exploring artwork has been removed, authenticated Demo badges use the platform red, and the workspace import icon remains white.
 - Persistent navigation keeps Home mapped to the workspace, four squares mapped to Projects and `?` mapped to How it works.
 - The top-right control now shows the current demo session and provides Log out.
 - Existing project dashboards, Findings, History, evidence navigation and report downloads remain intact.

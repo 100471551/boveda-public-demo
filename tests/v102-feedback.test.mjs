@@ -13,7 +13,6 @@ const indexHtml = readFileSync(new URL("../index.html", import.meta.url), "utf8"
 const menu = readFileSync(new URL("../public/ui/Menu.svg", import.meta.url), "utf8");
 const dragIcon = readFileSync(new URL("../public/ui/Drag_Icon.svg", import.meta.url), "utf8");
 const demoBannerClose = readFileSync(new URL("../public/ui/Demo_Banner_Close.svg", import.meta.url), "utf8");
-const startExploring = readFileSync(new URL("../public/ui/Start_Exploring.png", import.meta.url));
 const repositoryLink = readFileSync(new URL("../public/ui/Link_Button.svg", import.meta.url), "utf8");
 const howItWorksIcon = readFileSync(new URL("../public/ui/How_It_Works.svg", import.meta.url), "utf8");
 const howItWorksArrow = readFileSync(new URL("../public/ui/How_It_Works_Arrow.svg", import.meta.url), "utf8");
@@ -171,16 +170,9 @@ test("v1.0.2 stores the exact exported Figma demo-banner close asset", () => {
   assert.equal(demoBannerClose.trim(), '<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="19.5352" height="19.5352" viewBox="0 0 19.5352 19.5352" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Close Button"><circle id="Ellipse 31" cx="9.76758" cy="9.76758" r="9.01758" stroke="white" stroke-width="1.5"/><g id="Group 24"><path id="Vector 87" d="M7.21925 12.586L12.5664 7.23888" stroke="white" stroke-width="1.30234" stroke-linecap="round"/><path id="Vector 89" d="M7.24136 7.21947L12.5885 12.5666" stroke="white" stroke-width="1.30234" stroke-linecap="round"/></g></g></svg>');
 });
 
-test("v1.0.2 introduces first-visit guidance beside Projects using the exact Figma export", () => {
-  assert.equal(createHash("sha256").update(startExploring).digest("hex"), "b6f1af67a32fa68d82a743661fc202b0caf3cd94583a551e2508cfcd0b75d048");
-  assert.match(main, /const START_EXPLORING_STORAGE_KEY = "boveda\.start-exploring\.seen\.v1";/);
-  assert.match(main, /useState\(\(\) => !hasSeenStartExploring\(\)\)/);
-  assert.match(main, /src="\/ui\/Start_Exploring\.png"/);
-  assert.match(main, /aria-describedby=\{showStartExploring \? "start-exploring-hint" : undefined\}/);
-  assert.match(main, /showStartExploring=\{renderedScreen === "welcome" && startExploringVisible\}/);
-  assert.match(main, /setStartExploringVisible\(false\); storeStartExploringSeen\(\);/);
-  assert.match(styles, /\.global-navigation__start-exploring \{[\s\S]*?top: 77px;[\s\S]*?left: calc\(100% \+ 8px\);[\s\S]*?width: 114px;[\s\S]*?height: 27px;/);
-  assert.match(styles, /@media \(max-width: 900px\)[\s\S]*?\.global-navigation__start-exploring \{ top: -34px; left: calc\(50% \+ 10px\); \}/);
+test("v1.1.0 removes the first-visit Start exploring artwork from navigation", () => {
+  assert.doesNotMatch(main, /START_EXPLORING_STORAGE_KEY|start-exploring-hint|Start_Exploring\.png|showStartExploring/);
+  assert.doesNotMatch(styles, /\.global-navigation__start-exploring/);
 });
 
 test("v1.0.2 links each known demo project to its original GitHub repository", () => {

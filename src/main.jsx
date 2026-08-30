@@ -43,7 +43,6 @@ import { WorkspaceDashboard } from "./workspace-dashboard.jsx";
 const api = requestBovedaJson;
 
 const PROJECT_ORDER_STORAGE_KEY = "boveda.project-order.v1";
-const START_EXPLORING_STORAGE_KEY = "boveda.start-exploring.seen.v1";
 const WELCOME_HEADLINE = "Auditable by design.";
 const WELCOME_HEADLINE_LETTERS = [...WELCOME_HEADLINE];
 
@@ -66,16 +65,6 @@ function applyStoredProjectOrder(projects) {
 function storeProjectOrder(projectIds) {
   try { window.localStorage.setItem(PROJECT_ORDER_STORAGE_KEY, JSON.stringify(projectIds)); }
   catch { /* The server-backed order remains authoritative when browser storage is unavailable. */ }
-}
-
-function hasSeenStartExploring() {
-  try { return window.localStorage.getItem(START_EXPLORING_STORAGE_KEY) === "true"; }
-  catch { return false; }
-}
-
-function storeStartExploringSeen() {
-  try { window.localStorage.setItem(START_EXPLORING_STORAGE_KEY, "true"); }
-  catch { /* The hint can safely return if browser storage is unavailable. */ }
 }
 
 const MOTION_GROUPS = [
@@ -137,12 +126,11 @@ function Logo({ showVersion = true, showDemo = false }) {
   return <div className="brand"><img className="brand__logo" src="/Boveda_Logo_Black.svg" alt="Bóveda" />{showDemo ? <span className="brand__demo">Demo</span> : null}{showVersion ? <div className="brand__version">Alpha {applicationVersion}</div> : null}</div>;
 }
 
-function GlobalNavigation({ active, onHome, onProjects, onHowItWorks, showStartExploring = false }) {
+function GlobalNavigation({ active, onHome, onProjects, onHowItWorks }) {
   return <nav className="global-navigation" aria-label="Main navigation">
     <button type="button" className={active === "workspace" ? "is-active" : ""} onClick={onHome} aria-label="General dashboard" aria-current={active === "workspace" ? "page" : undefined}><Icon name="Home" /></button>
-    <button type="button" className={active === "projects" ? "is-active" : ""} onClick={onProjects} aria-label="Projects" aria-current={active === "projects" ? "page" : undefined} aria-describedby={showStartExploring ? "start-exploring-hint" : undefined}><span className="global-navigation__grid" aria-hidden="true"><i /><i /><i /><i /></span></button>
+    <button type="button" className={active === "projects" ? "is-active" : ""} onClick={onProjects} aria-label="Projects" aria-current={active === "projects" ? "page" : undefined}><span className="global-navigation__grid" aria-hidden="true"><i /><i /><i /><i /></span></button>
     <button type="button" className={`global-navigation__how ${active === "how-it-works" ? "is-active" : ""}`} onClick={onHowItWorks} aria-label="How it works" aria-current={active === "how-it-works" ? "page" : undefined}><Icon name="How_It_Works" /></button>
-    {showStartExploring ? <span className="global-navigation__start-exploring" id="start-exploring-hint" role="note"><img src="/ui/Start_Exploring.png" alt="" aria-hidden="true" /><span className="visually-hidden">Start exploring</span></span> : null}
   </nav>;
 }
 
@@ -1050,7 +1038,6 @@ function App() {
   const { screen, projectId: routeProjectId, activeView: routeView } = route;
   const [session, setSession] = useState(() => readDemoSession());
   const [loginOpen, setLoginOpen] = useState(false);
-  const [loginTarget, setLoginTarget] = useState(null);
   const [projectsOverlayOpen, setProjectsOverlayOpen] = useState(false);
   const [projects, setProjects] = useState([]);
   const [projectOrderBusy, setProjectOrderBusy] = useState(false);
@@ -1065,6 +1052,7 @@ function App() {
   const [analyticalLayer, setAnalyticalLayer] = useState(null);
   const activeView = routeView;
   const [findingsTarget, setFindingsTarget] = useState(null);
+  const [pendingFindingsTarget, setPendingFindingsTarget] = useState(null);
   const [signalSelection, setSignalSelection] = useState(null);
   const [showImport, setShowImport] = useState(false);
   const [trail, setTrail] = useState(null);
@@ -1076,7 +1064,6 @@ function App() {
   const [demoNotice, setDemoNotice] = useState("");
   const [workspaceLayers, setWorkspaceLayers] = useState({});
   const [workspaceLoading, setWorkspaceLoading] = useState(false);
-  const [startExploringVisible, setStartExploringVisible] = useState(() => !hasSeenStartExploring());
   const demoNoticeTimer = useRef(null);
   const showDemoAction = useCallback((action) => {
     const messages = {
@@ -1110,7 +1097,7 @@ function App() {
   useEffect(() => { if (route.notFound) navigateRoute({ screen: "projects" }, { replace: true }); }, [route.notFound]);
   useEffect(() => {
     const protectedScreen = ["workspace", "projects", "project"].includes(screen);
-    if (!session && protectedScreen) { setLoginTarget(route); setLoginOpen(true); }
+    if (!session && protectedScreen) setLoginOpen(true);
     if (session && screen === "welcome") navigateRoute({ screen: "workspace" }, { replace: true });
   }, [session, screen, route]);
   useSiteMotion([record?.project_id, activeView, projectsLoaded, signalsLayer, historyLayer, analyticalLayer]);
@@ -1172,16 +1159,23 @@ function App() {
     let cancelled = false;
     setWorkspaceLoading(true);
     Promise.all(projects.map(async (project) => {
-      const [signals, history] = await Promise.all([
+      const [signals, history, diagnostics] = await Promise.all([
         api(`/api/projects/${project.project_id}/signals`).catch(() => null),
         api(`/api/projects/${project.project_id}/history`).catch(() => null),
+        api(`/api/projects/${project.project_id}/diagnostics`).catch(() => null),
       ]);
-      return [project.project_id, { signals, history }];
+      return [project.project_id, { signals, history, diagnostics }];
     })).then((entries) => { if (!cancelled) setWorkspaceLayers(Object.fromEntries(entries)); })
       .catch((err) => { if (!cancelled) setError(err.message); })
       .finally(() => { if (!cancelled) setWorkspaceLoading(false); });
     return () => { cancelled = true; };
   }, [session, screen, projectsLoaded, projects]);
+  useEffect(() => {
+    if (screen !== "project" || activeView !== "signals" || !signalsLayer || !pendingFindingsTarget) return;
+    if (pendingFindingsTarget.type === "finding") setSignalSelection({ type: "finding", id: pendingFindingsTarget.id });
+    else setFindingsTarget(pendingFindingsTarget.type);
+    setPendingFindingsTarget(null);
+  }, [screen, activeView, signalsLayer, pendingFindingsTarget]);
   useEffect(() => {
     if (!projectsLoaded || screen !== "project" || !routeProjectId) return undefined;
     const knownProject = projects.find((item) => item.project_id === routeProjectId);
@@ -1254,28 +1248,30 @@ function App() {
       setDeleteBusy(false);
     }
   }
-  function requestLogin(target = { screen: "workspace" }) { setLoginTarget(target); setLoginOpen(true); }
-  function finishLogin(nextSession) { storeDemoSession(nextSession); setSession(nextSession); setLoginOpen(false); const target = loginTarget || (["workspace", "projects", "project"].includes(screen) ? route : { screen: "workspace" }); setLoginTarget(null); navigateRoute(target, { replace: screen !== "welcome" }); window.scrollTo(0, 0); }
-  function closeLogin() { setLoginOpen(false); setLoginTarget(null); if (!session && ["workspace", "projects", "project"].includes(screen)) navigateRoute({ screen: "welcome" }, { replace: true }); }
+  function requestLogin() { setLoginOpen(true); }
+  function finishLogin(nextSession) { storeDemoSession(nextSession); setSession(nextSession); setLoginOpen(false); navigateRoute({ screen: "workspace" }, { replace: true }); window.scrollTo(0, 0); }
+  function closeLogin() { setLoginOpen(false); if (!session && ["workspace", "projects", "project"].includes(screen)) navigateRoute({ screen: "welcome" }, { replace: true }); }
   function logout() { clearDemoSession(); setSession(null); setProjectsOverlayOpen(false); setRecord(null); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); navigateRoute({ screen: "welcome" }, { replace: true }); window.scrollTo(0, 0); }
   function showHome() { setProjectsOverlayOpen(false); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); if (!session) requestLogin({ screen: "workspace" }); else navigateRoute({ screen: "workspace" }); window.scrollTo(0, 0); }
-  function showProjects() { if (!session) { requestLogin({ screen: "projects" }); return; } if (startExploringVisible) { setStartExploringVisible(false); storeStartExploringSeen(); } if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); navigateRoute({ screen: "projects" }); } }
+  function showProjects() { if (!session) { requestLogin(); return; } if (record?.project_id) setSelectedProjectId(record.project_id); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); setFindingsTarget(null); setPendingFindingsTarget(null); if (screen === "project" && record) setProjectsOverlayOpen((open) => !open); else { setProjectsOverlayOpen(false); navigateRoute({ screen: "projects" }); } }
   function showHowItWorks() { setProjectsOverlayOpen(false); setSignalSelection(null); setDiagnosticsOpen(false); setTrail(null); navigateRoute({ screen: "how-it-works" }); window.scrollTo(0, 0); }
   function changeView(view) { setFindingsTarget(null); navigateRoute({ screen: "project", projectId: record.project_id, activeView: view }); }
   function navigateToFindingGroup(target) { setFindingsTarget(target); navigateRoute({ screen: "project", projectId: record.project_id, activeView: "signals" }); }
   function openWorkspaceProject(id) { setSelectedProjectId(id); navigateRoute({ screen: "project", projectId: id, activeView: "overview" }); }
-  function openWorkspaceFindings(id) { setSelectedProjectId(id); navigateRoute({ screen: "project", projectId: id, activeView: "signals" }); }
+  function openWorkspaceFindings(id, target = "signals") { setSelectedProjectId(id); setPendingFindingsTarget({ type: target }); navigateRoute({ screen: "project", projectId: id, activeView: "signals" }); }
+  function openWorkspaceSignal(id, findingId) { setSelectedProjectId(id); setPendingFindingsTarget({ type: "finding", id: findingId }); navigateRoute({ screen: "project", projectId: id, activeView: "signals" }); }
+  function openWorkspaceHistory(id) { setSelectedProjectId(id); navigateRoute({ screen: "project", projectId: id, activeView: "history" }); }
   function openSignalEvidence(ids) { setSignalSelection(null); setTrail({ value: "Signal evidence trail", epistemic: "DERIVED", evidence_ids: Array.isArray(ids) ? ids : [ids] }); }
   function openHistoryEvidence(id) { setTrail({ value: "History evidence trail", epistemic: "OBSERVED", evidence_ids: [id] }); }
   const protectedScreen = ["workspace", "projects", "project"].includes(screen);
   const renderedScreen = !session && protectedScreen ? "welcome" : screen;
   const currentNavigation = projectsOverlayOpen || renderedScreen === "projects" ? "projects" : renderedScreen;
   const content = renderedScreen === "welcome"
-    ? <WelcomeSurface onHowItWorks={showHowItWorks} onLogin={() => requestLogin({ screen: "workspace" })} />
+    ? <WelcomeSurface onHowItWorks={showHowItWorks} onLogin={requestLogin} />
     : screen === "how-it-works"
       ? <HowItWorksSurface onProjects={session ? null : showProjects} />
     : screen === "workspace"
-      ? <WorkspaceDashboard projects={projects} layersByProject={workspaceLayers} onProjects={showProjects} onOpenProject={openWorkspaceProject} onOpenFindings={openWorkspaceFindings} onImport={beginImport} loading={workspaceLoading} />
+      ? <WorkspaceDashboard projects={projects} layersByProject={workspaceLayers} onProjects={showProjects} onOpenProject={openWorkspaceProject} onOpenFindings={openWorkspaceFindings} onOpenSignal={openWorkspaceSignal} onOpenHistory={openWorkspaceHistory} onImport={beginImport} loading={workspaceLoading} />
     : screen === "project"
       ? record?.project_id === routeProjectId
         ? <div className="app-shell" inert={projectsOverlayOpen ? true : undefined} aria-hidden={projectsOverlayOpen || undefined}><Overview record={record} signalsLayer={signalsLayer} historyLayer={historyLayer} analyticalLayer={analyticalLayer} activeView={activeView} onView={changeView} findingsTarget={findingsTarget} onFindingsTargetHandled={() => setFindingsTarget(null)} onFindingNavigate={navigateToFindingGroup} onOpenProjects={showProjects} onSignalInspect={setSignalSelection} onSignalEvidence={openSignalEvidence} onHistoryEvidence={openHistoryEvidence} onReanalyse={reanalyse} reanalysing={reanalysing} onTrail={setTrail} onDiagnostics={openDiagnostics} /></div>
@@ -1283,7 +1279,7 @@ function App() {
       : projectsLoaded
         ? <ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} publicDemo={PUBLIC_DEMO} />
         : <main className="app-loading" aria-label="Loading projects" />;
-  return <><div className="v100b-app" inert={deleteCandidate || loginOpen ? true : undefined} aria-hidden={deleteCandidate || loginOpen ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} onHowItWorks={showHowItWorks} showStartExploring={renderedScreen === "welcome" && startExploringVisible} />{session ? <AccountMenu session={session} onLogout={logout} /> : null}{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{loginOpen ? <LoginModal onClose={closeLogin} onSignIn={finishLogin} /> : null}{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
+  return <><div className={`v100b-app${session ? " is-authenticated" : ""}`} inert={deleteCandidate || loginOpen ? true : undefined} aria-hidden={deleteCandidate || loginOpen ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} onHowItWorks={showHowItWorks} />{session ? <AccountMenu session={session} onLogout={logout} /> : null}{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{loginOpen ? <LoginModal onClose={closeLogin} onSignIn={finishLogin} /> : null}{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
 }
 
 createRoot(document.getElementById("root")).render(<React.StrictMode><App /></React.StrictMode>);

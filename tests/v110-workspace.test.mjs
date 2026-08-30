@@ -31,15 +31,18 @@ test("v1.1.0 derives supervisory KPIs and activity from project layers", () => {
     { project_id: "P2", name: "Beta", finding_count: 4, analysed_at: "2026-08-30T10:00:00.000Z" },
   ];
   const layers = {
-    P1: { signals: { finding_breakdown: { signals: 1, evidence_gaps: 2 }, findings: [{ finding_id: "S1", finding_type: "signal", status: "active", materiality: { level: "high" }, presentation: { title: "Review Alpha" } }] }, history: { events: [] } },
-    P2: { signals: { finding_breakdown: { signals: 2, evidence_gaps: 2 }, findings: [{ finding_id: "S2", finding_type: "signal", status: "active", materiality: { level: "medium" }, presentation: { title: "Review Beta" } }] }, history: { events: [] } },
+    P1: { signals: { finding_breakdown: { signals: 1, evidence_gaps: 2 }, findings: [{ finding_id: "S1", finding_type: "signal", status: "active", materiality: { level: "high" }, presentation: { title: "Review Alpha" } }] }, history: { events: [] }, diagnostics: { llm: { total_usage: { total_tokens: 1000 } } } },
+    P2: { signals: { finding_breakdown: { signals: 2, evidence_gaps: 2 }, findings: [{ finding_id: "S2", finding_type: "signal", status: "active", materiality: { level: "medium" }, presentation: { title: "Review Beta" } }] }, history: { events: [] }, diagnostics: { llm: { total_usage: { total_tokens: 2500 } } } },
   };
   const summary = buildWorkspaceSummary(projects, layers);
   assert.equal(summary.activeProjects, 2);
   assert.equal(summary.openSignals, 3);
   assert.equal(summary.evidenceGaps, 4);
+  assert.equal(summary.totalTokens, 3500);
+  assert.equal(summary.usageProjects, 2);
   assert.equal(summary.attention[0].projectId, "P2");
   assert.equal(summary.signals[0].findingId, "S1");
+  assert.equal(summary.signals[0].reviewStatus, "new");
   assert.equal(summary.activity[0].projectId, "P2");
 });
 
@@ -56,12 +59,18 @@ test("v1.1.0 gates workspace routes with an honest local demo session", () => {
 
 test("v1.1.0 provides the evidence-backed supervisory workspace without changing project dashboards", () => {
   assert.match(workspace, /Active Projects/);
-  assert.match(workspace, /Open Signals/);
+  assert.match(workspace, /Signals to review/);
   assert.match(workspace, /Evidence Gaps/);
   assert.match(workspace, /Projects requiring attention/);
-  assert.match(workspace, /Recent \/ open Signals/);
+  assert.match(workspace, /Requires attention/);
   assert.match(workspace, /Recent activity/);
+  assert.match(workspace, /tokens/);
+  assert.match(workspace, /Reconstruction ·/);
+  assert.match(workspace, /onOpenSignal\(signal\.projectId, signal\.findingId\)/);
+  assert.match(workspace, /onOpenHistory\(event\.projectId\)/);
   assert.match(workspace, /data-demo-disabled="true"/);
   assert.match(main, /<Overview record=\{record\}/);
   assert.match(main, /<WorkspaceDashboard projects=\{projects\}/);
+  assert.match(main, /navigateRoute\(\{ screen: "workspace" \}, \{ replace: true \}\)/);
+  assert.match(styles, /\.v100b-app\.is-authenticated \.brand__demo \{ background: var\(--ui-red\); \}/);
 });
