@@ -61,6 +61,9 @@ test("v1.1.0 provides the evidence-backed supervisory workspace without changing
   assert.match(workspace, /Active Projects/);
   assert.match(workspace, /Signals to review/);
   assert.match(workspace, /Evidence Gaps/);
+  assert.doesNotMatch(workspace, /onOpenFindings\(summary\.attention\[0\]/);
+  assert.match(workspace, /<article className="workspace-kpi"><span>Signals to review/);
+  assert.match(workspace, /<article className="workspace-kpi"><span>Evidence Gaps/);
   assert.match(workspace, /Projects requiring attention/);
   assert.match(workspace, /Requires attention/);
   assert.match(workspace, /Recent activity/);

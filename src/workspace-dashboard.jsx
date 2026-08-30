@@ -47,9 +47,9 @@ export function WorkspaceDashboard({ projects, layersByProject, onProjects, onOp
       </header>
 
       <section className="workspace-kpis" aria-label="Workspace totals">
-        <button type="button" className="workspace-kpi workspace-kpi--primary" onClick={onProjects}><span>Active Projects</span><strong>{summary.activeProjects}</strong><small>Projects currently under supervision</small><AssetIcon name="Folder" /></button>
-        <button type="button" className="workspace-kpi" onClick={() => summary.attention[0] && onOpenFindings(summary.attention[0].projectId, "signals")}><span>Signals to review</span><strong>{summary.openSignals}</strong><small>Findings requiring supervisory review</small><AssetIcon name="Findings_Signals" /></button>
-        <button type="button" className="workspace-kpi" onClick={() => summary.attention[0] && onOpenFindings(summary.attention[0].projectId, "gaps")}><span>Evidence Gaps</span><strong>{summary.evidenceGaps}</strong><small>Important evidence Bóveda could not establish</small><AssetIcon name="Findings_Evidence_Gaps" /></button>
+        <button type="button" className="workspace-kpi workspace-kpi--primary workspace-kpi--interactive" onClick={onProjects}><span>Active Projects</span><strong>{summary.activeProjects}</strong><small>Projects currently under supervision</small><AssetIcon name="Folder" /></button>
+        <article className="workspace-kpi"><span>Signals to review</span><strong>{summary.openSignals}</strong><small>Findings requiring supervisory review</small><AssetIcon name="Findings_Signals" /></article>
+        <article className="workspace-kpi"><span>Evidence Gaps</span><strong>{summary.evidenceGaps}</strong><small>Important evidence Bóveda could not establish</small><AssetIcon name="Findings_Evidence_Gaps" /></article>
       </section>
 
       {loading ? <section className="workspace-loading" aria-label="Loading workspace"><span /></section> : <div className="workspace-dashboard__grid">
