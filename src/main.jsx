@@ -208,7 +208,7 @@ function WelcomeSurface({ onHowItWorks, onLogin }) {
       </button>
     </aside>
     <div className="public-brand"><Logo showVersion={false} showDemo /></div>
-    <button type="button" className="welcome-sign-in" onClick={onLogin}>Sign in</button>
+    <button type="button" className="welcome-sign-in" onClick={onLogin}>Sign in <Icon name="Login" /></button>
     <h1 aria-label={WELCOME_HEADLINE}><WelcomeTypewriter /></h1>
     <p>Bóveda turns the evidence data, ML and AI projects already leave behind<br />into a clear, traceable record so the people responsible for them can<br />understand what happened, ask the right questions, and follow every<br />conclusion back to its source. <button type="button" className="welcome-how-link" onClick={onHowItWorks}>See how it works<Icon name="How_It_Works_Arrow" /></button></p>
     <span className="welcome-version">Alpha {applicationVersion}</span>
@@ -997,7 +997,7 @@ function LoginModal({ onClose, onSignIn }) {
   const submit = (event) => {
     event.preventDefault();
     const session = createDemoSession(username, password);
-    if (!session) { setValidation("Use the shared demo credentials shown above."); return; }
+    if (!session) { setValidation("Username or password is incorrect."); return; }
     onSignIn(session);
   };
   return <div className="login-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
@@ -1009,17 +1009,13 @@ function LoginModal({ onClose, onSignIn }) {
       </div>
       <span className="login-panel__eyebrow">Demo workspace</span>
       <h2 id="login-title">Sign in to Bóveda</h2>
-      <p>Use the shared public demo account below. This is a realistic demo gate, not secure production authentication.</p>
-      <dl className="login-panel__credentials" aria-label="Shared demo credentials">
-        <div><dt>Username</dt><dd>{DEMO_LOGIN.username}</dd></div>
-        <div><dt>Password</dt><dd>{DEMO_LOGIN.password}</dd></div>
-      </dl>
+      <p>Enter your username and password to continue.</p>
       <form onSubmit={submit} noValidate autoComplete="off">
-        <label htmlFor="demo-login-username">Demo username</label>
-        <input ref={inputRef} id="demo-login-username" type="text" inputMode="email" value={username} onChange={(event) => { setUsername(event.target.value); setValidation(""); }} autoComplete="off" spellCheck="false" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : "demo-login-note"} />
-        <label htmlFor="demo-login-password">Demo password</label>
-        <input id="demo-login-password" type="password" value={password} onChange={(event) => { setPassword(event.target.value); setValidation(""); }} autoComplete="off" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : "demo-login-note"} />
-        {validation ? <span className="login-panel__error" id="demo-login-error" role="alert">{validation}</span> : <span className="login-panel__note" id="demo-login-note">Credentials are checked only in this browser and are not sent or stored.</span>}
+        <label htmlFor="demo-login-username">Username</label>
+        <input ref={inputRef} id="demo-login-username" type="text" inputMode="email" value={username} onChange={(event) => { setUsername(event.target.value); setValidation(""); }} autoComplete="off" spellCheck="false" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : undefined} />
+        <label htmlFor="demo-login-password">Password</label>
+        <input id="demo-login-password" type="password" value={password} onChange={(event) => { setPassword(event.target.value); setValidation(""); }} autoComplete="off" aria-invalid={validation ? true : undefined} aria-describedby={validation ? "demo-login-error" : undefined} />
+        {validation ? <span className="login-panel__error" id="demo-login-error" role="alert">{validation}</span> : null}
         <button type="submit" className="login-panel__submit">Continue to workspace <Icon name="Arrow_Forward" /></button>
       </form>
     </section>

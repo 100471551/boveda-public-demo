@@ -4560,12 +4560,13 @@ body,
 }
 
 /* v1.1.0 — public sign-in and workspace supervision dashboard. */
-.welcome-sign-in { position: fixed; z-index: 72; top: 52px; right: 54px; min-width: 94px; height: 42px; border: 1px solid #222; border-radius: 999px; background: #222; padding: 0 22px; color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.welcome-sign-in { position: fixed; z-index: 72; top: 52px; right: 54px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-width: 106px; height: 42px; border: 1px solid #222; border-radius: 999px; background: #222; padding: 0 19px; color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.welcome-sign-in .ui-icon { width: 16px; height: 16px; }
 .welcome-sign-in:hover { background: #3a3a3a; }
 .welcome-sign-in:focus-visible { outline: 2px solid #222; outline-offset: 3px; }
 
 .login-backdrop { position: fixed; z-index: 160; inset: 0; display: grid; place-items: center; background: rgba(34, 34, 34, .42); padding: 24px; backdrop-filter: blur(20px) saturate(.85); -webkit-backdrop-filter: blur(20px) saturate(.85); }
-.login-panel { position: relative; width: min(500px, 100%); border: 1px solid rgba(34, 34, 34, .08); border-radius: 24px; background: rgba(255, 255, 255, .9); padding: 42px 48px 46px; color: #222; box-shadow: 0 26px 90px rgba(34, 34, 34, .2); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); }
+.login-panel { position: relative; width: min(500px, 100%); border: 1px solid rgba(255, 255, 255, .7); border-radius: 24px; background: rgba(255, 255, 255, .82); padding: 42px 48px 46px; color: #222; box-shadow: 0 26px 90px rgba(34, 34, 34, .2); backdrop-filter: blur(42px) saturate(.82); -webkit-backdrop-filter: blur(42px) saturate(.82); }
 .login-panel__close { position: absolute; top: 18px; right: 18px; display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: transparent; padding: 0; cursor: pointer; }
 .login-panel__close .ui-icon { width: 40px; height: 40px; }
 .login-panel__brand { display: flex; align-items: center; gap: 12px; margin: 0 52px 32px 0; }
@@ -4574,19 +4575,13 @@ body,
 .login-panel__eyebrow, .workspace-dashboard__eyebrow, .workspace-panel__eyebrow { display: block; color: rgba(34, 34, 34, .48); font-size: 11px; font-weight: 700; letter-spacing: .08em; line-height: 16px; text-transform: uppercase; }
 .login-panel h2 { margin: 12px 0; font-size: 38px; line-height: 1.08; letter-spacing: -.025em; }
 .login-panel > p { margin: 0; color: rgba(34, 34, 34, .68); font-size: 14px; line-height: 22px; }
-.login-panel__credentials { display: grid; gap: 0; margin: 22px 0 0; border: 1px solid rgba(34, 34, 34, .08); border-radius: 14px; background: rgba(255, 255, 255, .62); padding: 4px 15px; }
-.login-panel__credentials > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); align-items: baseline; gap: 12px; padding: 11px 0; }
-.login-panel__credentials > div + div { border-top: 1px solid rgba(34, 34, 34, .07); }
-.login-panel__credentials dt { color: rgba(34, 34, 34, .5); font-size: 11px; font-weight: 700; }
-.login-panel__credentials dd { margin: 0; color: #222; font-size: 13px; font-weight: 700; }
-.login-panel form { display: grid; gap: 10px; margin-top: 22px; }
+.login-panel form { display: grid; gap: 10px; margin-top: 30px; }
 .login-panel label { font-size: 12px; font-weight: 700; }
 .login-panel label:not(:first-child) { margin-top: 4px; }
 .login-panel input { width: 100%; height: 52px; border: 1px solid rgba(34, 34, 34, .13); border-radius: 12px; background: rgba(255, 255, 255, .72); padding: 0 16px; color: #222; font: inherit; font-size: 14px; transition: border-color .16s ease, background .16s ease, box-shadow .16s ease; }
 .login-panel input:focus { border-color: #222; outline: 1px solid #222; }
 .login-panel input[aria-invalid="true"] { border-color: var(--ui-red); }
-.login-panel__note, .login-panel__error { min-height: 18px; font-size: 11px; line-height: 18px; }
-.login-panel__note { color: rgba(34, 34, 34, .48); }
+.login-panel__error { min-height: 18px; font-size: 11px; line-height: 18px; }
 .login-panel__error { color: var(--ui-red); }
 .login-panel__submit { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 52px; margin-top: 8px; border: 1px solid #222; border-radius: 12px; background: #222; padding: 0 17px; color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
 .login-panel__submit .ui-icon { width: 18px; height: 18px; filter: invert(1); }

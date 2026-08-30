@@ -53,18 +53,19 @@ test("v1.1.0 derives supervisory KPIs and activity from project layers", () => {
 test("v1.1.0 gates workspace routes with an honest local demo session", () => {
   assert.equal(metadata.version, "1.1.0");
   assert.match(main, /function LoginModal/);
-  assert.match(main, /shared public demo account/);
-  assert.match(main, /not secure production authentication/);
-  assert.match(main, /Shared demo credentials/);
-  assert.match(main, /Credentials are checked only in this browser and are not sent or stored/);
+  assert.match(main, /Enter your username and password to continue/);
+  assert.doesNotMatch(main, /Shared demo credentials/);
+  assert.doesNotMatch(main, /Credentials are checked only in this browser/);
+  assert.doesNotMatch(main, /Demo username|Demo password/);
   assert.doesNotMatch(main, /name@organisation\.com/);
+  assert.match(main, /welcome-sign-in[\s\S]*?Login/);
   assert.match(main, /function AccountMenu/);
   assert.match(main, /Shared public demo/);
   assert.match(main, /login-panel__brand/);
   assert.match(main, /function logout\(\)/);
   assert.match(styles, /\.login-backdrop\s*\{[\s\S]*?backdrop-filter:\s*blur/);
-  assert.match(styles, /\.login-panel\s*\{[\s\S]*?background:\s*rgba\(255, 255, 255, \.9\)/);
-  assert.match(styles, /\.login-panel\s*\{[\s\S]*?backdrop-filter:\s*blur/);
+  assert.match(styles, /\.login-panel\s*\{[\s\S]*?background:\s*rgba\(255, 255, 255, \.82\)/);
+  assert.match(styles, /\.login-panel\s*\{[\s\S]*?backdrop-filter:\s*blur\(42px\)/);
   assert.match(styles, /\.account-menu__popover\s*\{[\s\S]*?backdrop-filter:\s*blur/);
 });
 
