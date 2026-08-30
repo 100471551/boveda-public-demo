@@ -8,6 +8,8 @@ First coherent supervision-workspace release, based independently on the current
 - New general workspace dashboard uses the real demo snapshots for Active Projects, Signals to review, Evidence Gaps, projects requiring attention, reviewable Signals and recorded project activity.
 - Signal rows open the exact canonical Finding, project Signal and Gap pills focus the corresponding Findings group, and activity rows open the relevant project History.
 - A secondary Usage element totals the tokens recorded by the three stored audit diagnostics; no usage values are estimated.
+- The refined workspace composition adds a real High / Medium Signal breakdown while keeping the aggregate KPI informational.
+- A Repositories panel links each stored demo project to its original public GitHub repository.
 - Signing in always enters the general workspace, regardless of which protected route prompted the sign-in.
 - Review inbox items use a bounded `new` / `in_review` / `reviewed` status shape. Current immutable snapshots default to `new`; no unsupported resolution workflow is implied.
 - The former Start exploring artwork has been removed, authenticated Demo badges use the platform red, and the workspace import icon remains white.

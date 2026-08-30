@@ -39,6 +39,7 @@ export function buildWorkspaceSummary(projects = [], layersByProject = {}) {
   let evidenceGaps = 0;
   let totalTokens = 0;
   let usageProjects = 0;
+  const signalBreakdown = { high: 0, medium: 0, low: 0, review: 0 };
   const attention = [];
   const signals = [];
   const activity = [];
@@ -65,13 +66,15 @@ export function buildWorkspaceSummary(projects = [], layersByProject = {}) {
 
     for (const finding of signalsLayer?.findings || []) {
       if (finding?.finding_type !== "signal" || finding?.status !== "active") continue;
+      const severity = String(finding?.materiality?.level || "review").toLowerCase();
+      signalBreakdown[severity in signalBreakdown ? severity : "review"] += 1;
       signals.push({
         findingId: finding.finding_id || finding.signal_id,
         projectId: project.project_id,
         projectTitle: titleForProject(project),
         title: signalTitle(finding),
         summary: finding?.presentation?.condition_summary || finding?.explanation || finding?.condition || "Review the bounded condition and its evidence trail.",
-        severity: String(finding?.materiality?.level || "review").toLowerCase(),
+        severity,
         reviewStatus: reviewStatusFor(finding),
       });
     }
@@ -110,5 +113,5 @@ export function buildWorkspaceSummary(projects = [], layersByProject = {}) {
   signals.sort((left, right) => severityRank(right.severity) - severityRank(left.severity) || left.projectTitle.localeCompare(right.projectTitle));
   activity.sort((left, right) => new Date(right.timestamp) - new Date(left.timestamp));
 
-  return { activeProjects, openSignals, evidenceGaps, totalTokens, usageProjects, attention, signals, activity };
+  return { activeProjects, openSignals, evidenceGaps, totalTokens, usageProjects, signalBreakdown, attention, signals, activity };
 }

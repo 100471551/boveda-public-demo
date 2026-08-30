@@ -38,6 +38,7 @@ test("v1.1.0 derives supervisory KPIs and activity from project layers", () => {
   assert.equal(summary.activeProjects, 2);
   assert.equal(summary.openSignals, 3);
   assert.equal(summary.evidenceGaps, 4);
+  assert.deepEqual(summary.signalBreakdown, { high: 1, medium: 1, low: 0, review: 0 });
   assert.equal(summary.totalTokens, 3500);
   assert.equal(summary.usageProjects, 2);
   assert.equal(summary.attention[0].projectId, "P2");
@@ -62,12 +63,16 @@ test("v1.1.0 provides the evidence-backed supervisory workspace without changing
   assert.match(workspace, /Signals to review/);
   assert.match(workspace, /Evidence Gaps/);
   assert.doesNotMatch(workspace, /onOpenFindings\(summary\.attention\[0\]/);
-  assert.match(workspace, /<article className="workspace-kpi"><span>Signals to review/);
+  assert.match(workspace, /workspace-kpi workspace-kpi--signals/);
   assert.match(workspace, /<article className="workspace-kpi"><span>Evidence Gaps/);
   assert.match(workspace, /Projects requiring attention/);
   assert.match(workspace, /Requires attention/);
   assert.match(workspace, /Recent activity/);
-  assert.match(workspace, /tokens/);
+  assert.match(workspace, /Signals by severity/);
+  assert.match(workspace, /Repositories/);
+  assert.match(workspace, /projectRepository\(project\.source_project_path\)/);
+  assert.match(workspace, /repository\.href/);
+  assert.match(workspace, /Tokens/);
   assert.match(workspace, /Reconstruction ·/);
   assert.match(workspace, /onOpenSignal\(signal\.projectId, signal\.findingId\)/);
   assert.match(workspace, /onOpenHistory\(event\.projectId\)/);
@@ -76,4 +81,7 @@ test("v1.1.0 provides the evidence-backed supervisory workspace without changing
   assert.match(main, /<WorkspaceDashboard projects=\{projects\}/);
   assert.match(main, /navigateRoute\(\{ screen: "workspace" \}, \{ replace: true \}\)/);
   assert.match(styles, /\.v100b-app\.is-authenticated \.brand__demo \{ background: var\(--ui-red\); \}/);
+  assert.match(styles, /\.workspace-overview \{ display: grid;/);
+  assert.match(styles, /\.workspace-dashboard__lower \{ display: grid;/);
+  assert.match(styles, /\.workspace-repositories/);
 });

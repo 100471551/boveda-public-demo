@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { version as applicationVersion } from "../package.json";
+import { projectRepository } from "./project-repository.mjs";
 import { buildWorkspaceSummary } from "./workspace-summary.mjs";
 
 function AssetIcon({ name }) {
@@ -36,25 +37,39 @@ function formatTokenCount(value) {
 export function WorkspaceDashboard({ projects, layersByProject, onProjects, onOpenProject, onOpenFindings, onOpenSignal, onOpenHistory, onImport, loading = false }) {
   const summary = useMemo(() => buildWorkspaceSummary(projects, layersByProject), [projects, layersByProject]);
   const signals = summary.signals.slice(0, 4);
-  const activity = summary.activity.slice(0, 5);
+  const activity = summary.activity.slice(0, 4);
+  const repositories = useMemo(() => projects.map((project) => ({ project, repository: projectRepository(project.source_project_path) })).filter(({ repository }) => repository), [projects]);
+  const signalTypes = ["high", "medium", "low", "review"].filter((type) => summary.signalBreakdown[type] > 0);
 
   return <main className="workspace-dashboard">
     <Brand />
     <div className="workspace-dashboard__inner">
-      <header className="workspace-dashboard__header">
-        <div><span className="workspace-dashboard__eyebrow">Workspace overview</span><h1>What needs your attention?</h1><p>An overview of the projects, signals and evidence currently under your supervision.</p></div>
-        <button type="button" className="workspace-import" onClick={onImport} data-demo-disabled="true"><AssetIcon name="Import_Plus" />Import new project</button>
-      </header>
+      <section className="workspace-overview" aria-labelledby="workspace-heading">
+        <header className="workspace-dashboard__header">
+          <h1 id="workspace-heading">What needs your attention?</h1>
+          <p>An overview of the projects, signals and evidence currently under your supervision.</p>
+        </header>
 
-      <section className="workspace-kpis" aria-label="Workspace totals">
-        <button type="button" className="workspace-kpi workspace-kpi--primary workspace-kpi--interactive" onClick={onProjects}><span>Active Projects</span><strong>{summary.activeProjects}</strong><small>Projects currently under supervision</small><AssetIcon name="Folder" /></button>
-        <article className="workspace-kpi"><span>Signals to review</span><strong>{summary.openSignals}</strong><small>Findings requiring supervisory review</small><AssetIcon name="Findings_Signals" /></article>
-        <article className="workspace-kpi"><span>Evidence Gaps</span><strong>{summary.evidenceGaps}</strong><small>Important evidence Bóveda could not establish</small><AssetIcon name="Findings_Evidence_Gaps" /></article>
+        <section className="workspace-kpis" aria-label="Workspace totals">
+          <button type="button" className="workspace-kpi workspace-kpi--interactive" onClick={onProjects}><span>Active Projects</span><strong>{summary.activeProjects}</strong><small>Projects currently under supervision</small><AssetIcon name="Folder" /></button>
+          <article className="workspace-kpi workspace-kpi--signals">
+            <span>Signals to review</span><AssetIcon name="Findings_Signals" />
+            <div className="workspace-kpi__signal-total"><strong>{summary.openSignals}</strong><small>Findings requiring supervisory review</small></div>
+            <dl className="workspace-signal-breakdown" aria-label="Signals by severity">{signalTypes.map((type) => <div key={type}><dt>{type === "review" ? "Other" : type}</dt><dd>{summary.signalBreakdown[type]}</dd></div>)}</dl>
+          </article>
+          <article className="workspace-kpi"><span>Evidence Gaps</span><strong>{summary.evidenceGaps}</strong><small>Important evidence Bóveda could not establish</small><AssetIcon name="Findings_Evidence_Gaps" /></article>
+        </section>
       </section>
 
-      {loading ? <section className="workspace-loading" aria-label="Loading workspace"><span /></section> : <div className="workspace-dashboard__grid">
-        <section className="workspace-panel workspace-attention">
-          <header><div><span className="workspace-panel__eyebrow">Priority view</span><h2>Projects requiring attention</h2></div><button type="button" onClick={onProjects}>View all projects <AssetIcon name="Arrow_Forward" /></button></header>
+      {loading ? <section className="workspace-loading" aria-label="Loading workspace"><span /></section> : <>
+        <section className="workspace-attention" aria-labelledby="workspace-attention-title">
+          <header>
+            <div><span className="workspace-panel__eyebrow">Priority view</span><h2 id="workspace-attention-title">Projects requiring attention</h2></div>
+            <div className="workspace-attention__actions">
+              <button type="button" className="workspace-import" onClick={onImport} data-demo-disabled="true"><AssetIcon name="Import_Plus" />Import new project</button>
+              <button type="button" className="workspace-view-projects" onClick={onProjects}><AssetIcon name="Folder" />View all projects</button>
+            </div>
+          </header>
           <div className="workspace-attention__list">{summary.attention.map((project, index) => <article className="workspace-project-row" key={project.projectId}>
             <button type="button" className="workspace-project-row__main" onClick={() => onOpenProject(project.projectId)}>
               <span className="workspace-project-row__number">{String(index + 1).padStart(2, "0")}</span>
@@ -65,28 +80,37 @@ export function WorkspaceDashboard({ projects, layersByProject, onProjects, onOp
               <button type="button" className="workspace-pill workspace-pill--gap" onClick={() => onOpenFindings(project.projectId, "gaps")} aria-label={`Open Evidence Gaps for ${project.title}`}>{project.gapCount} Gap{project.gapCount === 1 ? "" : "s"}</button>
             </span>
             <span className="workspace-project-row__confidence">{confidenceLabel(project.confidence)}</span>
+            <button type="button" className="workspace-project-row__open" onClick={() => onOpenProject(project.projectId)} aria-label={`Open ${project.title}`}><AssetIcon name="Arrow_Forward" /></button>
           </article>)}</div>
         </section>
 
-        <section className="workspace-panel workspace-signals">
-          <header><div><span className="workspace-panel__eyebrow">Requires attention</span><h2>Signals to review</h2></div></header>
-          <div className="workspace-signals__list">{signals.length ? signals.map((signal) => <button type="button" className="workspace-signal-row" onClick={() => onOpenSignal(signal.projectId, signal.findingId)} key={signal.findingId}>
-            <span className={`workspace-severity workspace-severity--${signal.severity}`}>{signal.severity}</span>
-            <span className="workspace-signal-row__title"><strong>{signal.title}</strong><em>{reviewStatusLabel(signal.reviewStatus)}</em></span>
-            <small>{signal.projectTitle}</small>
-            <AssetIcon name="Arrow_Forward" />
-          </button>) : <p className="workspace-empty">No open Signals were found in the current snapshots.</p>}</div>
-        </section>
+        <div className="workspace-dashboard__lower">
+          <section className="workspace-panel workspace-signals">
+            <header><div><span className="workspace-panel__eyebrow">Requires attention</span><h2>Signals to review</h2></div><AssetIcon name="Findings_Signals" /></header>
+            <div className="workspace-signals__list">{signals.length ? signals.map((signal) => <button type="button" className="workspace-signal-row" onClick={() => onOpenSignal(signal.projectId, signal.findingId)} key={signal.findingId}>
+              <span className={`workspace-severity workspace-severity--${signal.severity}`}>{signal.severity}</span>
+              <span className="workspace-signal-row__copy"><small><em>{reviewStatusLabel(signal.reviewStatus)}</em>{signal.projectTitle}</small><strong>{signal.title}</strong></span>
+              <AssetIcon name="Arrow_Forward" />
+            </button>) : <p className="workspace-empty">No open Signals were found in the current snapshots.</p>}</div>
+          </section>
 
-        <section className="workspace-panel workspace-activity">
-          <header><div><h2>Recent activity</h2></div></header>
-          <ol>{activity.map((event) => <li key={`${event.projectId}-${event.eventId}-${event.timestamp}`}>
-            <span className="workspace-activity__marker" />
-            <button type="button" onClick={() => onOpenHistory(event.projectId)}><strong>{event.title}</strong><span>{event.projectTitle}</span><small>{formatActivityDate(event.timestamp)}</small></button>
-          </li>)}</ol>
-          {summary.usageProjects > 0 ? <footer className="workspace-usage"><span>Usage</span><strong>{formatTokenCount(summary.totalTokens)} tokens</strong><small>Used across {summary.usageProjects} current audit{summary.usageProjects === 1 ? "" : "s"}</small></footer> : null}
-        </section>
-      </div>}
+          <section className="workspace-panel workspace-activity">
+            <header><div><span className="workspace-panel__eyebrow">Bóveda</span><h2>Recent activity</h2></div></header>
+            <ol>{activity.map((event) => <li key={`${event.projectId}-${event.eventId}-${event.timestamp}`}>
+              <span className="workspace-activity__marker" />
+              <button type="button" onClick={() => onOpenHistory(event.projectId)}><strong>{event.title}</strong><span>{event.projectTitle}</span><small>{formatActivityDate(event.timestamp)}</small></button>
+            </li>)}</ol>
+          </section>
+
+          <aside className="workspace-dashboard__supporting">
+            {summary.usageProjects > 0 ? <section className="workspace-panel workspace-usage"><span>Used</span><strong>Tokens</strong><b>{formatTokenCount(summary.totalTokens)}</b></section> : null}
+            <section className="workspace-panel workspace-repositories">
+              <header><h2>Repositories <span>({repositories.length})</span></h2><AssetIcon name="Link_Button" /></header>
+              <ul>{repositories.map(({ project, repository }) => <li key={project.project_id}><a href={repository.href} target="_blank" rel="noreferrer" aria-label={repository.label}><strong>{project.supervisor_project_title || project.name}</strong><span>{repository.href}</span></a></li>)}</ul>
+            </section>
+          </aside>
+        </div>
+      </>}
     </div>
     <span className="welcome-version">Alpha {applicationVersion}</span>
   </main>;
