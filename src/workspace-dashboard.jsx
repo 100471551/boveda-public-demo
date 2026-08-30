@@ -46,7 +46,7 @@ export function WorkspaceDashboard({ projects, layersByProject, onProjects, onOp
     <div className="workspace-dashboard__inner">
       <section className="workspace-overview" aria-labelledby="workspace-heading">
         <header className="workspace-dashboard__header">
-          <h1 id="workspace-heading">What needs your attention?</h1>
+          <h1 id="workspace-heading">What needs<br />your attention?</h1>
           <p>An overview of the projects, signals and evidence currently under your supervision.</p>
         </header>
 

@@ -72,6 +72,7 @@ test("v1.1.0 provides the evidence-backed supervisory workspace without changing
   assert.match(workspace, /Repositories/);
   assert.match(workspace, /projectRepository\(project\.source_project_path\)/);
   assert.match(workspace, /repository\.href/);
+  assert.match(workspace, /What needs<br \/>your attention\?/);
   assert.match(workspace, /Tokens/);
   assert.match(workspace, /Reconstruction ·/);
   assert.match(workspace, /onOpenSignal\(signal\.projectId, signal\.findingId\)/);
@@ -82,6 +83,8 @@ test("v1.1.0 provides the evidence-backed supervisory workspace without changing
   assert.match(main, /navigateRoute\(\{ screen: "workspace" \}, \{ replace: true \}\)/);
   assert.match(styles, /\.v100b-app\.is-authenticated \.brand__demo \{ background: var\(--ui-red\); \}/);
   assert.match(styles, /\.workspace-overview \{ display: grid;/);
+  assert.match(styles, /\.workspace-project-row__open \.ui-icon \{[^}]*opacity: \.65;/);
+  assert.match(styles, /\.workspace-signal-row > \.ui-icon \{[^}]*opacity: \.65;/);
   assert.match(styles, /\.workspace-dashboard__lower \{ display: grid;/);
   assert.match(styles, /\.workspace-repositories/);
 });
