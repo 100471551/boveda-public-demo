@@ -4698,3 +4698,191 @@ body,
   .workspace-project-row__findings { justify-content: flex-start; padding: 0 0 17px 42px; }
   .workspace-signal-row { grid-template-columns: 54px minmax(0, 1fr) 16px; padding: 17px 18px; }
 }
+
+/* v1.1.0-gradient — alternative Figma 43:2454 gradient and glass-surface study. */
+:root {
+  --v110-gradient-page:
+    radial-gradient(ellipse 76% 50% at 0% 0%, rgba(214, 255, 255, .95) 0%, rgba(222, 255, 253, .45) 48%, transparent 76%),
+    radial-gradient(ellipse 72% 48% at 0% 100%, rgba(249, 237, 218, .95) 0%, rgba(244, 238, 224, .4) 50%, transparent 78%),
+    linear-gradient(142deg, #effbf8 0%, #e9f0eb 48%, #d7e5f8 100%);
+  --v110-gradient-glass: rgba(255, 255, 255, .5);
+  --v110-gradient-glass-soft: rgba(255, 255, 255, .3);
+  --v110-gradient-glass-strong: rgba(255, 255, 255, .72);
+  --v100b-page: transparent;
+  --v100b-surface: var(--v110-gradient-glass);
+  --v100b-line: transparent;
+  --v15-surface: var(--v110-gradient-glass);
+  --v15-soft-surface: var(--v110-gradient-glass-soft);
+  --v15-line: transparent;
+  --v15-page-gradient: var(--v110-gradient-page);
+}
+
+html { background: #d7e5f8; }
+body {
+  background: var(--v110-gradient-page);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+body,
+.v100b-app,
+.app-loading,
+.app-shell,
+.welcome-surface,
+.how-it-works-surface,
+.projects-surface,
+.workspace-dashboard,
+.overview { background-color: transparent; }
+
+.global-navigation,
+.welcome-surface > p,
+.how-it-works__video-frame,
+.project-library__row,
+.project-library__empty,
+.hero-cards > *,
+.overview--overview .hero-cards > *,
+.primary-card,
+.samples-card,
+.confidence-card,
+.analytical-data,
+.signals-intro,
+.history-intro,
+.history-event__detail,
+.history-supporting,
+.history-limitations,
+.empty-evidence-state,
+.analytical-empty,
+.help-popover__content,
+.lineage-graph,
+.comparison-component:not(.analytical-frame--empty) > .analytical-heading,
+.comparison-component:not(.analytical-frame--empty) .analytical-body--comparison > .analytical-visual,
+.overview--overview .analytical-body--evaluation .analytical-visual,
+.analytical-body--evaluation .analytical-visual,
+.workspace-kpi:not(.workspace-kpi--primary),
+.workspace-panel,
+.workspace-loading,
+.canonical-result,
+.detail-state,
+.impact-list li,
+.detail-fields > div,
+.detail-questions article,
+.detail-signal-link,
+.coverage-domain-links > button,
+.signals-detail-drawer dl > div,
+.diagnostic-metric,
+.diagnostic-attempt,
+.legacy-audit {
+  border-color: transparent;
+  background: var(--v110-gradient-glass);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+}
+
+.global-navigation,
+.welcome-surface > p,
+.project-library__row,
+.project-library__empty,
+.hero-cards > *,
+.overview--overview .hero-cards > *,
+.primary-card,
+.samples-card,
+.confidence-card,
+.analytical-data,
+.signals-intro,
+.history-intro,
+.history-event__detail,
+.history-supporting,
+.history-limitations,
+.empty-evidence-state,
+.analytical-empty,
+.help-popover__content,
+.lineage-graph,
+.comparison-component:not(.analytical-frame--empty) > .analytical-heading,
+.comparison-component:not(.analytical-frame--empty) .analytical-body--comparison > .analytical-visual,
+.overview--overview .analytical-body--evaluation .analytical-visual,
+.analytical-body--evaluation .analytical-visual,
+.workspace-kpi,
+.workspace-panel,
+.workspace-loading,
+.canonical-result,
+.detail-state,
+.impact-list li,
+.detail-fields > div,
+.detail-questions article,
+.detail-signal-link,
+.coverage-domain-links > button,
+.signals-detail-drawer dl > div,
+.diagnostic-metric,
+.diagnostic-attempt,
+.legacy-audit { border-width: 0; }
+
+.primary-card.is-incomplete { background: var(--v110-gradient-glass); }
+.supervisor-finding {
+  border: 0;
+  border-left: 10px solid var(--v15-signal);
+  background: var(--v110-gradient-glass);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+}
+.supervisor-finding--evidence_gap { border-left-color: var(--v15-gap); }
+
+/* Banded information stays open: only the alternating band receives a 30% wash. */
+.data-table > div,
+.feature-row,
+.missingness-row,
+.signals-row { border: 0; background: transparent; }
+.data-table > div.is-tinted,
+.feature-row:nth-child(odd),
+.overview--overview .feature-row:nth-child(odd),
+.missingness-row:nth-child(even),
+.signals-row:nth-of-type(even),
+.history-event--boveda > summary {
+  border: 0;
+  background: var(--v110-gradient-glass-soft);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.signals-row:nth-of-type(odd),
+.history-event > summary:hover,
+.history-event--boveda > summary:hover { background: transparent; }
+
+.project-sticky-bar {
+  border: 0;
+  background: rgba(255, 255, 255, .46);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+.projects-overlay,
+.modal-backdrop,
+.delete-dialog-backdrop {
+  background: rgba(255, 255, 255, .38);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+.login-panel,
+.account-menu__popover,
+.delete-dialog,
+.demo-action-notice,
+.diagnostics-drawer,
+.signals-detail-drawer,
+.project-menu-drawer,
+.analytical-selector__menu,
+.report-download-menu__menu {
+  border-color: transparent;
+  background: var(--v110-gradient-glass-strong);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+}
+.login-panel,
+.account-menu__popover,
+.delete-dialog,
+.demo-action-notice,
+.diagnostics-drawer,
+.signals-detail-drawer,
+.project-menu-drawer { border-width: 0; }
+
+.login-panel input,
+.feature-component select,
+.delete-dialog__cancel,
+.history-show-more {
+  background: rgba(255, 255, 255, .5);
+}

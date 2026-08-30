@@ -77,3 +77,12 @@ test("v1.1.0 provides the evidence-backed supervisory workspace without changing
   assert.match(main, /navigateRoute\(\{ screen: "workspace" \}, \{ replace: true \}\)/);
   assert.match(styles, /\.v100b-app\.is-authenticated \.brand__demo \{ background: var\(--ui-red\); \}/);
 });
+
+test("v1.1.0 gradient alternative restores the Figma wash and glass surfaces", () => {
+  assert.match(styles, /v1\.1\.0-gradient — alternative Figma 43:2454/);
+  assert.match(styles, /--v110-gradient-page:[\s\S]*?radial-gradient[\s\S]*?linear-gradient\(142deg/);
+  assert.match(styles, /--v110-gradient-glass:\s*rgba\(255, 255, 255, \.5\)/);
+  assert.match(styles, /backdrop-filter:\s*blur\(28px\)/);
+  assert.match(styles, /\.data-table > div\.is-tinted,[\s\S]*?background:\s*var\(--v110-gradient-glass-soft\)/);
+  assert.match(styles, /\.feature-row,[\s\S]*?\.signals-row \{ border: 0; background: transparent; \}/);
+});
