@@ -177,7 +177,7 @@ test("v1.0.2 introduces first-visit guidance beside Projects using the exact Fig
   assert.match(main, /useState\(\(\) => !hasSeenStartExploring\(\)\)/);
   assert.match(main, /src="\/ui\/Start_Exploring\.png"/);
   assert.match(main, /aria-describedby=\{showStartExploring \? "start-exploring-hint" : undefined\}/);
-  assert.match(main, /showStartExploring=\{screen === "welcome" && startExploringVisible\}/);
+  assert.match(main, /showStartExploring=\{renderedScreen === "welcome" && startExploringVisible\}/);
   assert.match(main, /setStartExploringVisible\(false\); storeStartExploringSeen\(\);/);
   assert.match(styles, /\.global-navigation__start-exploring \{[\s\S]*?top: 77px;[\s\S]*?left: calc\(100% \+ 8px\);[\s\S]*?width: 114px;[\s\S]*?height: 27px;/);
   assert.match(styles, /@media \(max-width: 900px\)[\s\S]*?\.global-navigation__start-exploring \{ top: -34px; left: calc\(50% \+ 10px\); \}/);

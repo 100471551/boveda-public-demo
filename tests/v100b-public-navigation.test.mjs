@@ -6,12 +6,12 @@ const main = readFileSync(new URL("../src/main.jsx", import.meta.url), "utf8");
 const styles = readFileSync(new URL("../src/styles.css", import.meta.url), "utf8");
 const metadata = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
 
-test("v1.0.2 retains the v1.0.0b Welcome and simple Home/Projects flow", () => {
-  assert.equal(metadata.version, "1.0.2");
+test("v1.1.0 retains the public Welcome and extends the simple navigation flow", () => {
+  assert.equal(metadata.version, "1.1.0");
   assert.match(main, /useState\(\(\) => parseRoute\(window\.location\.pathname\)\)/);
   assert.match(main, /Auditable by design/);
   assert.match(main, /function GlobalNavigation/);
-  assert.match(main, /aria-label="Home"/);
+  assert.match(main, /aria-label="General dashboard"/);
   assert.match(main, /aria-label="Projects"/);
   assert.doesNotMatch(main, /function ProjectMenuDrawer/);
 });

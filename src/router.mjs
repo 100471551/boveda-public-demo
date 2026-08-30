@@ -9,6 +9,7 @@ export function parseRoute(pathname = "/") {
   const path = pathname || "/";
   if (path === "/" || path === "/index.html") return { screen: "welcome", projectId: null, activeView: "overview" };
   if (path === "/how-it-works" || path === "/how-it-works/") return { screen: "how-it-works", projectId: null, activeView: "overview" };
+  if (path === "/workspace" || path === "/workspace/") return { screen: "workspace", projectId: null, activeView: "overview" };
   if (path === "/projects" || path === "/projects/") return { screen: "projects", projectId: null, activeView: "overview" };
   const match = path.match(PROJECT_PATH);
   if (!match) return notFoundRoute();
@@ -23,6 +24,7 @@ export function parseRoute(pathname = "/") {
 
 export function routeFor(route) {
   if (route?.screen === "how-it-works") return "/how-it-works";
+  if (route?.screen === "workspace") return "/workspace";
   if (route?.screen === "projects") return "/projects";
   if (route?.screen === "project" && route.projectId) {
     const suffix = route.activeView === "signals" ? "/findings" : route.activeView === "history" ? "/history" : "";

@@ -1,12 +1,13 @@
 # Bóveda public demo deployment handoff
 
-The public build is a static Vite application. It reads only the versioned files under `public/demo-data/v1.0.2/`; it does not deploy Express, project source directories, provider credentials, or writable storage.
+The v1.1.0 public build is a static Vite application. It reads only the immutable versioned files under `public/demo-data/v1.0.2/`; it does not deploy Express, project source directories, provider credentials, authentication infrastructure, or writable storage. Its sign-in is explicitly a browser-local demo session.
 
 ## Deployed infrastructure
 
 - Private GitHub repository: `https://github.com/100471551/boveda-public-demo`
 - Production branch: `main`
-- Release tag: `v1.0.2`
+- Current production release tag: `v1.0.2`
+- v1.1.0 review branch: `v1.1.0` (promote and tag only after review)
 - Vercel project: `boveda/boveda-public-demo`
 - Production domain: `https://boveda.dev`
 - Redirect: `https://www.boveda.dev` → `https://boveda.dev` (HTTP 308)

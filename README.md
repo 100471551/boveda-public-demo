@@ -1,6 +1,6 @@
-# Bóveda Alpha v1.0.2
+# Bóveda Alpha v1.1.0
 
-Bóveda inspects a local ML or AI project without executing or modifying it, reconstructs one fixed supervisor-facing Overview, validates every material answer against cited evidence, and persists the resulting record locally. v1.0.2 starts from the v1.0.0b checkpoint and applies focused visual corrections to the dashboard menu, population-lineage graph, and Projects page. The analytical structure and runtime capabilities remain those of v0.20.13.
+Bóveda inspects a local ML or AI project without executing or modifying it, reconstructs one fixed supervisor-facing Overview, validates every material answer against cited evidence, and persists the resulting record locally. v1.1.0 adds an honest browser-local demo session and a general supervisory workspace using the existing sanitized project snapshots. The public Welcome and How it works pages remain open; the workspace, Projects and project routes share one compact sign-in experience. The analytical structure and project dashboards remain unchanged.
 
 The analytical projection reconstructs evidence-backed workstreams, context-bound model comparisons, supported evaluation diagnostics, feature/driver evidence, population/sample lineage, data-formation operations, persisted analytical failures, and source-visual references. Components are omitted when their minimum evidence contract is not met. Project identities, labels, values and expected answers are never encoded in the runtime; the projection is built from persisted notebook evidence and retains evidence IDs and source locators.
 
@@ -22,7 +22,7 @@ v0.20.10 makes seven bounded UX corrections: project titles now describe the est
 
 v0.20.13 starts directly from v0.20.11 and adds a shared, question-aware semantic contract for Overview sections. Related evidence remains available internally, but a dashboard or report section is available only when the reconstructed evidence answers that section's supervisory question.
 
-This directory is the independent v1.0.2 checkpoint based on v1.0.0b. Findings remains a separate projection at `GET /api/projects/:id/signals`; History is a second read-only projection at `GET /api/projects/:id/history`. Neither projection can change the canonical Project Record.
+This directory is the independent v1.1.0 checkpoint based on the latest v1.0.2 production release. Findings remains a separate projection at `GET /api/projects/:id/signals`; History is a second read-only projection at `GET /api/projects/:id/history`. Neither projection can change the canonical Project Record.
 
 History projects the canonical record together with bounded, read-only source history. When a real repository is available, it recovers up to 300 commits with authored timestamps, messages, changed files, and tags; it also recovers bounded file-backed MLflow run metadata when present. Deterministic materiality rules elevate only substantiated data, model, evaluation, pipeline, decision, failed-run, and versioned-release activity. Every other valid recovered event remains available in a collapsed supporting section, so a large repository does not become the main chronology. Host-project and Bóveda events remain visually separated; unresolved dates stay unresolved; Git HEAD alone creates no chronology; and Findings are linked only through an explicit temporal relationship.
 
@@ -38,7 +38,9 @@ Reconstruction confidence is the existing deterministic cumulative 0–8 evident
 
 ## Public demo build
 
-The default production build is fail-closed and static. It reads the sanitized, pre-analysed snapshots in `public/demo-data/v1.0.2/`; it does not call or deploy the Express server, writable storage, source-project paths, macOS browsing, reconstruction code, or provider credentials. Dashboards, Findings, History, evidence drawers, diagnostics and pre-generated HTML/PDF reports remain available. Import, new analysis, deletion and reanalysis show an explanatory read-only notice instead of issuing a request.
+The default production build is fail-closed and static. It reads the immutable sanitized, pre-analysed snapshots in `public/demo-data/v1.0.2/`; the snapshot version remains unchanged because v1.1.0 does not reconstruct analytical data. It does not call or deploy the Express server, writable storage, source-project paths, macOS browsing, reconstruction code, or provider credentials. Dashboards, Findings, History, evidence drawers, diagnostics and pre-generated HTML/PDF reports remain available. Import, new analysis, deletion and reanalysis show an explanatory read-only notice instead of issuing a request.
+
+The v1.1.0 sign-in is a presentation-layer demo session, not an authentication service. It stores only the entered email, a derived display name and a sign-in timestamp in the current browser. It creates no account, sends no data and does not claim to secure the public static snapshots.
 
 ```bash
 npm ci
