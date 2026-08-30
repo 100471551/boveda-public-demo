@@ -1,6 +1,6 @@
 # Bóveda Alpha 1.1.0
 
-The `v1.1.0-gradient` branch is an alternative visual study. It restores the Figma 43:2454 aqua/cream/periwinkle page gradient, converts appropriate white cards and panels to borderless blurred glass, and renders alternating information bands as borderless 30% white washes. The production `main` visual system remains unchanged while this alternative is evaluated.
+The `v1.1.0-gradient` branch is an alternative visual study. It restores the Figma 43:2454 aqua/cream/periwinkle page gradient, converts appropriate white cards and panels to borderless blurred glass, and renders alternating information bands as borderless 30% white washes. Rows inside an existing glass card use opaque white bands for sufficient separation, while authentication and dropdown overlays use stronger white glass and blur for legibility. The production `main` visual system remains unchanged while this alternative is evaluated.
 
 First coherent supervision-workspace release, based independently on the current v1.0.2 production checkpoint.
 

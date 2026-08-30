@@ -85,4 +85,8 @@ test("v1.1.0 gradient alternative restores the Figma wash and glass surfaces", (
   assert.match(styles, /backdrop-filter:\s*blur\(28px\)/);
   assert.match(styles, /\.data-table > div\.is-tinted,[\s\S]*?background:\s*var\(--v110-gradient-glass-soft\)/);
   assert.match(styles, /\.feature-row,[\s\S]*?\.signals-row \{ border: 0; background: transparent; \}/);
+  assert.match(styles, /\.login-backdrop \{[\s\S]*?background:\s*rgba\(255, 255, 255, \.5\);[\s\S]*?blur\(34px\)/);
+  assert.match(styles, /\.analytical-selector__trigger \{[\s\S]*?border:\s*1px solid rgba\(34, 34, 34, \.2\)/);
+  assert.match(styles, /\.analytical-selector__menu,[\s\S]*?background:\s*rgba\(255, 255, 255, \.66\);[\s\S]*?blur\(34px\)/);
+  assert.match(styles, /\.analytical-data \.missingness-row:nth-child\(even\) \{[\s\S]*?background:\s*#fff/);
 });
