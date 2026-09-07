@@ -126,6 +126,16 @@
     if(value===null||value===undefined)return '-';
     return String(value).replace(/(?<![\w.])([+-]?(?:\d+\.\d{4,}|\d+(?:\.\d+)?e[+-]?\d+))(?![\w.])/gi,token=>formatHero(Number(token)));
   }
+  function r2Dial(value) {
+    const angle=Math.max(-1,Math.min(1,value))*120,radians=angle*Math.PI/180;
+    return {
+      center:value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}),
+      precise:value!==0&&Math.abs(value)<.00001?value.toExponential(5).replace(/\.?0+e/,'e'):value.toLocaleString('en-US',{maximumFractionDigits:5}),
+      gradient:value>=0?`conic-gradient(from 0deg at 50% 65.219%, var(--text) 0deg ${angle}deg, transparent ${angle}deg 360deg)`:`conic-gradient(from 0deg at 50% 65.219%, transparent 0deg ${360+angle}deg, var(--text) ${360+angle}deg 360deg)`,
+      x:(113.5+105.5*Math.sin(radians))/227*100,
+      y:(114.134-106.134*Math.cos(radians))/175.001*100
+    };
+  }
   function heroAffixes(described={}) {
     return {qualifier:String(described.qualifier||''),unit:described.unit==='0–1'?'':String(described.unit||'')};
   }
@@ -134,5 +144,5 @@
     if(!described.unit && described.note==='Unit not recorded.')return 'Unit not recorded.';
     return '';
   }
-  return {describe,label,format,formatHero,heroAffixes,userNote};
+  return {describe,label,format,formatHero,r2Dial,heroAffixes,userNote};
 });

@@ -96,8 +96,8 @@
     const hero=BovedaMetricDisplay.heroAffixes(shown);
     let illustration='';
     if(shown.visual?.type==='r2-window'){
-      const value=shown.visual.value,clamped=Math.max(-1,Math.min(1,value)),count=Math.round((clamped+1)*30);
-      illustration=`<div class="r2-dial"><svg viewBox="0 0 220 125" role="img" aria-label="R squared display window from minus one to one${value < -1 ? '; value below minus one' : ''}">${Array.from({length:61},(_,i)=>{const angle=Math.PI-i*Math.PI/60,x=Math.cos(angle),y=Math.sin(angle);return `<line x1="${110+83*x}" y1="${105-83*y}" x2="${110+96*x}" y2="${105-96*y}" class="${i<=count&&value>=-1?'on':''}"/>`;}).join('')}</svg><div class="metric-scale"><span>−1</span><span>0</span><span>1</span></div><p class="small muted">${value < -1?'Value below −1. ':''}R² can be below −1.</p></div>`;
+      const value=shown.visual.value,dial=BovedaMetricDisplay.r2Dial(value);
+      return `<aside class="metric-tile unified-surface r2-tile">${surfaceFrame}<h3 class="metric-cap">${esc(shown.title)}</h3><div class="metric-inner"><div class="r2-gauge" data-r2-value="${value}" role="img" aria-label="R squared ${esc(dial.precise)}; arc starts at zero and extends ${value<0?'toward minus one':'toward one'}. R squared can be below minus one."><span class="r2-zero" aria-hidden="true">0</span><div class="r2-arc"><img src="/product_v2_0_1/assets/r2-arc.svg" alt="" width="227" height="175"/><span class="r2-active"></span>${value!==0?`<i class="r2-cap r2-origin"></i><i class="r2-cap r2-end"></i>`:''}<strong class="r2-center">${esc(dial.center)}</strong></div><div class="r2-endpoints" aria-hidden="true"><span>−1</span><span>1</span></div></div><div class="r2-status">${badge(metric,{title:metric.label||'Metric',stage:'Q2',record:metric})}</div><div class="r2-precise"><span>R²</span><span title="${esc(value)}">${esc(dial.precise)}</span></div>${value < -1?'<p class="small muted r2-overflow">Value below −1; arc ends at −1.</p>':''}</div></aside>`;
     }else if(shown.visual?.type==='fill'){
       const {min,max,low,high}=shown.visual,span=max-min;
       const lowFraction=(low-min)/span,highFraction=(high-min)/span;
@@ -118,6 +118,12 @@
     return `<article class="panel performance"><div class="panel-title">${icon('performance')}<h2>Model Performance</h2></div><div class="performance-columns"><section class="model-surface unified-surface">${surfaceFrame}<div class="model-tabs" role="tablist" aria-label="Model evaluations">${cards.map((card,i)=>`<button role="tab" id="model-tab-${i}" aria-selected="${i===state.model}" aria-controls="model-panel" class="${i===state.model?'active':''}" data-model="${i}" title="${esc(card.model_or_capability?.text)}">${grid}<span class="model-tab-label">Model ${i+1}</span></button>`).join('')}</div><div class="performance-detail" id="model-panel" role="tabpanel" aria-labelledby="model-tab-${state.model}"><div class="model-description"><div><h3>Model / Capability</h3><p>${esc(c.model_or_capability?.text||'Not available')}</p>${badge(c.model_or_capability,{title:'Model / Capability',stage:'Q2',record:c.model_or_capability})}</div><div><h3>Evaluation</h3><p>${esc(c.evaluation?.text||'Not available')}</p>${badge(c.evaluation,{title:'Evaluation',stage:'Q2',record:c.evaluation})}</div></div><div class="metric-table-scroll"><table class="metrics-table"><thead><tr><th>Metric</th><th>Status</th><th>Unit</th><th>Value</th></tr></thead><tbody>${metrics.map((m,i)=>`<tr><td><button class="metric-select" data-metric="${i}" aria-pressed="${state.metric===i}">${grid}<span>${esc(m.label||'-')}</span></button></td><td>${badge(m,{title:m.label,stage:'Q2',record:m},true)}</td><td>${esc(m.unit||'-')}</td><td><span class="metric-value">${esc(m.value===null||m.value===undefined||m.value===''?'-':m.value)}</span></td></tr>`).join('')}</tbody></table></div></div></section>${metricVisual(metrics[state.metric])}</div><p class="execution-line ${r.record_status==='COMPLETE'?'complete':''}"><span><strong>Execution status:</strong> ${esc(pretty(r.record_status))}${r.record_status==='PARTIAL'?' · Material performance work remains unresolved.':''}</span></p></article>`;
   }
   function syncPerformanceShape() {
+    document.querySelectorAll('[data-r2-value]').forEach(gauge=>{
+      const dial=BovedaMetricDisplay.r2Dial(Number(gauge.dataset.r2Value));
+      gauge.querySelector('.r2-active').style.background=dial.gradient;
+      const end=gauge.querySelector('.r2-end');
+      if(end){end.style.left=dial.x+'%';end.style.top=dial.y+'%';}
+    });
     for(const surface of document.querySelectorAll('.model-surface,.tab-surface')){
       const tabs=surface.querySelector('.model-tabs,.surface-tabs'),active=tabs?.querySelector('[aria-selected="true"]');
       if(!active)continue;

@@ -217,9 +217,21 @@ body,button,input,select,textarea,pre,code{font-family:Menlo,Monaco,monospace;fo
 
 /* Local tab updates and compact numeric presentation. */
 .quantities-table td.quantity-number{font-size:18px}
-.r2-dial svg{display:block;width:100%;height:auto;overflow:visible}
-.r2-dial line{stroke:var(--line,#d5d7d9);stroke-width:3;stroke-linecap:round}
-.r2-dial line.on{stroke:var(--text,#222)}
-.r2-dial .metric-scale{margin-top:-12px}
-.r2-dial p{font-size:11px;margin:12px 0 20px}
+/* Figma 85:166: continuous signed arc, central value and precise footer. */
+.r2-tile .metric-inner{width:100%;display:block;position:relative;padding:50px 22px 36px}
+.r2-gauge{position:relative;container-type:inline-size;margin:0 12px}
+.r2-arc{position:relative;aspect-ratio:227/175.001}
+.r2-arc>img{display:block;width:100%;height:100%}
+.r2-active{position:absolute;inset:0;mask:url('/product_v2_0_1/assets/r2-arc.svg') center/100% 100% no-repeat}
+.r2-cap{position:absolute;width:7.049%;aspect-ratio:1;border-radius:50%;background:var(--text);transform:translate(-50%,-50%)}
+.r2-origin{left:50%;top:4.5714%}
+.r2-center{position:absolute;top:39%;left:0;width:100%;text-align:center;font-size:23cqw;font-weight:400;line-height:1.2;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.r2-zero{position:absolute;top:-28px;left:0;width:100%;text-align:center;color:var(--faint);font-size:13px}
+.r2-endpoints{display:flex;justify-content:space-between;margin:4px 8% 0;color:var(--faint);font-size:13px}
+.r2-status{text-align:center;position:relative;margin-top:-44px;min-height:24px}
+.r2-status .badge{margin-top:0;max-width:90%;font-size:10px}
+.r2-precise{display:flex;justify-content:space-between;gap:12px;margin-top:66px;font-size:13px;font-variant-numeric:tabular-nums}
+.r2-precise>span:last-child{color:var(--muted);overflow-wrap:anywhere;text-align:right}
+.r2-overflow{margin-top:16px!important;font-size:11px}
+[data-theme=dark] .r2-arc>img{filter:brightness(.35)}
 @media(min-width:1101px){.purpose-card{grid-template-columns:minmax(310px,.85fr) minmax(0,1.15fr);gap:28px;padding-inline:40px}}
