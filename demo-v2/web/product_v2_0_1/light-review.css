@@ -267,3 +267,15 @@
  .signal-table-head>[role=columnheader]:not(.outcome-sort-header){display:none}
  .outcome-sort{min-height:36px}
 }
+
+/* Purpose opening: relaxed spacing, inspired by Figma 86:4. */
+.purpose-card{padding-block:54px;min-height:328px}
+.purpose-card h2{white-space:normal;line-height:1.14}
+.purpose-card h2 br{display:block}
+.purpose-question{display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+.purpose-question>.purpose-icon{position:static}
+.purpose-description>.field-label{position:static;margin:0 0 12px}
+.purpose-card .field-copy{line-height:2}
+@media(min-width:1101px){.purpose-card{grid-template-columns:164px minmax(0,1fr);gap:36px;padding-inline:40px}}
+@media(max-width:1100px){.purpose-card{padding:42px 36px;min-height:0}}
+@media(max-width:600px){.purpose-card{padding:34px 24px}}
