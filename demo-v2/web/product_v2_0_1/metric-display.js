@@ -112,12 +112,19 @@
   }
   function format(value,ratio=false) {
     if(value===null||value===undefined)return '-';
-    if(typeof value!=='number')return String(value);
-    if(value!==0&&Math.abs(value)<.005)return value.toLocaleString('en-US',{maximumSignificantDigits:3});
-    return value.toLocaleString('en-US',{maximumFractionDigits:2,minimumFractionDigits:ratio?2:0});
+    if(typeof value!=='number') {
+      return String(value).replace(/(?<![\w.])([+-]?(?:\d+\.\d{6,}|\d+(?:\.\d+)?e[+-]?\d+))(?![\w.])/gi, token => format(Number(token)));
+    }
+    if(value!==0&&Math.abs(value)<.005)return value.toLocaleString('en-US',{maximumSignificantDigits:5});
+    return value.toLocaleString('en-US',{maximumFractionDigits:5,minimumFractionDigits:ratio?2:0});
   }
   function heroAffixes(described={}) {
-    return {qualifier:'',unit:described.unit==='0–1'?'':String(described.unit||'')};
+    return {qualifier:String(described.qualifier||''),unit:described.unit==='0–1'?'':String(described.unit||'')};
   }
-  return {describe,label,format,heroAffixes};
+  function userNote(described={}) {
+    if(described.kind==='missing')return 'Value not available.';
+    if(!described.unit && described.note==='Unit not recorded.')return 'Unit not recorded.';
+    return '';
+  }
+  return {describe,label,format,heroAffixes,userNote};
 });
