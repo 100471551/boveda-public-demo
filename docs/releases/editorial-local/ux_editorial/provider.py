@@ -1,4 +1,4 @@
-"""One bounded request per field; editorial usage is separate from audit usage."""
+"""Bounded editorial and paired-review requests; usage is separate from audit usage."""
 import importlib.util
 import json
 import math
