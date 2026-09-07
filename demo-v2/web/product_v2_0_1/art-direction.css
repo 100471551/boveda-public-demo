@@ -204,9 +204,9 @@ body,button,input,select,textarea,pre,code{font-family:Menlo,Monaco,monospace;fo
 .status-dot.documented span,.status-dot.clear span {background:var(--status-clear);}
 .status-dot.interpreted span,.status-dot.insufficient-evidence span {background:var(--status-caution);}
 .status-dot.unresolved span,.status-dot.signal span {background:var(--status-alert);}
-.badge.documented,.badge.clear {background:var(--status-clear);color:#234b16;}
-.badge.interpreted,.badge.insufficient-evidence {background:var(--status-caution);color:#55320a;}
-.badge.unresolved,.badge.signal {background:var(--status-alert);color:#592015;}
+.badge.documented,.badge.clear {background:rgba(160,231,132,.18);color:var(--green);}
+.badge.interpreted,.badge.insufficient-evidence {background:rgba(245,170,78,.18);color:var(--amber);}
+.badge.unresolved,.badge.signal {background:rgba(244,128,103,.16);color:var(--red);}
 
 .audit-identifier,.project-identifier {font-size:11px;color:var(--muted);}
 .audit-identifier {margin:0 0 10px;}

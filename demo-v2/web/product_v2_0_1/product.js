@@ -46,7 +46,7 @@
     const c=component(id),e=c?.entries?.[0];
     return `<div class="field-block">${fieldLabel(c,e)}<h3>${esc(question || c?.question || '')}</h3>${e?c.entries.map(x=>content(x.content)).join(''):'<p class="empty-copy">None recorded.</p>'}${(c?.entries?.length||0)>1?`<button class="text-button" data-detail="${detail({title:c.label,stage:c.stage,record:c.entries})}">Inspect all entries →</button>`:''}</div>`;
   }
-  const publicationLabel = status => ({PUBLISHABLE:'Audit available',PUBLISHABLE_WITH_LIMITATIONS:'Audit available with limitations',NOT_PUBLISHABLE:'Audit unavailable',NOT_AVAILABLE:'Audit unavailable'}[status]||pretty(status));
+  const publicationLabel = status => ({PUBLISHABLE:'Available',PUBLISHABLE_WITH_LIMITATIONS:'Available with limitations',NOT_PUBLISHABLE:'Unavailable',NOT_AVAILABLE:'Unavailable'}[status]||pretty(status));
   function publication() {
     const p=state.audit?.publication||{};if(!p.status)return '';
     const k=detail({title:'Publication status',record:p});
