@@ -116,3 +116,8 @@
 .project-grid:not(.project-list) .project-card .project-purpose[data-home-purpose-state="unavailable"]{color:var(--muted)}
 .project-grid:not(.project-list) .project-card .card-bottom{justify-content:space-between}
 .project-preserved{color:var(--muted);font-size:11px}
+
+/* Let the construction introduction begin closer to its title. */
+@media(min-width:1101px){
+ .construction-opening .construction-hero-card>.narrative-hero{grid-template-columns:minmax(200px,.3fr) minmax(0,1fr);gap:40px}
+}

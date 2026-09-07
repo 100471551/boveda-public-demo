@@ -52,7 +52,7 @@ def original_content(field):
 def number_values(text):
     # Repeating a number across flow branches is legitimate; inventing or losing
     # a numeric value is not. This is not a check of number-to-object relations.
-    return {n.replace(',', '') for n in NUMBER.findall(text)}
+    return {n.replace(',', '').replace('−', '-') for n in NUMBER.findall(text)}
 
 
 def digest(data):
@@ -96,6 +96,8 @@ def fields(stage, record):
             context = {k: parent[k] for k in ('label', 'status') if k in parent}
             if profile.id == 'S1.purpose_intro':
                 context={'status':parent.get('purpose_status'),'supporting_statements':parent['supporting_statements']}
+            if profile.id == 'S4.construction_intro':
+                context={'status':parent.get('source_status'),'supporting_statements':parent['supporting_statements']}
             if profile.id == 'S4.models':
                 # The label already sits beside the description in the table.
                 # A variant name must not become inferred training/evaluation scope.
@@ -106,7 +108,7 @@ def fields(stage, record):
                 context['primary_identity'] = parent.get('answer')
             yield {'profile_id': profile.id, 'stage': stage, 'pointer': pointer,
                    'canonical_text': text, 'context': context,
-                   'shape': profile.shape, 'keep_allowed': profile.id != 'S1.purpose_intro' and (profile.shape != 'items' or '*' in profile.path), 'component': profile.component, 'question': profile.question,
+                   'shape': profile.shape, 'keep_allowed': profile.id not in ('S1.purpose_intro','S4.construction_intro') and (profile.shape != 'items' or '*' in profile.path), 'component': profile.component, 'question': profile.question,
                    'instructions': CONTRACT + '\n\n' + profile.prompt + '\nFor KEEP or FALLBACK, return empty text or empty arrays. REWRITE must use the requested content shape.'}
 
 
@@ -162,7 +164,7 @@ def resolve(field, answer):
         result['reason'] = 'EDITORIAL_CONTROL_TOKEN'
     elif any(re.search(r'\[E\d{4}\]|\]\(|<\s*/?\s*[A-Za-z]+\b|https?://|^\s*[#*>]|[\r\n]', t) for t in strings):
         result['reason'] = 'NOT_PLAIN_CONTENT'
-    elif (field['profile_id'] != 'S1.display_title' and not number_values(source).issubset(number_values(text))) or not number_values(text).issubset(number_values(source + ' ' + json.dumps(field.get('context', {})))):
+    elif (field['profile_id'] != 'S1.display_title' and not number_values(source).issubset(number_values(text))) or not number_values(text).issubset(number_values(source + ' ' + json.dumps(field.get('context', {}), ensure_ascii=False))):
         result['reason'] = 'NUMBERS_CHANGED'
     else:
         result.update(decision='KEEP' if content == original_content(field) else 'REWRITE',
@@ -214,6 +216,8 @@ class Package:
             self.records['S1']['_display_title'] = ' '.join(self.records['S1'].get(k, {}).get('text', '') for k in ('core_purpose', 'subject', 'output_claim'))
             from .purpose_intro import attach
             attach(self.records['S1'])
+        from .construction_intro import attach as attach_construction
+        attach_construction(self.records)
         q1 = self.root / 'runs' / ('Q1__' + self.pid) / 'data_shape_profile.json'
         if q1.is_file():
             self.sources[str(q1)] = digest(q1.read_bytes())

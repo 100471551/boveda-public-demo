@@ -1,0 +1,117 @@
+[
+  {
+    "audit": "R14",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 19
+  },
+  {
+    "audit": "R13",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 18
+  },
+  {
+    "audit": "R22",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 43
+  },
+  {
+    "audit": "R12",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 23
+  },
+  {
+    "audit": "R15",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 35
+  },
+  {
+    "audit": "R6_Fresh",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 40
+  },
+  {
+    "audit": "R7",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 26
+  },
+  {
+    "audit": "R9",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 13
+  },
+  {
+    "audit": "R8",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 22
+  },
+  {
+    "audit": "R1",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 18
+  },
+  {
+    "audit": "R6",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 29
+  },
+  {
+    "audit": "R13_Fresh",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 27
+  },
+  {
+    "audit": "R17",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 21
+  },
+  {
+    "audit": "R21",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 26
+  },
+  {
+    "audit": "R19",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 17
+  },
+  {
+    "audit": "R18",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 17
+  },
+  {
+    "audit": "R16",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 23
+  },
+  {
+    "audit": "R11",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 27
+  },
+  {
+    "audit": "R3",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 22
+  },
+  {
+    "audit": "R4",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 19
+  },
+  {
+    "audit": "audit_bd5b4af6c49848a9988469c4abd65486",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 18
+  },
+  {
+    "audit": "R5",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 25
+  },
+  {
+    "audit": "R2",
+    "unchanged_existing_fields": true,
+    "source_references_checked": 22
+  }
+]

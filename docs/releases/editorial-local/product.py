@@ -476,7 +476,7 @@ class ProductLibrary:
             value['retention']='RETAINED_SNAPSHOT';q3=value
         except (OSError,ValueError,KeyError,TypeError,AttributeError):pass
         from apps.primitive_probe.editorial_revision import title_from
-        qualified=content.get('content_contract_version') in ('2.8','2.9')
+        qualified=content.get('content_contract_version') in ('2.8','2.9','2.10')
         display_title=title_from(content) if qualified else None
         return {'id':pid,'title':display_title or binding.get('title',pid),'display_title':display_title,'editorial_qualified':qualified,'publication':summary['publication_eligibility'],
                 'available':True,'components':self._enrich(content['components'],records),
