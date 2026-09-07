@@ -92,10 +92,13 @@
   function evidencePreview() { const c=component('S2.evidence_basis'),e=c?.entries?.[0];return `<article class="panel evidence-preview"><div class="evidence-intro">${icon('database')}<div>${fieldLabel(c,e)}<h2>What evidence does the project actually rely on?</h2></div><div class="field-copy">${e?content(e.content):'<p class="empty-copy">Not available.</p>'}</div></div>${preview()}</article>`; }
   const surfaceFrame = '<svg class="surface-frame" aria-hidden="true" focusable="false" preserveAspectRatio="none"><path></path></svg>';
   function metricVisual(metric={}) {
-    const shown=BovedaMetricDisplay.describe(metric),fmt=BovedaMetricDisplay.format;
+    const shown=BovedaMetricDisplay.describe(metric),fmt=BovedaMetricDisplay.formatHero;
     const hero=BovedaMetricDisplay.heroAffixes(shown);
     let illustration='';
-    if(shown.visual?.type==='fill'){
+    if(shown.visual?.type==='r2-window'){
+      const value=shown.visual.value,clamped=Math.max(-1,Math.min(1,value)),count=Math.round((clamped+1)*30);
+      illustration=`<div class="r2-dial"><svg viewBox="0 0 220 125" role="img" aria-label="R squared display window from minus one to one${value < -1 ? '; value below minus one' : ''}">${Array.from({length:61},(_,i)=>{const angle=Math.PI-i*Math.PI/60,x=Math.cos(angle),y=Math.sin(angle);return `<line x1="${110+83*x}" y1="${105-83*y}" x2="${110+96*x}" y2="${105-96*y}" class="${i<=count&&value>=-1?'on':''}"/>`;}).join('')}</svg><div class="metric-scale"><span>−1</span><span>0</span><span>1</span></div><p class="small muted">${value < -1?'Value below −1. ':''}R² can be below −1.</p></div>`;
+    }else if(shown.visual?.type==='fill'){
       const {min,max,low,high}=shown.visual,span=max-min;
       const lowFraction=(low-min)/span,highFraction=(high-min)/span;
       illustration=`<div class="dot-matrix" aria-hidden="true">${Array.from({length:200},(_,i)=>`<i class="${i<Math.round(lowFraction*200)?'':i<Math.round(highFraction*200)?'range-dot':'off'}"></i>`).join('')}</div><div class="metric-scale" aria-hidden="true"><span>${esc(fmt(min))}</span><span>${esc(fmt(max))}</span></div>`;
@@ -408,7 +411,24 @@
       if(returnFocus){state.loginFocus=null;requestAnimationFrame(()=>{if(returnFocus.isConnected&&returnFocus.getClientRects().length)returnFocus.focus();});}
     }catch(error){if(seq===state.route&&(!state.auth.enabled||state.auth.authenticated))$('main').innerHTML=`<div class="error-panel"><h2>This view is not available.</h2><p>${esc(error.message)}</p><a class="text-button" href="#home">Return Home →</a></div>`;}
   }
-  function drawAudit(){const y=window.scrollY;$('main').innerHTML=auditPage();document.querySelectorAll('.model-tabs [aria-selected="true"],.surface-tabs [aria-selected="true"]').forEach(tab=>tab.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'}));requestAnimationFrame(syncPerformanceShape);window.scrollTo({top:y,behavior:'instant'});}
+  function drawAudit(scope){
+    if(scope){
+      const current=[...document.querySelectorAll(scope)];
+      if(current.length){
+        const template=document.createElement('template');template.innerHTML=auditPage();
+        const next=[...template.content.querySelectorAll(scope)],y=window.scrollY;
+        if(next.length===current.length){
+          current.forEach((node,i)=>{
+            const open=[...node.querySelectorAll('details')].map(d=>d.open);
+            node.dataset.localUpdate='true';
+            node.replaceChildren(...next[i].childNodes);
+            node.querySelectorAll('details').forEach((d,j)=>{if(open[j]!==undefined)d.open=open[j];});
+          });
+          requestAnimationFrame(syncPerformanceShape);window.scrollTo({top:y,behavior:'instant'});return;
+        }
+      }
+    }
+    const y=window.scrollY;$('main').innerHTML=auditPage();document.querySelectorAll('.model-tabs [aria-selected="true"],.surface-tabs [aria-selected="true"]').forEach(tab=>tab.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'}));requestAnimationFrame(syncPerformanceShape);window.scrollTo({top:y,behavior:'instant'});}
   window.addEventListener('resize',()=>requestAnimationFrame(syncPerformanceShape));
   async function action(path,payload){if(state.auth.hostedDemo&&['/api/browse','/api/run','/api/library/remove','/api/library/restore'].includes(path))return null;const epoch=state.privateEpoch;state.pending=true;notify('');try{const result=await request(path,payload);if(epoch!==state.privateEpoch)return null;state.runtime=result.audit!==undefined?result:state.runtime;return result;}catch(error){if(epoch===state.privateEpoch)notify(error.message);return null;}finally{if(epoch===state.privateEpoch){state.pending=false;if((!state.auth.enabled||state.auth.authenticated)&&location.hash==='#new')drawNew();}}}
   document.addEventListener('click',async event=>{
@@ -423,16 +443,16 @@
     if(el.dataset.homeView){const layout=el.dataset.homeView==='list'?'list':'grid';state.libraryLayout=layout;try{localStorage.setItem('boveda-library-layout',layout);}catch(_){}drawHome();document.querySelector(`[data-home-view="${layout}"]`)?.focus();return;}
     if(el.dataset.detail){showDetail(state.details.get(el.dataset.detail));return;}
     if(el.dataset.evidence){showEvidence(el.dataset.evidence,el.dataset.stage,state.details.get(el.dataset.refDetail));return;}
-    if(el.dataset.model!==undefined){state.model=Number(el.dataset.model);state.metric=null;drawAudit();document.getElementById('model-tab-'+state.model)?.focus();return;}
-    if(el.dataset.metric!==undefined){state.metric=Number(el.dataset.metric);drawAudit();document.querySelector(`[data-metric="${state.metric}"]`)?.focus();return;}
-    if(el.dataset.sourceFilter){state.sourceFilter=el.dataset.sourceFilter;drawAudit();document.querySelector(`[data-source-filter="${state.sourceFilter}"]`)?.focus();return;}
+    if(el.dataset.model!==undefined){state.model=Number(el.dataset.model);state.metric=null;drawAudit('.performance');document.getElementById('model-tab-'+state.model)?.focus();return;}
+    if(el.dataset.metric!==undefined){state.metric=Number(el.dataset.metric);drawAudit('.performance');document.querySelector(`[data-metric="${state.metric}"]`)?.focus();return;}
+    if(el.dataset.sourceFilter){state.sourceFilter=el.dataset.sourceFilter;drawAudit('.artifact-catalogue');document.querySelector(`[data-source-filter="${state.sourceFilter}"]`)?.focus();return;}
     for(const [data,key,prefix] of [['routeIndex','routeIndex','route-tab-'],['representationIndex','representationIndex','representation-tab-'],['approachIndex','approachIndex','approach-tab-']]){
-      if(el.dataset[data]!==undefined){state[key]=Number(el.dataset[data]);drawAudit();$(prefix+state[key])?.focus();return;}
+      if(el.dataset[data]!==undefined){state[key]=Number(el.dataset[data]);drawAudit({routeIndex:'.route-surface',representationIndex:'.representation-detail',approachIndex:'.learning-method-surface'}[key]);$(prefix+state[key])?.focus();return;}
     }
-    if(el.dataset.evidenceTopic!==undefined){state.evidenceTopic=Number(el.dataset.evidenceTopic);drawAudit();$('evidence-topic-'+state.evidenceTopic)?.focus();return;}
+    if(el.dataset.evidenceTopic!==undefined){state.evidenceTopic=Number(el.dataset.evidenceTopic);drawAudit('.evidence-questions');$('evidence-topic-'+state.evidenceTopic)?.focus();return;}
     if(el.dataset.chapter){document.getElementById('chapter-'+el.dataset.chapter)?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});return;}
-    if(el.dataset.outcomeSort){state.outcomeSort=state.outcomeSort==='priority'?'reverse':'priority';drawAudit();document.querySelector('[data-outcome-sort]')?.focus();return;}
-    if(el.dataset.filter){state.filter=el.dataset.filter;drawAudit();document.querySelector(`[data-filter="${state.filter}"]`)?.focus();return;}
+    if(el.dataset.outcomeSort){state.outcomeSort=state.outcomeSort==='priority'?'reverse':'priority';drawAudit('.outcome-review');document.querySelector('[data-outcome-sort]')?.focus();return;}
+    if(el.dataset.filter){state.filter=el.dataset.filter;drawAudit('.outcome-review,.outcome-summary');document.querySelector(`[data-filter="${state.filter}"]`)?.focus();return;}
     if(el.dataset.remove){const id=el.dataset.remove;openDrawer('Remove audit from library',`<p>This removes ${esc(id)} from this library. Preserved analytical files remain intact.</p><div class="run-actions"><button class="primary-button" data-confirm-remove="${esc(id)}">Remove from library</button><button class="secondary-button" id="cancel-remove">Keep audit</button></div>`);return;}
     if(el.dataset.confirmRemove){const id=el.dataset.confirmRemove;const result=await action('/api/library/remove',{audit_id:id});if(result){closeDrawer();await navigate();notify('Audit removed from the library. Preserved files remain intact.');}return;}
     if(el.id==='restore-library'){for(const a of state.library.filter(a=>a.hidden))await action('/api/library/restore',{audit_id:a.id});await navigate();return;}
@@ -455,8 +475,8 @@
     if(el.id==='open-artifacts'){await action('/api/artifacts',{audit_id:state.runtime.audit.audit_id});return;}
   });
   document.addEventListener('change',event=>{
-    if(event.target.dataset.compare){const side=event.target.dataset.compare,other=side==='Left'?'Right':'Left',before=state['compare'+side];state['compare'+side]=Number(event.target.value);if(state['compare'+other]===state['compare'+side])state['compare'+other]=before;drawAudit();document.querySelector(`[data-compare="${side}"]`)?.focus();return;}
-if(event.target.id==='preview-select'){state.view=Number(event.target.value);drawAudit();$('preview-select')?.focus();}});
+    if(event.target.dataset.compare){const side=event.target.dataset.compare,other=side==='Left'?'Right':'Left',before=state['compare'+side];state['compare'+side]=Number(event.target.value);if(state['compare'+other]===state['compare'+side])state['compare'+other]=before;drawAudit('.model-comparison');document.querySelector(`[data-compare="${side}"]`)?.focus();return;}
+if(event.target.id==='preview-select'){state.view=Number(event.target.value);drawAudit('.standalone-preview,.evidence-preview');$('preview-select')?.focus();}});
   document.addEventListener('input',event=>{if(event.target.id==='project-search'){const pos=event.target.selectionStart;state.search=event.target.value;drawHome();$('project-search').focus();try{$('project-search').setSelectionRange(pos,pos);}catch(_){};}if(event.target.id==='spend-guard')sessionStorage.setItem('boveda-spend',event.target.value);});
   document.addEventListener('submit',async event=>{
     if(event.target.id==='login-form'){
@@ -545,6 +565,7 @@ if(event.target.id==='preview-select'){state.view=Number(event.target.value);dra
       }
     }),{threshold:0,rootMargin:'0px 0px -12px 0px'});
     function scan(root){
+      if(root.closest?.('[data-local-update]'))return;
       const nodes=[...(root.matches?.(selector)?[root]:[]),...root.querySelectorAll(selector)];
       nodes.forEach(node=>{if(!seen.has(node)){seen.add(node);observer.observe(node);}});
     }

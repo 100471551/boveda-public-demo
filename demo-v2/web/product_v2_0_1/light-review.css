@@ -136,7 +136,7 @@
 .quantities-table th:nth-child(4){width:16%}
 .quantities-table .eyebrow{display:block;font-size:9px;margin-bottom:8px}
 .quantities-table .quantity-label{display:block;font-size:13px;line-height:1.6}
-.quantities-table td.quantity-number{font-size:23px;text-align:center;overflow-wrap:anywhere}
+.quantities-table td.quantity-number{font-size:18px;text-align:center;overflow-wrap:anywhere}
 .quantities-table td{vertical-align:middle}
 .quantities-table .badge{white-space:normal}
 /* Evidence context uses the same selected-tab contour as Performance. */

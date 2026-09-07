@@ -105,7 +105,7 @@
       note:qualifier?'Approximate reported proportion; reference scale: 0–1.':'Reference scale: 0–1.'};
     if(silhouette&&unitless(unit)&&value>=-1&&value<=1) return {...base,kind:'reference',
       visual:{type:'point',min:-1,max:1,value},note:'Silhouette reference scale: −1 to 1.'};
-    if(rSquared&&unitless(unit)) return {...base,note:'R² has a maximum of 1 but can be negative; no bounded fill scale is implied.'};
+    if(rSquared&&unitless(unit)) return {...base,visual:{type:'r2-window',value},note:'R² has a maximum of 1 but can be negative; no bounded fill scale is implied.'};
     if(/\bmean\s+abs\s+mfe\s+forecast\b/.test(name)) return {...base,note:'This reported formula is not bounded to 0–1.'};
     if(percent(unit)&&value>=0&&value<=100)return {...base,kind:'percentage',unit:'%',fraction:value/100,note:qualifier?`Approximately ${value}% as reported; no bounded scale is implied.`:'Reported percentage; no bounded scale is implied.'};
     return base;
@@ -118,6 +118,14 @@
     if(value!==0&&Math.abs(value)<.005)return value.toLocaleString('en-US',{maximumSignificantDigits:5});
     return value.toLocaleString('en-US',{maximumFractionDigits:5,minimumFractionDigits:ratio?2:0});
   }
+  function formatHero(value,ratio=false) {
+    if(typeof value==='number') {
+      if(value!==0&&Math.abs(value)<.001)return value.toExponential(3).replace(/\.?0+e/,'e');
+      return value.toLocaleString('en-US',{maximumFractionDigits:3,minimumFractionDigits:ratio?2:0});
+    }
+    if(value===null||value===undefined)return '-';
+    return String(value).replace(/(?<![\w.])([+-]?(?:\d+\.\d{4,}|\d+(?:\.\d+)?e[+-]?\d+))(?![\w.])/gi,token=>formatHero(Number(token)));
+  }
   function heroAffixes(described={}) {
     return {qualifier:String(described.qualifier||''),unit:described.unit==='0–1'?'':String(described.unit||'')};
   }
@@ -126,5 +134,5 @@
     if(!described.unit && described.note==='Unit not recorded.')return 'Unit not recorded.';
     return '';
   }
-  return {describe,label,format,heroAffixes,userNote};
+  return {describe,label,format,formatHero,heroAffixes,userNote};
 });
