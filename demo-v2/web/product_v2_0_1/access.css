@@ -36,6 +36,8 @@
 .login-form>input+label+input{margin-top:31px}
 .login-submit{height:59px;min-width:158px;margin-top:21px;padding:0 27px;border-radius:20px;background:#222;color:#f6f6f6;display:flex;align-items:center;justify-content:center;gap:15px;font-family:Flink,Arial,sans-serif;font-size:14px;font-weight:700}
 .login-submit .grid-icon{width:12px;height:12px;gap:2px;color:rgba(246,246,246,.5)}
+.login-submit{position:relative;isolation:isolate}
+.login-submit>span{position:relative;z-index:1}
 .login-submit:hover:not(:disabled){background:#303030}
 .remember-control{display:flex;align-items:center;gap:11px;margin:45px 4px 0;font-size:14px;line-height:1.5;cursor:pointer}
 .remember-control input{appearance:none;width:17px;height:17px;margin:0;border:1px solid var(--line);border-radius:5px;background:var(--raised);display:grid;place-content:center}
