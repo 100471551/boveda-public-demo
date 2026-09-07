@@ -36,7 +36,7 @@
     if(!c||!canonicalDisplayFields.has(id)||state.audit?.editorial_qualified)return c;
     return {...c,entries:c.entries.map(e=>typeof e.canonical_text==='string'&&e.canonical_text.trim()?{...e,effective_source:'CANONICAL',fallback_reason:'LEGACY_SCOPE_PROTECTION',content:c.component==='LIST'?{items:[e.canonical_text]}:{text:e.canonical_text}}:e)};
   }
-  function entryContext(c,e) { return {title:c?.label,stage:c?.stage,display_text:contentText(e?.content),canonical_text:e?.canonical_text,pointer:e?.pointer,decision:e?.decision}; }
+  function entryContext(c,e) { return {title:c?.label,stage:c?.stage,display_text:contentText(e?.content),canonical_text:e?.canonical_text,canonical_sources:e?.metadata?.canonical_sources,pointer:e?.pointer,decision:e?.decision}; }
   function entries(c,labels=false) {
     if(!c?.entries?.length)return '<p class="empty-copy">None recorded.</p>';
     return c.entries.map(e=>`<div class="field-block">${labels&&e.metadata?.label?`<h3>${esc(e.metadata.label)}</h3>`:''}${content(e.content)}<div class="field-label">${badge(e.metadata,entryContext(c,e))}</div></div>`).join('');
@@ -156,7 +156,7 @@
     return `<aside class="callout ${neutral?'neutral':red?'red':''}"><h2>${heading}</h2><ul>${items.length?items.map(({text,e})=>`<li>${icon(neutral?'chevron':red?'arrow-red':'arrow-amber')}<span>${esc(text)}</span>${id==='S1.boundary'?'':badge(e.metadata,entryContext(c,e),!neutral)}</li>`).join(''):'<li><span></span><p class="empty-copy">None recorded.</p></li>'}</ul></aside>`;
   }
   function overview() {
-    const c=component('S1.core_purpose'),e=c?.entries?.[0];
+    const intro=component('S1.purpose_intro'),c=intro?.entries?.[0]?.decision==='REWRITE'?intro:component('S1.core_purpose'),e=c?.entries?.[0];
     return `<div class="overview-top"><div class="overview-left"><article class="panel purpose-card"><div class="purpose-question"><img class="purpose-icon" src="/product_v2_0_1/assets/purpose.svg" alt=""><h2>What is it for?</h2></div><div class="purpose-description">${fieldLabel(c,e)}${e?content(e.content):'<p class="empty-copy">Not available.</p>'}</div></article><article class="panel content-overview"><div class="panel-title">${grid}<h2>Content Overview</h2></div><div class="panel-body">${questionCard('S1.subject','What is it about?')}${questionCard('S1.output_claim','What does it produce or assert?')}${questionCard('S1.intended_use','Why, for whom, or toward what decision?')}${questionCard('S1.secondary_purposes')}</div></article></div><div class="overview-right">${confidence()}${shape()}</div></div>${evidencePreview()}${performance()}${callout('S1.boundary','Where does the claim stop?')}${callout('S1.not_established','Not Established',true)}`;
   }
   function componentPanel(id,ico='construction') {const c=component(id);return `<article class="panel component-panel"><div class="panel-title">${icon(ico)}<h2>${esc(c?.label||id)}</h2></div><div class="panel-body">${entries(c,true)}</div></article>`;}
@@ -359,7 +359,8 @@
     }
     if(d.context)body+=section('Context',`<p class="muted">${esc(d.context)}</p>`);
     if(d.display_text)body+=section('Display copy',`<p>${esc(d.display_text)}</p>`);
-    if(d.canonical_text!==undefined)body+=section('Canonical content',`<p>${esc(d.canonical_text)}</p>`);
+    if(d.canonical_sources?.length)body+=section('Canonical source statements',d.canonical_sources.map(source=>`<div class="field-block"><h3>${esc(source.field)} · ${esc(pretty(source.status))}</h3><p>${esc(source.text)}</p>${(source.evidence||[]).map(ref=>`<button class="evidence-link" data-evidence="${esc(ref.evidence_id)}" data-stage="S1" data-ref-detail="${detail({title:source.field,record:ref})}"><strong>${esc(ref.evidence_id)}</strong><span>${esc(ref.artifact||'')} · ${esc(ref.location||'')}</span></button>`).join('')}</div>`).join(''));
+    else if(d.canonical_text!==undefined)body+=section('Canonical content',`<p>${esc(d.canonical_text)}</p>`);
     if(meta.status)body+=section('Epistemic status',`<span class="badge ${cls(meta.status)}">${esc(meta.status)}</span>`);
     if(d.record)body+=section('Preserved detail',renderRecord(d.record));
     if(d.decision)body+=section('Presentation',`<p class="small muted">${esc(d.decision)} · The canonical result remains authoritative.</p>`);

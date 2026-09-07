@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const {describe,label,format,heroAffixes} = require('../static/product_v2_0_1/metric-display.js');
+const {describe,label,format,formatHero,r2Dial,heroAffixes} = require('../static/product_v2_0_1/metric-display.js');
 
 test('bounded percentage becomes a disclosed display proportion without changing the record', () => {
   const metric = Object.freeze({label: 'Average accuracy', unit: '%', value: 86.4});
@@ -14,9 +14,9 @@ test('bounded percentage becomes a disclosed display proportion without changing
 });
 test('Unicode and ASCII R-squared labels preserve values without implying a bounded fill scale', () => {
   for (const name of ['R²','Test R²','R^2','R-squared','Test_R2']) {
-    for (const value of [.953887,-.4]) {
+    for (const value of [.953887,-.4,-7]) {
       const shown=describe({label:name,value});
-      assert.equal(shown.kind,'number');assert.equal(shown.value,value);assert.equal(shown.visual,null);
+      assert.equal(shown.kind,'number');assert.equal(shown.value,value);assert.deepEqual(shown.visual,{type:'r2-window',value});
       assert.match(shown.note,/can be negative/);
     }
   }
@@ -130,4 +130,21 @@ test('compact precision preserves small values and raw qualifiers',()=>{
  assert.equal(format('≤ 0.953887894029'),'≤ 0.95389');
  assert.equal(format('1.123456789 / 2.987654321'),'1.12346 / 2.98765');
  assert.equal(format(67485),'67,485');
+});
+
+test('hero rounds to three decimals without erasing small nonzero results',()=>{
+ assert.equal(formatHero(.903472509313),'0.903');
+ assert.equal(formatHero(-.000000123456),'−1.235e-7'.replace('−','-'));
+ assert.equal(formatHero(2099575),'2,099,575');
+ assert.equal(format(.903472509313),'0.90347');
+});
+
+test('R squared dial starts at zero in either direction and keeps separate precision',()=>{
+ const positive=r2Dial(.953887894029),negative=r2Dial(-.953887894029),zero=r2Dial(0);
+ assert.equal(positive.center,'0.95');assert.equal(positive.precise,'0.95389');
+ assert.equal(negative.center,'-0.95');assert.equal(negative.precise,'-0.95389');
+ assert.ok(positive.x>50);assert.ok(negative.x<50);assert.equal(positive.y,negative.y);
+ assert.match(positive.gradient,/var\(--text\) 0deg/);assert.match(negative.gradient,/transparent 0deg/);
+ assert.equal(zero.center,'0.00');assert.equal(zero.x,50);
+ assert.equal(r2Dial(-4).precise,'-4');assert.equal(r2Dial(-4).x,r2Dial(-1).x);
 });

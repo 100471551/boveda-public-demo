@@ -94,6 +94,8 @@ def fields(stage, record):
                 continue
             parent, _ = parent_at(record, pointer)
             context = {k: parent[k] for k in ('label', 'status') if k in parent}
+            if profile.id == 'S1.purpose_intro':
+                context={'status':parent.get('purpose_status'),'supporting_statements':parent['supporting_statements']}
             if profile.id == 'S4.models':
                 # The label already sits beside the description in the table.
                 # A variant name must not become inferred training/evaluation scope.
@@ -104,7 +106,7 @@ def fields(stage, record):
                 context['primary_identity'] = parent.get('answer')
             yield {'profile_id': profile.id, 'stage': stage, 'pointer': pointer,
                    'canonical_text': text, 'context': context,
-                   'shape': profile.shape, 'keep_allowed': profile.shape != 'items' or '*' in profile.path, 'component': profile.component, 'question': profile.question,
+                   'shape': profile.shape, 'keep_allowed': profile.id != 'S1.purpose_intro' and (profile.shape != 'items' or '*' in profile.path), 'component': profile.component, 'question': profile.question,
                    'instructions': CONTRACT + '\n\n' + profile.prompt + '\nFor KEEP or FALLBACK, return empty text or empty arrays. REWRITE must use the requested content shape.'}
 
 
@@ -210,6 +212,8 @@ class Package:
         # Presentation-only source fields. No canonical record is written.
         if 'S1' in self.records:
             self.records['S1']['_display_title'] = ' '.join(self.records['S1'].get(k, {}).get('text', '') for k in ('core_purpose', 'subject', 'output_claim'))
+            from .purpose_intro import attach
+            attach(self.records['S1'])
         q1 = self.root / 'runs' / ('Q1__' + self.pid) / 'data_shape_profile.json'
         if q1.is_file():
             self.sources[str(q1)] = digest(q1.read_bytes())

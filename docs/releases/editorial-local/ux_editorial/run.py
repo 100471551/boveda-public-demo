@@ -35,7 +35,7 @@ def evaluate_field(field, provider, attempt=0):
         from .validation import REVIEW_POLICY
         review_field = {**field, 'shape':'text', 'keep_allowed':True,
                         'profile_id':field['profile_id']+'.semantic_review',
-                        'instructions':REVIEW_POLICY,
+                        'instructions':REVIEW_POLICY + (' An opening introduction must name the supplied concrete output, not repeat the purpose three times. Reject the prohibited phrases this documented project or documented outputs. Secondary aims must not become achieved results.' if field['profile_id']=='S1.purpose_intro' else ''),
                         'context':{'field':field['profile_id'],'display':result['content'],'canonical_metadata':field['context']}}
         verdict, review_event = provider.generate(review_field)
         prior_cost = result['usage'].get('cost_usd') or 0

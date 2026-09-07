@@ -7,7 +7,7 @@ from .editor import parent_at, locate, original_content
 
 
 def clean_metadata(parent):
-    return {k:copy.deepcopy(parent[k]) for k in ('label','status','answer') if k in parent} | {
+    return {k:copy.deepcopy(parent[k]) for k in ('label','status','answer','canonical_sources') if k in parent} | {
         'evidence': [{k:e[k] for k in ('evidence_id','artifact','location') if k in e} for e in parent.get('evidence', [])]}
 
 

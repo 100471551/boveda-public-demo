@@ -28,3 +28,5 @@ python3 -B -m unittest discover -s apps/ux_editorial/tests
 All tests use offline transports. The regular provider makes real paid requests using the already configured local credential.
 
 C1 2.8 qualification and rollback evidence: `outputs/UX_Editorial_Revision_2026-09-07/RELEASE.md`. Three retained field-level fallbacks protect source meaning; no frontend rules depend on their project IDs.
+
+Version 2.9 adds `S1.purpose_intro`, a separate opening synthesis from canonical S1 statements, with combined references and individually inspectable source statuses. It does not replace the short core-purpose field. Failed generation falls back to the short purpose. The synthesis status describes the editorial introduction, not a changed analytical finding.
