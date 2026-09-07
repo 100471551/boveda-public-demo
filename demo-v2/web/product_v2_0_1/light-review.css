@@ -276,6 +276,11 @@
 .purpose-question>.purpose-icon{position:static}
 .purpose-description>.field-label{position:static;margin:0 0 12px}
 .purpose-card .field-copy{line-height:2}
-@media(min-width:1101px){.purpose-card{grid-template-columns:164px minmax(0,1fr);gap:36px;padding-inline:40px}}
+@media(min-width:1101px){
+ .purpose-card{grid-template-columns:164px minmax(0,1fr);gap:36px;padding-inline:40px}
+ /* Center the heading against the complete description; the icon sits above it. */
+ .purpose-question{position:relative;display:block}
+ .purpose-question>.purpose-icon{position:absolute;left:0;bottom:calc(100% + 22px)}
+}
 @media(max-width:1100px){.purpose-card{padding:42px 36px;min-height:0}}
 @media(max-width:600px){.purpose-card{padding:34px 24px}}
