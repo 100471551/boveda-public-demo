@@ -195,7 +195,8 @@ body,button,input,select,textarea,pre,code{font-family:Menlo,Monaco,monospace;fo
 .performance-columns > .metric-tile {align-self:start; height:auto; min-height:0;}
 .performance-columns > .metric-tile .metric-inner {flex:initial; min-height:0;}
 .route-notes {padding:24px 32px; border-top:1px solid var(--border, #ddd);}
-.route-notes h4 {font-size:13px; margin:0 0 12px;}
+.route-notes > summary {font-size:13px; font-weight:700; cursor:pointer;}
+.route-notes[open] > summary {margin-bottom:12px;}
 .route-notes p {margin:10px 0; line-height:1.6;}
 .metric-qualifier {font-size:16px; align-self:center;}
 
