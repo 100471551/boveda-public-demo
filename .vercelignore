@@ -1,0 +1,12 @@
+engine/
+src/
+public/
+docs/
+tests/
+scripts/
+node_modules/
+dist/
+.env*
+.github/
+demo-v2/tests/
+demo-v2/scripts/encrypt.mjs

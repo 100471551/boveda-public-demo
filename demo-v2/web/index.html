@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="probe-token" content="__PROBE_TOKEN__">
+  <meta name="color-scheme" content="dark light">
+  <title>Bóveda · Alpha</title>
+  <link rel="stylesheet" href="/product_v2_0_1/product.css">
+  <link rel="stylesheet" href="/product_v2_0_1/review-controls.css">
+<link rel="stylesheet" href="/product_v2_0_1/art-direction.css">
+<link rel="stylesheet" href="/product_v2_0_1/light-review.css">
+  <link rel="stylesheet" href="/product_v2_0_1/access.css">
+  <script defer src="/product_v2_0_1/metric-display.js"></script>
+  <script defer src="/vendor/marked.umd.js"></script>
+  <script defer src="/viewer.js"></script>
+  <script defer src="/product_v2_0_1/product.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="app-shell">
+    <header class="brand-header">
+      <a class="brand" href="#home" aria-label="Bóveda Home"><img class="logo logo-dark" src="/product/assets/logo.svg" alt="Bóveda"><img class="logo logo-light" src="/product/assets/logo-light.svg" alt="Bóveda"><span class="demo-pill">Demo</span></a>
+      <div class="header-actions">
+        <button id="public-theme-toggle" class="public-theme-toggle" type="button" aria-label="Use dark theme" title="Use dark theme" hidden><span aria-hidden="true">◐</span></button>
+        <a id="public-login" class="public-login-button" href="#login" hidden><span class="grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Login</span></a>
+        <button id="global-menu" class="icon-button menu-trigger" aria-label="Open menu" aria-haspopup="dialog"><span class="grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+      </div>
+    </header>
+    <nav class="rail" aria-label="Main navigation">
+      <a href="#home" data-page="home" aria-label="Home" title="Home"><img src="/product_v2_0_1/assets/nav-home.svg" alt=""></a>
+      <a href="#audit" data-page="audit" aria-label="Audit" title="Audit"><span class="grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span></a>
+      <a href="#how-it-works" data-page="how-it-works" aria-label="How it works" title="How it works"><img src="/product_v2_0_1/assets/nav-info.svg" alt=""></a>
+    </nav>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <main id="main" tabindex="-1"></main>
+    <footer class="footer"><a class="brand" href="#home" aria-label="Bóveda Home"><img class="logo logo-dark" src="/product/assets/logo.svg" alt="Bóveda"><img class="logo logo-light" src="/product/assets/logo-light.svg" alt="Bóveda"><span class="demo-pill">Demo</span></a><strong>alpha 2.0.1</strong></footer>
+  </div>
+  <div id="overlay" class="overlay" hidden>
+    <section id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+      <header class="drawer-header"><button id="drawer-back" class="icon-button drawer-back" aria-label="Back to previous detail" title="Back" hidden><span aria-hidden="true">←</span></button><h2 id="drawer-title"></h2><div id="drawer-tools"></div><button id="drawer-close" class="icon-button" aria-label="Close drawer"><img src="/product/assets/close.svg" alt=""></button></header>
+      <div id="drawer-body" class="drawer-body"></div>
+      <footer class="drawer-footer">alpha 2.0.1</footer>
+    </section>
+  </div>
+</body>
+</html>

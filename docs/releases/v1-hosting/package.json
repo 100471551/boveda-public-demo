@@ -1,6 +1,6 @@
 {
   "name": "boveda-alpha",
-  "version": "2.0.1",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -11,18 +11,16 @@
     "dev": "node scripts/dev.mjs",
     "dev:public": "vite",
     "server": "node engine/server.mjs",
-    "build": "node demo-v2/scripts/build.mjs",
-    "build:demo": "node demo-v2/scripts/build.mjs",
+    "build": "vite build",
+    "build:demo": "vite build",
     "test": "node --test tests/*.test.mjs",
-    "test:deploy": "node --test demo-v2/tests/*.test.mjs",
+    "test:deploy": "node --test tests/public-demo-deployment.test.mjs tests/router.test.mjs tests/v102-feedback.test.mjs tests/v110-workspace.test.mjs",
     "demo:export": "node scripts/export-public-demo.mjs",
-    "demo:validate": "node demo-v2/scripts/validate.mjs",
+    "demo:validate": "node scripts/public-demo-privacy.mjs public/demo-data/v1.0.2",
     "report:stored": "node scripts/generate-stored-report.mjs",
     "validate:corpus": "node scripts/validate-corpus.mjs",
     "validate:live": "node scripts/live-validate.mjs",
-    "validate:analytical": "node scripts/validate-analytical.mjs",
-    "build:v1": "vite build",
-    "test:v1:deploy": "node --test tests/public-demo-deployment.test.mjs tests/router.test.mjs tests/v102-feedback.test.mjs tests/v110-workspace.test.mjs"
+    "validate:analytical": "node scripts/validate-analytical.mjs"
   },
   "dependencies": {
     "express": "5.1.0",

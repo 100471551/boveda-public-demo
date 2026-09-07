@@ -3,7 +3,7 @@ name: Deployment checks
 on:
   pull_request:
   push:
-    branches: [main, "codex/**"]
+    branches: [main]
 
 permissions:
   contents: read
@@ -23,4 +23,4 @@ jobs:
       - run: npm run test:deploy
       - run: npm run build:demo
       - name: Validate built artefacts
-        run: node demo-v2/scripts/validate.mjs
+        run: node scripts/public-demo-privacy.mjs dist
