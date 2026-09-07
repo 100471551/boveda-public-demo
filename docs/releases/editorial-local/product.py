@@ -1,8 +1,9 @@
 """Bounded, read-only product catalogue for the Primitive Probe.
 
 This module deliberately knows a small set of published result packages.  It
-does not discover projects, open selected source folders, run analytical code,
+does not discover projects, inspect project source code, run analytical code,
 or call a model/provider. It reuses the existing pure presentation mapping.
+Repository attribution reads only audit-bound run metadata and Git origin config.
 The catalogue's mutable state only
 controls visibility of references; it never owns or removes analytical output.
 """
@@ -315,6 +316,7 @@ class ProductLibrary:
         from apps.primitive_probe.editorial_revision import load_revision, title_from
         for entry in entries:
             if not entry.get('available'): continue
+            entry['repository_url'] = self.repository_url(entry['id'])
             try:
                 revision = load_revision(self, entry['id'])
                 title = title_from(revision) if revision else None
@@ -427,7 +429,22 @@ class ProductLibrary:
 
     def audit(self, audit_id):
         from apps.primitive_probe.editorial_revision import apply_revision
-        return apply_revision(self, self._audit_legacy(audit_id))
+        value = apply_revision(self, self._audit_legacy(audit_id))
+        value['repository_url'] = self.repository_url(audit_id) if value.get('available') else None
+        return value
+
+    def repository_url(self, audit_id):
+        from apps.primitive_probe.repository import repository_url
+        binding = self._binding(audit_id)
+        if audit_id in NO_CONTENT:
+            return None
+        if binding['kind'] == 'runtime':
+            pid = binding['project_id']
+            root = Path(binding['output_root']) / 'projects' / pid
+        else:
+            pid = self._fresh_project_id(audit_id) or audit_id
+            root = self._project_root(audit_id)
+        return repository_url(self.workspace, root, pid)
 
     def _audit_legacy(self, audit_id):
         binding=self._binding(audit_id)

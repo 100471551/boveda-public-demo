@@ -121,3 +121,12 @@
 @media(min-width:1101px){
  .construction-opening .construction-hero-card>.narrative-hero{grid-template-columns:minmax(200px,.3fr) minmax(0,1fr);gap:40px}
 }
+
+.audit-identifier{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.repository-link{display:inline-flex;align-items:center;gap:7px;color:inherit}
+.repository-link>span{text-decoration:underline;text-underline-offset:3px}
+.repository-external{width:14px;height:14px;flex:none}
+.repository-link:hover{color:var(--text)}
+.repository-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}
+.repository-unavailable{color:var(--muted)}
+[data-theme=light] .repository-external{filter:brightness(.55)}
