@@ -496,7 +496,9 @@ if(event.target.id==='preview-select'){state.view=Number(event.target.value);dra
   let sessionRefresh=null;
   async function refreshSession(forceNavigate=false){
     if(!state.auth.ready)return;if(sessionRefresh)return sessionRefresh;
-    state.sessionChecking=true;document.body.classList.add('session-rechecking');
+    state.sessionChecking=true;
+    // Only shield a page restored from browser history, never a background check.
+    if(forceNavigate)document.body.classList.add('session-rechecking');
     sessionRefresh=(async()=>{
       try{
         const session=await request('/api/auth/session'),next={ready:true,enabled:!!session.enabled,authenticated:!!session.authenticated,hostedDemo:hostedSession(session)};
