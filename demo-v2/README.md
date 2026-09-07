@@ -2,7 +2,7 @@
 
 The public home and How it works are open. The library, audit views, supporting evidence and canonical downloads require the existing demo account. Login includes a close button; the authenticated menu includes logout. There is no registration or collection of user profile information.
 
-The cloud release serves a preserved snapshot of 22 available audits and two unavailable metadata entries (R10 and R20). It does not run the analytical pipeline, access local project directories, remove audits or regenerate outputs. The canonical reports retain their original bytes. The UX source comes from `apps/primitive_probe/static/product_v2_0_1` in the Boveda_2.0 workspace.
+The cloud release serves a preserved snapshot of 23 available audits and two unavailable metadata entries (R10 and R20). It does not run the analytical pipeline, access local project directories, remove audits or regenerate outputs. The canonical reports retain their original bytes. The UX source comes from `apps/primitive_probe/static/product_v2_0_1` in the Boveda_2.0 workspace.
 
 ## Deployment
 
@@ -23,3 +23,10 @@ Run `npm run demo:validate`, `npm run test:deploy` and `npm run build:demo`. Tes
 ## Version 1 preservation and rollback
 
 The previous source, engine, public assets and documentation remain in Git. The former hosting configuration and handoff are copied to `docs/releases/v1-hosting/`. The last v1 production commit is `65826eef9b4626d748dba2ce33382739a1899f2b`. Revert the v2 release commit(s) or restore the earlier Vercel deployment to roll back; do not delete v1 files to deploy v2. `.vercelignore` and the new build prevent v1 audit files from becoming public assets in the v2 deployment.
+
+
+## Motion and local snapshot revision
+
+The local application creates audits; this cloud snapshot displays a disabled New audit button and never starts processing. This release includes the completed R23 public-health audit under its original runtime UUID, including its canonical report and retained evidence. R10 and R20 remain metadata only.
+
+UI motion uses viewport-triggered entrances, staggered inner surfaces, progressive confidence ticks and brief dashboard transitions. Reduced-motion preferences disable these effects; numerical evidence and final colors are not modified. Local remembered sessions now survive server restarts in a private file containing only token hashes and expiration times; cloud sessions continue using Redis.

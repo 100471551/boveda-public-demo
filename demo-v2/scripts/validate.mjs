@@ -10,7 +10,7 @@ export async function validateBundle(root = fileURLToPath(new URL('../', import.
   if (names.length !== Object.keys(manifest.files).length + 1) throw new Error('Unexpected data files');
   for (const name of names) {
     if (name === 'manifest.json') continue;
-    if (!/^(?:library\.json|R(?:[1-9]|1[0-9]|2[0-2])(?:_Fresh)?\.(?:json|canonical\.md|evidence\.json))\.enc$/.test(name)) throw new Error('Unexpected export name');
+    if (!/^(?:library\.json|(?:R(?:[1-9]|1[0-9]|2[0-2])(?:_Fresh)?|audit_[a-f0-9]{32})\.(?:json|canonical\.md|evidence\.json))\.enc$/.test(name)) throw new Error('Unexpected export name');
     const raw = await readFile(join(directory, name));
     if (createHash('sha256').update(raw).digest('hex') !== manifest.files[name]) throw new Error('Ciphertext digest differs: ' + name);
     const value = JSON.parse(raw);

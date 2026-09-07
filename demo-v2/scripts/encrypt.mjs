@@ -10,7 +10,7 @@ const files = JSON.parse(Buffer.concat(chunks).toString());
 await mkdir(destination, {recursive:true});
 const manifest = {version:2, encryption:'AES-256-GCM', files:{}};
 for (const [name, data] of Object.entries(files)) {
-  if (!/^(?:library\.json|R(?:[1-9]|1[0-9]|2[0-2])(?:_Fresh)?\.(?:json|canonical\.md|evidence\.json))$/.test(name)) throw new Error('Invalid export filename');
+  if (!/^(?:library\.json|(?:R(?:[1-9]|1[0-9]|2[0-2])(?:_Fresh)?|audit_[a-f0-9]{32})\.(?:json|canonical\.md|evidence\.json))$/.test(name)) throw new Error('Invalid export filename');
   const iv = randomBytes(12), cipher = createCipheriv('aes-256-gcm', Buffer.from(hex, 'hex'), iv);
   cipher.setAAD(Buffer.from(name));
   const encrypted = Buffer.concat([cipher.update(Buffer.from(data, 'base64')), cipher.final()]);

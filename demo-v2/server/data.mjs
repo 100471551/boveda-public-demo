@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 import { DataNotFoundError, ServiceUnavailableError } from './errors.mjs';
 
-const AUDIT_ID = /^(?:R(?:[1-9]|1[0-9]|2[0-2])|R6_Fresh|R13_Fresh)$/;
+const AUDIT_ID = /^(?:R(?:[1-9]|1[0-9]|2[0-2])|R6_Fresh|R13_Fresh|audit_[a-f0-9]{32})$/;
 const EVIDENCE_ID = /^E[0-9]{4,}$/;
 const STAGES = new Set(['S1', 'S2', 'S3', 'S4', 'Q1', 'Q2', 'S6']);
 const STUB_IDS = new Set(['R10', 'R20']);
