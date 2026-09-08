@@ -130,3 +130,7 @@
 .repository-link:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}
 .repository-unavailable{color:var(--muted)}
 [data-theme=light] .repository-external{filter:brightness(.55)}
+
+/* Quiet visual affordance; row labels retain the accessible Inspect action. */
+.inspect-chevron{display:block;width:14px;height:14px;object-fit:contain;transform:rotate(180deg)}
+.signal-inspect-header,.signal-result-inspect{display:flex;justify-content:flex-end;align-items:center}

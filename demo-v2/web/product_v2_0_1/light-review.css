@@ -115,9 +115,9 @@
 .shape-card{outline:none}
 .overview-top{row-gap:46px}
 .overview-left,.overview-right{display:contents}
-.overview-left>.purpose-card{grid-column:1;grid-row:1;align-self:center}
+.overview-left>.purpose-card{grid-column:1;grid-row:1;align-self:end}
 .overview-left>.content-overview{grid-column:1;grid-row:2}
-.overview-right>.confidence{grid-column:2;grid-row:1;margin-top:-80px}
+.overview-right>.confidence{grid-column:2;grid-row:1;align-self:end;margin-top:0}
 .overview-right>.shape-card{grid-column:2;grid-row:2}
 .rail a img,.rail a .grid-icon{opacity:.78}
 [data-theme=light] .project-card .remove-button{color:#d3d3d3}
@@ -203,7 +203,6 @@
 .signal-result-explanation{color:var(--text)}
 .signal-result-row .badge{font-size:9px}
 @media(max-width:1300px){
- .overview-right>.confidence{margin-top:0}
  .evidence-layout{grid-template-columns:minmax(0,1.5fr) minmax(310px,1fr);gap:25px}
  .evidence-answer{padding:32px 36px}
  .shape-expanded{padding:28px 22px}
