@@ -7,7 +7,7 @@ const AUDIT_ID = /^(?:R(?:[1-9]|1[0-9]|2[0-2])|R6_Fresh|R13_Fresh|audit_[a-f0-9]
 const EVIDENCE_ID = /^E[0-9]{4,}$/;
 const STAGES = new Set(['S1', 'S2', 'S3', 'S4', 'Q1', 'Q2', 'S6']);
 const STUB_IDS = new Set(['R10', 'R20']);
-const BASE64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+const INVALID_BASE64_CHARACTER = /[^A-Za-z0-9+/=]/;
 const VISUAL_SHA = /^[a-f0-9]{64}$/;
 const MAX_VISUAL_BYTES = 4 * 1024 * 1024;
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
@@ -47,10 +47,13 @@ function assetMetadata(audit, sha) {
 function assetReferencedByVisualEvidence(audit, sha) {
   const visualEvidence = audit.visual_evidence;
   const expectedUrl = `/api/visual-asset?audit=${audit.id}&asset=${sha}`;
-  if (!visualEvidence || !READY_VISUAL_STATUSES.has(visualEvidence.status) || !Array.isArray(visualEvidence.items)) {
+  if (!visualEvidence || !READY_VISUAL_STATUSES.has(visualEvidence.status)) {
     return false;
   }
-  return visualEvidence.items.some((item) => Array.isArray(item?.images) && item.images.some((image) => (
+  const imageRecords = [visualEvidence.items, visualEvidence.additional_images]
+    .filter(Array.isArray)
+    .flat();
+  return imageRecords.some((item) => Array.isArray(item?.images) && item.images.some((image) => (
     image && typeof image === 'object' && image.url === expectedUrl
   )));
 }
@@ -69,8 +72,10 @@ function validateVisualBytes(bytes, sha, mime) {
 }
 
 function decodeBase64(value, expectedLength) {
-  if (typeof value !== 'string' || !BASE64.test(value)) throw new ServiceUnavailableError('Invalid encrypted data envelope.');
+  // Repeated-group regexes can overflow V8's stack on valid multi-megabyte images.
+  if (typeof value !== 'string' || value.length % 4 || INVALID_BASE64_CHARACTER.test(value)) throw new ServiceUnavailableError('Invalid encrypted data envelope.');
   const decoded = Buffer.from(value, 'base64');
+  if (decoded.toString('base64') !== value) throw new ServiceUnavailableError('Invalid encrypted data envelope.');
   if (expectedLength !== undefined && decoded.length !== expectedLength) {
     throw new ServiceUnavailableError('Invalid encrypted data envelope.');
   }

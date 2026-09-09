@@ -4,6 +4,7 @@ import copy
 import json
 from pathlib import Path
 from .service import VERSION, digest, read_json
+from .catalog import attach_catalog
 
 
 def qualify(source, destination, review):
@@ -34,10 +35,13 @@ def qualify(source, destination, review):
                 raise ValueError('Invalid reviewed placement')
             item['section'] = decision['section']
         result['items'].append(item)
-    wanted = {im['asset_sha256'] for item in result['items'] for im in item.get('images', [])}
+    inventory_path = source / 'inventory.json'
+    if inventory_path.exists():
+        result = attach_catalog(result, read_json(inventory_path, source), source)
+    wanted = {im['asset_sha256'] for item in result['items'] + result.get('additional_images', []) for im in item.get('images', [])}
     blobs = {}
     for sha in wanted:
-        info = draft['assets'][sha]
+        info = result['assets'][sha]
         path = source / info['file']
         if path.is_symlink() or not path.resolve().is_relative_to(source) or path.stat().st_size > 8 * 1024 * 1024:
             raise ValueError('Invalid draft asset')
@@ -52,7 +56,7 @@ def qualify(source, destination, review):
     result['review_status'] = 'REVIEWED'
     result['review'] = review
     # A curated supplement is a selection, never an exhaustive repository catalog.
-    result['status'] = 'PARTIAL' if result['items'] else 'NOT_AVAILABLE'
+    result['status'] = 'PARTIAL' if result['items'] or result.get('additional_images') else 'NOT_AVAILABLE'
     destination.mkdir(parents=True)
     (destination / 'assets').mkdir()
     for sha, (blob, mime) in blobs.items():

@@ -38,3 +38,9 @@ A fifth, secondary Visuals destination contains the reviewed local snapshot: 49 
 Images are encrypted alongside the audit data, served only after authentication and only when referenced by the requested audit. Decrypted bytes must match their SHA-256 identity, PNG/JPEG format and 4 MB limit. The public static directory contains no project images. Computed visuals use already established values; no API inference is performed in production.
 
 Previous production commit: `bd0a93c9da0441d6b09d6bdf32338ff8e94f64b1`. Preserved by the `codex/pre-visuals-2026-09-09` release tag. Revert this release commit or redeploy that preserved commit to roll back. Existing v1 files remain in Git.
+
+### Source-image gallery release
+
+Visuals now includes Other source images below the contextual cards: 592 additional entries, 574 distinct protected image assets globally, with 24 entries per page and lazy loading. Repository filenames and locations are shown without generated audit interpretations. The four R1 `graphs` PNGs are included. Existing 49 contextual items and 23 canonical reports are preserved.
+
+`visual_evidence.additional_images` uses the same protected image URL contract as contextual `items`; internal asset metadata is never exposed. The hosted demo still has no audit-creation endpoint. Publication adds no LLM calls. Previous release: `6edac57f0713858c1ff4c53fe400f0697163f499` / tag `codex/pre-visuals-coverage-2026-09-09`.

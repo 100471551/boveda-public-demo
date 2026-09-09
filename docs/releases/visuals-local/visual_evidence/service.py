@@ -51,8 +51,10 @@ def supplement(library,aid,payload):
         loaded=_load(library,aid,payload)
         if loaded is None:return absent
         data,folder=loaded
-        result={'status':data['status'],'items':copy.deepcopy(data['items'])}
-        for item in result['items']:
+        result={'status':data['status'],'items':copy.deepcopy(data['items']),
+                'additional_images':copy.deepcopy(data.get('additional_images',[])),
+                'catalog_coverage':copy.deepcopy(data.get('catalog_coverage',{}))}
+        for item in result['items']+result['additional_images']:
             for image in item.get('images',[]):
                 sha=image.pop('asset_sha256')
                 if not HEX.fullmatch(sha):raise ValueError('Invalid asset')
@@ -67,7 +69,7 @@ def asset(library,aid,sha):
     loaded=_load(library,aid,payload)
     if not loaded:raise ValueError('Visual unavailable')
     data,folder=loaded
-    if sha not in {im['asset_sha256'] for item in data['items'] for im in item.get('images',[])}:raise ValueError('Asset outside reviewed supplement')
+    if sha not in {im['asset_sha256'] for item in data['items']+data.get('additional_images',[]) for im in item.get('images',[])}:raise ValueError('Asset outside bound supplement')
     info=data['assets'][sha];path=folder/info['file']
     if path.is_symlink() or not path.resolve().is_relative_to(folder.resolve()) or path.stat().st_size>8*1024*1024:raise ValueError('Invalid retained asset')
     blob=path.read_bytes()

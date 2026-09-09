@@ -22,7 +22,7 @@ function encrypt(logicalName, value) {
   }));
 }
 
-function audit(id, sha = SHA, urlAudit = id) {
+function audit(id, sha = SHA, urlAudit = id, { galleryOnly = false } = {}) {
   return {
     id,
     visual_assets: {
@@ -30,7 +30,16 @@ function audit(id, sha = SHA, urlAudit = id) {
     },
     visual_evidence: {
       status: 'READY',
-      items: [{ images: [{ url: `/api/visual-asset?audit=${urlAudit}&asset=${sha}`, alt: 'Fixture chart' }] }],
+      items: galleryOnly ? [] : [{ images: [{ url: `/api/visual-asset?audit=${urlAudit}&asset=${sha}`, alt: 'Fixture chart' }] }],
+      ...(galleryOnly ? {
+        additional_images: [{
+          id: 'source-plot-1',
+          kind: 'source_image',
+          title: 'Unlinked source plot',
+          sources: [{ path: 'graphs/plot.png', locator: 'graphs/plot.png' }],
+          images: [{ url: `/api/visual-asset?audit=${urlAudit}&asset=${sha}`, alt: 'Fixture chart' }],
+        }],
+      } : {}),
     },
   };
 }
@@ -39,6 +48,8 @@ function fixtureStore() {
   const files = new Map([
     ['R1.json.enc', encrypt('R1.json', Buffer.from(JSON.stringify(audit('R1'))))],
     ['R2.json.enc', encrypt('R2.json', Buffer.from(JSON.stringify(audit('R2', SHA, 'R1'))))],
+    ['R3.json.enc', encrypt('R3.json', Buffer.from(JSON.stringify(audit('R3', SHA, 'R3', { galleryOnly: true }))))],
+    ['R4.json.enc', encrypt('R4.json', Buffer.from(JSON.stringify(audit('R4', SHA, 'R3', { galleryOnly: true }))))],
     [`visual-${SHA}.png.enc`, encrypt(`visual-${SHA}.png`, PNG)],
   ]);
   const reads = [];
@@ -66,7 +77,7 @@ test('visual assets are audit-bound, binary-verified, and hidden from public aud
 
 test('visual asset lookup rejects unknown audits, invalid hashes, and cross-audit references before reading an image', async () => {
   const { reads, store } = fixtureStore();
-  await assert.rejects(store.visualAsset('R3', SHA), DataNotFoundError);
+  await assert.rejects(store.visualAsset('R5', SHA), DataNotFoundError);
   await assert.rejects(store.visualAsset('R1', 'A'.repeat(64)), DataNotFoundError);
   await assert.rejects(store.visualAsset('R1', '0'.repeat(64)), DataNotFoundError);
 
@@ -74,6 +85,18 @@ test('visual asset lookup rejects unknown audits, invalid hashes, and cross-audi
   await assert.rejects(store.visualAsset('R2', SHA), DataNotFoundError);
   assert.equal(reads.length, beforeCrossAudit + 1);
   assert.equal(reads.at(-1), 'R2.json.enc');
+});
+
+test('gallery-only source images are served when audit-bound and denied across audits', async () => {
+  const { reads, store } = fixtureStore();
+  const asset = await store.visualAsset('R3', SHA);
+  assert.equal(asset.mime, 'image/png');
+  assert.deepEqual(asset.bytes, PNG);
+
+  const beforeCrossAudit = reads.length;
+  await assert.rejects(store.visualAsset('R4', SHA), DataNotFoundError);
+  assert.equal(reads.length, beforeCrossAudit + 1);
+  assert.equal(reads.at(-1), 'R4.json.enc');
 });
 
 test('visual asset corruption fails closed after authenticated decryption', async () => {
@@ -134,4 +157,22 @@ test('handler authenticates visual assets before reading and returns verified bi
   assert.equal(success.headers.get('content-type'), 'image/png');
   assert.deepEqual(success.body, PNG);
   assert.equal(assetReads, 1);
+});
+
+test('images at the four MiB limit decode without regex stack overflow and reject larger bytes', async()=>{
+ const {files,store}=fixtureStore();
+ for(const size of [4*1024*1024,4*1024*1024+1]){
+  const blob=Buffer.alloc(size,37);PNG.copy(blob);const sha=createHash('sha256').update(blob).digest('hex');
+  files.set('R1.json.enc',encrypt('R1.json',Buffer.from(JSON.stringify(audit('R1',sha)))));
+  files.set(`visual-${sha}.png.enc`,encrypt(`visual-${sha}.png`,blob));
+  if(size===4*1024*1024)assert.deepEqual((await store.visualAsset('R1',sha)).bytes,blob);
+  else await assert.rejects(store.visualAsset('R1',sha),ServiceUnavailableError);
+ }
+});
+
+test('noncanonical base64 is rejected rather than silently normalized',async()=>{
+ const {files,store}=fixtureStore();const name=`visual-${SHA}.png.enc`;
+ const env=JSON.parse(files.get(name));env.ciphertext='===='+env.ciphertext;
+ files.set(name,Buffer.from(JSON.stringify(env)));
+ await assert.rejects(store.visualAsset('R1',SHA),ServiceUnavailableError);
 });

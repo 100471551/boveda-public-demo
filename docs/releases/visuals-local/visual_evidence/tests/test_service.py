@@ -34,6 +34,14 @@ class SupplementTests(unittest.TestCase):
  def test_external_asset_path(self):
   (self.root/'secret.png').write_bytes(self.blob);self.manifest['assets'][self.sha]['file']='../../secret.png';self.install()
   with self.assertRaises(ValueError):asset(self.library,'A',self.sha)
+ def test_source_only_gallery_remains_bound_without_contextual_items(self):
+  self.manifest['additional_images']=self.manifest.pop('items');self.manifest['items']=[];self.manifest['status']='PARTIAL';self.install()
+  view=supplement(self.library,'A',self.payload)
+  self.assertEqual(view['items'],[])
+  self.assertIn('/api/visual-asset?audit=A&asset=',view['additional_images'][0]['images'][0]['url'])
+  self.assertEqual(asset(self.library,'A',self.sha)[0],self.blob)
+  self.payload['passthrough']['Q2']['content']['changed']=True
+  self.assertEqual(supplement(self.library,'A',self.payload)['status'],'NOT_AVAILABLE')
  def test_response_must_link_only_supplied_evidence(self):
   image={'id':'i','asset_sha256':self.sha,'source_path':'plot.png','locator':'plot.png'}
   answer={'items':[{'image_ids':['i'],'section':'overview','title':'Plot','caption':'A context','caveat':'','audit_refs':['Q2:0']}]}

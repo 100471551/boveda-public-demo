@@ -46,7 +46,7 @@ def main():
     catalogue = [{**entry, 'hidden': False, 'removable': False} for entry in library.list()]
     ids = [entry['id'] for entry in catalogue]
     files = {}
-    counts = {'audits': 0, 'unavailable_entries': 0, 'evidence_records': 0, 'unavailable_references': 0, 'visual_items': 0, 'visual_assets': 0}
+    counts = {'audits': 0, 'unavailable_entries': 0, 'evidence_records': 0, 'unavailable_references': 0, 'visual_items': 0, 'additional_images': 0, 'visual_assets': 0}
     reports = {}
 
     def add(name, value):
@@ -65,8 +65,10 @@ def main():
         from apps.visual_evidence.service import asset as reviewed_asset
         from urllib.parse import urlparse, parse_qs
         visual_assets = {}
-        for item in view.get('visual_evidence', {}).get('items', []):
-            counts['visual_items'] += 1
+        supplement = view.get('visual_evidence', {})
+        counts['visual_items'] += len(supplement.get('items', []))
+        counts['additional_images'] += len(supplement.get('additional_images', []))
+        for item in supplement.get('items', []) + supplement.get('additional_images', []):
             for image in item.get('images', []):
                 url = urlparse(image['url']); params = parse_qs(url.query)
                 if url.path != '/api/visual-asset' or params.get('audit') != [aid] or len(params.get('asset', [])) != 1:
