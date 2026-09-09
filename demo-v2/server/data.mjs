@@ -1,4 +1,4 @@
-import { createDecipheriv } from 'node:crypto';
+import { createDecipheriv, createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
 import { DataNotFoundError, ServiceUnavailableError } from './errors.mjs';
@@ -8,10 +8,64 @@ const EVIDENCE_ID = /^E[0-9]{4,}$/;
 const STAGES = new Set(['S1', 'S2', 'S3', 'S4', 'Q1', 'Q2', 'S6']);
 const STUB_IDS = new Set(['R10', 'R20']);
 const BASE64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+const VISUAL_SHA = /^[a-f0-9]{64}$/;
+const MAX_VISUAL_BYTES = 4 * 1024 * 1024;
+const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+const JPEG_SIGNATURE = Buffer.from([0xff, 0xd8, 0xff]);
+const READY_VISUAL_STATUSES = new Set(['READY', 'PARTIAL']);
 
 function requireAuditId(value) {
   if (typeof value !== 'string' || !AUDIT_ID.test(value)) throw new DataNotFoundError();
   return value;
+}
+
+function requireVisualSha(value) {
+  if (typeof value !== 'string' || !VISUAL_SHA.test(value)) throw new DataNotFoundError();
+  return value;
+}
+
+function publicAudit(value) {
+  const { visual_assets: ignored, ...audit } = value;
+  return audit;
+}
+
+function assetMetadata(audit, sha) {
+  const metadata = audit.visual_assets?.[sha];
+  const expectedPng = `visual-${sha}.png`;
+  const expectedJpeg = `visual-${sha}.jpg`;
+  if (!metadata) throw new DataNotFoundError();
+  if (typeof metadata !== 'object' || Array.isArray(metadata)) {
+    throw new ServiceUnavailableError('Visual asset metadata is malformed.');
+  }
+  if ((metadata.name === expectedPng && metadata.mime === 'image/png') ||
+      (metadata.name === expectedJpeg && metadata.mime === 'image/jpeg')) {
+    return metadata;
+  }
+  throw new ServiceUnavailableError('Visual asset metadata differs.');
+}
+
+function assetReferencedByVisualEvidence(audit, sha) {
+  const visualEvidence = audit.visual_evidence;
+  const expectedUrl = `/api/visual-asset?audit=${audit.id}&asset=${sha}`;
+  if (!visualEvidence || !READY_VISUAL_STATUSES.has(visualEvidence.status) || !Array.isArray(visualEvidence.items)) {
+    return false;
+  }
+  return visualEvidence.items.some((item) => Array.isArray(item?.images) && item.images.some((image) => (
+    image && typeof image === 'object' && image.url === expectedUrl
+  )));
+}
+
+function validateVisualBytes(bytes, sha, mime) {
+  if (bytes.length > MAX_VISUAL_BYTES) {
+    throw new ServiceUnavailableError('Visual asset is too large.');
+  }
+  if (createHash('sha256').update(bytes).digest('hex') !== sha) {
+    throw new ServiceUnavailableError('Visual asset digest differs.');
+  }
+  const signature = mime === 'image/png' ? PNG_SIGNATURE : JPEG_SIGNATURE;
+  if (bytes.length < signature.length || !bytes.subarray(0, signature.length).equals(signature)) {
+    throw new ServiceUnavailableError('Visual asset type differs.');
+  }
 }
 
 function decodeBase64(value, expectedLength) {
@@ -65,6 +119,15 @@ export function createDataStore({ dataKey, read = readFile, dataRoot = new URL('
     }
   }
 
+  async function loadAudit(rawId) {
+    const id = requireAuditId(rawId);
+    const value = await loadJson(`${id}.json`);
+    if (!value || typeof value !== 'object' || value.id !== id) {
+      throw new ServiceUnavailableError('Demo audit identity differs.');
+    }
+    return value;
+  }
+
   return {
     async library() {
       const value = await loadJson('library.json');
@@ -75,12 +138,7 @@ export function createDataStore({ dataKey, read = readFile, dataRoot = new URL('
     },
 
     async audit(rawId) {
-      const id = requireAuditId(rawId);
-      const value = await loadJson(`${id}.json`);
-      if (!value || typeof value !== 'object' || value.id !== id) {
-        throw new ServiceUnavailableError('Demo audit identity differs.');
-      }
-      return value;
+      return publicAudit(await loadAudit(rawId));
     },
 
     async canonical(rawId) {
@@ -100,6 +158,25 @@ export function createDataStore({ dataKey, read = readFile, dataRoot = new URL('
         throw new DataNotFoundError();
       }
       return records[key];
+    },
+
+    async visualAsset(rawId, rawSha) {
+      const id = requireAuditId(rawId);
+      const sha = requireVisualSha(rawSha);
+      const audit = await loadAudit(id);
+      const metadata = assetMetadata(audit, sha);
+      if (!assetReferencedByVisualEvidence(audit, sha)) throw new DataNotFoundError();
+      let bytes;
+      try {
+        bytes = await load(metadata.name);
+      } catch (error) {
+        if (error instanceof DataNotFoundError) {
+          throw new ServiceUnavailableError('Visual asset is unavailable.');
+        }
+        throw error;
+      }
+      validateVisualBytes(bytes, sha, metadata.mime);
+      return { bytes, mime: metadata.mime };
     },
   };
 }

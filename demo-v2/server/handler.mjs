@@ -173,7 +173,7 @@ export function createDemoHandler(options = {}) {
         return;
       }
 
-      if (!['library', 'audit', 'evidence', 'canonical'].includes(requestRoute)) {
+      if (!['library', 'audit', 'evidence', 'canonical', 'visual-asset'].includes(requestRoute)) {
         send(res, 404, { error: 'Not found.' });
         return;
       }
@@ -188,6 +188,9 @@ export function createDemoHandler(options = {}) {
         send(res, 200, await data.audit(query(req, 'audit')));
       } else if (requestRoute === 'evidence') {
         send(res, 200, await data.evidence(query(req, 'audit'), query(req, 'stage'), query(req, 'evidence')));
+      } else if (requestRoute === 'visual-asset') {
+        const asset = await data.visualAsset(query(req, 'audit'), query(req, 'asset'));
+        send(res, 200, asset.bytes, asset.mime);
       } else {
         const id = query(req, 'audit');
         const markdown = await data.canonical(id);

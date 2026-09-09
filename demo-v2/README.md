@@ -30,3 +30,11 @@ The previous source, engine, public assets and documentation remain in Git. The 
 The local application creates audits; this cloud snapshot displays a disabled New audit button and never starts processing. This release includes the completed R23 public-health audit under its original runtime UUID, including its canonical report and retained evidence. R10 and R20 remain metadata only.
 
 UI motion uses viewport-triggered entrances, staggered inner surfaces, progressive confidence ticks and brief dashboard transitions. Reduced-motion preferences disable these effects; numerical evidence and final colors are not modified. Local remembered sessions now survive server restarts in a private file containing only token hashes and expiration times; cloud sessions continue using Redis.
+
+## Visuals release
+
+A fifth, secondary Visuals destination contains the reviewed local snapshot: 49 figures/collections/comparisons in 18 of the 23 available audits, backed by 47 unique original images. No material is a normal state. The graphical surface uses solid white, rounded image corners, adaptive sizing and an accessible enlargement dialog.
+
+Images are encrypted alongside the audit data, served only after authentication and only when referenced by the requested audit. Decrypted bytes must match their SHA-256 identity, PNG/JPEG format and 4 MB limit. The public static directory contains no project images. Computed visuals use already established values; no API inference is performed in production.
+
+Previous production commit: `bd0a93c9da0441d6b09d6bdf32338ff8e94f64b1`. Preserved by the `codex/pre-visuals-2026-09-09` release tag. Revert this release commit or redeploy that preserved commit to roll back. Existing v1 files remain in Git.
