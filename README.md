@@ -1,95 +1,51 @@
-# Bóveda Alpha v1.1.0
+# Bóveda — hosted research demo (2.0.1)
 
-Bóveda inspects a local ML or AI project without executing or modifying it, reconstructs one fixed supervisor-facing Overview, validates every material answer against cited evidence, and persists the resulting record locally. v1.1.0 adds an honest browser-local demo session and a general supervisory workspace using the existing sanitized project snapshots. The public Welcome and How it works pages remain open; the workspace, Projects and project routes share one compact sign-in experience. The analytical structure and project dashboards remain unchanged.
+Bóveda is a research prototype for inspecting machine-learning projects and presenting their purpose, construction, evidence and supervisory Signals. The hosted demo at [boveda.dev](https://boveda.dev) lets evaluators explore preserved audits; access to audit content requires the demo account supplied separately by the project author.
 
-The analytical projection reconstructs evidence-backed workstreams, context-bound model comparisons, supported evaluation diagnostics, feature/driver evidence, population/sample lineage, data-formation operations, persisted analytical failures, and source-visual references. Components are omitted when their minimum evidence contract is not met. Project identities, labels, values and expected answers are never encoded in the runtime; the projection is built from persisted notebook evidence and retains evidence IDs and source locators.
+## What this repository contains
 
-v0.20.2 adds one bounded population-role capability: an explicit complete population partition can supply the project population when its parent unit matches the established project unit and the evidence is not model-, evaluation-, scoring-, or output-scoped. Numerically larger repeated or filtered rows remain downstream lineage stages. Persisted tabular scoring artefacts with recorded shapes are exposed separately as output populations.
+This is the **deployment repository**, not the complete Bóveda 2.0 research workspace. It contains the current viewer, its access service and encrypted audit snapshots, together with the earlier v1 implementation retained for provenance. It supports inspection of the interface, deployment code and access controls. It does **not** independently reproduce the full 2.0 audit-generation pipeline or the research validation runs.
 
-v0.20.3 makes a bounded dashboard UX correction: result contexts are selected instead of overlaid, headline results use a consistent two-decimal decimal scale, comparison cards fit their evidence table, selectors expose the complete option list with a clear selected state, and record actions remain adjacent to the title.
+The current experience provides Overview, Evidence, Construction, Signals and an additional Visuals destination. It displays retained results rather than creating new audits. Audit creation, project import, deletion and regeneration are disabled in the hosted version; production does not call an LLM API.
 
-v0.20.4 adds one bounded project-anatomy capability: the selected population-lineage workstream supplies the dashboard's model and evaluation samples everywhere they are summarised, while the broad project population remains fixed. Output-only contexts cannot inherit unrelated modelling samples.
+| Location | Role |
+| --- | --- |
+| [`demo-v2/web/`](demo-v2/web/) | Current interface and canonical-report viewer |
+| [`demo-v2/server/`](demo-v2/server/), [`api/demo.mjs`](api/demo.mjs) | Server-side access, sessions and protected content delivery |
+| [`demo-v2/data/`](demo-v2/data/) | Encrypted snapshot and integrity manifest; decryption keys are not included |
+| [`demo-v2/tests/`](demo-v2/tests/) | Deployment, authentication and session regression tests |
+| [`src/`](src/), [`engine/`](engine/), [`tests/`](tests/), [`public/`](public/) | Historical v1 application, engine, tests and sanitized demo material; excluded from the current hosted payload |
+| [`docs/releases/`](docs/releases/) | Version-specific implementation notes and retained release material |
 
-v0.20.5 adds one bounded focal-target capability: Bóveda selects one evidence-backed target and connects its main result, like-for-like model comparison, selected-model features, evaluation diagnostics, original/training/evaluation counts, missingness evidence, and a simplified population map. Missing diagnostics or missingness quantities remain explicitly unavailable instead of being borrowed or inferred from another workstream.
+### Evidence and corpus boundaries
 
-`GET /api/projects/:id/analytical` is a read-only, provider-free projection. It reads only notebook files already represented in the project evidence pack when the audited source path remains available, and otherwise falls back conservatively to the stored excerpts. It does not modify the canonical Project Record or the imported project.
+The research inventory comprises **23 unique repositories**. The hosted snapshot presents **23 available audit cases corresponding to 21 repositories**, including repeated repository identities for NMR and Subway cases. These are different counting units, not 23 independent repositories displayed in the interface. R10 and R20 are retained as unavailable metadata entries; their non-publishable canonical reports and evidence are not included in the hosted bundle.
 
-v0.20.8 makes Reconstruction confidence an overall reconstruction assessment while retaining the deterministic main-result evidence ladder. Ordinary Signals do not lower confidence. The canonical Material evidence absence Signal does: when an important applicable analytical area is entirely unavailable, overall confidence cannot remain above partial and is reduced by at least one level from the otherwise supported result-trace score. The explanation still states how far the main result was traced and separately identifies the whole-area reconstruction limitation.
+Signals and Audit Confidence describe the reconstruction and its supporting evidence; they are not a certification of model quality. Visuals distinguish contextual figures, comparisons drawn from established values, and additional source images shown with filenames and locations without inferred interpretations. A missing visual is a normal state.
 
-v0.20.9 adds evidence-aware empty and partial dashboard states. Missing analytical areas keep their own heading and evidence-specific explanation in a compact white state card, while obsolete outer backgrounds, fixed heights and ghost space are removed. Populated comparison, evaluation and data-lineage components now size to their actual content, and the project drawer uses a more regular reading rhythm. Reconstruction, Signals, Findings and reports are unchanged.
+The historical v1 snapshots are retained in plain text and pre-generated reports. Current v2 audit payloads and source images are encrypted; authorized access to the demo does not grant redistribution rights over third-party material.
 
-v0.20.10 makes seven bounded UX corrections: project titles now describe the established primary analytical target while preserving the canonical project identity, the side-menu layout flows around multi-line titles, reanalysis has a wider animated busy state, the redundant title warning is removed, vertical lineage cards size to their graph, empty-state copy and icons are larger, and 11/12 px interface text advances by one pixel. No provider rerun is required because the descriptive title is a deterministic display projection from the established target.
+## Verify the current deployment code
 
-v0.20.13 starts directly from v0.20.11 and adds a shared, question-aware semantic contract for Overview sections. Related evidence remains available internally, but a dashboard or report section is available only when the reconstructed evidence answers that section's supervisory question.
-
-This directory is the independent v1.1.0 checkpoint based on the latest v1.0.2 production release. Findings remains a separate projection at `GET /api/projects/:id/signals`; History is a second read-only projection at `GET /api/projects/:id/history`. Neither projection can change the canonical Project Record.
-
-History projects the canonical record together with bounded, read-only source history. When a real repository is available, it recovers up to 300 commits with authored timestamps, messages, changed files, and tags; it also recovers bounded file-backed MLflow run metadata when present. Deterministic materiality rules elevate only substantiated data, model, evaluation, pipeline, decision, failed-run, and versioned-release activity. Every other valid recovered event remains available in a collapsed supporting section, so a large repository does not become the main chronology. Host-project and Bóveda events remain visually separated; unresolved dates stay unresolved; Git HEAD alone creates no chronology; and Findings are linked only through an explicit temporal relationship.
-
-Existing audits remain compatible and are reused without reconstruction. Their audit IDs, source identity, evidence, generation metadata, provider/model, and originating product version remain unchanged. Importing an unchanged source reuses its current audit; explicit **Reanalyse** or a changed source snapshot can create a new audit.
-
-The layer implements ten bounded checks across purpose, target, population scope, evaluation design, population filters, sample lineage, primary-result origin, project context, source inventory, and reproduction inputs. Checks retain the four canonical results, typed evidence roles, explicit gaps, allowed/prohibited claims, and complete trails. A material `SIGNAL PRESENT` creates a Signal; a material `INSUFFICIENT EVIDENCE` condition creates an Evidence Gap. `NO SIGNAL DETECTED` and `NOT APPLICABLE` create no Finding. Every Finding is canonical and counted once even when several fields or coverage domains reference it.
-
-The Findings surface leads with **What needs attention**. Deterministic `SignalPresentation` objects provide factual title, established condition, bounded relevance, compact scope, owning field, and a trail entry. Signals and Evidence Gaps are visually and epistemically separate. The complete field/check matrix remains available under collapsed **Checks performed**, where successful, inapplicable, and insufficient executions can be verified without turning green checks into Findings.
-
-The UI presents reconstructed evidence states as `Reconstructed`, `Partially reconstructed`, `Material information gap`, and `Missing information / Not applicable`. These are display labels over the unchanged internal state model. Project Evidence Coverage remains separate and uses `Sufficiently covered`, `Partially covered`, `Material evidence gap`, and `Not assessed / Not applicable`. Neither system averages colours or computes a project score.
-
-Reconstruction confidence is the existing deterministic cumulative 0–8 evidentiary ladder for the primary result, renamed for display clarity. It replaces the displayed provider-authored confidence without changing the stored audit. Explicit primary-result Finding impacts cap confidence at 3 (`blocks`), 5 (`limits`), or 6 (`qualifies`); `contextualises` and general coverage gaps do not cap it.
-
-## Public demo build
-
-The default production build is fail-closed and static. It reads the immutable sanitized, pre-analysed snapshots in `public/demo-data/v1.0.2/`; the snapshot version remains unchanged because v1.1.0 does not reconstruct analytical data. It does not call or deploy the Express server, writable storage, source-project paths, macOS browsing, reconstruction code, or provider credentials. Dashboards, Findings, History, evidence drawers, diagnostics and pre-generated HTML/PDF reports remain available. Import, new analysis, deletion and reanalysis show an explanatory read-only notice instead of issuing a request.
-
-The v1.1.0 sign-in is a presentation-layer demo session, not an authentication service. It stores only the entered email, a derived display name and a sign-in timestamp in the current browser. It creates no account, sends no data and does not claim to secure the public static snapshots.
+Use Node.js 24 and npm 11:
 
 ```bash
-npm ci
+npm ci --ignore-scripts
 npm run demo:validate
-npm run test:deploy
+npm test
 npm run build:demo
 ```
 
-See [DEPLOYMENT_HANDOFF.md](DEPLOYMENT_HANDOFF.md) for the GitHub → Vercel workflow and the short list of one-time account/domain actions.
+These checks run without production credentials or paid model calls. They validate encrypted-file integrity, access-control behavior with test fixtures, and the public build boundary. They do not decrypt production evidence, regenerate audits, or establish the scientific correctness of every retained claim.
 
-## Run locally
+The build writes public interface assets to `dist/`. Serving the protected application additionally requires the Vercel function, Redis and private configuration described in the [deployment handoff](DEPLOYMENT_HANDOFF.md). Opening `dist/` alone is not a complete running demo. Never put server secrets in browser-prefixed environment variables.
 
-Requirements: Node.js 24+ and macOS for the native **Browse** button. A directory path can be entered manually on other platforms.
+## Historical implementation
 
-```bash
-npm ci
-npm run build
-npm run server
-```
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), the root `tests/` suite and commands such as `npm run server`, `npm run dev` and `npm run build:v1` concern the earlier application. The [archived v1 README](docs/releases/v1-hosting/README.md) preserves that history. `npm test` and `npm run test:deploy` run the current deployment suite; `npm run test:v1` explicitly runs the retained legacy suite. In the 10 September 2026 checkout, that legacy suite reports 285 passes and 64 failures (349 tests), including missing development fixtures and obsolete version/deployment expectations. Those legacy failures remain unresolved; they are not covered by a passing current-deployment check. Older tags and release descriptions remain version-specific; they should not be read as claims about the current hosted system.
 
-Open `http://127.0.0.1:4310`.
+## Rights and access
 
-For development with Vite hot reload:
+See [third-party notices and publication prerequisites](THIRD_PARTY_NOTICES.md). This repository currently has no general open-source license grant. In particular, permission to redistribute the bundled commercial Flink font files has not been established. Repository visibility must not be changed to public until the owner resolves that issue and the remaining publication checks.
 
-```bash
-npm run dev
-```
-
-The UI is then available at `http://127.0.0.1:4309`.
-
-## Live reconstruction
-
-The server reads `OPENAI_API_KEY` only from its process environment. The credential is never sent to the browser or persisted in a record. The default model is `gpt-5.6-sol`; override it with `BOVEDA_OPENAI_MODEL`.
-
-```bash
-OPENAI_API_KEY=... npm run server
-```
-
-Without a provider credential, Bóveda uses a deliberately conservative fallback that establishes only directly recoverable project identity/README information and leaves unsupported fields unresolved.
-
-## Validation
-
-```bash
-npm test
-npm run build
-npm run validate:corpus
-npm run validate:live
-```
-
-`validate:live` loads the authorised local credential into that validation process only. It does not print, copy, persist, or pass the credential to the application frontend. Generated development records are written under ignored `validation/results/` directories.
-
-See [Architecture](docs/ARCHITECTURE.md), the [v0.11 History validation](validation/HISTORY_VALIDATION.md), the inherited [v0.10.2 Findings validation](validation/SIGNALS_VALIDATION.md), and the historical [R1–R5 validation](validation/VALIDATION.md).
+Project author: Luis López Trejo. Source-project attribution is available through repository links in the audit interface; Bóveda does not claim authorship of those projects or their figures.

@@ -1,3 +1,5 @@
+> Historical v1 documentation. For the current hosted architecture and scope, see the [repository README](../README.md) and [v2 deployment notes](../demo-v2/README.md).
+
 # Architecture — v0.14.0 (record contract v0.9.0, Signals contract v0.3.1, Findings presentation contract v1.0.0, History contract v0.11.1, analytical projection v0.13.2)
 
 ## Shape

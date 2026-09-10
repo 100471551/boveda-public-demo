@@ -13,7 +13,7 @@
     "server": "node engine/server.mjs",
     "build": "node demo-v2/scripts/build.mjs",
     "build:demo": "node demo-v2/scripts/build.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test demo-v2/tests/*.test.mjs",
     "test:deploy": "node --test demo-v2/tests/*.test.mjs",
     "demo:export": "node scripts/export-public-demo.mjs",
     "demo:validate": "node demo-v2/scripts/validate.mjs",
@@ -22,7 +22,8 @@
     "validate:live": "node scripts/live-validate.mjs",
     "validate:analytical": "node scripts/validate-analytical.mjs",
     "build:v1": "vite build",
-    "test:v1:deploy": "node --test tests/public-demo-deployment.test.mjs tests/router.test.mjs tests/v102-feedback.test.mjs tests/v110-workspace.test.mjs"
+    "test:v1:deploy": "node --test tests/public-demo-deployment.test.mjs tests/router.test.mjs tests/v102-feedback.test.mjs tests/v110-workspace.test.mjs",
+    "test:v1": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "express": "5.1.0",

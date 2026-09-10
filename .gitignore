@@ -10,7 +10,15 @@ validation/v017-smoke/
 validation/v017-final/
 tmp/pdfs/
 .env
-.env.*.local
+.env.*
+!.env.example
 .vercel/
 .DS_Store
 *.log
+
+# Private authentication material must never enter source control.
+github-recovery-codes*
+Git_Hub_Codes/
+*.key
+*.p12
+*.pfx
