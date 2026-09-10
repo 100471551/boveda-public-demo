@@ -36,6 +36,6 @@ Production and preview environment values, GitHub integration scope, domain owne
 
 ## Repository publication is a separate decision
 
-A deployed website does not imply permission to redistribute every file in its Git history. Keep visibility private while Flink redistribution rights remain unresolved. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Also review Actions logs, release attachments and historical branches before changing visibility; a new cleanup commit does not remove previously committed material.
+A deployed website does not imply permission to redistribute every file in its Git history. Flink redistribution rights remain unverified; the owner has chosen to retain the current typography for the educational demo. This choice is not evidence of a font license. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Also review Actions logs, release attachments and historical branches before changing visibility; a new cleanup commit does not remove previously committed material.
 
 Recommended repository controls: dependency alerts, protected production merges requiring deployment checks, and restricted access to production secrets. Do not place confidential security findings in public issues or build logs.

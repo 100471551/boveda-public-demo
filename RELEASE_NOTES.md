@@ -1,3 +1,5 @@
+> Historical release notes for v1. For the current hosted implementation, see [README.md](README.md) and [demo-v2/README.md](demo-v2/README.md).
+
 # Bóveda Alpha 1.1.0
 
 First coherent supervision-workspace release, based independently on the current v1.0.2 production checkpoint.

@@ -4,7 +4,7 @@ This inventory records attribution and unresolved permissions. It does not grant
 
 | Material | Location / provenance | Status |
 | --- | --- | --- |
-| Flink font binaries | `demo-v2/web/product/assets/` and `public/fonts/`; Flink by Moritz Kleinsorge / Identity Letters | Commercial font. The owner has not established permission to redistribute the binaries in a public repository. Pending; retain repository privacy until resolved. |
+| Flink font binaries | `demo-v2/web/product/assets/` and `public/fonts/`; Flink by Moritz Kleinsorge / Identity Letters | Commercial font. The owner has not established permission to redistribute the binaries in a public repository. Permission remains unverified; no font redistribution license is granted by this repository. |
 | Marked | `demo-v2/web/vendor/marked.umd.js` | License retained in [`marked.LICENSE.md`](demo-v2/web/vendor/marked.LICENSE.md). |
 | npm packages | `package.json` and `package-lock.json` | Package versions and package license declarations are recorded in the lockfile; upstream package notices continue to apply. |
 | Source-project figures and excerpts | Encrypted v2 snapshots and historical v1 demo reports | Attribution is retained through source repositories and evidence locators. Attribution and public availability do not themselves establish redistribution permission. Check the relevant upstream terms before redistributing these materials. |

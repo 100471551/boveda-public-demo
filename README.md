@@ -46,6 +46,6 @@ The build writes public interface assets to `dist/`. Serving the protected appli
 
 ## Rights and access
 
-See [third-party notices and publication prerequisites](THIRD_PARTY_NOTICES.md). This repository currently has no general open-source license grant. In particular, permission to redistribute the bundled commercial Flink font files has not been established. Repository visibility must not be changed to public until the owner resolves that issue and the remaining publication checks.
+See [third-party notices and publication prerequisites](THIRD_PARTY_NOTICES.md). This repository currently has no general open-source license grant. In particular, permission to redistribute the bundled commercial Flink font files has not been established. The educational purpose of this project does not establish a redistribution license; no license to reuse these font files is granted here.
 
 Project author: Luis López Trejo. Source-project attribution is available through repository links in the audit interface; Bóveda does not claim authorship of those projects or their figures.
