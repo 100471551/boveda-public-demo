@@ -103,6 +103,8 @@
 }
 @media(max-width:1100px){.audit-tabs{width:100%;max-width:900px}}
 @media(max-width:760px){
+ [data-theme=dark] .rail{background:#12171d}
+ [data-theme=light] .rail{background:#f9f9f9}
  .audit-tabs{gap:4px}
  .purpose-card{padding-block:30px}
  .narrative-hero>h2,.evidence-opening .narrative-hero h2,.signals-question h2{font-size:30px}
