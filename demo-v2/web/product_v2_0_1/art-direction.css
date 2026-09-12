@@ -1,8 +1,28 @@
-/* Annotated art-direction pass. Flink baseline is preserved at /v2.0.1-flink. */
+/* Variant B uses Flink throughout while reserving Bold for project titles and UX questions. */
 :root{--bg:#090b0f;--panel:rgba(255,255,255,.02);--inner:rgba(255,255,255,.02);--raised:rgba(255,255,255,.02);--line:rgba(178,179,177,.05);--active:rgba(255,255,255,.04)}
 [data-theme=light]{--bg:#f1f1f1;--panel:rgba(255,255,255,.45);--inner:rgba(255,255,255,.30);--raised:rgba(255,255,255,.35);--line:rgba(178,179,177,.12);--active:#222}
-body,button,input,select,textarea,pre,code{font-family:Menlo,Monaco,monospace;font-synthesis:none}
-#app-shell *,#overlay *,body{font-family:Menlo,Monaco,monospace!important;font-weight:400!important}
+body,button,input,select,textarea,pre,code{font-family:Flink,Arial,sans-serif;font-synthesis:none}
+#app-shell *,#overlay *,body{font-family:Flink,Arial,sans-serif!important;font-weight:400!important}
+#app-shell .project-card h2,
+#app-shell .audit-heading h1,
+#app-shell .purpose-question h2,
+#app-shell .content-overview .field-block>h3,
+#app-shell .evidence-intro h2,
+#app-shell .wide-question h2,
+#app-shell .chapter-heading h2,
+#app-shell .narrative-hero>h2,
+#app-shell .evidence-answer-heading h3,
+#app-shell .use-story h2,
+#app-shell .change-story h2,
+#app-shell .representation-story h2,
+#app-shell .learning-task h2,
+#app-shell .primary-rationale h3,
+#app-shell .designation-card h2,
+#app-shell .landscape-heading h2,
+#app-shell .signals-question h2,
+#app-shell .route-guide h3,
+#app-shell .catalogue-heading h2,
+#app-shell .callout:not(.neutral):not(.red) h2{font-weight:700!important}
 .audit-heading{margin-left:0;margin-right:0}
 .audit-heading h1{font-size:36px}
 .audit-tabs a:not(.active){opacity:.5}
