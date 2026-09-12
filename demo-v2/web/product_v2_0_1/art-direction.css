@@ -3,7 +3,6 @@
 [data-theme=light]{--bg:#f1f1f1;--panel:rgba(255,255,255,.45);--inner:rgba(255,255,255,.30);--raised:rgba(255,255,255,.35);--line:rgba(178,179,177,.12);--active:#222}
 body,button,input,select,textarea,pre,code{font-family:Flink,Arial,sans-serif;font-synthesis:none}
 #app-shell *,#overlay *,body{font-family:Flink,Arial,sans-serif!important;font-weight:400!important}
-#app-shell .project-card h2,
 #app-shell .home-heading h1,
 #app-shell .audit-heading h1,
 #app-shell .purpose-question h2,
