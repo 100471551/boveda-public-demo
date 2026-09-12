@@ -86,8 +86,10 @@ export function createConfig(env = process.env) {
     throw new ServiceUnavailableError('Invalid BOVEDA_PUBLIC_ORIGIN.');
   }
   if (configured) origins.push(configured);
-  const preview = previewOrigin(env.VERCEL_URL);
-  if (preview && !origins.some((entry) => entry.origin === preview.origin)) origins.push(preview);
+  for (const rawPreviewOrigin of [env.VERCEL_URL, env.VERCEL_BRANCH_URL]) {
+    const preview = previewOrigin(rawPreviewOrigin);
+    if (preview && !origins.some((entry) => entry.origin === preview.origin)) origins.push(preview);
+  }
   if (origins.length === 0) throw new ServiceUnavailableError('No valid demo origin is configured.');
 
   const canonicalCredential = JSON.stringify({

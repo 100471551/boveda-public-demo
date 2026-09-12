@@ -347,13 +347,17 @@ test('handler keeps index public, gates data, and enforces exact origin, host, t
 test('handler fails closed on Redis outage and accepts only a valid same-host Vercel preview origin', async () => {
   let now = 5_000_000;
   const clock = () => now;
-  const env = environment({ BOVEDA_PUBLIC_ORIGIN: undefined, VERCEL_URL: 'boveda-demo-git-preview.vercel.app' });
+  const env = environment({
+    BOVEDA_PUBLIC_ORIGIN: undefined,
+    VERCEL_URL: 'boveda-demo-generated-preview.vercel.app',
+    VERCEL_BRANCH_URL: 'boveda-demo-git-preview.vercel.app',
+  });
   const config = createConfig(env);
   const redis = new FakeRedis(clock);
   const handler = makeHandler({ redis, config, clock, env });
   const previewHeaders = {
-    host: env.VERCEL_URL,
-    origin: `https://${env.VERCEL_URL}`,
+    host: env.VERCEL_BRANCH_URL,
+    origin: `https://${env.VERCEL_BRANCH_URL}`,
     'x-probe-token': 'boveda-demo-ui',
     'content-type': 'application/json',
   };
@@ -371,7 +375,11 @@ test('handler fails closed on Redis outage and accepts only a valid same-host Ve
   assert.equal((await call(handler, { route: 'library', headers: { cookie } })).statusCode, 503);
 
   assert.throws(
-    () => createConfig(environment({ BOVEDA_PUBLIC_ORIGIN: undefined, VERCEL_URL: 'vercel.app.attacker.example' })),
+    () => createConfig(environment({
+      BOVEDA_PUBLIC_ORIGIN: undefined,
+      VERCEL_URL: 'vercel.app.attacker.example',
+      VERCEL_BRANCH_URL: 'also.invalid.example',
+    })),
     ServiceUnavailableError,
   );
 });
