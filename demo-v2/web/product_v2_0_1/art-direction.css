@@ -23,6 +23,7 @@ body,button,input,select,textarea,pre,code{font-family:Flink,Arial,sans-serif;fo
 #app-shell .route-guide h3,
 #app-shell .catalogue-heading h2,
 #app-shell .callout h2,
+#app-shell .callout h2>span,
 #app-shell .signal-result-check>span:last-child,
 #app-shell .visual-evidence-heading h2{font-weight:700!important}
 
