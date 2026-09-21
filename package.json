@@ -26,6 +26,7 @@
     "test:v1": "node --test tests/*.test.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "express": "5.1.0",
     "pdf-parse": "1.1.1",
     "react": "19.1.1",

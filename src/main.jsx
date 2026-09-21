@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import { version as applicationVersion } from "../package.json";
 import "./styles.css";
 import {
@@ -1290,4 +1291,4 @@ function App() {
   return <><div className={`v100b-app${session ? " is-authenticated" : ""}`} inert={deleteCandidate || loginOpen ? true : undefined} aria-hidden={deleteCandidate || loginOpen ? true : undefined}>{content}<GlobalNavigation active={currentNavigation} onHome={showHome} onProjects={showProjects} onHowItWorks={showHowItWorks} />{session ? <AccountMenu session={session} onLogout={logout} /> : null}{projectsOverlayOpen && record ? <div className="projects-overlay" role="dialog" aria-modal="true" aria-label="Projects"><ProjectsSurface projects={projects} onOpen={select} onAdd={beginImport} onDelete={remove} onReorder={reorderProjectCards} reorderBusy={projectOrderBusy} onClose={() => setProjectsOverlayOpen(false)} overlay publicDemo={PUBLIC_DEMO} /></div> : null}</div>{loginOpen ? <LoginModal onClose={closeLogin} onSignIn={finishLogin} /> : null}{error ? <div className="toast" role="alert">{error}<button onClick={() => setError("")}>×</button></div> : null}<DemoActionNotice message={demoNotice} onClose={() => setDemoNotice("")} />{showImport ? <ImportModal onClose={() => setShowImport(false)} onImported={imported} /> : null}<DeleteProjectDialog project={deleteCandidate} busy={deleteBusy} onCancel={cancelRemove} onConfirm={confirmRemove} />{trail && record ? <EvidenceDrawer item={trail} evidence={[...(record.evidence || []), ...(historyLayer?.evidence || [])]} onClose={() => setTrail(null)} /> : null}{diagnosticsOpen ? <DiagnosticsDrawer diagnostics={diagnostics} loading={diagnosticsLoading} onClose={() => setDiagnosticsOpen(false)} /> : null}{signalSelection ? <SignalsDetailDrawer selection={signalSelection} layer={signalsLayer} onClose={() => setSignalSelection(null)} onInspect={setSignalSelection} onEvidence={openSignalEvidence} /> : null}</>;
 }
 
-createRoot(document.getElementById("root")).render(<React.StrictMode><App /></React.StrictMode>);
+createRoot(document.getElementById("root")).render(<React.StrictMode><App /><Analytics /></React.StrictMode>);
